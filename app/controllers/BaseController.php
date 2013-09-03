@@ -14,5 +14,13 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout);
 		}
 	}
+	
+	public static $timestamps = true;
+	public function timestamp()
+    {
+        $this->updated_at = time();
+
+        if ( ! $this->exists) $this->created_at = $this->updated_at;
+    }
 
 }
