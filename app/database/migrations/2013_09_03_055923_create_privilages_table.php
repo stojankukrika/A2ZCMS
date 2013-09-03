@@ -16,10 +16,10 @@ class CreatePrivilagesTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('resource');
-			$table->boolean('view')->default(false);
-			$table->boolean('edit')->default(false);
-			$table->boolean('delete')->default(false);
-			$table->boolean('insert')->default(false);
+			$table->boolean('view')->default(0);
+			$table->boolean('edit')->default(0);
+			$table->boolean('delete')->default(0);
+			$table->boolean('insert')->default(0);
 			$table->timestamps();
 		});
 	}

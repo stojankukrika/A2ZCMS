@@ -17,11 +17,11 @@ class CreateUsersTable extends Migration {
 			$table->string('name');
 			$table->string('surname');
 			$table->string('email')->unique();
-			$table->boolean('picture')->default(false);
+			$table->boolean('picture')->default(0);
 			$table->string('username')->unique();
 			$table->string('password');
-			$table->boolean('active')->default(false);
-			$table->boolean('confirmed')->default(false);
+			$table->boolean('active')->default(0);
+			$table->boolean('confirmed')->default(0);
 			$table->string('confirmation_code');
 			$table->timestamps();
 		});

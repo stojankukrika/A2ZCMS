@@ -1,7 +1,7 @@
 <?php
 
-class Role extends Eloquent {
+class Password_remainder extends Eloquent {
 	protected $guarded = array();
-	protected $table = 'roles';
+
 	public static $rules = array();
 }
