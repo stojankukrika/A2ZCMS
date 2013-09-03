@@ -7,7 +7,9 @@ class UsersController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	  public $restful = true;
+
+    public function index()
 	{
 		return View::make('users.index')
         ->with('users', User::all());
