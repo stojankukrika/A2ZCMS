@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('confirmed')->default(0);
 			$table->string('confirmation_code');
 			$table->timestamps();
+			$table->softDeletes();	
 		});
 	}
 

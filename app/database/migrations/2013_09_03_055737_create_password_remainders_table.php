@@ -18,6 +18,7 @@ class CreatePasswordRemaindersTable extends Migration {
 			$table->string('token');
 			$table->boolean('used')->default(false);
 			$table->timestamps();
+			$table->softDeletes();	
 		});
 	}
 

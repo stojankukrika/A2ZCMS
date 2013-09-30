@@ -1,6 +1,6 @@
 <?php
 
-class Password_remainder extends Eloquent {
+class Blog extends Eloquent {
 	protected $guarded = array();
 
 	public static $rules = array();

@@ -18,8 +18,9 @@ class PivotRoleUserTable extends Migration {
 			$table->integer('user_id')->unsigned()->index();
 			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->boolean('active')->default(0);
 			$table->timestamps();
-			$table->boolean('active')->default(0);			
+			$table->softDeletes();			
 		});
 	}
 

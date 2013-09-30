@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePrivilagesTable extends Migration {
+class CreatePermissionsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePrivilagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('privilages', function(Blueprint $table) {
+		Schema::create('permissions', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('resource');
@@ -21,6 +21,7 @@ class CreatePrivilagesTable extends Migration {
 			$table->boolean('delete')->default(0);
 			$table->boolean('insert')->default(0);
 			$table->timestamps();
+			$table->softDeletes();	
 		});
 	}
 
@@ -31,7 +32,7 @@ class CreatePrivilagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('privilages');
+		Schema::drop('permissions');
 	}
 
 }

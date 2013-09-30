@@ -1,6 +1,6 @@
 <?php
 
-class RolesController extends BaseController {
+class UsersController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +9,7 @@ class RolesController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+        return View::make('users.index');
 	}
 
 	/**
@@ -19,7 +19,7 @@ class RolesController extends BaseController {
 	 */
 	public function create()
 	{
-		//
+        return View::make('users.create');
 	}
 
 	/**
@@ -40,7 +40,7 @@ class RolesController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        return View::make('users.show');
 	}
 
 	/**
@@ -51,7 +51,7 @@ class RolesController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+        return View::make('users.edit');
 	}
 
 	/**

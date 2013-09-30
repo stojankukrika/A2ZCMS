@@ -1,6 +1,6 @@
 <?php
 
-class Privilage extends Eloquent {
+class RoleUser extends Eloquent {
 	protected $guarded = array();
 
 	public static $rules = array();

@@ -1,19 +1,17 @@
 <?php
 
-class UsersController extends BaseController {
+class AdminDashboardController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	  public $restful = true;
-
-    public function index()
+	public function index()
 	{
-		return View::make('users.index')
-        ->with('users', User::all());
+        return View::make('admindashboards.index');
 	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -21,7 +19,7 @@ class UsersController extends BaseController {
 	 */
 	public function create()
 	{
-		//
+        return View::make('admindashboards.create');
 	}
 
 	/**
@@ -42,7 +40,7 @@ class UsersController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        return View::make('admindashboards.show');
 	}
 
 	/**
@@ -53,7 +51,7 @@ class UsersController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+        return View::make('admindashboards.edit');
 	}
 
 	/**

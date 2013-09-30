@@ -1,6 +1,6 @@
 <?php
 
-class PrivilagesController extends BaseController {
+class AutorizedController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +9,7 @@ class PrivilagesController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+        return View::make('autorizeds.index');
 	}
 
 	/**
@@ -19,7 +19,7 @@ class PrivilagesController extends BaseController {
 	 */
 	public function create()
 	{
-		//
+        return View::make('autorizeds.create');
 	}
 
 	/**
@@ -40,7 +40,7 @@ class PrivilagesController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        return View::make('autorizeds.show');
 	}
 
 	/**
@@ -51,7 +51,7 @@ class PrivilagesController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+        return View::make('autorizeds.edit');
 	}
 
 	/**
