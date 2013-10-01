@@ -1,10 +1,6 @@
 #Laravel 4 Bootstrap Starter Site
-`Version: 1.2.1 Stable` [![ProjectStatus](http://stillmaintained.com/andrew13/Laravel-4-Bootstrap-Starter-Site.png)](http://stillmaintained.com/andrew13/Laravel-4-Bootstrap-Starter-Site)
-[![Build Status](https://api.travis-ci.org/Zizaco/confide.png)](https://travis-ci.org/andrew13/Laravel-4-Bootstrap-Starter-Site)
 
-Laravel 4 Bootstrap Starter Site is a sample application for beginning development with Larvel 4.
-
-It began as a fork of [laravel4-starter-kit](https://github.com/brunogaspar/laravel4-starter-kit) taking the starter kit changing the included modules and adding a few as well.
+It began as a fork of [Laravel-4-Bootstrap-Starter-Site](https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site/) taking the starter kit changing the included modules and more modules, controlers and others to make CMS based on Laravel 4.
 
 
 ## Features
@@ -33,12 +29,6 @@ It began as a fork of [laravel4-starter-kit](https://github.com/brunogaspar/lara
 	* [Basset](#basset)
 	* [Presenter](#presenter)
 	* [Generators](#generators)
-
-## Issues
-See [github issue list](https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site/issues) for current list.
-
-## Wiki
-[Roadmap](https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site/wiki/Roadmap)
 
 -----
 
