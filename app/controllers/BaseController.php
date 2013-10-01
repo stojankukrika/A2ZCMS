@@ -2,6 +2,17 @@
 
 class BaseController extends Controller {
 
+    /**
+     * Initializer.
+     *
+     * @access   public
+     * @return \BaseController
+     */
+    public function __construct()
+    {
+        $this->beforeFilter('csrf', array('on' => 'post'));
+    }
+
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -14,13 +25,5 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout);
 		}
 	}
-	
-	public static $timestamps = true;
-	public function timestamp()
-    {
-        $this->updated_at = time();
-
-        if ( ! $this->exists) $this->created_at = $this->updated_at;
-    }
 
 }

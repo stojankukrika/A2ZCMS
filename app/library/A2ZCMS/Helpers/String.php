@@ -1,4 +1,4 @@
-<?php namespace Andrew13\Helpers;
+<?php namespace A2ZCMS\Helpers;
 
 use Carbon\Carbon;
 use tidy;

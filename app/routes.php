@@ -16,8 +16,9 @@
  *  ------------------------------------------
  */
 Route::model('user', 'User');
-Route::model('comment', 'Comment');
-Route::model('post', 'Post');
+Route::model('blogcomment', 'BlogComment');
+Route::model('blogcategory', 'BlogCategory');
+Route::model('blog', 'Blog');
 Route::model('role', 'Role');
 
 /** ------------------------------------------
@@ -27,28 +28,39 @@ Route::model('role', 'Role');
 Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 {
 
-    # Comment Management
-    Route::get('comments/{comment}/edit', 'AdminBlogCommentController@getEdit')
-        ->where('comment', '[0-9]+');
-    Route::post('comments/{comment}/edit', 'AdminBlogCommentController@postEdit')
-        ->where('comment', '[0-9]+');
-    Route::get('comments/{comment}/delete', 'AdminBlogCommentController@getDelete')
-        ->where('comment', '[0-9]+');
-    Route::post('comments/{comment}/delete', 'AdminBlogCommentController@postDelete')
-        ->where('comment', '[0-9]+');
-    Route::controller('comments', 'AdminBlogCommentController');
+    # Blog Comment Management
+    Route::get('blogcomments/{blogcomment}/edit', 'AdminBlogCommentController@getEdit')
+        ->where('blogcomment', '[0-9]+');
+    Route::post('blogcomments/{blogcomment}/edit', 'AdminBlogCommentController@postEdit')
+        ->where('blogcomment', '[0-9]+');
+    Route::get('blogcomments/{blogcomment}/delete', 'AdminBlogCommentController@getDelete')
+        ->where('blogcomment', '[0-9]+');
+    Route::post('blogcomments/{blogcomment}/delete', 'AdminBlogCommentController@postDelete')
+        ->where('blogcomment', '[0-9]+');
+    Route::controller('blogcomments', 'AdminBlogCommentController');
+	
+	 # Blog Category Management
+    Route::get('blogcategoris/{blogcategory}/edit', 'AdminBlogCategoryController@getEdit')
+        ->where('blogcategory', '[0-9]+');
+    Route::post('blogcategoris/{blogcategory}/edit', 'AdminBlogCategoryController@postEdit')
+        ->where('blogcategory', '[0-9]+');
+    Route::get('blogcategoris/{blogcategory}/delete', 'AdminBlogCategoryController@getDelete')
+        ->where('blogcategory', '[0-9]+');
+    Route::post('blogcategoris/{blogcategory}/delete', 'AdminBlogCategoryController@postDelete')
+        ->where('blogcategory', '[0-9]+');
+    Route::controller('blogcategoris', 'AdminBlogCategoryController');
 
     # Blog Management
-    Route::get('blogs/{post}/show', 'AdminBlogController@getShow')
-        ->where('post', '[0-9]+');
-    Route::get('blogs/{post}/edit', 'AdminBlogController@getEdit')
-        ->where('post', '[0-9]+');
-    Route::post('blogs/{post}/edit', 'AdminBlogController@postEdit')
-        ->where('post', '[0-9]+');
-    Route::get('blogs/{post}/delete', 'AdminBlogController@getDelete')
-        ->where('post', '[0-9]+');
-    Route::post('blogs/{post}/delete', 'AdminBlogController@postDelete')
-        ->where('post', '[0-9]+');
+    Route::get('blogs/{blog}/show', 'AdminBlogController@getShow')
+        ->where('blog', '[0-9]+');
+    Route::get('blogs/{blog}/edit', 'AdminBlogController@getEdit')
+        ->where('blog', '[0-9]+');
+    Route::post('blogs/{blog}/edit', 'AdminBlogController@postEdit')
+        ->where('blog', '[0-9]+');
+    Route::get('blogs/{blog}/delete', 'AdminBlogController@getDelete')
+        ->where('blog', '[0-9]+');
+    Route::post('blogs/{blog}/delete', 'AdminBlogController@postDelete')
+        ->where('blog', '[0-9]+');
     Route::controller('blogs', 'AdminBlogController');
 
     # User Management
@@ -119,11 +131,11 @@ Route::get('contact-us', function()
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
-Route::get('/', function()
+/*Route::get('/', function()
 {
 	return View::make('hello');
-});
+});*/
 
 # Index Page - Last route, no matches
-//Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
+Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
 

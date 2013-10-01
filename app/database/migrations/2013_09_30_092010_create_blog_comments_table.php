@@ -14,10 +14,10 @@ class CreateBlogcommentsTable extends Migration {
 	{
 		Schema::create('blog_comments', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('users_id')->unsigned()->index();
-			$table->integer('blogs_id')->unsigned()->index();
-			$table->foreign('blogs_id')->references('id')->on('blogs')->onDelete('cascade');
-			$table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+			$table->integer('user_id')->unsigned()->index();
+			$table->integer('blog_id')->unsigned()->index();
+			$table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->text('body');
 			$table->timestamps();
 			$table->softDeletes();	

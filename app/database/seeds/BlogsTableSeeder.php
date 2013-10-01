@@ -11,7 +11,7 @@ class BlogsTableSeeder extends Seeder {
 		
 		$blogs = array(
 						array(	
-								'users_id' => $admin, 'blogcategory_id' => $blogcategory,
+								'user_id' => $admin, 'blogcategory_id' => $blogcategory,
 							    'title' => 'Lorem ipsum', 'slug'=>'lorem_ipsum',
 								'content'=>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 								euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, 

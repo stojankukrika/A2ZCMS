@@ -12,7 +12,7 @@ class BlogcommentsTableSeeder extends Seeder {
 		
 		$blogcomments = array(
 					array(
-							    'blogs_id' => $blog, 'users_id' => $user, 
+							    'blog_id' => $blog, 'user_id' => $user, 
 								'body'=> 'Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. 
 								Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare 
 								quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula 
