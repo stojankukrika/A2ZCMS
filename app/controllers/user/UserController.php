@@ -1,6 +1,6 @@
 <?php
 
-class UsersController extends BaseController {
+class UserController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.

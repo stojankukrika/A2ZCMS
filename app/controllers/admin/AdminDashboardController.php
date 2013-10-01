@@ -1,7 +1,21 @@
 <?php
+class AdminDashboardController extends AdminController {
 
-class AdminDashboardController extends BaseController {
+	    /**
+     * Comment Model
+     * @var Comment
+     */
+    protected $admindashboard;
 
+    /**
+     * Inject the models.
+     * @param Comment $comment
+     */
+    public function __construct(Comment $comment)
+    {
+        parent::__construct();
+        $this->comment = $comment;
+    }
 	/**
 	 * Display a listing of the resource.
 	 *

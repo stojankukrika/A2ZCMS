@@ -1,7 +1,23 @@
 <?php
 
-class AdminUsersController extends BaseController {
+class AdminBlogCommentController extends AdminController {
 
+    /**
+     * Comment Model
+     * @var Comment
+     */
+    protected $blog_comment;
+
+    /**
+     * Inject the models.
+     * @param Comment $comment
+     */
+    public function __construct(Comment $comment)
+    {
+        parent::__construct();
+        $this->comment = $comment;
+    }
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +25,7 @@ class AdminUsersController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('adminusers.index');
+        return View::make('adminblogcomments.index');
 	}
 
 	/**
@@ -19,7 +35,7 @@ class AdminUsersController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('adminusers.create');
+        return View::make('adminblogcomments.create');
 	}
 
 	/**
@@ -40,7 +56,7 @@ class AdminUsersController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('adminusers.show');
+        return View::make('adminblogcomments.show');
 	}
 
 	/**
@@ -51,7 +67,7 @@ class AdminUsersController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('adminusers.edit');
+        return View::make('adminblogcomments.edit');
 	}
 
 	/**
