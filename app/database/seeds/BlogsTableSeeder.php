@@ -2,36 +2,78 @@
 
 class BlogsTableSeeder extends Seeder {
 
-	public function run()
-	{
-		// Uncomment the below to wipe the table clean before populating
-		// DB::table('blogs')->truncate();
-		$admin = User::where('username','=','admin')->first()->id;
+    protected $content = 'In mea autem etiam menandri, quot elitr vim ei, eos semper disputationi id? Per facer appetere eu, duo et animal maiestatis. Omnesque invidunt mnesarchum ex mel, vis no case senserit dissentias. Te mei minimum singulis inimicus, ne labores accusam necessitatibus vel, vivendo nominavi ne sed. Posidonium scriptorem consequuntur cum ex? Posse fabulas iudicabit in nec, eos cu electram forensibus, pro ei commodo tractatos reformidans. Qui eu lorem augue alterum, eos in facilis pericula mediocritatem?
+
+Est hinc legimus oporteat in. Sit ei melius delicatissimi. Duo ex qualisque adolescens! Pri cu solum aeque. Aperiri docendi vituperatoribus has ea!
+
+Sed ut ludus perfecto sensibus, no mea iisque facilisi. Choro tation melius et mea, ne vis nisl insolens. Vero autem scriptorem cu qui? Errem dolores no nam, mea tritani platonem id! At nec tantas consul, vis mundi petentium elaboraret ex, mel appareat maiestatis at.
+
+Sed et eros concludaturque. Mel ne aperiam comprehensam! Ornatus delicatissimi eam ex, sea an quidam tritani placerat? Ad eius iriure consequat eam, mazim temporibus conclusionemque eum ex.
+
+Te amet sumo usu, ne autem impetus scripserit duo, ius ei mutat labore inciderint! Id nulla comprehensam his? Ut eam deleniti argumentum, eam appellantur definitionem ad. Pro et purto partem mucius!
+
+Cu liber primis sed, esse evertitur vis ad. Ne graeco maiorum mea! In eos nostro docendi conclusionemque. Ne sit audire blandit tractatos? An nec dicam causae meliore, pro tamquam offendit efficiendi ut.
+
+Te dicta sadipscing nam, denique albucius conclusionemque ne usu, mea eu euripidis philosophia! Qui at vivendo efficiendi! Vim ex delenit blandit oportere, in iriure placerat cum. Te cum meis altera, ius ex quis veri.
+
+Mutat propriae eu has, mel ne veri bonorum tincidunt. Per noluisse sensibus honestatis ut, stet singulis ea eam, his dicunt vivendum mediocrem ei. Ei usu mutat efficiantur, eum verear aperiam definitiones an! Simul dicam instructior ius ei. Cu ius facer doming cotidieque! Quot principes eu his, usu vero dicat an.
+
+Ex dicta perpetua qui, pericula intellegam scripserit id vel. Id fabulas ornatus necessitatibus mel. Prompta dolorem appetere ea has. Vel ad expetendis instructior!
+
+Te his dolorem adversarium? Pri eu rebum viris, tation molestie id pri. Mel ei stet inermis dissentias. Sed ea dolorum detracto vituperata. Possit oportere similique cu nec, ridens animal quo ex?';
+
+    public function run()
+    {
+        //DB::table('blogs')->delete();
+
+        $user_id = User::first()->id;
 		$blogcategory = Blogcategory::find(1)->id;
-		
-		$blogs = array(
-						array(	
-								'user_id' => $admin, 'blogcategory_id' => $blogcategory,
-							    'title' => 'Lorem ipsum', 'slug'=>'lorem_ipsum',
-								'content'=>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
-								euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, 
-								quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-								Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum 
-								dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent 
-								luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis 
-								eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent 
-								claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt 
-								lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem 
-								consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum 
-								formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, 
-								fiant sollemnes in futurum.',
-								'meta_title' => 'meta_title1', 'meta_description' => 'meta_description1',
-								'meta_keywords' => 'meta_keywords1',
-								'start_publish' => new DateTime, 'end_publish'=> null,'resource_link'=>null,
-								'created_at' => new DateTime,'updated_at' => new DateTime),
-		);
-		// Uncomment the below to run the seeder
-		 DB::table('blogs')->insert($blogs);
-	}
+
+        DB::table('blogs')->insert( array(
+            array(
+                'user_id'    => $user_id,
+				'blogcategory_id' => $blogcategory,
+                'title'      => 'Lorem ipsum dolor sit amet',
+                'slug'       => 'lorem-ipsum-dolor-sit-amet',
+                'content'    => $this->content,
+				'resource_link'=>null,
+                'meta_title' => 'meta_title1',
+                'meta_description' => 'meta_description1',
+                'meta_keywords' => 'meta_keywords1',
+				'start_publish' => new DateTime,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+			
+            ),
+            array(
+                'user_id'    => $user_id,
+				'blogcategory_id' => $blogcategory,
+                'title'      => 'Vivendo suscipiantur vim te vix',
+                'slug'       => 'vivendo-suscipiantur-vim-te-vix',
+                'content'    => $this->content,
+				'resource_link'=>null,
+                'meta_title' => 'meta_title2',
+                'meta_description' => 'meta_description2',
+                'meta_keywords' => 'meta_keywords2',
+				'start_publish' => new DateTime,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ),
+            array(
+                'user_id'    => $user_id,
+				'blogcategory_id' => $blogcategory,
+                'title'      => 'In iisque similique reprimique eum',
+                'slug'       => 'in-iisque-similique-reprimique-eum',
+                'content'    => $this->content,
+				'resource_link'=>null,
+                'meta_title' => 'meta_title3',
+                'meta_description' => 'meta_description3',
+                'meta_keywords' => 'meta_keywords3',
+				'start_publish' => new DateTime,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ))
+        );
+    }
 
 }

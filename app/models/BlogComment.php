@@ -4,7 +4,9 @@ use Robbo\Presenter\PresentableInterface;
 
 class BlogComment extends Eloquent implements PresentableInterface{
 
-	/**
+	protected $table = "blog_comments";
+	 /* 
+	 *//**
 	 * Get the comment's content.
 	 *
 	 * @return string

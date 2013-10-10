@@ -14,6 +14,11 @@ return array(
 	*/
 
 	'contact_us' => 'Contact Us',
-        'sign_up' => 'Sign Up',
+    'sign_up' => 'Sign Up',
+	'login' => 'Login',
+	'home' => 'Home',
+	'admin_panel' =>'Admin Panel',
+	'logged_in_as' =>'Logged in as',
+	'logout' =>'Logout',
 
 );

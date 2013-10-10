@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'connection' => null,
+	'connection' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ return array(
 
 	'memcached' => array(
 
-		array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 100),
+		array('host' => '127.0.0.1', 'port' => 82, 'weight' => 100),
 
 	),
 
@@ -84,6 +84,6 @@ return array(
 	|
 	*/
 
-	'prefix' => 'laravel',
+	'prefix' => 'a2zcms',
 
 );

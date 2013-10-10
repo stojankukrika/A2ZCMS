@@ -20,6 +20,7 @@ Route::model('blogcomment', 'BlogComment');
 Route::model('blogcategory', 'BlogCategory');
 Route::model('blog', 'Blog');
 Route::model('role', 'Role');
+Route::model('settings', 'Settings');
 
 /** ------------------------------------------
  *  Admin Routes
@@ -29,68 +30,80 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 {
 
     # Blog Comment Management
-    Route::get('blogcomments/{blogcomment}/edit', 'AdminBlogCommentController@getEdit')
+    Route::get('blogcomments/{blog}/commentsforblog', 'AdminBlogCommentsController@getCommentsForBlog')
+        ->where('blog', '[0-9]+');
+    Route::get('blogcomments/{blogcomment}/edit', 'AdminBlogCommentsController@getEdit')
         ->where('blogcomment', '[0-9]+');
-    Route::post('blogcomments/{blogcomment}/edit', 'AdminBlogCommentController@postEdit')
+    Route::post('blogcomments/{blogcomment}/edit', 'AdminBlogCommentsController@postEdit')
         ->where('blogcomment', '[0-9]+');
-    Route::get('blogcomments/{blogcomment}/delete', 'AdminBlogCommentController@getDelete')
+    Route::get('blogcomments/{blogcomment}/delete', 'AdminBlogCommentsController@getDelete')
         ->where('blogcomment', '[0-9]+');
-    Route::post('blogcomments/{blogcomment}/delete', 'AdminBlogCommentController@postDelete')
+    Route::post('blogcomments/{blogcomment}/delete', 'AdminBlogCommentsController@postDelete')
         ->where('blogcomment', '[0-9]+');
-    Route::controller('blogcomments', 'AdminBlogCommentController');
+    Route::controller('blogcomments', 'AdminBlogCommentsController');
 	
 	 # Blog Category Management
-    Route::get('blogcategoris/{blogcategory}/edit', 'AdminBlogCategoryController@getEdit')
+    Route::get('blogcategorys/{blogcategory}/edit', 'AdminBlogCategorysController@getEdit')
         ->where('blogcategory', '[0-9]+');
-    Route::post('blogcategoris/{blogcategory}/edit', 'AdminBlogCategoryController@postEdit')
+    Route::post('blogcategorys/{blogcategory}/edit', 'AdminBlogCategorysController@postEdit')
         ->where('blogcategory', '[0-9]+');
-    Route::get('blogcategoris/{blogcategory}/delete', 'AdminBlogCategoryController@getDelete')
+    Route::get('blogcategorys/{blogcategory}/delete', 'AdminBlogCategorysController@getDelete')
         ->where('blogcategory', '[0-9]+');
-    Route::post('blogcategoris/{blogcategory}/delete', 'AdminBlogCategoryController@postDelete')
+    Route::post('blogcategorys/{blogcategory}/delete', 'AdminBlogCategorysController@postDelete')
         ->where('blogcategory', '[0-9]+');
-    Route::controller('blogcategoris', 'AdminBlogCategoryController');
+    Route::controller('blogcategorys', 'AdminBlogCategorysController');
 
     # Blog Management
-    Route::get('blogs/{blog}/show', 'AdminBlogController@getShow')
+     Route::get('blogs/{blogcategory}/blogsforcategory', 'AdminBlogsController@getBlogsForCategory')
+        ->where('blogcategory', '[0-9]+');
+    Route::get('blogs/{blog}/show', 'AdminBlogsController@getShow')
         ->where('blog', '[0-9]+');
-    Route::get('blogs/{blog}/edit', 'AdminBlogController@getEdit')
+    Route::get('blogs/{blog}/edit', 'AdminBlogsController@getEdit')
         ->where('blog', '[0-9]+');
-    Route::post('blogs/{blog}/edit', 'AdminBlogController@postEdit')
+    Route::post('blogs/{blog}/edit', 'AdminBlogsController@postEdit')
         ->where('blog', '[0-9]+');
-    Route::get('blogs/{blog}/delete', 'AdminBlogController@getDelete')
+    Route::get('blogs/{blog}/delete', 'AdminBlogsController@getDelete')
         ->where('blog', '[0-9]+');
-    Route::post('blogs/{blog}/delete', 'AdminBlogController@postDelete')
+    Route::post('blogs/{blog}/delete', 'AdminBlogsController@postDelete')
         ->where('blog', '[0-9]+');
-    Route::controller('blogs', 'AdminBlogController');
+    Route::controller('blogs', 'AdminBlogsController');
 
-    # User Management
-    Route::get('users/{user}/show', 'AdminUserController@getShow')
+    # User Management    
+    Route::get('users/{role}/usersforrole', 'AdminUsersController@getUsersForRole')
+        ->where('role', '[0-9]+');
+    Route::get('users/{user}/show', 'AdminUsersController@getShow')
         ->where('user', '[0-9]+');
-    Route::get('users/{user}/edit', 'AdminUserController@getEdit')
+    Route::get('users/{user}/edit', 'AdminUsersController@getEdit')
         ->where('user', '[0-9]+');
-    Route::post('users/{user}/edit', 'AdminUserController@postEdit')
+    Route::post('users/{user}/edit', 'AdminUsersController@postEdit')
         ->where('user', '[0-9]+');
-    Route::get('users/{user}/delete', 'AdminUserController@getDelete')
+    Route::get('users/{user}/delete', 'AdminUsersController@getDelete')
         ->where('user', '[0-9]+');
-    Route::post('users/{user}/delete', 'AdminUserController@postDelete')
+    Route::post('users/{user}/delete', 'AdminUsersController@postDelete')
         ->where('user', '[0-9]+');
-    Route::controller('users', 'AdminUserController');
+    Route::controller('users', 'AdminUsersController');
 
     # User Role Management
-    Route::get('roles/{role}/show', 'AdminRoleController@getShow')
+    Route::get('roles/{role}/show', 'AdminRolesController@getShow')
         ->where('role', '[0-9]+');
-    Route::get('roles/{role}/edit', 'AdminRoleController@getEdit')
+    Route::get('roles/{role}/edit', 'AdminRolesController@getEdit')
         ->where('role', '[0-9]+');
-    Route::post('roles/{role}/edit', 'AdminRoleController@postEdit')
+    Route::post('roles/{role}/edit', 'AdminRolesController@postEdit')
         ->where('role', '[0-9]+');
-    Route::get('roles/{role}/delete', 'AdminRoleController@getDelete')
+    Route::get('roles/{role}/delete', 'AdminRolesController@getDelete')
         ->where('role', '[0-9]+');
-    Route::post('roles/{role}/delete', 'AdminRoleController@postDelete')
+    Route::post('roles/{role}/delete', 'AdminRolesController@postDelete')
         ->where('role', '[0-9]+');
-    Route::controller('roles', 'AdminRoleController');
+    Route::controller('roles', 'AdminRolesController');
 
+	# Settings
+    Route::get('settings', 'AdminSettingsController@getIndex');
+    Route::post('settings', 'AdminSettingsController@postIndex');
+	
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');
+	
+	
 });
 
 

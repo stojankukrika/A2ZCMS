@@ -4,6 +4,7 @@ use Robbo\Presenter\PresentableInterface;
 
 class Blog extends Eloquent implements PresentableInterface {
 
+	 protected $softDelete = true;
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.
@@ -57,8 +58,9 @@ class Blog extends Eloquent implements PresentableInterface {
 	 */
 	public function category()
 	{
-		return $this->hasOne('BlogCategory');
+		return $this->belongsTo('BlogCategory');
 	}
+	
 
     /**
      * Get the date the blog was created.

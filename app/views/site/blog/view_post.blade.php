@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ String::title($post->title) }}} ::
+{{{ String::title($blog->title) }}} ::
 @parent
 @stop
 
@@ -26,21 +26,21 @@
 
 {{-- Content --}}
 @section('content')
-<h3>{{ $post->title }}</h3>
+<h3>{{ $blog->title }}</h3>
 
-<p>{{ $post->content() }}</p>
+<p>{{ $blog->content() }}</p>
 
 <div>
-	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
+	<span class="badge badge-info">Posted {{{ $blog->date() }}}</span>
 </div>
 
 <hr />
 
 <a id="comments"></a>
-<h4>{{{ $comments->count() }}} Comments</h4>
+<h4>{{{ $blog_comments->count() }}} Comments</h4>
 
-@if ($comments->count())
-@foreach ($comments as $comment)
+@if ($blog_comments->count())
+@foreach ($blog_comments as $comment)
 <div class="row">
 	<div class="col-md-1">
 		<img class="thumbnail" src="http://placehold.it/60x60" alt="">
@@ -72,7 +72,7 @@
 @if ( ! Auth::check())
 You need to be logged in to add comments.<br /><br />
 Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
-@elseif ( ! $canComment )
+@elseif ( ! $canBlogComment )
 You don't have the correct permissions to add comments.
 @else
 
@@ -87,7 +87,7 @@ You don't have the correct permissions to add comments.
 @endif
 
 <h4>Add a Comment</h4>
-<form  method="post" action="{{{ URL::to($post->slug) }}}">
+<form  method="post" action="{{{ URL::to($blog->slug) }}}">
 	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 
 	<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>

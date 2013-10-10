@@ -38,9 +38,11 @@ class UserController extends BaseController {
      */
     public function postIndex()
     {
-        $this->user->username = Input::get( 'username' );
+        $this->user->name = Input::get( 'name' );
+        $this->user->surname = Input::get( 'surname' );
+		$this->user->username = Input::get( 'username' );
         $this->user->email = Input::get( 'email' );
-
+		
         $password = Input::get( 'password' );
         $passwordConfirmation = Input::get( 'password_confirmation' );
 
@@ -95,8 +97,8 @@ class UserController extends BaseController {
         if ($validator->passes())
         {
             $oldUser = clone $user;
-            $user->username = Input::get( 'username' );
-            $user->email = Input::get( 'email' );
+            $user->name = Input::get( 'name' );
+            $user->surname = Input::get( 'surname' );
 
             $password = Input::get( 'password' );
             $passwordConfirmation = Input::get( 'password_confirmation' );

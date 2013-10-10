@@ -5,9 +5,7 @@ use Robbo\Presenter\PresentableInterface;
 
 class BlogCategory extends Eloquent implements PresentableInterface {
 
-	protected $guarded = array();
 	protected $table = "blog_categorys";
-	public static $rules = array();
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.
@@ -17,10 +15,9 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	public function delete()
 	{
 		// Delete the comments
-		$this->comments()->delete();
+		$this->categorys()->softDeletes();
 
-		// Delete the blog post
-		return parent::delete();
+		return true;
 	}
 
 	/**
@@ -29,19 +26,9 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function content()
+	public function title()
 	{
-		return nl2br($this->content);
-	}
-
-	/**
-	 * Get the post's author.
-	 *
-	 * @return User
-	 */
-	public function author()
-	{
-		return $this->belongsTo('User', 'user_id');
+		return nl2br($this->title);
 	}
 
     /**
@@ -80,10 +67,10 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	{
         return $this->date($this->updated_at);
 	}
-
-    public function getPresenter()
+	
+	public function getPresenter()
     {
-        return new PostPresenter($this);
+        return new CommentPresenter($this);
     }
 
 }

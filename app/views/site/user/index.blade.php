@@ -25,25 +25,26 @@ body {
     <!-- ./ csrf token -->
     <!-- General tab -->
     <div class="tab-pane active" id="tab-general">
-        <!-- username -->
-        <div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
-            <label class="col-md-2 control-label" for="username">Username</label>
+        
+		  <!-- Name -->
+        <div class="form-group {{{ $errors->has('name') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="name">Name</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}" />
-                {{{ $errors->first('username', '<span class="help-inline">:message</span>') }}}
+                <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $user->name) }}}" />
+                {{{ $errors->first('name', '<span class="help-inline">:message</span>') }}}
             </div>
         </div>
-        <!-- ./ username -->
-
-        <!-- Email -->
-        <div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
-            <label class="col-md-2 control-label" for="email">Email</label>
+        <!-- ./ name -->
+		
+		  <!-- Surname -->
+        <div class="form-group {{{ $errors->has('surname') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="surname">Surname</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
-                {{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+                <input class="form-control" type="text" name="surname" id="surname" value="{{{ Input::old('surname', $user->surname) }}}" />
+                {{{ $errors->first('surname', '<span class="help-inline">:message</span>') }}}
             </div>
         </div>
-        <!-- ./ email -->
+        <!-- ./ surname -->
 
         <!-- Password -->
         <div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">

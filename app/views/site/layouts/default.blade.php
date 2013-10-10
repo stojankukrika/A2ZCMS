@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<title>
 			@section('title')
-			Laravel 4 Sample Site
+			A2Z CMS
 			@show
 		</title>
 		<meta name="keywords" content="your, awesome, keywords, here" />
@@ -56,18 +56,18 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
-						<li {{ (Request::is('/') ? ' class="active"' : '') }}><a href="{{{ URL::to('') }}}">Home</a></li>
+						<li {{ (Request::is('/') ? ' class="active"' : '') }}><a href="{{{ URL::to('') }}}">{{Lang::get('site.home')}}</a></li>
 					</ul>
 
                     <ul class="nav navbar-nav pull-right">
                         @if (Auth::check())
                         @if (Auth::user()->hasRole('admin'))
-                        <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
+                        <li><a href="{{{ URL::to('admin') }}}">{{Lang::get('site.admin_panel')}}</a></li>
                         @endif
-                        <li><a href="{{{ URL::to('user') }}}">Logged in as {{{ Auth::user()->username }}}</a></li>
-                        <li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
+                        <li><a href="{{{ URL::to('user') }}}">{{Lang::get('site.logged_in_as')}} {{{ Auth::user()->username }}}</a></li>
+                        <li><a href="{{{ URL::to('user/logout') }}}">{{Lang::get('site.logout')}}</a></li>
                         @else
-                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
+                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">{{{ Lang::get('site.login') }}}</a></li>
                         <li {{ (Request::is('user/register') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
                         @endif
                     </ul>

@@ -18,11 +18,27 @@
 		<div class="tab-content">
 			<!-- General tab -->
 			<div class="tab-pane active" id="tab-general">
+			<!-- name -->
+				<div class="form-group">
+	            	<label class="col-md-2 control-label" for="name">{{ Lang::get('confide.name') }}</label>
+		            <div class="col-md-10">
+		                <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide.name') }}" type="text" name="name" id="name" value="{{{ Input::old('name', isset($user) ? $user->name : null) }}}">
+		            </div>
+		        </div>
+		        <!-- name -->
+		        <!-- surname -->
+				<div class="form-group">
+		            <label class="col-md-2 control-label" for="surname">{{ Lang::get('confide.surname') }}</label>
+		            <div class="col-md-10">
+		                <input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide.surname') }}" type="text" name="surname" id="surname" value="{{{ Input::old('surname', isset($user) ? $user->surname : null) }}}">
+		            </div>
+		        </div>		
+        		<!-- surname -->
 				<!-- username -->
 				<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="username">Username</label>
 					<div class="col-md-10">
-						<input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', isset($user) ? $user->username : null) }}}" />
+						<input class="form-control" type="text" tabindex="3" placeholder="{{ Lang::get('confide.username') }}" name="username" id="username" value="{{{ Input::old('username', isset($user) ? $user->username : null) }}}" />
 						{{{ $errors->first('username', '<span class="help-inline">:message</span>') }}}
 					</div>
 				</div>
@@ -32,7 +48,7 @@
 				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="email">Email</label>
 					<div class="col-md-10">
-						<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
+						<input class="form-control" type="text" tabindex="4" placeholder="{{ Lang::get('confide.e_mail') }}" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
 						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
 					</div>
 				</div>
@@ -42,7 +58,7 @@
 				<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="password">Password</label>
 					<div class="col-md-10">
-						<input class="form-control" type="password" name="password" id="password" value="" />
+						<input class="form-control"  tabindex="5" placeholder="{{ Lang::get('confide.password') }}" type="password" name="password" id="password" value="" />
 						{{{ $errors->first('password', '<span class="help-inline">:message</span>') }}}
 					</div>
 				</div>
@@ -52,7 +68,7 @@
 				<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="password_confirmation">Password Confirm</label>
 					<div class="col-md-10">
-						<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
+						<input class="form-control" type="password" tabindex="6" placeholder="{{ Lang::get('confide.password_confirmation') }}"  name="password_confirmation" id="password_confirmation" value="" />
 						{{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}}
 					</div>
 				</div>

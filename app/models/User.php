@@ -9,22 +9,43 @@ use Carbon\Carbon;
 
 class User extends ConfideUser implements PresentableInterface {
     use HasRole;
-
+	
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
 	protected $table = 'users';
-
-	/**
-     * Validation rules
-     */
-    public static $rules = array(
-        'email' => 'required|email',
-        'password' => 'required|between:4,11|confirmed',
-    );
 	
+	/**
+	* Ardent validation rules
+	*
+	* @var array
+	*/
+    public static $rules = array(
+		'name' => 'required|min:4',
+		'surname' => 'required|min:4',
+        'username' => 'required|alpha_dash|unique:users',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|between:4,11|confirmed',
+        'password_confirmation' => 'between:4,11',
+    );
+
+    /**
+	* Rules for when updating a user.
+	*
+	* @var array
+	*/
+    protected $updateRules = array(
+		'name' => 'required|min:4',
+		'surname' => 'required|min:4',
+        'password' => 'between:4,11|confirmed',
+        'password_confirmation' => 'between:4,11',
+    );
+
+
+	
+
     public function getPresenter()
     {
         return new UserPresenter($this);

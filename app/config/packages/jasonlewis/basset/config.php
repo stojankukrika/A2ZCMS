@@ -32,14 +32,18 @@ return array(
         {
             $collection->directory('assets/css', function($collection)
             {
-                $collection->add('less/master.less')->apply('Less');
+            	$collection->add('less/master.less')->apply('Less');
+                $collection->add('jquery-ui-1.10.3.custom.css');
+				$collection->add('bootswatch.css');
+				$collection->add('bootstrap.css');
             })->apply('UriRewriteFilter')->apply('CssMin');
 
             $collection->directory('assets/js', function($collection)
             {
-                $collection->javascript('jquery.min.js');
+                $collection->add('jquery.1.10.2.min.js');
+				$collection->add('jquery-ui-1.10.3.custom.js');
                 $collection->add('bootstrap/bootstrap.js');
-                $collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
+                //$collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
             })->apply('JsMin');
         },
 
@@ -47,21 +51,25 @@ return array(
         {
             $collection->directory('assets/css', function($collection)
             {
-                $collection->add('less/master.less')->apply('Less');
+            	$collection->add('less/master.less')->apply('Less');
+                $collection->add('jquery-ui-1.10.3.custom.css');				
                 $collection->add('wysihtml5/prettify.css');
                 $collection->add('wysihtml5/bootstrap-wysihtml5.css');
                 $collection->add('datatables-bootstrap.css');
+				$collection->add('bootswatch.css');
+				$collection->add('bootstrap.css');
                 $collection->add('colorbox.css');
             })->apply('UriRewriteFilter')->apply('CssMin');
 
             $collection->directory('assets/js', function($collection)
             {
-                $collection->javascript('jquery.min.js');
-                //$collection->add('bootstrap/bootstrap.js');
-                $collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
+                $collection->add('jquery.1.10.2.min.js');
+				$collection->add('jquery-ui-1.10.3.custom.js');
+                $collection->add('bootstrap/bootstrap.js');
+                //$collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
                 $collection->add('wysihtml5/wysihtml5-0.3.0.js');
                 $collection->add('wysihtml5/bootstrap-wysihtml5.js');
-                $collection->javascript('jquery.dataTables.min.js');
+                $collection->javascript('dataTables/1.9.4/jquery.dataTables.min.js');
                 $collection->add('datatables-bootstrap.js');
                 $collection->add('datatables.fnReloadAjax.js');
                 $collection->add('jquery.colorbox.js');

@@ -13,8 +13,6 @@
 
 $app = new Illuminate\Foundation\Application;
 
-$app->redirectIfTrailingSlash();
-
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment
@@ -28,7 +26,9 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('your-machine-name'),
+    'local' => array('VirtualMint'), // Change this to your local machine hostname.
+    'staging' => array('your-staging-machine-name'),
+    'production' => array('your-production-machine-name'),
 
 ));
 
