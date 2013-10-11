@@ -3,8 +3,8 @@
 return array(
 
 	'email'	 => 'Your Email Address',
-	'dateformat'   => 'Format for Date <a href="http://php.net/manual/en/function.date.php">(PHP DATE)</a>',
-	'timeformat' => 'Format for Time <a href="http://php.net/manual/en/function.date.php">(PHP DATE)</a>',
+	'dateformat'   => 'Format for Date (PHP DATE)',
+	'timeformat' => 'Format for Time (PHP DATE)',
 	'pageitem' => 'Choose how many item per page',
 	'shortmsg' => 'Short Message Length',
 	'analytics' => 'Analytics Code',

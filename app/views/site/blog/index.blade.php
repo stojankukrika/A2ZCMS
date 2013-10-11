@@ -44,6 +44,7 @@
 </div>
 
 <hr />
+
 @endforeach
 
 {{ $blogs->links() }}

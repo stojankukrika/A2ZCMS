@@ -13,18 +13,26 @@ class BlogController extends BaseController {
      * @var User
      */
     protected $user;
+	/**
+     * Settings Model
+     * @var Settings
+     */
+	protected $settings;
 
     /**
      * Inject the models.
      * @param Blog $blog
      * @param User $user
      */
-    public function __construct(Blog $blog, User $user)
+    public function __construct(Blog $blog, User $user, Settings $settings)
     {
         parent::__construct();
 
         $this->blog = $blog;
         $this->user = $user;
+		$settings = Settings::all();
+		$this->settings = $settings;
+		
     }
     
 	/**
@@ -34,8 +42,14 @@ class BlogController extends BaseController {
 	 */
 	public function getIndex()
 	{
+		foreach($this->settings as $v) 
+		{
+			 if ($v->varname == 'pageitem') {
+			 	 $pageitem =  $v->value; 
+			 } 
+		} 
 		// Get all the blog posts
-		$blogs = $this->blog->orderBy('created_at', 'DESC')->paginate(10);
+		$blogs = $this->blog->orderBy('created_at', 'DESC')->paginate($pageitem);
 
 		// Show the page
 		return View::make('site/blog/index', compact('blogs'));

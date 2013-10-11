@@ -7,8 +7,6 @@ class AdminSettingsController extends AdminController {
      * @var Post
      */
     protected $settings;
-	protected $guarded = array('id', 'created_at','updated_at');
-
     /**
      * Inject the models.
      * @param Post $post
@@ -28,11 +26,10 @@ class AdminSettingsController extends AdminController {
         // Title
         $title = Lang::get('admin/settings/title.settings_menagement');
 
-        // Grab all the blog posts
-        $settings = $this->settings;
-
+		//load settings from database
+		$settings = Settings::all();
         // Show the page
-        return View::make('admin/settings/index', compact('settings', 'title'));
+        return View::make('admin/settings/index', compact('title','settings'));
     }
 	
 	/**
@@ -44,9 +41,15 @@ class AdminSettingsController extends AdminController {
 	{
         // Declare the rules for the form validation
         $rules = array(
-            'title'   => 'required|min:3',
-            'content' => 'required|min:3',
-            'blogcategory_id' => 'required'
+            'email'   => 'required|email',
+            'title' => 'required|min:3',
+            'copyright' => 'required|min:3',
+            'dateformat' => 'required',
+            'timeformat' => 'required',
+            'useravatwidth' => 'required|integer',
+            'useravatheight' => 'required|integer',
+            'shortmsg' => 'required|integer',
+            'pageitem' => 'required|integer'
         );
 		
 	     // Validate the inputs
@@ -55,35 +58,84 @@ class AdminSettingsController extends AdminController {
         // Check if the form validates with success
         if ($validator->passes())
         {
-            // Create a new blog post
-            $user = Auth::user();
+        	// Update the blog post data
+            $email            = Input::get('email');
+			$title  		  = Input::get('title');
+            $copyright        = Input::get('copyright');
+            $dateformat       = Input::get('dateformat');			
+            $timeformat       = Input::get('timeformat');
+            $useravatwidth 	  = Input::get('useravatwidth');
+            $useravatheight   = Input::get('useravatheight');			
+			$shortmsg    	  = Input::get('shortmsg');			
+            $pageitem  		  = Input::get('pageitem');
+            $analytics        = Input::get('analytics');
+            $metadesc         = Input::get('metadesc');			
+            $metakey       	  = Input::get('metakey');
+            $metaauthor 	  = Input::get('metaauthor');
+            $offline    	  = Input::get('offline');			
+			$offlinemessage   = Input::get('offlinemessage');
+						
+			//Save settings to database
+			$settings = Settings::all();
+			foreach($settings as $v) {
+				
+				switch ($v->varname) {
+					case 'email':
+						$v->value = $email;
+						break;
+					case 'title':
+						$v->value = $title;
+						break;
+					case 'copyright':
+						$v->value = $copyright;
+						break;
+					case 'dateformat':
+						$v->value = $dateformat;
+						break;
+					case 'timeformat':
+						$v->value = $timeformat;
+						break;
+					case 'useravatwidth':
+						$v->value = $useravatwidth;
+						break;
+					case 'useravatheight':
+						$v->value = $useravatheight;
+						break;
+					case 'shortmsg':
+						$v->value = $shortmsg;
+						break;
+					case 'pageitem':
+						$v->value = $pageitem;
+						break;					
+					case 'analytics':
+						$v->value = $analytics;
+						break;
+					case 'metadesc':
+						$v->value = $metadesc;
+						break;
+					case 'metakey':
+						$v->value = $metakey;
+						break;
+					case 'metaauthor':
+						$v->value = $metaauthor;
+						break;
+					case 'offline':
+						$v->value = $offline;
+						break;
+					case 'offlinemessage':
+						$v->value = $offlinemessage;
+						break;
+				}
+					Settings::where('varname', '=', $v->varname)->update(array('value' => $v->value));
+			}
+			
 
-            // Update the blog post data
-            $this->blog->title            = Input::get('title');
-			$this->blog->blogcategory_id  = Input::get('blogcategory_id');
-            $this->blog->slug             = Str::slug(Input::get('title'));
-            $this->blog->content          = Input::get('content');
-            $this->blog->meta_title       = Input::get('meta-title');
-            $this->blog->meta_description = Input::get('meta-description');
-            $this->blog->meta_keywords    = Input::get('meta-keywords');			
-			$this->blog->start_publish    = (Input::get('start_publish')=='')?date('Y-m-d'):Input::get('start_publish');
-            $this->blog->end_publish 	  = (Input::get('end_publish')=='')?null:Input::get('end_publish');
-            $this->blog->resource_link    = Input::get('resource_link');
-            $this->blog->user_id          = $user->id;
-
-            // Was the blog post created?
-            if($this->blog->save())
-            {
-                // Redirect to the new blog post page
-                return Redirect::to('admin/blogs/' . $this->blog->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
-            }
-
-            // Redirect to the blog post create page
-            return Redirect::to('admin/blogs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
+           // Redirect to the settings page
+           return Redirect::to('admin/settings/')->with('success', Lang::get('admin/settings/messages.success'));
         }
 
         // Form validation failed
-        return Redirect::to('admin/blogs/create')->withInput()->withErrors($validator);
+        return Redirect::to('admin/settings/')->withInput()->withErrors($validator);
 	}
 
 }

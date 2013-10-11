@@ -16,7 +16,8 @@
 			{{{ $title }}}
 		</h3>
 	</div>
-	{{ Form::open(array('url' => '')) }}
+	<?php //print_r($settings); die(); ?>
+	{{ Form::open() }}
     <div id="tabs">
 		<ul>
 		<li><a href="#general_settings">{{ Lang::get('admin/settings/title.general_settings') }}</a></li>
@@ -31,118 +32,185 @@
 				<!-- Email -->
 				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        {{Form::label('email', Lang::get('admin/settings/table.email'), array('class' => 'control-label'))}}
-                       	{{Form::text('email', Input::old('email', isset($settings) ? $settings->email : null) , array('class' => 'form-control'))}} 
-						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+                    	<?php $email = ''; foreach($settings as $v) { if ($v->varname == 'email') { $email =  $v->value; } } ?>
+                    	{{Form::label('email', Lang::get('admin/settings/table.email'), array('class' => 'control-label'))}}
+                       	{{Form::text('email', Input::old('email', $email) , array('class' => 'form-control'))}} 
+						{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 				<!-- ./ email -->
+					<!-- Title -->
+				<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                    	<?php $title = ''; foreach($settings as $v) { if ($v->varname == 'title') { $title =  $v->value; } } ?>
+                    	{{Form::label('title', Lang::get('admin/settings/table.title'), array('class' => 'control-label'))}}
+                       	{{Form::text('title', Input::old('title', $title) , array('class' => 'form-control'))}} 
+						{{ $errors->first('title', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ title -->
+					<!-- Copyright -->
+				<div class="form-group {{{ $errors->has('copyright') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                        <?php $copyright = ''; foreach($settings as $v) { if ($v->varname == 'copyright') { $copyright =  $v->value; } } ?>
+                    	{{Form::label('copyright', Lang::get('admin/settings/table.copyright'), array('class' => 'control-label'))}}
+                       	{{Form::text('copyright', Input::old('copyright', $copyright) ,array('class' => 'form-control'))}} 
+						{{ $errors->first('copyright', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ copyright -->
+					<!-- Dateformat -->
+				<div class="form-group {{{ $errors->has('dateformat') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                         <?php $dateformat = ''; foreach($settings as $v) { if ($v->varname == 'dateformat') { $dateformat =  $v->value; } } ?>
+                    	{{Form::label('dateformat', Lang::get('admin/settings/table.dateformat'), array('class' => 'control-label'))}}
+                       	{{Form::text('dateformat', Input::old('dateformat', $dateformat) , array('class' => 'form-control'))}} 
+						{{ $errors->first('dateformat', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ dateformat -->
+					<!-- Timeformat -->
+				<div class="form-group {{{ $errors->has('timeformat') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                         <?php $timeformat = ''; foreach($settings as $v) { if ($v->varname == 'timeformat') { $timeformat =  $v->value; } } ?>
+                    	{{Form::label('timeformat', Lang::get('admin/settings/table.timeformat'), array('class' => 'control-label'))}}
+                       	{{Form::text('timeformat', Input::old('timeformat', $timeformat) , array('class' => 'form-control'))}} 
+						{{ $errors->first('timeformat', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ timeformat -->
 				
-					<!-- Email -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+					<!-- Useravatwidth -->
+				<div class="form-group {{{ $errors->has('useravatwidth') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        {{Form::label('email', Lang::get('admin/settings/table.email'), array('class' => 'control-label'))}}
-                       	{{Form::text('email', Input::old('email', isset($settings) ? $settings->email : null) , array('class' => 'form-control'))}} 
-						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+                         <?php $useravatwidth = ''; foreach($settings as $v) { if ($v->varname == 'useravatwidth') { $useravatwidth =  $v->value; } } ?>
+                    	{{Form::label('useravatwidth', Lang::get('admin/settings/table.useravatwidth'), array('class' => 'control-label'))}}
+                       	{{Form::text('useravatwidth', Input::old('useravatwidth', $useravatwidth) , array('class' => 'form-control'))}} 
+						{{ $errors->first('useravatwidth', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
-				<!-- ./ email -->
-					<!-- Email -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+				<!-- ./ useravatwidth -->
+					<!-- Useravatheight -->
+				<div class="form-group {{{ $errors->has('useravatheight') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        {{Form::label('email', Lang::get('admin/settings/table.email'), array('class' => 'control-label'))}}
-                       	{{Form::text('email', Input::old('email', isset($settings) ? $settings->email : null) , array('class' => 'form-control'))}} 
-						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+                         <?php $useravatheight = ''; foreach($settings as $v) { if ($v->varname == 'useravatheight') { $useravatheight =  $v->value; } } ?>
+                    	{{Form::label('useravatheight', Lang::get('admin/settings/table.useravatheight'), array('class' => 'control-label'))}}
+                       	{{Form::text('useravatheight', Input::old('useravatheight', $useravatheight) , array('class' => 'form-control'))}} 
+						{{ $errors->first('useravatheight', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
-				<!-- ./ email -->
-					<!-- Email -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+				<!-- ./ timeformat -->
+					<!-- Shortmsg -->
+				<div class="form-group {{{ $errors->has('shortmsg') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        {{Form::label('email', Lang::get('admin/settings/table.email'), array('class' => 'control-label'))}}
-                       	{{Form::text('email', Input::old('email', isset($settings) ? $settings->email : null) , array('class' => 'form-control'))}} 
-						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+                         <?php $shortmsg = ''; foreach($settings as $v) { if ($v->varname == 'shortmsg') { $shortmsg =  $v->value; } } ?>
+                    	{{Form::label('shortmsg', Lang::get('admin/settings/table.shortmsg'), array('class' => 'control-label'))}}
+                       	{{Form::text('shortmsg', Input::old('shortmsg', $shortmsg) , array('class' => 'form-control'))}} 
+						{{ $errors->first('shortmsg', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
-				<!-- ./ email -->
+				<!-- ./ shortmsg -->
+					<!-- Pageitem -->
+				<div class="form-group {{{ $errors->has('pageitem') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                         <?php $pageitem = ''; foreach($settings as $v) { if ($v->varname == 'pageitem') { $pageitem =  $v->value; } } ?>
+                    	{{Form::label('pageitem', Lang::get('admin/settings/table.pageitem'), array('class' => 'control-label'))}}
+                       	{{Form::text('pageitem', Input::old('pageitem', $pageitem) , array('class' => 'form-control'))}} 
+						{{ $errors->first('pageitem', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ pageitem -->
 			</div>
 			<!-- ./ general tab -->
 			
 			<!-- Analytics tab -->
 			<div class="tab-pane active" id="analytics_code">
 				<!-- analytics -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('analytics') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        {{Form::label('analytics', Lang::get('admin/settings/table.analytics'), array('class' => 'control-label'))}}
-                       	{{Form::textarea('analytics', Input::old('offlinemessage', isset($settings) ? $settings->analytics : null) , array('class' => 'form-control'))}} 
-						{{{ $errors->first('analytics', '<span class="help-inline">:message</span>') }}}
+                         <?php $analytics = ''; foreach($settings as $v) { if ($v->varname == 'analytics') { $analytics =  $v->value; } } ?>
+                    	{{Form::label('analytics', Lang::get('admin/settings/table.analytics'), array('class' => 'control-label'))}}
+                       	{{Form::textarea('analytics', Input::old('analytics', $analytics) , array('class' => 'form-control'))}} 
+						{{ $errors->first('analytics', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 				<!-- ./ analytics -->
 			</div>
 			<!-- ./ analytics tab -->
 			
-			<!-- General tab -->
-			<div class="tab-pane active" id="offline_settings">
-				<!-- Offline -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
-                    <div class="col-md-12">
-                        {{Form::label('offline', Lang::get('admin/settings/table.offline'), array('class' => 'control-label'))}}
-                       	{{Form::radio('offline', '0', true);}} {{Lang::get('admin/settings/table.yes')}}
-                       	{{Form::radio('offline', '1', false);}} {{Lang::get('admin/settings/table.no')}}
-						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
-					</div>
-				</div>
-				<!-- ./ offline -->
-				
-					<!-- Offline message -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
-                    <div class="col-md-12">
-                        {{Form::label('offlinemessage', Lang::get('admin/settings/table.offlinemessage'), array('class' => 'control-label'))}}
-                       	{{Form::textarea('offlinemessage', Input::old('offlinemessage', isset($settings) ? $settings->offlinemessage : null) , array('class' => 'form-control'))}} 
-						{{{ $errors->first('offlinemessage', '<span class="help-inline">:message</span>') }}}
-					</div>
-				</div>
-				<!-- ./ offline message -->
-				
-			</div>
-			<!-- ./ general tab -->
-			
 				<!-- Meta data tab -->
 			<div class="tab-pane active" id="meta_data">
-				<!-- Offline -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+				<!-- Metadesc -->
+				<div class="form-group {{{ $errors->has('metadesc') ? 'error' : '' }}}">
+                     <div class="col-md-12">
+                         <?php $metadesc = ''; foreach($settings as $v) { if ($v->varname == 'metadesc') { $metadesc =  $v->value; } } ?>
+                    	{{Form::label('metadesc', Lang::get('admin/settings/table.metadesc'), array('class' => 'control-label'))}}
+                       	{{Form::textarea('metadesc', Input::old('offlinemessage', $metadesc) , array('class' => 'form-control'))}} 
+						{{ $errors->first('metadesc', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ metadesc -->
+				
+					<!-- Metakey -->
+				<div class="form-group {{{ $errors->has('metakey') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        {{Form::label('offline', Lang::get('admin/settings/table.offline'), array('class' => 'control-label'))}}
-                       	{{Form::radio('offline', '0', true);}} {{Lang::get('admin/settings/table.yes')}}
-                       	{{Form::radio('offline', '1', false);}} {{Lang::get('admin/settings/table.no')}}
-						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+                         <?php $metakey = ''; foreach($settings as $v) { if ($v->varname == 'metakey') { $metakey =  $v->value; } } ?>
+                    	{{Form::label('metakey', Lang::get('admin/settings/table.metakey'), array('class' => 'control-label'))}}
+                       	{{Form::text('metakey', Input::old('metakey', $metakey) , array('class' => 'form-control'))}} 
+						{{ $errors->first('metakey', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ metakey -->
+				
+					<!-- Metaauthor -->
+				<div class="form-group {{{ $errors->has('metaauthor') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                         <?php $metaauthor = ''; foreach($settings as $v) { if ($v->varname == 'metaauthor') { $metaauthor =  $v->value; } } ?>
+                    	{{Form::label('metaauthor', Lang::get('admin/settings/table.metaauthor'), array('class' => 'control-label'))}}
+                       	{{Form::text('metaauthor', Input::old('metaauthor', $metaauthor) , array('class' => 'form-control'))}} 
+						{{ $errors->first('metaauthor', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<!-- ./ metaauthor -->
+			</div>
+			<!-- ./ meta tab -->
+				
+			<!-- offline tab -->
+			<div class="tab-pane active" id="offline_settings">
+				<!-- Offline -->
+				<div class="form-group {{{ $errors->has('offline') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                         <?php $offline = ''; foreach($settings as $v) { if ($v->varname == 'offline') { $offline =  $v->value; } } ?>
+                    	{{Form::label('offline', Lang::get('admin/settings/table.offline'), array('class' => 'control-label'))}}
+                       	{{Form::radio('offline', '0', ($offline)?true:false);}} {{Lang::get('admin/settings/table.yes')}}
+                       	{{Form::radio('offline', '1', (!$offline)?true:false);}} {{Lang::get('admin/settings/table.no')}}
+						{{ $errors->first('offline', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 				<!-- ./ offline -->
 				
 					<!-- Offline message -->
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('offlinemessage') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        {{Form::label('offlinemessage', Lang::get('admin/settings/table.offlinemessage'), array('class' => 'control-label'))}}
-                       	{{Form::textarea('offlinemessage', Input::old('offlinemessage', isset($settings) ? $settings->offlinemessage : null) , array('class' => 'form-control'))}} 
-						{{{ $errors->first('offlinemessage', '<span class="help-inline">:message</span>') }}}
+                         <?php $offlinemessage = ''; foreach($settings as $v) { if ($v->varname == 'offlinemessage') { $offlinemessage =  $v->value; } } ?>
+                    	{{Form::label('offlinemessage', Lang::get('admin/settings/table.offlinemessage'), array('class' => 'control-label'))}}
+                       	{{Form::textarea('offlinemessage', Input::old('offlinemessage', $offlinemessage) , array('class' => 'form-control'))}} 
+						{{ $errors->first('offlinemessage', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 				<!-- ./ offline message -->
-				
 			</div>
-			<!-- ./ meta data tab -->
+			<!-- ./ offline tab -->
 			
 			<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-12">
-				<element class="btn-cancel close_popup">Cancel</element>
 				<button type="reset" class="btn btn-default">Reset</button>
-				<button type="submit" class="btn btn-success">@if (isset($blog)){{ "Update" }} @else {{ "Create" }} @endif</button>
+				<button type="submit" class="btn btn-success">Update</button>
 			</div>
 		</div>
 		<!-- ./ form actions -->
+				
 		
     
 {{ Form::close() }}

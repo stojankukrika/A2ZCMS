@@ -6,19 +6,6 @@ class Settings extends Eloquent implements PresentableInterface {
 		
 	protected $table = "settings";
 	public $timestamps = false;
-	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete()
-	{
-		// Delete the comments
-		$this->categorys()->softDeletes();
-
-		return true;
-	}
 	
 	/**
 	 * Returns a formatted varname entry,
