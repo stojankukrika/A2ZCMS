@@ -28,7 +28,7 @@ return array(
 
     'collections' => array(
 
-        'public' => function($collection)
+       /* 'public' => function($collection)
         {
             $collection->directory('assets/css', function($collection)
             {
@@ -46,34 +46,67 @@ return array(
                 //$collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
             })->apply('JsMin');
         },
-
+*/
         'admin' => function($collection)
         {
             $collection->directory('assets/css', function($collection)
             {
-            	$collection->add('less/master.less')->apply('Less');
-                $collection->add('jquery-ui-1.10.3.custom.css');				
-                $collection->add('wysihtml5/prettify.css');
-                $collection->add('wysihtml5/bootstrap-wysihtml5.css');
-                $collection->add('datatables-bootstrap.css');
-				$collection->add('bootswatch.css');
-				$collection->add('bootstrap.css');
-                $collection->add('colorbox.css');
+            	$collection->add('bootstrap.min.css');
+                $collection->add('style.min.css');				
+                $collection->add('retina.min.css');
+				
+				$collection->add('jquery-ui-1.10.3.custom.css');
+	$collection->add('fullcalendar.css');
+	$collection->add('chosen.css');
+	$collection->add('select2.css');
+	$collection->add('jquery.cleditor.css');
+	$collection->add('jquery.noty.css');
+	$collection->add('noty_theme_default.css');
+	$collection->add('elfinder.min.css');
+	$collection->add('elfinder.theme.css');
+	$collection->add('uploadify.css');
+	$collection->add('jquery.gritter.css');
+	$collection->add('font-awesome.min.css');
+	$collection->add('font-awesome-ie7.min.css');
+	$collection->add('glyphicons.css');
+	$collection->add('halflings.css');
+	$collection->add('dropzone.css');
+	$collection->add('xcharts.min.css');
+	$collection->add('jquery.easy-pie-chart.css');
+	$collection->add('icheck/all.css');
+	$collection->add('bootstrap-editable.css');
+	
             })->apply('UriRewriteFilter')->apply('CssMin');
 
             $collection->directory('assets/js', function($collection)
             {
-                $collection->add('jquery.1.10.2.min.js');
-				$collection->add('jquery-ui-1.10.3.custom.js');
-                $collection->add('bootstrap/bootstrap.js');
+                $collection->add('jquery-2.0.3.min.js');
+				$collection->add('jquery-1.10.2.min.js');
+                $collection->add('jquery-migrate-1.2.1.min.js');
                 //$collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
-                $collection->add('wysihtml5/wysihtml5-0.3.0.js');
-                $collection->add('wysihtml5/bootstrap-wysihtml5.js');
-                $collection->javascript('dataTables/1.9.4/jquery.dataTables.min.js');
-                $collection->add('datatables-bootstrap.js');
-                $collection->add('datatables.fnReloadAjax.js');
-                $collection->add('jquery.colorbox.js');
-                $collection->add('prettify.js');
+                $collection->add('bootstrap.min.js');
+                $collection->add('jquery-ui-1.10.3.custom.min.js');
+                $collection->add('jquery.ui.touch-punch.min.js');
+                $collection->add('jquery.sparkline.min.js');
+                $collection->add('fullcalendar.min.js');
+                $collection->add('excanvas.min.js');
+                $collection->add('prettify.js');			
+				$collection->add('jquery.flot.min.js');
+                $collection->add('jquery.flot.pie.min.js');
+                $collection->add('jquery.flot.stack.min.js');
+                $collection->add('jquery.flot.resize.min.js');
+                $collection->add('jquery.flot.time.min.js');
+                $collection->add('jquery.autosize.min.js');				
+				$collection->add('jquery.placeholder.min.js');
+                $collection->add('moment.min.js');
+                $collection->add('daterangepicker.min.js');
+                $collection->add('jquery.easy-pie-chart.min.js');
+                $collection->add('jquery.dataTables.min.js');
+                $collection->add('dataTables.bootstrap.min.js');				
+				$collection->add('custom.min.js');
+                $collection->add('core.min.js');
+                $collection->add('index.js');
+				
             })->apply('JsMin');
         }
 
