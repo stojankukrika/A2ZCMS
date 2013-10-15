@@ -11,23 +11,28 @@
 
 {{-- Content --}}
 @section('content')
-	<div class="page-header">
-		<h3>
-			{{{ $title }}}
-		</h3>
-	</div>
-	<?php //print_r($settings); die(); ?>
+
+	<li><a href="#">Home</a></li>
+					  	<li class="active" >Dashboard</li>
+					</ol>		
+					<div class="row">	
+						
 	{{ Form::open() }}
-    <div id="tabs">
-		<ul>
-		<li><a href="#general_settings">{{ Lang::get('admin/settings/title.general_settings') }}</a></li>
-		<li><a href="#analytics_code">{{ Lang::get('admin/settings/title.analytics_code') }}</a></li>
-		<li><a href="#meta_data">{{ Lang::get('admin/settings/title.meta_data') }}</a></li>		
-		<li><a href="#offline_settings">{{ Lang::get('admin/settings/title.offline_settings') }}</a></li>
-		</ul>
-		<!-- Tabs Content -->
-		<div class="tab-content">
-			<!-- General tab -->
+	<div class="col-md-12">
+					<div class="box">
+						<div class="box-header">
+							<h2><i class="icon-th"></i><span class="break"></span>{{{ $title }}}</h2>
+							<ul id="myTab" class="nav tab-menu nav-tabs">
+								<li><a href="#general_settings">{{ Lang::get('admin/settings/title.general_settings') }}</a></li>
+								<li><a href="#analytics_code">{{ Lang::get('admin/settings/title.analytics_code') }}</a></li>
+								<li><a href="#meta_data">{{ Lang::get('admin/settings/title.meta_data') }}</a></li>		
+								<li><a href="#offline_settings">{{ Lang::get('admin/settings/title.offline_settings') }}</a></li>
+							</ul>
+						</div>
+						<div class="box-content">
+							
+							<div class="tab-content" id="myTabContent">
+								<!-- General tab -->
 			<div class="tab-pane active" id="general_settings">
 				<!-- Email -->
 				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
@@ -120,10 +125,8 @@
 					</div>
 				</div>
 				<!-- ./ pageitem -->
-			</div>
-			<!-- ./ general tab -->
-			
-			<!-- Analytics tab -->
+				</div>
+								<!-- Analytics tab -->
 			<div class="tab-pane active" id="analytics_code">
 				<!-- analytics -->
 				<div class="form-group {{{ $errors->has('analytics') ? 'error' : '' }}}">
@@ -137,9 +140,7 @@
 				<!-- ./ analytics -->
 			</div>
 			<!-- ./ analytics tab -->
-			
-				<!-- Meta data tab -->
-			<div class="tab-pane active" id="meta_data">
+						<div class="tab-pane active" id="meta_data">
 				<!-- Metadesc -->
 				<div class="form-group {{{ $errors->has('metadesc') ? 'error' : '' }}}">
                      <div class="col-md-12">
@@ -201,15 +202,17 @@
 				<!-- ./ offline message -->
 			</div>
 			<!-- ./ offline tab -->
-			
-			<!-- Form Actions -->
-		<div class="form-group">
+							</div>
+							<div class="form-group">
 			<div class="col-md-12">
 				<button type="reset" class="btn btn-default">Reset</button>
 				<button type="submit" class="btn btn-success">Update</button>
 			</div>
 		</div>
-		<!-- ./ form actions -->
+						</div>
+					</div>
+				</div>
+
 				
 		
     

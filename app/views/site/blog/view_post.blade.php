@@ -26,48 +26,43 @@
 
 {{-- Content --}}
 @section('content')
-<h3>{{ $blog->title }}</h3>
-
-<p>{{ $blog->content() }}</p>
-
-<div>
-	<span class="badge badge-info">Posted {{{ $blog->date() }}}</span>
+ <h1 class="header">{{ $blog->title }}</h1>
+  <img class="main_pic" alt="main pic" src="http://placehold.it/738x430" />
+  <div class="post_content"><p>{{ $blog->content() }} </p>
+  <div class="author">{{{ $blog->author->username }}}</div>
+  <div class="date">Posted {{{ $blog->date() }}}</div>
 </div>
-
 <hr />
-
-<a id="comments"></a>
+ <div class="comments">
 <h4>{{{ $blog_comments->count() }}} Comments</h4>
 
 @if ($blog_comments->count())
 @foreach ($blog_comments as $comment)
-<div class="row">
-	<div class="col-md-1">
-		<img class="thumbnail" src="http://placehold.it/60x60" alt="">
-	</div>
-	<div class="col-md-11">
-		<div class="row">
-			<div class="col-md-11">
-				<span class="muted">{{{ $comment->author->username }}}</span>
-				&bull;
-				{{{ $comment->date() }}}
-			</div>
 
-			<div class="col-md-11">
-				<hr />
+<div class="comment">
+    <div class="row">
+        <div class="span1">
+            <img src="http://placehold.it/171x174" class="img-circle author_pic" />
+        </div>
+        <div class="span6">
+            <div class="name">
+               {{{ $comment->author->username }}}
+            </div>
+            <div class="date">
+               {{{ $comment->date() }}}
+            </div>
+            <div class="response">
+               {{{ $comment->content() }}}
 			</div>
-
-			<div class="col-md-11">
-				{{{ $comment->content() }}}
-			</div>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
-<hr />
+
 @endforeach
 @else
 <hr />
 @endif
+ </div>
 
 @if ( ! Auth::check())
 You need to be logged in to add comments.<br /><br />
@@ -86,17 +81,21 @@ You don't have the correct permissions to add comments.
 </div>
 @endif
 
-<h4>Add a Comment</h4>
-<form  method="post" action="{{{ URL::to($blog->slug) }}}">
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
-
-	<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>
-
-	<div class="form-group">
-		<div class="col-md-12">
-			<input type="submit" class="btn btn-default" id="submit" value="Submit" />
-		</div>
-	</div>
-</form>
+<div class="new_comment">
+    <h4>Add Comment</h4>
+    <form method="post" action="{{{ URL::to($blog->slug) }}}">
+    	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
+       <div class="row">
+            <div class="span6">
+                <textarea placeholder="Comments" rows="7">{{{ Request::old('comment') }}}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <a href="#" class="btn">Submit</a>
+            </div>
+        </div>
+    </form>
+</div>
 @endif
 @stop

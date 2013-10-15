@@ -32,30 +32,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 	<?php 
-	$asset = 'http://localhost:82/a2zcms/public/assets';
+	$asset = Config::get('app.url');
 	?>
 <!-- start: CSS -->
-	<link href="{{$asset}}/css/bootstrap.min.css" rel="stylesheet">
-	<link href="{{$asset}}/css/style.min.css" rel="stylesheet">
-	<link href="{{$asset}}/css/retina.min.css" rel="stylesheet">
-	<link href="{{$asset}}/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+	<link href="{{$asset}}assets/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/retina.min.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 	<!-- end: CSS -->
 	
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 		
-	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<script src="assets/js/respond.min.js"></script>
+	  	<script src="{{$asset}}assets/admin/js/html5.js"></script>
+		<script src="{{$asset}}assets/admin/js/respond.min.js"></script>
 		
 	<![endif]-->
 
 	<!-- start: Favicon and Touch Icons -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{$asset}}/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{$asset}}/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{$asset}}/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{$asset}}/ico/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="{{$asset}}/ico/favicon.png">
+	    <link rel="shortcut icon" href="{{$asset}}assets/admin/ico/favicon.ico">
 	<!-- end: Favicon and Touch Icons -->	
 </head>
 
@@ -219,7 +215,7 @@
 							</li>	
                         	<li>
                                 <a href="#">
-									<span class="avatar"><img src="assets/img/avatar/avatar.png" alt="Avatar"></span>
+									<span class="avatar"><img src="{{$asset}}assets/admin/img/avatar/avatar.png" alt="Avatar"></span>
 									<span class="header">
 										<span class="from">
 									    	Łukasz Holeczek
@@ -235,7 +231,7 @@
                             </li>
                             <li>
                                 <a href="#">
-									<span class="avatar"><img src="assets/img/avatar/avatar.png" alt="Avatar"></span>
+									<span class="avatar"><img src="{{$asset}}assets/admin/img/avatar/avatar.png" alt="Avatar"></span>
 									<span class="header">
 										<span class="from">
 									    	Megan Abott
@@ -251,7 +247,7 @@
                             </li>
                             <li>
                                 <a href="#">
-									<span class="avatar"><img src="assets/img/avatar/avatar.png" alt="Avatar"></span>
+									<span class="avatar"><img src="{{$asset}}assets/admin/img/avatar/avatar.png" alt="Avatar"></span>
 									<span class="header">
 										<span class="from">
 									    	Kate Ross
@@ -267,7 +263,7 @@
                             </li>
 							<li>
                                 <a href="#">
-									<span class="avatar"><img src="assets/img/avatar/avatar.png" alt="Avatar"></span>
+									<span class="avatar"><img src="{{$asset}}assets/admin/img/avatar/avatar.png" alt="Avatar"></span>
 									<span class="header">
 										<span class="from">
 									    	Julie Blank
@@ -283,7 +279,7 @@
                             </li>
                             <li>
                                 <a href="#">
-									<span class="avatar"><img src="assets/img/avatar/avatar.png" alt="Avatar"></span>
+									<span class="avatar"><img src="{{$asset}}assets/admin/img/avatar/avatar.png" alt="Avatar"></span>
 									<span class="header">
 										<span class="from">
 									    	Jane Sanders
@@ -311,13 +307,14 @@
 					<!-- start: User Dropdown -->
 					<li class="dropdown">
 						<a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
-							<div class="avatar"><img src="assets/img/avatar/avatar.png" alt="Avatar"></div>
+							<div class="avatar"><img src="{{$asset}}assets/admin/img/avatar/avatar.png" alt="Avatar"></div>
 							<div class="user">
 								<span class="hello">Welcome!</span>
 								<span class="name">{{{ Auth::user()->username }}}</span>
 							</div>
 						</a>
 						<ul class="dropdown-menu">
+							<li><a href="{{{ URL::to('/') }}}"><i class="icon-home"></i> {{ Lang::get('admin/general.homepage') }}</a></li>
 							<li><a href="#"><i class="icon-user"></i> Profile</a></li>
 							<li><a href="{{{ URL::to('user/settings') }}}"><i class="icon-cog"></i> {{ Lang::get('admin/general.settings') }}</a></li>
 							<li><a href="#"><i class="icon-envelope"></i> Messages</a></li>
@@ -340,24 +337,24 @@
 								
 				<div class="sidebar-nav nav-collapse collapse navbar-collapse">
 					<ul class="nav main-menu">
-						<li><a href="{{{ URL::to('admin') }}}"><i class="icon-bar-chart"></i><span class="hidden-sm text"> Dashboard</span></a></li>	
+						<li><a href="{{{ URL::to('admin') }}}"><i class="icon-dashboard"></i><span class="hidden-sm text">Dashboard</span></a></li>	
 						<li>
-							<a class="dropmenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-eye-open"></i><span class="hidden-sm text"> Blog</span> <span class="chevron closed"></span></a>
+							<a class="dropmenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-external-link"></i><span class="hidden-sm text">Blog</span><span class="chevron closed"></span></a>
 							<ul>
-								<li><a class="submenu" href="{{{ URL::to('admin/blogcategorys') }}}"><i class="icon-eye-open"></i><span class="hidden-sm text"> Blog categorys</span></a></li>
-								<li><a class="submenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-eye-open"></i><span class="hidden-sm text"> Blog</span></a></li>
-								<li><a class="submenu" href="{{{ URL::to('admin/blogcomments') }}}"><i class="icon-eye-open"></i><span class="hidden-sm text"> Blog comments</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/blogcategorys') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> Blog categorys</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-book"></i><span class="hidden-sm text"> Blog</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/blogcomments') }}}"><i class="icon-comment-alt"></i> <span class="hidden-sm text">Blog comments</span></a></li>
 							</ul>
 							</li>
 						
 						<li>
-							<a class="dropmenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-edit"></i><span class="hidden-sm text"> Users</span> <span class="chevron closed"></span></a>
+							<a class="dropmenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-group"></i><span class="hidden-sm text"> Users </span><span class="chevron closed"></span></a>
 							<ul>
-								<li><a class="submenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-edit"></i><span class="hidden-sm text"> Users</span></a></li>
-								<li><a class="submenu" href="{{{ URL::to('admin/roles') }}}"><i class="icon-edit"></i><span class="hidden-sm text"> Roles</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-user"></i><span class="hidden-sm text"> Users</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/roles') }}}"><i class="icon-user-md"></i><span class="hidden-sm text"> Roles</span></a></li>
 							</ul>
 						</li>
-						<li><a href="{{{ URL::to('admin/settings') }}}"><i class="icon-align-justify"></i><span class="hidden-sm text"> {{ Lang::get('admin/general.settings') }}</span></a></li>
+						<li><a href="{{{ URL::to('admin/settings') }}}"><i class=" icon-cogs"></i><span class="hidden-sm text"> {{ Lang::get('admin/general.settings') }}</span></a></li>
 					</ul>
 				</div>
 				<a href="{{{ URL::to('admin') }}}#" id="main-menu-min" class="full visible-md visible-lg"><i class="icon-double-angle-left"></i></a>
@@ -369,73 +366,15 @@
 			
 			<div class="row">
 				
-				<div class="col-sm-12 col-md-9">
+				<div class="col-sm-12 col-md-12">
 					<ol class="breadcrumb">
-					  	<li><a href="#">Genius</a></li>
-					  	<li class="active" >Dashboard</li>
-					</ol>		
-					<div class="row">	
+					  
 						<!-- Content -->
 						@yield('content')
 						<!-- ./ content -->
 					</div><!--/row-->		
 	
 				</div><!--/col-->
-				
-				<div class="col-md-3 visible-md visible-lg" id="feed">
-					
-					<h2>Activity Feed <a class="icon-repeat"></a></h2>
-					
-					<ul id="filter">
-						<li><a class="green" href="#" data-option-value="task">Tasks</a></li>
-						<li><a class="red" href="#" data-option-value="comment">Comments</a></li>
-						<li><a class="blue" href="#" data-option-value="message">Messages</a></li>
-						<li><a href="#" data-option-value="all">All</a></li>
-					</ul>
-					
-					<ul id="timeline">
-						
-						<li class="task">
-							<i class="icon-check-sign green"></i>
-							<div class="title">New website - A/B Tests</div>
-							<div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-							<span class="date">3 seconds ago</span>
-							<span class="separator">•</span>
-							<span class="name">Megan Abbott</span>
-						</li>
-						
-						<li class="comment">
-							<i class="icon-comments red"></i>
-							<div class="title">Sales increase</div>
-							<div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
-							<span class="date">15 minutes ago</span>
-							<span class="separator">•</span>
-							<span class="name">Ashley Tan</span>
-						</li>
-						
-						<li class="comment">
-							<i class="icon-comments red"></i>
-							<div class="title">New Bootstrap Theme</div>
-							<div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
-							<span class="date">Today</span>
-							<span class="separator">•</span>
-							<span class="name">Ashley Tan</span>
-						</li>
-						
-						<li class="message">
-							<i class="icon-edit-sign blue"></i>
-							<div class="title">Job offer</div>
-							<div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</div>
-							<span class="date">Yesterday</span>
-							<span class="separator">•</span>
-							<span class="name">James Doe</span>
-						</li>
-					</ul>
-					<a href="#" id="load-more">•••</a>		
-						
-					
-				</div><!--/col-->	
-				
 			</div><!--/row-->
 			
 			</div>
@@ -477,20 +416,20 @@
 	<!-- start: JavaScript-->
 	<!--[if !IE]>-->
 
-			<script src="{{$asset}}/js/jquery-2.0.3.min.js"></script>
+			<script src="{{$asset}}assets/admin/js/jquery-2.0.3.min.js"></script>
 
 	<!--<![endif]-->
 
 	<!--[if IE]>
 	
-		<script src="{{$asset}}/js/jquery-1.10.2.min.js"></script>
+		<script src="{{$asset}}assets/admin/js/jquery-1.10.2.min.js"></script>
 	
 	<![endif]-->
 
 	<!--[if !IE]>-->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{{$asset}}/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='{{$asset}}assets/admin/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 	<!--<![endif]-->
@@ -498,41 +437,41 @@
 	<!--[if IE]>
 	
 		<script type="text/javascript">
-	 	window.jQuery || document.write("<script src='{{$asset}}/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+	 	window.jQuery || document.write("<script src='{{$asset}}assets/admin/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 		</script>
 		
 	<![endif]-->
-	<script src="{{$asset}}/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="{{$asset}}/js/bootstrap.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/bootstrap.min.js"></script>
 	
 		
 	
 	
 	<!-- page scripts -->
-	<script src="{{$asset}}/js/jquery-ui-1.10.3.custom.min.js"></script>
-	<script src="{{$asset}}/js/jquery.ui.touch-punch.min.js"></script>
-	<script src="{{$asset}}/js/jquery.sparkline.min.js"></script>
-	<script src="{{$asset}}/js/fullcalendar.min.js"></script>
-	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{$asset}}/js/excanvas.min.js"></script><![endif]-->
-	<script src="{{$asset}}/js/jquery.flot.min.js"></script>
-	<script src="{{$asset}}/js/jquery.flot.pie.min.js"></script>
-	<script src="{{$asset}}/js/jquery.flot.stack.min.js"></script>
-	<script src="{{$asset}}/js/jquery.flot.resize.min.js"></script>
-	<script src="{{$asset}}/js/jquery.flot.time.min.js"></script>
-	<script src="{{$asset}}/js/jquery.autosize.min.js"></script>
-	<script src="{{$asset}}/js/jquery.placeholder.min.js"></script>
-	<script src="{{$asset}}/js/moment.min.js"></script>
-	<script src="{{$asset}}/js/daterangepicker.min.js"></script>
-	<script src="{{$asset}}/js/jquery.easy-pie-chart.min.js"></script>
-	<script src="{{$asset}}/js/jquery.dataTables.min.js"></script>
-	<script src="{{$asset}}/js/dataTables.bootstrap.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.sparkline.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/fullcalendar.min.js"></script>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{$asset}}assets/admin/js/excanvas.min.js"></script><![endif]-->
+	<script src="{{$asset}}assets/admin/js/jquery.flot.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.flot.pie.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.flot.stack.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.flot.resize.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.flot.time.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.autosize.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.placeholder.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/moment.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/daterangepicker.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.easy-pie-chart.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.dataTables.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/dataTables.bootstrap.min.js"></script>
 	
 	<!-- theme scripts -->
-	<script src="{{$asset}}/js/custom.min.js"></script>
-	<script src="{{$asset}}/js/core.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/core.min.js"></script>
 	
 	<!-- inline scripts related to this page -->
-	<script src="{{$asset}}/js/pages/index.js"></script>
+	<script src="{{$asset}}assets/admin/js/pages/index.js"></script>
 	
 	<!-- end: JavaScript-->
 	  @yield('scripts')

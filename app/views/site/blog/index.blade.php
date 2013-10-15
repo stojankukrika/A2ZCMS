@@ -1,50 +1,42 @@
 @extends('site.layouts.default')
 
+{{-- Page title --}}
+@section('page_title')
+<h1 class="header">Blog <hr></h1>
+@stop
+
 {{-- Content --}}
 @section('content')
 @foreach ($blogs as $blog)
-<div class="row">
-	<div class="col-md-8">
-		<!-- Blog Title -->
-		<div class="row">
-			<div class="col-md-8">
-				<h4><strong><a href="{{{ $blog->url() }}}">{{ String::title($blog->title) }}</a></strong></h4>
-			</div>
-		</div>
-		<!-- ./ blog title -->
 
-		<!-- Blog Content -->
-		<div class="row">
-			<div class="col-md-2">
-				<a href="{{{ $blog->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-			</div>
-			<div class="col-md-6">
-				<p>
-					{{ String::tidy(Str::limit($blog->content, 200)) }}
-				</p>
-				<p><a class="btn btn-mini btn-default" href="{{{ $blog->url() }}}">Read more</a></p>
-			</div>
-		</div>
-		<!-- ./ blog content -->
-
-		<!-- Blog Footer -->
-		<div class="row">
-			<div class="col-md-8">
-				<p></p>
-				<p>
-					<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $blog->author->username }}}</span>
-					| <span class="glyphicon glyphicon-calendar"></span> <!--Oct 28th, 2013-->{{{ $blog->date() }}}
-					| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $blog->url() }}}#blogcomments">{{$blog->blogcomments->count()}} 
-					{{ \Illuminate\Support\Pluralizer::plural('BlogComment', $blog->blogcomments->count()) }}</a>
-				</p>
-			</div>
-		</div>
-		<!-- ./ post footer -->
-	</div>
-</div>
-
-<hr />
-
+<div class="post">
+        <div class="row">
+            <div class="span3">
+                <a href="{{{ $blog->url() }}}">
+                    <img class="main_pic" alt="main pic" src="http://placehold.it/260x180" />
+                </a>
+            </div>
+            <div class="span4 info">
+                <a href="{{{ $blog->url() }}}">
+                    <h3>{{ String::title($blog->title) }}</h3>
+                </a>
+                <p>{{ String::tidy(Str::limit($blog->content, 200)) }}</p>
+                <div class="post_info">
+                    <div class="author">
+                        {{{ $blog->author->username }}}
+                    </div>
+                    <div class="date">
+                        {{{ $blog->date() }}}
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <a href="{{{ $blog->url() }}}" class="btn">Read more <i class="icon-chevron-right"></i></a>
+        <a href="{{{ $blog->url() }}}#blogcomments" class="btn">
+        	 {{$blog->blogcomments->count()}} 
+        	{{ \Illuminate\Support\Pluralizer::plural('Blog comment', $blog->blogcomments->count()) }} <i class="icon-comment"></i></a>
+    </div>
+<hr>
 @endforeach
 
 {{ $blogs->links() }}

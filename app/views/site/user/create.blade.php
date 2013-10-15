@@ -11,7 +11,7 @@
 <div class="page-header">
 	<h1>{{ Lang::get('confide.signup.desc')}}</h1>
 </div>
-<form class="form-horizontal" method="POST" action="{{ URL::to('user/') }}" accept-charset="UTF-8">
+<form method="POST" action="{{ URL::to('user/') }}" accept-charset="UTF-8">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <fieldset>
 		<div class="form-group">

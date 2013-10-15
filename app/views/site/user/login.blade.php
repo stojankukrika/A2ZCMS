@@ -1,9 +1,15 @@
 @extends('site.layouts.default')
 
+
 {{-- Web site Title --}}
 @section('title')
 {{{ Lang::get('user/user.login') }}} ::
 @parent
+@stop
+
+{{-- Page title --}}
+@section('page_title')
+<span>Login</span> <small>Access to your account</small></h2>
 @stop
 
 {{-- Content --}}
@@ -11,7 +17,7 @@
 <div class="page-header">
 	<h1>{{Lang::get('confide.login.desc')}}</h1>
 </div>
-<form class="form-horizontal" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
+<form method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <fieldset>
         <div class="form-group">
