@@ -11,6 +11,12 @@ class BaseController extends Controller {
     public function __construct()
     {
         $this->beforeFilter('csrf', array('on' => 'post'));
+		// Redirect to /install if the db isn't setup.
+		if (Config::get("a2zcms.installed") !== true)
+		{
+			header('Location: install');
+			exit;
+		}
     }
 
 	/**

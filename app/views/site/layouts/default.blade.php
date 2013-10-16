@@ -7,7 +7,7 @@
     
     <!-- @todo: fill with your company info or remove -->
     <meta name="description" content="">
-    <meta name="author" content="Themelize.me">
+    <meta name="author" content="">
     <?php 
 	$asset = Config::get('app.url');
 	?>
@@ -38,7 +38,7 @@
 	            <span class="icon-bar"></span>
           	</a>
           	<a class="brand" href="{{{ URL::to('') }}}">
-                <img src="{{$asset}}assets/site/img/logo.png" alt="logo" />
+                A2Z CMS
             </a>
 		  	<div class="nav-collapse collapse">
                 <ul class="nav pull-right">
@@ -90,7 +90,7 @@
          </div>
 
                 <div class="span3 sidebar offset1">
-
+					<br>
                     <input type="text" class="input-large search-query" placeholder="Search">
 
                     <h4 class="sidebar_header">
@@ -168,20 +168,20 @@
    <!-- start: JavaScript-->
 	<!--[if !IE]>-->
 
-			<script src="{{$asset}}assets/admin/js/jquery-2.0.3.min.js"></script>
+			<script src="{{$asset}}assets/site/js/jquery-2.0.3.min.js"></script>
 
 	<!--<![endif]-->
 
 	<!--[if IE]>
 	
-		<script src="{{$asset}}assets/admin/js/jquery-1.10.2.min.js"></script>
+		<script src="{{$asset}}assets/site/js/jquery-1.10.2.min.js"></script>
 	
 	<![endif]-->
 
 	<!--[if !IE]>-->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{{$asset}}assets/admin/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='{{$asset}}assets/site/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 	<!--<![endif]-->
@@ -189,11 +189,11 @@
 	<!--[if IE]>
 	
 		<script type="text/javascript">
-	 	window.jQuery || document.write("<script src='{{$asset}}assets/admin/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+	 	window.jQuery || document.write("<script src='{{$asset}}assets/site/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 		</script>
 		
 	<![endif]-->
-	<script src="{{$asset}}assets/admin/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{{$asset}}assets/site/js/jquery-migrate-1.2.1.min.js"></script>
     
    <script src="{{$asset}}assets/site/js/bootstrap.min.js"></script>
     <script src="{{$asset}}assets/site/js/theme.js"></script>

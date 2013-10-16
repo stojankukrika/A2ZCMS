@@ -6,3 +6,5 @@ composer.lock
 .DS_Store
 app/config/app.php
 app/config/database.php
+app/config/production/app.php
+app/config/production/database.php

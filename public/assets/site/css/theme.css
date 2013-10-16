@@ -141,11 +141,15 @@ input[type="color"]:focus,
     filter: none;
     padding: 7px 0 8px 0;
     /*background: none repeat scroll 0 0 #242b35;*/
-    background: url("../img/nav_bg.jpg") 0 0 repeat;
+    background: url("../img/header-footer.png") 0 0 repeat;
 }
 .navbar .brand {
     font-size: 26px;
 	text-shadow: none;
+}
+.brand{
+	color: #ffffff!important;
+	    font-weight: bold!important;
 }
 .navbar .nav.pull-right {
 	top: 10px;
@@ -463,7 +467,7 @@ input[type="color"]:focus,
 
 /* footer section */
 #footer {
-	background: url("../img/footer_bg.jpg") 0 0 repeat;
+	background: url("../img/header-footer.png") 0 0 repeat;
 	min-height: 50px;
 	margin-top: 50px;
 	color: #fff;

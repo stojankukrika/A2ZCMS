@@ -23,7 +23,7 @@
                 <p>{{ String::tidy(Str::limit($blog->content, 200)) }}</p>
                 <div class="post_info">
                     <div class="author">
-                        {{{ $blog->author->username }}}
+                        {{{ $blog->author->name }}} {{{ $blog->author->surname }}}
                     </div>
                     <div class="date">
                         {{{ $blog->date() }}}

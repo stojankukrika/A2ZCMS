@@ -438,7 +438,7 @@
 	margin:0;
 	min-height:40px;
 	border:0;
-	background:#34383c;
+	background: url("../img/header-footer.png") 0 0 repeat;
 	-webkit-border-radius:0;
 	-moz-border-radius:0;
 	border-radius:0
@@ -460,7 +460,7 @@
 .navbar #search
 {
 	position:relative;
-	background:#282b2e;
+	background:#3394c0;
 	height:30px;
 	-webkit-border-radius:2px;
 	-moz-border-radius:2px;
@@ -472,7 +472,7 @@
 	margin:4px 0 0 -11px;
 	height:22px;
 	line-height:22px;
-	background:#585e65;
+	background:#1b5d7c;
 	border:0;
 	color:white;
 	-webkit-border-radius:1px;
@@ -517,7 +517,7 @@
 }
 	a.navbar-brand
 {
-	background:#282b2e;
+	background: url("../img/header-footer.png") 0 0 repeat;
 	text-align:center;
 	padding:9px 0 10px 0!important
 }
@@ -529,12 +529,12 @@
 }
 	a.navbar-brand.noBg
 {
-	background:#34383c;
+	background: url("../img/header-footer.png") 0 0 repeat;
 	border-bottom:0
 }
 	a.navbar-brand:hover
 {
-	background:#282b2e
+	background: url("../img/header-footer.png") 0 0 repeat;
 }
 .header-nav
 {
@@ -830,7 +830,7 @@
 }
 	a#main-menu-toggle
 {
-	background:#1c1e21;
+	background:#0d668f;
 	width:40px;
 	height:40px;
 	color:white;
@@ -847,7 +847,7 @@
 	a#main-menu-toggle.close
 {
 	opacity:1;
-	background:#282b2e!important;
+	background:#0d668f!important;
 	padding:10px 13px!important
 }
 	a#main-menu-min
@@ -1106,7 +1106,7 @@
 	left:39px;
 	z-index:1000;
 	width:180px;
-	background:#e9ebec;
+	background:#1b5d7c!important;
 	border:1px solid #dbdee0;
 	border-bottom:0
 }
@@ -1117,7 +1117,7 @@
 	-moz-border-radius:2px;
 	border-radius:2px;
 	text-shadow:none;
-	background:#e9ebec;
+	background:#1b5d7c!important;
 	color:#7c848d
 }
 .btn i
@@ -1568,7 +1568,7 @@
 }
 	footer
 {
-	background:#34383c;
+	background: url("../img/header-footer.png") 0 0 repeat;
 	color:white;
 	height:40px;
 	padding:10px 20px 20px 20px!important;
@@ -3971,7 +3971,7 @@
 }
 	div.DTTT .btn
 {
-	color:#333!important;
+	color:#1b5d7c!important;
 	font-size:12px
 }
 	div.DTTT .btn:hover
@@ -3984,7 +3984,7 @@
 }
 	ul.DTTT_dropdown.dropdown-menu a
 {
-	color:#333!important
+	color:#1b5d7c!important
 }
 	ul.DTTT_dropdown.dropdown-menu li
 {

@@ -128,6 +128,9 @@ Route::post('user/login', 'UserController@postLogin');
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
 
+// Install application
+Route::controller('install', 'InstallController');
+
 //:: Application Routes ::
 
 # Filter for detect language
