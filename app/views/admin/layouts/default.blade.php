@@ -453,9 +453,10 @@
 	<!-- theme scripts -->
 	<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
 	<script src="{{$asset}}assets/admin/js/core.min.js"></script>
-	
+
 	<!-- end: JavaScript-->
 	  @yield('scripts')
+	 
 </body>
 </html>
 	

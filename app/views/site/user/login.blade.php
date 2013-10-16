@@ -62,5 +62,17 @@
         </div>
     </fieldset>
 </form>
+ <div class="container col-md-6">
+        <div class="jumbotron">
+            <h2>Need an Account?</h2>
+            <p>Create an account here</p>
+            <p>
+                <a href="{{ Url::to('user/create') }}" class="btn btn-info">
+                    Create Account
+                </a>
+            </p>
+        </div>
+
+    </div>
 
 @stop
