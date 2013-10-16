@@ -110,13 +110,22 @@
     {{ Basset::show('admin.js') }}
 
     <script type="text/javascript">
-    	$(document).ready(function(){
-			$('.close_popup').click(function(){
-				parent.oTable.fnReloadAjax();
-				parent.$.colorbox.close();
-				return false;
-			});
-		});
+		$(function() {
+              $('form').submit(function(event) {
+                var form = $(this);
+                $.ajax({
+                  type: form.attr('method'),
+                  url: form.attr('action'),
+                  data: form.serialize()
+                }).done(function() {
+                  // Optionally alert the user of success here...
+                  parent.$.colorbox.close();                  
+                }).fail(function() {
+                  // Optionally alert the user of an error here...
+                });
+                event.preventDefault(); // Prevent the form from submitting via the browser.
+              });
+            });
 		$('.wysihtml5').wysihtml5();
        	$(prettyPrint)
     </script>

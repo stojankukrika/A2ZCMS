@@ -39,6 +39,7 @@
 	<link href="{{$asset}}assets/admin/css/retina.min.css" rel="stylesheet">
 	<link href="{{$asset}}assets/admin/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 	<link href="{{$asset}}assets/admin/css/jquery.dataTables.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/colorbox.css" rel="stylesheet">
 	<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
 	
 	<!-- end: CSS -->
@@ -460,6 +461,7 @@
 	<!-- theme scripts -->
 	<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
 	<script src="{{$asset}}assets/admin/js/core.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
 
 	<!-- end: JavaScript-->
 	  @yield('scripts')
