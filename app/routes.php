@@ -67,6 +67,45 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('blogs/{blog}/delete', 'AdminBlogsController@postDelete')
         ->where('blog', '[0-9]+');
     Route::controller('blogs', 'AdminBlogsController');
+	
+		# Navigation Management
+    Route::get('pages/{nav}/show', 'AdminPagesController@getShow')
+        ->where('group', '[0-9]+');
+    Route::get('pages/{nav}/edit', 'AdminPagesController@getEdit')
+        ->where('group', '[0-9]+');
+    Route::post('pages/{nav}/edit', 'AdminPagesController@postEdit')
+        ->where('group', '[0-9]+');
+    Route::get('pages/{nav}/delete', 'AdminPagesController@getDelete')
+        ->where('group', '[0-9]+');
+    Route::post('pages/{nav}/delete', 'AdminPagesController@postDelete')
+        ->where('group', '[0-9]+');
+    Route::controller('pages', 'AdminPagesController');
+    
+    # Navigation Group Management
+    Route::get('navigation/groups/{group}/show', 'AdminNavigationGroupsController@getShow')
+        ->where('group', '[0-9]+');
+    Route::get('navigation/groups/{group}/edit', 'AdminNavigationGroupsController@getEdit')
+        ->where('group', '[0-9]+');
+    Route::post('navigation/groups/{group}/edit', 'AdminNavigationGroupsController@postEdit')
+        ->where('group', '[0-9]+');
+    Route::get('navigation/groups/{group}/delete', 'AdminNavigationGroupsController@getDelete')
+        ->where('group', '[0-9]+');
+    Route::post('navigation/groups/{group}/delete', 'AdminNavigationGroupsController@postDelete')
+        ->where('group', '[0-9]+');
+    Route::controller('navigation/groups', 'AdminNavigationGroupsController');
+
+    # Navigation Management
+    Route::get('navigation/{nav}/show', 'AdminNavigationController@getShow')
+        ->where('group', '[0-9]+');
+    Route::get('navigation/{nav}/edit', 'AdminNavigationController@getEdit')
+        ->where('group', '[0-9]+');
+    Route::post('navigation/{nav}/edit', 'AdminNavigationController@postEdit')
+        ->where('group', '[0-9]+');
+    Route::get('navigation/{nav}/delete', 'AdminNavigationController@getDelete')
+        ->where('group', '[0-9]+');
+    Route::post('navigation/{nav}/delete', 'AdminNavigationController@postDelete')
+        ->where('group', '[0-9]+');
+    Route::controller('navigation', 'AdminNavigationController');
 
     # User Management    
     Route::get('users/{role}/usersforrole', 'AdminUsersController@getUsersForRole')
@@ -96,9 +135,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('role', '[0-9]+');
     Route::controller('roles', 'AdminRolesController');
 
+
 	# Settings
     Route::get('settings', 'AdminSettingsController@getIndex');
     Route::post('settings', 'AdminSettingsController@postIndex');
+	
 	
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');

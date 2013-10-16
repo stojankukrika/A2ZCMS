@@ -36,7 +36,7 @@ class PermissionsTableSeeder extends Seeder {
 
         DB::table('permissions')->insert( $permissions );
 
-        DB::table('permission_role')->delete();
+        //DB::table('permission_role')->delete();
 
         $permissions = array(
             array(

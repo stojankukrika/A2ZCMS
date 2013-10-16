@@ -348,6 +348,13 @@
 								<li><a class="submenu" href="{{{ URL::to('admin/blogcomments') }}}"><i class="icon-comment-alt"></i> <span class="hidden-sm text">Blog comments</span></a></li>
 							</ul>
 							</li>
+						<li>
+							<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> Pages</span><span class="chevron closed"></span></a>
+							<ul>
+    							<li><a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-user"></i> Navigation</a></li>
+    							<li><a href="{{{ URL::to('admin/navigation/groups') }}}"><i class="icon-user"></i> Navigation Group</a></li>
+    						</ul>
+						</li> 
 						
 						<li>
 							<a class="dropmenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-group"></i><span class="hidden-sm text"> Users </span><span class="chevron closed"></span></a>
