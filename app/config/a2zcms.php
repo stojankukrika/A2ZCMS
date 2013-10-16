@@ -19,5 +19,5 @@ return array(
   | This sets a flag so that it can only be installed once.
   |
   */
-  'installed' => false,
+  'installed' => true,
 );
