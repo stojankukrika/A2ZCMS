@@ -1,7 +1,7 @@
 @extends('install.layouts.default')
 
 @section('title')
-  Installer | Step 2
+  Installer | Step 3 of 4
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
       @endforeach
     </div>
     @endif
-    <form method="post" action="{{ url('install/user') }}" class="form-horizontal">
+    <form method="post" action="{{ url('install/step3') }}" class="form-horizontal">
       <div id="js-errors" class="hide">
         <div class="alert alert-error">
           <button type="button" class="close" data-dismiss="alert">×</button>
@@ -33,6 +33,12 @@
           <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{ (isset($old) ? $old->last_name : '') }}">
         </div>
       </div>
+       <div class="control-group">
+        <label class="control-label" for="username">Username</label>
+        <div class="controls">
+          <input type="text" id="username" name="username" placeholder="Username" value="{{ (isset($old) ? $old->username : '') }}">
+        </div>
+      </div>
       <div class="control-group">
         <label class="control-label" for="email">Email</label>
         <div class="controls">
@@ -47,7 +53,7 @@
       </div>
       <div class="control-group">
         <div class="controls">
-          <button type="submit" class="btn save">Save</button>
+          <button type="submit" class="btn save">Next Step</button>
         </div>
       </div>
     </form>

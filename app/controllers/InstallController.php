@@ -45,28 +45,16 @@ class InstallController extends BaseController {
 	 */
 	public function postIndex()
 	{
-		Artisan::call('key:generate', array('--env' => App::environment()));
-
-		$artisan = Artisan::call('migrate', array('--env' => App::environment()));
-
-		if ($artisan > 0)
-		{
-			return Redirect::back()
-				->withErrors(array('error' => 'Install Failed'))
-				->with('install_errors', true);
-		}
-
-		return Redirect::to('install/user');
+		return Redirect::to('install/step2');
 	}
-
 	/**
 	 * Get the user form.
 	 *
 	 * @return Response
 	 */
-	public function getUser()
+	public function getStep2()
 	{
-		return View::make('install.installer.user');
+		return View::make('install.installer.step2');
 	}
 
 	/**
@@ -74,12 +62,72 @@ class InstallController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function postUser()
+	public function postStep2()
+	{
+		
+		$form = Validator::make($input = Input::all(), array(
+		'hostname' => array('required'),
+		'username' => array('required'),
+		'database' => array('required'),
+	));
+
+		if($form->passes())
+		{
+			$search = array_map(function($key)
+			{
+				return '{{'.$key.'}}';
+	
+			}, array_keys($input));
+	
+			$replace = array_values($input);
+	
+			$stub = File::get(__DIR__.'\..\config\database_temp.php');
+
+			$stub = str_replace($search, $replace, $stub);
+
+			File::put(__DIR__.'\..\config\/'.App::environment().'\database.php', $stub);
+
+			/*delete temp file*/
+			
+			//File::delete($stub);
+			
+			Artisan::call('key:generate', array('--env' => App::environment()));
+
+			Artisan::call('migrate', array('--env' => App::environment()));
+	
+			Artisan::call('db:seed');
+			
+	
+			return Redirect::to('install/step3');
+		}
+		else
+		{
+			return Redirect::to('install/step2')->withErrors($form);
+		}
+	}
+
+	/**
+	 * Get the user form.
+	 *
+	 * @return Response
+	 */
+	public function getStep3()
+	{
+		return View::make('install.installer.step3');
+	}
+
+	/**
+	 * Add the user and show success!
+	 *
+	 * @return Response
+	 */
+	public function postStep3()
 	{
 		
 		 $rules = array(
             'first_name'   => 'required',
             'last_name' => 'required',
+            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
         );
@@ -94,29 +142,29 @@ class InstallController extends BaseController {
 		
 		$this->user->name = Input::get( 'name' );
         $this->user->surname = Input::get( 'surname' );
-        $this->user->username = Input::get( 'email' );
+        $this->user->username = Input::get( 'username' );
         $this->user->email = Input::get( 'email' );
         $this->user->password = Input::get( 'password' );
 		
 		$this->user->save();
 
-		return Redirect::to('install/config');
+		return Redirect::to('install/step4');
 	}
 
 	/**
 	 * Get the config form.
 	 */
-	public function getConfig()
+	public function getStep4()
 	{
-		return View::make('install.installer.config');
+		return View::make('install.installer.step4');
 	}
 
 	/**
 	 * Save the config files
 	 */
-	public function postConfig()
+	public function postStep4()
 	{
-		$this->setWardrobeConfig(Input::get('title', 'Site Name'), Input::get('theme', 'Default'), Input::get('per_page', 5));
+		$this->setA2ZConfig(Input::get('title', 'Site Name'), Input::get('theme', 'Default'), Input::get('per_page', 5));
 		return View::make('install.installer.complete');
 	}
 
@@ -129,7 +177,7 @@ class InstallController extends BaseController {
 	 *
 	 * @return
 	 */
-	protected function setWardrobeConfig($title, $theme, $per_page)
+	protected function setA2ZConfig($title, $theme, $per_page)
 	{
 		$path = $this->getConfigFile('a2zcms.php');
 		$content = str_replace(
@@ -156,5 +204,13 @@ class InstallController extends BaseController {
 		}
 
 		return app_path().'/config/'.$file;
+	}
+	
+	protected function getDatabaseSeedFile($dir)
+	{
+		if (file_exists(app_path().'/database/'.$dir.'/*.php'))
+		{
+			return app_path().'/database/'.$dir.'/*.php';
+		}
 	}
 }

@@ -1,7 +1,7 @@
 @extends('install.layouts.default')
 
 @section('title')
-  Installer | Step 1
+  Installer | Step 1 of 4
 @stop
 
 @section('content')

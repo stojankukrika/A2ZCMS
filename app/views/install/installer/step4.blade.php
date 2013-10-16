@@ -1,7 +1,7 @@
 @extends('install.layouts.default')
 
 @section('title')
-  Installer | Step 3
+  Installer | Step 4 of 4
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
       @endforeach
     </div>
     @endif
-    <form method="post" style="text-align: center;" action="{{ url('install/config') }}" class="form-horizontal">
+    <form method="post" style="text-align: center;" action="{{ url('install/step4') }}" class="form-horizontal">
       <p>Don't worry you can always change these later inside app/config/</p>
       <div class="control-group">
         <label class="control-label" for="title">Site Title</label>
@@ -38,7 +38,7 @@
           <input type="number" name="per_page" value="5">
         </div>
       </div>
-      <button style="text-align: center;" type="submit" class="btn save">Save</button>
+      <button style="text-align: center;" type="submit" class="btn save">Finish</button>
     </form>
   </div>
 @stop
