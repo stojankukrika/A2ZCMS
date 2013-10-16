@@ -147,7 +147,7 @@ class AdminBlogCategorysController extends AdminController {
 
         return Datatables::of($blogcategorys)
 
-        ->edit_column('blog_count', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/blogsforcategory\' ) }}}" class="btn btn-default btn-xs" >{{ DB::table(\'blogs\')->where(\'blogcategory_id\', \'=\', $id)->count() }}</a>')
+        ->edit_column('blog_count', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/blogsforcategory\' ) }}}" class="btn btn-link btn-xs" >{{ DB::table(\'blogs\')->where(\'blogcategory_id\', \'=\', $id)->count() }}</a>')
         
         ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>

@@ -239,7 +239,7 @@ class AdminRolesController extends AdminController {
 
         return Datatables::of($roles)
       
-	   ->edit_column('users', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/usersforrole\' ) }}}" class="btn btn-default btn-xs" >{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}</a>')
+	   ->edit_column('users', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/usersforrole\' ) }}}" class="btn btn-link btn-xs" >{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}</a>')
       				
 		
 

@@ -271,7 +271,7 @@ class AdminBlogsController extends AdminController {
 
         return Datatables::of($blogs)
 
-        ->edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-default btn-xs" >{{ DB::table(\'blog_comments\')->where(\'blog_id\', \'=\', $id)->count() }}</a>')
+        ->edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link  btn-xs" >{{ DB::table(\'blog_comments\')->where(\'blog_id\', \'=\', $id)->count() }}</a>')
         
         ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
@@ -294,7 +294,7 @@ class AdminBlogsController extends AdminController {
                         
         return Datatables::of($blogs)
 
-        ->edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-default btn-xs" >{{ DB::table(\'blog_comments\')->where(\'blog_id\', \'=\', $id)->count() }}</a>')
+        ->edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link btn-xs" >{{ DB::table(\'blog_comments\')->where(\'blog_id\', \'=\', $id)->count() }}</a>')
         
         ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>

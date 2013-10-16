@@ -1157,7 +1157,7 @@
 }
 .btn-danger:hover,.btn-danger.disabled,.btn-danger[disabled]
 {
-	background-color:#ff2121
+	background-color:#ff212!important;
 }
 .btn-danger:active,.btn-danger.active
 {
@@ -6719,4 +6719,25 @@
 	display:none
 }
 
+}
+table.dataTable tr.odd { background-color: #f9f9f9; }
+table.dataTable tr.even { background-color: white; }
+
+table.dataTable tr.odd td.sorting_1 { background-color: transparent!important; }
+table.dataTable tr.odd td.sorting_2 { background-color: transparent!important; }
+table.dataTable tr.odd td.sorting_3 { background-color: transparent!important; }
+table.dataTable tr.even td.sorting_1 { background-color:transparent!important; }
+table.dataTable tr.even td.sorting_2 { background-color: transparent!important; }
+table.dataTable tr.even td.sorting_3 { background-color: transparent!important; }
+
+.btn-danger {
+	background: #ce2f2f!important;
+}
+.btn-default {
+	background: #1c8fc4!important;
+	color: #ffffff!important;
+}
+.btn-link {
+	background: #3eb123!important;
+	color: #ffffff!important;
 }

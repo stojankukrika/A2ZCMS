@@ -36,9 +36,11 @@
 	?>
 <!-- start: CSS -->
 	<link href="{{$asset}}assets/admin/css/bootstrap.min.css" rel="stylesheet">
-	<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
 	<link href="{{$asset}}assets/admin/css/retina.min.css" rel="stylesheet">
 	<link href="{{$asset}}assets/admin/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+	<link href="{{$asset}}assets/admin/css/jquery.dataTables.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
+	
 	<!-- end: CSS -->
 	
 
@@ -426,26 +428,8 @@
 	
 	<![endif]-->
 
-	<!--[if !IE]>-->
-
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{{$asset}}assets/admin/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-
-	<!--<![endif]-->
-
-	<!--[if IE]>
-	
-		<script type="text/javascript">
-	 	window.jQuery || document.write("<script src='{{$asset}}assets/admin/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-		</script>
-		
-	<![endif]-->
 	<script src="{{$asset}}assets/admin/js/jquery-migrate-1.2.1.min.js"></script>
 	<script src="{{$asset}}assets/admin/js/bootstrap.min.js"></script>
-	
-		
-	
 	
 	<!-- page scripts -->
 	<script src="{{$asset}}assets/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -463,15 +447,12 @@
 	<script src="{{$asset}}assets/admin/js/moment.min.js"></script>
 	<script src="{{$asset}}assets/admin/js/daterangepicker.min.js"></script>
 	<script src="{{$asset}}assets/admin/js/jquery.easy-pie-chart.min.js"></script>
-	<script src="{{$asset}}assets/admin/js/jquery.dataTables.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.dataTables.js"></script>
 	<script src="{{$asset}}assets/admin/js/dataTables.bootstrap.min.js"></script>
-	
+	<script src="{{$asset}}assets/admin/js/jquery.dataTables.min.js"></script>
 	<!-- theme scripts -->
 	<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
 	<script src="{{$asset}}assets/admin/js/core.min.js"></script>
-	
-	<!-- inline scripts related to this page -->
-	<script src="{{$asset}}assets/admin/js/pages/index.js"></script>
 	
 	<!-- end: JavaScript-->
 	  @yield('scripts')
