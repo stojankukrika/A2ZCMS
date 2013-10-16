@@ -52,8 +52,8 @@ class InstallController extends BaseController {
 		if ($artisan > 0)
 		{
 			return Redirect::back()
-													->withErrors(array('error' => 'Install Failed'))
-													->with('install_errors', true);
+				->withErrors(array('error' => 'Install Failed'))
+				->with('install_errors', true);
 		}
 
 		return Redirect::to('install/user');
