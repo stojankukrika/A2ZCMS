@@ -110,7 +110,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('gallery', '[0-9]+');
     Route::controller('galleries', 'AdminGalleriesController');
 	
-	
 		# Navigation Management
     Route::get('pages/{nav}/show', 'AdminPagesController@getShow')
         ->where('group', '[0-9]+');

@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Galleries_Controller extends Base_Controller {
+class AdminGalleryCommentsController extends AdminController {
 
     public $restful = true;
 
