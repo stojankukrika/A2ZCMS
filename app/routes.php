@@ -19,6 +19,9 @@ Route::model('user', 'User');
 Route::model('blogcomment', 'BlogComment');
 Route::model('blogcategory', 'BlogCategory');
 Route::model('blog', 'Blog');
+Route::model('gallerycomment', 'GalleryComment');
+Route::model('gallerycategory', 'GalleryCategory');
+Route::model('gallery', 'Gallery');
 Route::model('role', 'Role');
 Route::model('settings', 'Settings');
 
@@ -67,6 +70,46 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('blogs/{blog}/delete', 'AdminBlogsController@postDelete')
         ->where('blog', '[0-9]+');
     Route::controller('blogs', 'AdminBlogsController');
+	
+	  # Gallery Comment Management
+    Route::get('gallerycomments/{gallery}/commentsforblog', 'AdminGalleryCommentsController@getCommentsForBlog')
+        ->where('gallery', '[0-9]+');
+    Route::get('gallerycomments/{gallerycomment}/edit', 'AdminGalleryCommentsController@getEdit')
+        ->where('gallerycomment', '[0-9]+');
+    Route::post('gallerycomments/{gallerycomment}/edit', 'AdminGalleryCommentsController@postEdit')
+        ->where('gallerycomment', '[0-9]+');
+    Route::get('gallerycomments/{gallerycomment}/delete', 'AdminGalleryCommentsController@getDelete')
+        ->where('gallerycomment', '[0-9]+');
+    Route::post('gallerycomments/{gallerycomment}/delete', 'AdminGalleryCommentsController@postDelete')
+        ->where('gallerycomment', '[0-9]+');
+    Route::controller('gallerycomments', 'AdminGalleryCommentsController');
+	
+	 # Gallery Category Management
+    Route::get('gallerycategorys/{gallerycategory}/edit', 'AdminGalleryCategorysController@getEdit')
+        ->where('gallerycategory', '[0-9]+');
+    Route::post('gallerycategorys/{gallerycategory}/edit', 'AdminGalleryCategorysController@postEdit')
+        ->where('gallerycategory', '[0-9]+');
+    Route::get('gallerycategorys/{gallerycategory}/delete', 'AdminGalleryCategorysController@getDelete')
+        ->where('gallerycategory', '[0-9]+');
+    Route::post('gallerycategorys/{gallerycategory}/delete', 'AdminGalleryCategorysController@postDelete')
+        ->where('gallerycategory', '[0-9]+');
+    Route::controller('gallerycategorys', 'AdminGalleryCategorysController');
+
+    # Galleries Management
+     Route::get('galleries/{gallerycategory}/blogsforcategory', 'AdminGalleriesController@getBlogsForCategory')
+        ->where('gallerycategory', '[0-9]+');
+    Route::get('galleries/{gallery}/show', 'AdminGalleriesController@getShow')
+        ->where('gallery', '[0-9]+');
+    Route::get('galleries/{gallery}/edit', 'AdminGalleriesController@getEdit')
+        ->where('gallery', '[0-9]+');
+    Route::post('galleries/{gallery}/edit', 'AdminGalleriesController@postEdit')
+        ->where('gallery', '[0-9]+');
+    Route::get('galleries/{gallery}/delete', 'AdminGalleriesController@getDelete')
+        ->where('gallery', '[0-9]+');
+    Route::post('galleries/{gallery}/delete', 'AdminGalleriesController@postDelete')
+        ->where('gallery', '[0-9]+');
+    Route::controller('galleries', 'AdminGalleriesController');
+	
 	
 		# Navigation Management
     Route::get('pages/{nav}/show', 'AdminPagesController@getShow')

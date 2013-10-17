@@ -33,10 +33,9 @@ class CreateNavigationTable extends Migration {
 			$table->enum('target', array('selected','_blank'))->default('selected');
 			$table->string('restricted_to');
 			$table->string('class', 50);
-			$table->timestamps();
-
-			$table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+			$table->timestamps();			
 			$table->foreign('parent')->references('id')->on('navigation_links')->onDelete('cascade');
+			$table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
 		});
 
 	}
