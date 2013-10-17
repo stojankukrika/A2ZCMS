@@ -342,6 +342,14 @@
 					<ul class="nav main-menu">
 						<li><a href="{{{ URL::to('admin') }}}"><i class="icon-dashboard"></i><span class="hidden-sm text">Dashboard</span></a></li>	
 						<li>
+							<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> Pages</span><span class="chevron closed"></span></a>
+							<ul>
+								<li><a href="{{{ URL::to('admin/navigation/groups') }}}"><i class="icon-th-list"></i> Navigation Group</a></li>
+    							<li><a href="{{{ URL::to('admin/pages') }}}"><i class="icon-envelope"></i> Pages</a></li>    							
+    							<li><a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-file"></i> Navigation</a></li>
+    						</ul>
+						</li> 
+						<li>
 							<a class="dropmenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-external-link"></i><span class="hidden-sm text">Blog</span><span class="chevron closed"></span></a>
 							<ul>
 								<li><a class="submenu" href="{{{ URL::to('admin/blogcategorys') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> Blog categorys</span></a></li>
@@ -350,13 +358,13 @@
 							</ul>
 							</li>
 						<li>
-							<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> Pages</span><span class="chevron closed"></span></a>
+							<a class="dropmenu" href="{{{ URL::to('admin/gallery') }}}"><i class="icon-camera"></i><span class="hidden-sm text">Gallery</span><span class="chevron closed"></span></a>
 							<ul>
-								<li><a href="{{{ URL::to('admin/navigation/groups') }}}"><i class="icon-th-list"></i> Navigation Group</a></li>
-    							<li><a href="{{{ URL::to('admin/pages') }}}"><i class="icon-envelope"></i> Pages</a></li>    							
-    							<li><a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-file"></i> Navigation</a></li>
-    						</ul>
-						</li> 
+								<li><a class="submenu" href="{{{ URL::to('admin/gallerycategorys') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> Gallery categorys</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/gallerys') }}}"><i class="icon-camera-retro"></i><span class="hidden-sm text"> Gallery</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/gallerycomments') }}}"><i class="icon-comments-alt"></i> <span class="hidden-sm text">Gallery comments</span></a></li>
+							</ul>
+							</li>
 						
 						<li>
 							<a class="dropmenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-group"></i><span class="hidden-sm text"> Users </span><span class="chevron closed"></span></a>

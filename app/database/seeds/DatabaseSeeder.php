@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder {
         $this->call('BlogCommentsTableSeeder');
     	$this->call('SettingsTableSeeder');
     	$this->call('NavPagesPermissionSeeder'); 
+		$this->call('GalleryCategoriesTableSeeder');
+		$this->call('GallerysTableSeeder');
+		$this->call('GalleryCommentsTableSeeder');
 	}
 
 }
