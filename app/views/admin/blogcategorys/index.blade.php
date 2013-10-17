@@ -10,6 +10,9 @@
 	<div class="page-header">
 		<h3>
 			{{{ $title }}}
+			<div class="pull-right">
+				<a href="{{{ URL::to('admin/blogcategorys/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+			</div>
 		</h3>
 	</div>
 
@@ -39,8 +42,8 @@
 				"bProcessing": true,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('admin/blogcategorys/data') }}",
-		        "fnDrawCallback": function ( oSettings ) {
-	           		$(".iframe").colorbox({iframe:true, width:"100%", height:"100%"});
+		       "fnDrawCallback": function ( oSettings ) {
+	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}
 			});
 		});

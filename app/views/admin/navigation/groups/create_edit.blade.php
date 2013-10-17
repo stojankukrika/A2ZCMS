@@ -43,7 +43,7 @@
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-lg-6 col-lg-offset-2">
-				<element class="btn-cancel close_popup">Cancel</element>
+				<button type="reset" class="btn btn-link close_popup">Cancel</button>
 				<button type="reset" class="btn">Reset</button>
 				<button type="submit" class="btn btn-success">Save</button>
 			</div>

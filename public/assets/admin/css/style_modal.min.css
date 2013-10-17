@@ -1,0 +1,20 @@
+body:after
+{
+	left:100%!important;
+	height:100%;
+	width:0%!important;
+	z-index:0
+}
+	body:before
+{
+	width:0%!important;
+	height:100%;
+	z-index:0
+}
+	body.sidebar-minified:after
+{
+	left:0px!important;
+	margin-right:0px!important;
+	z-index:0
+}
+	

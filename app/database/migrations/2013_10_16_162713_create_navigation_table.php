@@ -23,7 +23,7 @@ class CreateNavigationTable extends Migration {
 		Schema::create('navigation_links', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('title', 100)->unique();
-			$table->unsignedInteger('parent');
+			$table->unsignedInteger('parent')->nullable()->default(NULL);
 			$table->enum('link_type', array('url','uri','page'))->default('page');
 			$table->unsignedInteger('page_id');
 			$table->string('url');

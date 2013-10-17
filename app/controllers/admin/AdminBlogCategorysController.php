@@ -36,6 +36,56 @@ class AdminBlogCategorysController extends AdminController {
     }
 
     /**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function getCreate()
+	{
+        // Title
+        // Title
+        $title = Lang::get('admin/blogcategorys/title.create_a_new_category');
+
+        // Show the page
+        return View::make('admin/blogcategorys/edit', compact('title'));
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function postCreate()
+	{
+        // Declare the rules for the form validation
+        $rules = array(
+            'title'   => 'required|min:3'
+        );
+		
+	     // Validate the inputs
+        $validator = Validator::make(Input::all(), $rules);
+
+        // Check if the form validates with success
+        if ($validator->passes())
+        {           
+            // Update the blog post data
+            $this->blog_category->title            = Input::get('title');
+            // Was the blog post created?
+            if($this->blog_category->save())
+            {
+                // Redirect to the new blog post page
+                return Redirect::to('admin/blogcategorys/' . $this->blog_category->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+            }
+
+            // Redirect to the blog post create page
+            return Redirect::to('admin/blogcategorys/create')->with('error', Lang::get('admin/blogcategorys/messages.create.error'));
+        }
+
+        // Form validation failed
+        return Redirect::to('admin/blogcategorys/create')->withInput()->withErrors($validator);
+	}
+	 
+	 /**
      * Show the form for editing the specified resource.
      *
      * @param $blog_category

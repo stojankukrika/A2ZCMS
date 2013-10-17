@@ -205,6 +205,7 @@
 							</div>
 							<div class="form-group">
 			<div class="col-md-12">
+				<button type="reset" class="btn btn-link close_popup">Cancel</button>
 				<button type="reset" class="btn btn-default">Reset</button>
 				<button type="submit" class="btn btn-success">Update</button>
 			</div>

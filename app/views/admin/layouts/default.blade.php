@@ -318,7 +318,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="{{{ URL::to('/') }}}"><i class="icon-home"></i> {{ Lang::get('admin/general.homepage') }}</a></li>
-							<li><a href="#"><i class="icon-user"></i> Profile</a></li>
+							<li><a href="{{{ URL::to('/user') }}}"><i class="icon-user"></i> Profile</a></li>
 							<li><a href="{{{ URL::to('user/settings') }}}"><i class="icon-cog"></i> {{ Lang::get('admin/general.settings') }}</a></li>
 							<li><a href="#"><i class="icon-envelope"></i> Messages</a></li>
 							<li><a href="{{{ URL::to('user/logout') }}}"><i class="icon-off"></i> {{ Lang::get('admin/general.logout') }}</a></li>
@@ -352,8 +352,9 @@
 						<li>
 							<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> Pages</span><span class="chevron closed"></span></a>
 							<ul>
-    							<li><a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-user"></i> Navigation</a></li>
-    							<li><a href="{{{ URL::to('admin/navigation/groups') }}}"><i class="icon-user"></i> Navigation Group</a></li>
+								<li><a href="{{{ URL::to('admin/navigation/groups') }}}"><i class="icon-th-list"></i> Navigation Group</a></li>
+    							<li><a href="{{{ URL::to('admin/pages') }}}"><i class="icon-envelope"></i> Pages</a></li>    							
+    							<li><a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-file"></i> Navigation</a></li>
     						</ul>
 						</li> 
 						
@@ -393,26 +394,7 @@
 				</div><!--/row-->		
 		
 	</div><!--/container-->
-	
-	
-	<div class="modal fade" id="myModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Modal title</h4>
-				</div>
-				<div class="modal-body">
-					<p>Here settings can be configured...</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	
+
 	<div class="clearfix"></div>
 	
 	<footer>

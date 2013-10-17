@@ -42,7 +42,7 @@ $(function(){
 				<div class="form-group {{{ $errors->has('parent') ? 'error' : '' }}}">
 					<label class="control-label col-lg-2" for="parent">{{{ Lang::get('admin/navigation/table.parent') }}}</label>
 					<div class="col-lg-6">
-						{{ Form::select('parent', array('' => 'Select Page') + $pageList, isset($navigation) ? $navigation->parent  : '', array('class' => 'form-control input-sm')) }}
+						{{ Form::select('parent', array('' => 'Select Page') + (array)$navigationList, isset($navigation) ? $navigation->parent  : '', array('class' => 'form-control input-sm')) }}
 						<span class="help-inline">Do not select if this navigation is not under other navigation.</span>
 						<span class="help-inline">{{{ $errors->first('parent', ':message') }}}</span>
 					</div>
@@ -129,7 +129,7 @@ $(function(){
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-lg-6 col-lg-offset-2">
-				<element class="btn-cancel close_popup">Cancel</element>
+				<button type="reset" class="btn btn-link close_popup">Cancel</button>
 				<button type="reset" class="btn">Reset</button>
 				<button type="submit" class="btn btn-success">Save</button>
 			</div>

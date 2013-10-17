@@ -31,12 +31,9 @@
 	<!--  Mobile Viewport Fix -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-	<!-- This is the traditional favicon.
-	 - size: 16x16 or 32x32
-	 - transparency is OK
-	 - see wikipedia for info on browser support: http://mky.be/favicon/ -->
-	<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.png') }}}">
-
+	<?php 
+	$asset = Config::get('app.url');
+	?>
 	<!-- iOS favicons. -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{{ asset('assets/ico/apple-touch-icon-114-precomposed.png') }}}">
@@ -44,36 +41,23 @@
 	<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}">
 
 	<!-- CSS -->
-    {{ Basset::show('admin.css') }}
+    <link href="{{$asset}}assets/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/retina.min.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 
-	<style>
-	.tab-pane {
-		padding-top: 20px;
-	}
-	</style>
-
-	@yield('styles')
-
-	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
+	<link href="{{$asset}}assets/admin/css/style_modal.min.css" rel="stylesheet">
+<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		
+	  	<script src="{{$asset}}assets/admin/js/html5.js"></script>
+		<script src="{{$asset}}assets/admin/js/respond.min.js"></script>
+		
 	<![endif]-->
 
-	<!-- Asynchronous google analytics; this is the official snippet.
-	 Replace UA-XXXXXX-XX with your site's ID and uncomment to enable.
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-	  	_gaq.push(['_setAccount', 'UA-31122385-3']);
-	  	_gaq.push(['_trackPageview']);
-
-	  	(function() {
-	   		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  	})();
-
-	</script> -->
-
+	<!-- start: Favicon and Touch Icons -->
+	    <link rel="shortcut icon" href="{{$asset}}assets/admin/ico/favicon.ico">
+	<!-- end: Favicon and Touch Icons -->	
 </head>
 
 <body>
@@ -88,7 +72,7 @@
 			<h3>
 				{{ $title }}
 				<div class="pull-right">
-					<button class="btn btn-default btn-small btn-inverse close_popup"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</button>
+					<button class="btn btn-link btn-small btn-inverse close_popup"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</button>
 				</div>
 			</h3>
 		</div>
@@ -96,19 +80,31 @@
 		<!-- Content -->
 		@yield('content')
 		<!-- ./ content -->
-
-		<!-- Footer -->
-		<footer class="clearfix">
-			@yield('footer')
-		</footer>
-		<!-- ./ Footer -->
-
 	</div>
 	<!-- ./ container -->
 
-	<!-- Javascripts -->
-    {{ Basset::show('admin.js') }}
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
 
+			<script src="{{$asset}}assets/admin/js/jquery-2.0.3.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="{{$asset}}assets/admin/js/jquery-1.10.2.min.js"></script>
+	
+	<![endif]-->
+
+	<script src="{{$asset}}assets/admin/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/bootstrap.min.js"></script>
+	
+	<!-- page scripts -->
+	<script src="{{$asset}}assets/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/jquery.sparkline.min.js"></script>
+	<script src="{{$asset}}assets/admin/js/fullcalendar.min.js"></script>
+	
     <script type="text/javascript">
 		$(function() {
               $('form').submit(function(event) {
@@ -125,9 +121,13 @@
                 });
                 event.preventDefault(); // Prevent the form from submitting via the browser.
               });
+              
+               $('.close_popup').click(function(){
+               	 parent.$.colorbox.close()
+               });
+             
             });
-		$('.wysihtml5').wysihtml5();
-       	$(prettyPrint)
+            
     </script>
 
     @yield('scripts')

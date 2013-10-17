@@ -42,10 +42,11 @@ class AdminNavigationController extends AdminController {
         
         $navigations = Navigation::all();
         $pageList = Page::lists('name', 'id');
+		$navigationList = Navigation::lists('title', 'id');
         $navigationGroupList = NavigationGroup::lists('title', 'id');
 
         // Show the navigation group
-		return View::make('admin/navigation/create_edit', compact('title', 'navigations', 'pageList', 'navigationGroupList'));
+		return View::make('admin/navigation/create_edit', compact('title', 'navigations', 'pageList', 'navigationGroupList','navigationList'));
 	}
 
 	/**
@@ -77,7 +78,8 @@ class AdminNavigationController extends AdminController {
             // Create a new navigation
             $this->navigation->title = Input::get( 'title' );
             $this->navigation->link_type = Input::get( 'link_type' );
-            $this->navigation->parent = Input::get( 'parent' );
+			//set to null if is empty
+            $this->navigation->parent = (Input::get( 'parent' )!='')?Input::get( 'parent' ):NULL;
             $this->navigation->page_id = Input::get( 'page_id' );
             $this->navigation->url = Input::get( 'url' );
             $this->navigation->uri = Input::get( 'uri' );
@@ -116,18 +118,20 @@ class AdminNavigationController extends AdminController {
     {
 
         $navigations = Navigation::all();
-        $pageList = Page::lists('name', 'id');
-        $navigationGroupList = NavigationGroup::lists('title', 'id');
+        $pageList = Page::lists('name', 'id');		
+		 $navigationGroupList = NavigationGroup::lists('title', 'id');
 
         if ( $id )
         {
         	$navigation = Navigation::find($id);
+			$navigationList = Navigation::where('id', '<>', $id)->lists('title', 'id');
+       
             // Title
             $title = Lang::get('admin/navigation/title.navigation_group_update');
             // mode
             $mode = 'edit';
 
-            return View::make('admin/navigation/create_edit', compact('navigation', 'title', 'mode', 'pageList', 'navigationGroupList'));
+            return View::make('admin/navigation/create_edit', compact('navigation', 'title', 'mode', 'pageList', 'navigationGroupList','navigationList'));
         }
         else
         {
@@ -160,12 +164,15 @@ class AdminNavigationController extends AdminController {
         $validator = Validator::make(Input::all(), $rules);
 
         $navigation = Navigation::find($id);
-
-        $inputs = Input::all();
+		
+ 		$inputs = Input::all();
+			//set to null if is empty
+		$inputs['parent'] = ($inputs['parent']!='')?$inputs['parent']:NULL;
 
         // Check if the form validates with success
         if ($validator->passes())
         {
+        	
             // Was the page updated?
             if ($navigation->update($inputs))
             {
@@ -212,18 +219,43 @@ class AdminNavigationController extends AdminController {
     public function getData()
     {
         $navs = Navigation::leftjoin('navigation_groups', 'navigation_groups.id', '=', 'navigation_links.navigation_group_id')
-                    ->select(array('navigation_links.id',  'navigation_links.title', 'navigation_links.link_type', 'navigation_groups.title as navigtion_group'));
+					->leftjoin('navigation_links AS nl', 'nl.id', '=', 'navigation_links.parent')
+					->orderBy('navigation_links.position')
+                    ->select(array('navigation_links.id', 'navigation_links.title', 'nl.title as parent' ,'navigation_links.link_type', 'navigation_groups.title as navigtion_group'));
 
         return Datatables::of($navs)
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-warning btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
-                               <a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
-                               
-            ')
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-xs">{{{ Lang::get(\'button.edit\') }}}</a>
+                               <a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+                               <input type="hidden" name="row" value="{{$id}}" id="row">                               
+            		')
 
         ->remove_column('id')
 
         ->make();
     }
+	
+	/**
+	 * Reorder navigation
+	 *
+	 * @param order navigation
+	 * @param navigation list
+	 * @return boolean is sorting would be a correct
+	 * /
+	 */
+	 public function getReorder()
+	 {
+	 	 $list = Input::get( 'list' );
+		 $items = explode(",", $list);
+		 $order = 1;
+		 foreach ($items as $value) {
+		 	if($value!=''){
+		 		 Navigation::where('id', '=', $value)->update(array('position' => $order));
+									
+		 			$order++;				
+		 	}
+		 }		 
+		 return $list;
+	 }
 
 }

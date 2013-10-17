@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th class="span2">{{{ Lang::get('admin/navigation/table.title') }}}</th>
+				<th class="span2">{{{ Lang::get('admin/navigation/table.parent') }}}</th>
 				<th class="span3">{{{ Lang::get('admin/navigation/table.link_type') }}}</th>
 				<th class="span3">{{{ Lang::get('admin/navigation/title.navigation_group') }}}</th>
 				<th class="span2">{{{ Lang::get('table.actions') }}}</th>
@@ -49,6 +50,31 @@
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}
 			});
+			var startPosition;
+			var endPosition;
+			$("#pages tbody").sortable({
+						    cursor: "move",
+						    start:function(event, ui){
+						        startPosition = ui.item.prevAll().length + 1;
+						    },
+						    update: function(event, ui) {
+						        endPosition = ui.item.prevAll().length + 1;
+						        var navigationList = "";
+						        $('#pages #row').each(function(i){
+						            navigationList = navigationList + ',' + $(this).val();
+						        });
+						         $.getJSON("{{ URL::to('admin/navigation/reorder') }}", {
+						            list:navigationList
+						        },
+						        function(data){
+						            if(data.intSuccess == 1){
+						                alert('Display order updated');
+						            } else {
+						                alert('Sorry, there was a problem updating the display order.');
+						            }
+						        });
+    					 }
+					});
 		});
 	</script>
 @stop
