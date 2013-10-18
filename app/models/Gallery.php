@@ -5,6 +5,8 @@ use Robbo\Presenter\PresentableInterface;
 class Gallery extends Eloquent implements PresentableInterface {
 
 	 protected $softDelete = true;
+	 protected $table = "gallery";
+	 
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.

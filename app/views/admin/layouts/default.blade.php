@@ -358,10 +358,10 @@
 							</ul>
 							</li>
 						<li>
-							<a class="dropmenu" href="{{{ URL::to('admin/gallery') }}}"><i class="icon-camera"></i><span class="hidden-sm text">Gallery</span><span class="chevron closed"></span></a>
+							<a class="dropmenu" href="{{{ URL::to('admin/galleries') }}}"><i class="icon-camera"></i><span class="hidden-sm text">Gallery</span><span class="chevron closed"></span></a>
 							<ul>
 								<li><a class="submenu" href="{{{ URL::to('admin/galleryimages') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> Gallery images</span></a></li>
-								<li><a class="submenu" href="{{{ URL::to('admin/gallerys') }}}"><i class="icon-camera-retro"></i><span class="hidden-sm text"> Gallery</span></a></li>
+								<li><a class="submenu" href="{{{ URL::to('admin/galleries') }}}"><i class="icon-camera-retro"></i><span class="hidden-sm text"> Gallery</span></a></li>
 								<li><a class="submenu" href="{{{ URL::to('admin/gallerycomments') }}}"><i class="icon-comments-alt"></i> <span class="hidden-sm text">Gallery comments</span></a></li>
 							</ul>
 							</li>

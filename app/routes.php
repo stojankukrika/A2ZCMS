@@ -85,7 +85,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('gallerycomment', '[0-9]+');
     Route::controller('gallerycomments', 'AdminGalleryCommentsController');
 	
-	 # Gallery Category Management
+	 # Gallery Images Management
     Route::get('galleryimages/{galleryimage}/edit', 'AdminGalleryImagesController@getEdit')
         ->where('galleryimages', '[0-9]+');
     Route::post('galleryimages/{galleryimage}/edit', 'AdminGalleryImagesController@postEdit')

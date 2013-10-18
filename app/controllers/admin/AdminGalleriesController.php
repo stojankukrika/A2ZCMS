@@ -2,43 +2,95 @@
 
 class AdminGalleriesController extends AdminController {
 
-    public $restful = true;
+     /**
+     * Post Model
+     * @var Post
+     */
+    protected $gallery;
 
-    public function __construct()
+    /**
+     * Inject the models.
+     * @param Post $post
+     */
+    public function __construct(Gallery $gallery)
     {
         parent::__construct();
-        $this->filter('before', 'authAdmin');
+        $this->gallery = $gallery;
     }
 
-    public function get_index()
+    /**
+     * Show a list of all the blog posts.
+     *
+     * @return View
+     */
+    public function getIndex()
     {
-        $galleries = Galleries::getAll();
+        // Title
+        $title = Lang::get('admin/galleries/title.gallery_management');
 
-        return View::make('admin/galleries.index')
-            ->with('galleries', $galleries);
-    }
+        // Grab all the blog posts
+        $galleries = $this->gallery;
 
-    public function get_create()
-    {
-        return View::make('admin/galleries.create');
+        // Show the page
+        return View::make('admin/galleries/index', compact('galleries', 'title'));
     }
+   
+
+
+    /**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function getCreate()
+	{
+        // Title
+        $title = Lang::get('admin/galleries/title.create_a_new_gallery');
+		
+        // Show the page
+        return View::make('admin/galleries/create_edit', compact('title'));
+	}
+
 
     public function post_create()
     {
-        $validation = Validator::make(Input::get(), array('galleryName' => 'required|max:60'));
-        
-        if ($validation->fails()) {
-            return Redirect::to('admin/galleries');
+          // Declare the rules for the form validation
+        $rules = array(
+            'title'   => 'required|min:3|max:60'
+        );
+		
+	     // Validate the inputs
+        $validator = Validator::make(Input::all(), $rules);
+
+        // Check if the form validates with success
+        if ($validator->passes())
+        {
+        	 // Create a new blog post
+            $user = Auth::user();
+		   $this->gallery->title            = Input::get('title');
+		   $this->gallery->start_publish    = (Input::get('start_publish')=='')?date('Y-m-d'):Input::get('start_publish');
+		   $this->gallery->end_publish 	  = (Input::get('end_publish')=='')?null:Input::get('end_publish');
+		   $this->gallery->user_id          = $user->id;
+			
+			 // Was the gallery created?
+            if($this->gallery->save())
+            {
+            	File::mkdir(path('public').'images/'.$this->gallery->id);
+        		File::mkdir(path('public').'images/'.$this->gallery->id.'/thumbs');
+
+        // Redirect to the new gallery post page
+                return Redirect::to('admin/galleries/' . $this->gallery->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+            }
+
+            // Redirect to the gallery create page
+            return Redirect::to('admin/galleries/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
         }
 
-        $galleryName = Input::get('galleryName');
-        $galleryID = Galleries::create($galleryName);
-        File::mkdir(path('public').'images/'.$galleryID);
-        File::mkdir(path('public').'images/'.$galleryID.'/thumbs');
+        // Form validation failed
+        return Redirect::to('admin/galleries/create')->withInput()->withErrors($validator);
+	}
 
-        return Redirect::to('admin/galleries');
-    }
-
+/*
     public function get_edit($galleryID)
     {
         $gallery = Galleries::get($galleryID);
@@ -115,6 +167,29 @@ class AdminGalleriesController extends AdminController {
         }
 
         return Response::json($fuResponse);
-    }
+    }*/
 
+     /**
+     * Show a list of all the blog posts formatted for Datatables.
+     *
+     * @return Datatables JSON
+     */
+     public function getData()
+    {
+         $blogcategorys = Gallery::select(array('gallery.id', 'gallery.title', 'gallery.id as images_count','gallery.id as comments_count','gallery.created_at'));
+
+        return Datatables::of($blogcategorys)
+
+        ->edit_column('images_count', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/imagesforgallery\' ) }}}" class="btn btn-link btn-xs" >{{ DB::table(\'gallery_images\')->where(\'gallery_id\', \'=\', $id)->count() }}</a>')
+        ->edit_column('comments_count', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/commentsforgallery\' ) }}}" class="btn btn-link btn-xs" >{{ DB::table(\'gallery_comments\')->where(\'gallery_id\', \'=\', $id)->count() }}</a>')
+       
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
+                <a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+            ')
+        
+        ->remove_column('id')
+        
+        ->make();
+    }
+	
 }
