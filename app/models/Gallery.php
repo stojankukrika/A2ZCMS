@@ -51,17 +51,7 @@ class Gallery extends Eloquent implements PresentableInterface {
 		return $this->hasMany('GalleryComment');
 	}
 	
-	/**
-	 * Get the blog's category.
-	 *
-	 * @return array
-	 */
-	public function category()
-	{
-		return $this->belongsTo('GalleryCategory');
-	}
 	
-
     /**
      * Get the date the blog was created.
      *

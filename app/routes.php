@@ -20,7 +20,8 @@ Route::model('blogcomment', 'BlogComment');
 Route::model('blogcategory', 'BlogCategory');
 Route::model('blog', 'Blog');
 Route::model('gallerycomment', 'GalleryComment');
-Route::model('gallerycategory', 'GalleryCategory');
+Route::model('galleryimages', 'GalleryImages');
+Route::model('galleryimageslikes', 'GalleryImagesLikes');
 Route::model('gallery', 'Gallery');
 Route::model('role', 'Role');
 Route::model('settings', 'Settings');
@@ -85,15 +86,15 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('gallerycomments', 'AdminGalleryCommentsController');
 	
 	 # Gallery Category Management
-    Route::get('gallerycategorys/{gallerycategory}/edit', 'AdminGalleryCategorysController@getEdit')
-        ->where('gallerycategory', '[0-9]+');
-    Route::post('gallerycategorys/{gallerycategory}/edit', 'AdminGalleryCategorysController@postEdit')
-        ->where('gallerycategory', '[0-9]+');
-    Route::get('gallerycategorys/{gallerycategory}/delete', 'AdminGalleryCategorysController@getDelete')
-        ->where('gallerycategory', '[0-9]+');
-    Route::post('gallerycategorys/{gallerycategory}/delete', 'AdminGalleryCategorysController@postDelete')
-        ->where('gallerycategory', '[0-9]+');
-    Route::controller('gallerycategorys', 'AdminGalleryCategorysController');
+    Route::get('galleryimages/{galleryimage}/edit', 'AdminGalleryImagesController@getEdit')
+        ->where('galleryimages', '[0-9]+');
+    Route::post('galleryimages/{galleryimage}/edit', 'AdminGalleryImagesController@postEdit')
+        ->where('galleryimage', '[0-9]+');
+    Route::get('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@getDelete')
+        ->where('galleryimage', '[0-9]+');
+    Route::post('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@postDelete')
+        ->where('galleryimage', '[0-9]+');
+    Route::controller('galleryimages', 'AdminGalleryImagesController');
 
     # Galleries Management
      Route::get('galleries/{gallerycategory}/blogsforcategory', 'AdminGalleriesController@getBlogsForCategory')

@@ -8,11 +8,8 @@ class GallerysTableSeeder extends Seeder {
 		// DB::table('gallerys')->truncate();
 		
 		$user_id = User::first()->id;
-		$galleryscategory = GalleryCategory::find(1)->id;
-
-		$gallerys = array(
+			$gallerys = array(
 								array(
-								'gallerycategory_id' =>$galleryscategory,
 								'user_id' => $user_id,
 							    'title' => 'Gallery 1', 
 								'created_at' => new DateTime,
