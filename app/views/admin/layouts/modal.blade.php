@@ -106,7 +106,7 @@
 	<script src="{{$asset}}assets/admin/js/fullcalendar.min.js"></script>
 	
     <script type="text/javascript">
-		$(function() {
+$(function() {
               $('form').submit(function(event) {
                 var form = $(this);
                 $.ajax({
@@ -124,10 +124,11 @@
               
                $('.close_popup').click(function(){
                	 parent.$.colorbox.close()
+               	  parent.oTable.fnReloadAjax();
+     			 parent.jQuery.fn.colorbox.close();
                });
              
-            });
-            
+            }); 
     </script>
 
     @yield('scripts')
