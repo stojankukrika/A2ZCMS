@@ -109,6 +109,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('gallery', '[0-9]+');
     Route::post('galleries/{gallery}/delete', 'AdminGalleriesController@postDelete')
         ->where('gallery', '[0-9]+');
+	Route::get('galleries/{gallery}/upload', 'AdminGalleriesController@getUpload')
+        ->where('gallery', '[0-9]+');
+    Route::post('galleries/{gallery}/upload', 'AdminGalleriesController@postUpload')
+        ->where('gallery', '[0-9]+');		
     Route::controller('galleries', 'AdminGalleriesController');
 	
 		# Navigation Management

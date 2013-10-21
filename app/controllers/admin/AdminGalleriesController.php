@@ -219,5 +219,17 @@ class AdminGalleriesController extends AdminController {
         
         ->make();
     }
+
+	/*
+	 * Upload pictures for gallery
+	 * */
+	  public function getUpload($galleries)
+	{
+		// Title
+        $title = Lang::get('admin/galleries/title.gallery_add_picture');
+
+	        // Show the page
+        return View::make('admin/galleries/upload', compact('galleries', 'title'));
+	}
 	
 }
