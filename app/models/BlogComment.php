@@ -4,7 +4,23 @@ use Robbo\Presenter\PresentableInterface;
 
 class BlogComment extends Eloquent implements PresentableInterface{
 
+	protected $softDelete = true;
 	protected $table = "blog_comments";
+	/**
+	 * Deletes a blog post and all
+	 * the associated comments.
+	 *
+	 * @return bool
+	 */
+	public function delete()
+	{
+		// Delete the comments
+		$this->gallerycomments()->delete();
+
+		// Delete the blog post
+		return parent::delete();
+	}
+	
 	 /* 
 	 *//**
 	 * Get the comment's content.
@@ -33,7 +49,7 @@ class BlogComment extends Eloquent implements PresentableInterface{
 	 */
 	public function comment()
 	{
-		return $this->belongsTo('Comment');
+		return $this->belongsTo('Blog');
 	}
 
     /**

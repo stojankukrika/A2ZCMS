@@ -11,4 +11,5 @@ class Page extends Eloquent{
 		'content' => 'required',
 		'status' => 'required'
 	);
+	
 }

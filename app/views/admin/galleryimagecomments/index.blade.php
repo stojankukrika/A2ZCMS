@@ -9,16 +9,17 @@
 @section('content')
 	<div class="page-header">
 		<h3>
-			{{{ $title }}} {{ $blog->title }}
+			{{{ $title }}}
 		</h3>
 	</div>
 
 	<table id="comments" class="table table-striped table-hover">
 		<thead>
 			<tr>
-				<th class="col-md-3">{{{ Lang::get('admin/blogcomments/table.title') }}}</th>
+				<th class="col-md-3">{{{ Lang::get('admin/galleryimagecomments/table.title') }}}</th>
+				<th class="col-md-3">{{{ Lang::get('admin/galleries/table.title') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/users/table.username') }}}</th>
-				<th class="col-md-2">{{{ Lang::get('admin/blogcomments/table.created_at') }}}</th>
+				<th class="col-md-2">{{{ Lang::get('admin/galleryimagecomments/table.created_at') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>
 		</thead>
@@ -38,7 +39,7 @@
 				},
 				"bProcessing": true,
 		        "bServerSide": true,
-		        "sAjaxSource": "{{ URL::to('admin/blogcomments/dataforblog/'. $blog->id) }}",
+		        "sAjaxSource": "{{ URL::to('admin/galleryimagecomments/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}

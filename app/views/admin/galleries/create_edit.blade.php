@@ -3,7 +3,7 @@
 {{-- Content --}}
 @section('content')
 	{{-- Edit Gallery Form --}}
-	<form class="form-horizontal" method="post" action="@if (isset($galleries)){{ URL::to('admin/galleries/' . $gallery->id . '/edit') }}@endif" autocomplete="off">
+	<form class="form-horizontal" method="post" action="@if (isset($galleries)){{ URL::to('admin/galleries/' . $galleries->id . '/edit') }}@endif" autocomplete="off">
 		<!-- CSRF Token -->
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		<!-- ./ csrf token -->
@@ -43,7 +43,7 @@
 			<div class="col-md-12">
 				<button type="reset" class="btn btn-link close_popup">Cancel</button>
 				<button type="reset" class="btn btn-default">Reset</button>
-				<button type="submit" class="btn btn-success">@if (isset($blog)){{ "Update" }} @else {{ "Create" }} @endif</button>
+				<button type="submit" class="btn btn-success">@if (isset($galleries)){{ "Update" }} @else {{ "Create" }} @endif</button>
 			</div>
 		</div>
 		<!-- ./ form actions -->

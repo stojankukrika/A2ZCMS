@@ -2,9 +2,22 @@
 
 use Robbo\Presenter\PresentableInterface;
 
-class GalleryComment extends Eloquent implements PresentableInterface{
+class GalleryImageComment extends Eloquent implements PresentableInterface{
 
-	protected $table = "gallery_comments";
+	protected $softDelete = true;
+	protected $table = "gallery_images_comments";
+/**
+	 * Deletes a blog post and all
+	 * the associated comments.
+	 *
+	 * @return bool
+	 */
+	public function delete()
+	{
+		// Delete the post
+		return parent::delete();
+	}
+	
 	 /* 
 	 *//**
 	 * Get the comment's content.
@@ -14,6 +27,15 @@ class GalleryComment extends Eloquent implements PresentableInterface{
 	public function content()
 	{
 		return nl2br($this->content);
+	}
+	/**
+	 * Get the comment's author.
+	 *
+	 * @return User
+	 */
+	public function image()
+	{
+		return $this->belongsTo('GalleryImages', 'gallery_images_id');
 	}
 
 	/**
@@ -25,27 +47,6 @@ class GalleryComment extends Eloquent implements PresentableInterface{
 	{
 		return $this->belongsTo('User', 'user_id');
 	}
-
-	/**
-	 * Get the comment's post's.
-	 *
-	 * @return Blog\Comment
-	 */
-	public function comment()
-	{
-		return $this->belongsTo('Comment');
-	}
-
-    /**
-     * Get the post's author.
-     *
-     * @return User
-     */
-    public function user()
-    {
-        return $this->belongsTo('User', 'user_id');
-    }
-
     /**
      * Get the date the post was created.
      *

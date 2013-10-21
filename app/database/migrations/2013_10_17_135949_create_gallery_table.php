@@ -18,6 +18,7 @@ class CreateGalleryTable extends Migration {
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('title');
 			$table->integer('views')->unsigned()->default(0);
+			$table->string('folderid');
 			$table->date('start_publish');
 			$table->date('end_publish')->nullable();
 			$table->timestamps();

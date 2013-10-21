@@ -6,6 +6,7 @@ use Robbo\Presenter\PresentableInterface;
 class BlogCategory extends Eloquent implements PresentableInterface {
 
 	protected $table = "blog_categorys";
+	protected $softDelete = true;
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.

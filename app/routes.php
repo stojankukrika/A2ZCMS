@@ -19,9 +19,9 @@ Route::model('user', 'User');
 Route::model('blogcomment', 'BlogComment');
 Route::model('blogcategory', 'BlogCategory');
 Route::model('blog', 'Blog');
-Route::model('gallerycomment', 'GalleryComment');
 Route::model('galleryimages', 'GalleryImages');
 Route::model('galleryimageslikes', 'GalleryImagesLikes');
+Route::model('galleryimagecomment', 'GalleryImageComment');
 Route::model('gallery', 'Gallery');
 Route::model('role', 'Role');
 Route::model('settings', 'Settings');
@@ -73,17 +73,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('blogs', 'AdminBlogsController');
 	
 	  # Gallery Comment Management
-    Route::get('gallerycomments/{gallery}/commentsforblog', 'AdminGalleryCommentsController@getCommentsForBlog')
+    Route::get('galleryimagecomments/{gallery}/commentsforgallery', 'AdminGalleryImageCommentsController@getCommentsforgallery')
         ->where('gallery', '[0-9]+');
-    Route::get('gallerycomments/{gallerycomment}/edit', 'AdminGalleryCommentsController@getEdit')
-        ->where('gallerycomment', '[0-9]+');
-    Route::post('gallerycomments/{gallerycomment}/edit', 'AdminGalleryCommentsController@postEdit')
-        ->where('gallerycomment', '[0-9]+');
-    Route::get('gallerycomments/{gallerycomment}/delete', 'AdminGalleryCommentsController@getDelete')
-        ->where('gallerycomment', '[0-9]+');
-    Route::post('gallerycomments/{gallerycomment}/delete', 'AdminGalleryCommentsController@postDelete')
-        ->where('gallerycomment', '[0-9]+');
-    Route::controller('gallerycomments', 'AdminGalleryCommentsController');
+    Route::get('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentsController@getEdit')
+        ->where('galleryimagecomment', '[0-9]+');
+    Route::post('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentsController@postEdit')
+        ->where('galleryimagecomment', '[0-9]+');
+    Route::get('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentsController@getDelete')
+        ->where('galleryimagecomment', '[0-9]+');
+    Route::post('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentsController@postDelete')
+        ->where('galleryimagecomment', '[0-9]+');
+    Route::controller('galleryimagecomments', 'AdminGalleryImageCommentsController');
 	
 	 # Gallery Images Management
     Route::get('galleryimages/{galleryimage}/edit', 'AdminGalleryImagesController@getEdit')

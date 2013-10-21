@@ -9,19 +9,16 @@
 @section('content')
 	<div class="page-header">
 		<h3>
-			{{{ $title }}}
-			<div class="pull-right">
-				<a href="{{{ URL::to('admin/blogcategorys/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
-			</div>
+			{{{ $title }}} {{ $gallery->title }}
 		</h3>
 	</div>
 
 	<table id="comments" class="table table-striped table-hover">
 		<thead>
 			<tr>
-				<th class="col-md-3">{{{ Lang::get('admin/blogcategorys/table.title') }}}</th>
-				<th class="col-md-3">{{{ Lang::get('admin/blogcategorys/table.no_of_blogs') }}}</th>
-				<th class="col-md-2">{{{ Lang::get('admin/blogcategorys/table.created_at') }}}</th>
+				<th class="col-md-3">{{{ Lang::get('admin/blogcomments/table.title') }}}</th>
+				<th class="col-md-2">{{{ Lang::get('admin/users/table.username') }}}</th>
+				<th class="col-md-2">{{{ Lang::get('admin/blogcomments/table.created_at') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>
 		</thead>
@@ -41,8 +38,8 @@
 				},
 				"bProcessing": true,
 		        "bServerSide": true,
-		        "sAjaxSource": "{{ URL::to('admin/blogcategorys/data') }}",
-		       "fnDrawCallback": function ( oSettings ) {
+		        "sAjaxSource": "{{ URL::to('admin/galleryimagecomments/dataforgallery/'. $gallery->id) }}",
+		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}
 			});
