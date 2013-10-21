@@ -210,8 +210,9 @@ class AdminGalleriesController extends AdminController {
        
 	    ->edit_column('comments_count', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/commentsforgallery\' ) }}}" class="btn btn-link btn-xs" >{{ DB::table(\'gallery_images_comments\')->where(\'gallery_id\', \'=\', $id)->where(\'deleted_at\', \'=\', NULL)->count() }}</a>')
        
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/upload\' ) }}}" class="btn btn-info btn-sm iframe" >{{{ Lang::get(\'admin/galleries/title.gallery_add_picture\') }}}</a>
+        <a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
+                <a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
         
         ->remove_column('id')

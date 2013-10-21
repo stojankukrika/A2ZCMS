@@ -1,56 +1,20 @@
 <?php
-use Illuminate\Support\Facades\URL; 
 use Robbo\Presenter\PresentableInterface;
 
-class GalleryImages extends Eloquent implements PresentableInterface {
+class GalleryImageLike extends Eloquent implements PresentableInterface {
 
 	 protected $softDelete = true;
-	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete()
-	{
-		// Delete the comments
-		$this->galleryimages()->delete();
-
-		// Delete the blog post
-		return parent::delete();
-	}
-
-	/**
-	 * Returns a formatted post content entry,
-	 * this ensures that line breaks are returned.
-	 *
-	 * @return string
-	 */
-	public function content()
-	{
-		return nl2br($this->content);
-	}
-
+	 protected $table = "gallery_images_likes";
 	/**
 	 * Get the blog's author.
 	 *
 	 * @return User
 	 */
-	public function author()
+	public function image()
 	{
-		return $this->belongsTo('User', 'user_id');
+		return $this->belongsTo('GalleryImages', 'gallery_images_id');
 	}
 
-	/**
-	 * Get the blog's comments.
-	 *
-	 * @return array
-	 */
-	public function galleryimages()
-	{
-		return $this->belongsTo('Gallery');
-	}
-	
     /**
      * Get the date the blog was created.
      *

@@ -2,7 +2,7 @@
 
 use Robbo\Presenter\PresentableInterface;
 
-class GalleryImageComment extends Eloquent implements PresentableInterface{
+class GalleryImageComment extends Eloquent implements PresentableInterface {
 
 	protected $softDelete = true;
 	protected $table = "gallery_images_comments";

@@ -198,8 +198,8 @@ class AdminBlogCommentsController extends AdminController {
 
         ->edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>')
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-xs">{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-xs btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
+                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
 
         ->remove_column('id')

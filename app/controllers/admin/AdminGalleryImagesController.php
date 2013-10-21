@@ -2,119 +2,62 @@
 
 class AdminGalleryImagesController extends AdminController {
 
-    public $restful = true;
+ /**
+     * Comment Model
+     * @var Comment
+     */
+    protected $gallery_image;
 
-    public function __construct()
+    /**
+     * Inject the models.
+     * @param Comment $comment
+     */
+    public function __construct(GalleryImage $gallery_image)
     {
         parent::__construct();
-        $this->filter('before', 'authAdmin');
+        $this->gallery_image = $gallery_image;
     }
-
-    public function get_index()
+	  /**
+     * Show a list of all the blog posts.
+     *
+     * @return View
+     */
+    public function getIndex()
     {
-        $galleries = Galleries::getAll();
+        // Title
+        $title = Lang::get('admin/galleryimages/title.gallery_management');
 
-        return View::make('admin/galleries.index')
-            ->with('galleries', $galleries);
+      // Gallery category
+		$galleries = Gallery::all();
+		
+		$options = array();
+		
+		$options[0]=Lang::get('admin/galleryimages/title.gallery_choose');
+		
+		foreach ($galleries as $gallery)
+		{
+		     $options[$gallery->id] = $gallery->title;
+		}
+		
+        // Show the page
+        return View::make('admin/galleryimages/index', compact('options', 'galleries','title'));
     }
+   
 
-    public function get_create()
-    {
-        return View::make('admin/galleries.create');
-    }
 
-    public function post_create()
-    {
-        $validation = Validator::make(Input::get(), array('galleryName' => 'required|max:60'));
-        
-        if ($validation->fails()) {
-            return Redirect::to('admin/galleries');
-        }
+    /**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function getImageforgallery($galleryid)
+	{
+        $images = GalleryImage::join('gallery', 'gallery.id', '=', 'gallery_images.gallery_id')
+        ->select(array('gallery_images.id', 'gallery_images.content','gallery.folderid', 
+        'gallery_images.views','gallery_images.likes','gallery_images.created_at'))
+		->where('gallery_id','=',$galleryid);
 
-        $galleryName = Input::get('galleryName');
-        $galleryID = Galleries::create($galleryName);
-        File::mkdir(path('public').'images/'.$galleryID);
-        File::mkdir(path('public').'images/'.$galleryID.'/thumbs');
-
-        return Redirect::to('admin/galleries');
-    }
-
-    public function get_edit($galleryID)
-    {
-        $gallery = Galleries::get($galleryID);
-
-        if ($gallery != null) {
-            return View::make('admin/galleries.edit')
-                ->with('gallery', $gallery);
-        } else {
-            return "Error";
-        }
-    }
-
-    public function post_edit($galleryID)
-    {
-        $validation = Validator::make(Input::get(), array('galleryName' => 'required|max:60'));
-        
-        if ($validation->fails()) {
-            return Redirect::to('admin/galleries');
-        }
-
-        Galleries::edit($galleryID, Input::get('galleryName'));
-
-        return Redirect::to('admin/galleries');
-    }
-
-    public function get_delete($galleryID)
-    {
-        $gallery = Galleries::get($galleryID);
-
-        if ($gallery != null) {
-            return View::make('admin/galleries.delete')
-                ->with('gallery', $gallery);
-        } else {
-            return "Error";
-        } 
-    }
-
-    public function post_delete($galleryID)
-    {
-        Galleries::delete($galleryID);
-        File::rmdir(path('public').'images/'.$galleryID);
-
-        return Redirect::to('admin/galleries');
-    }
-
-    public function get_upload($galleryID)
-    {
-        $gallery = Galleries::get($galleryID);
-
-        if ($gallery != null) {
-            return View::make('admin/galleries.upload')
-                ->with('gallery', $gallery);
-        } else {
-            return "Error";
-        }
-    }
-
-    public function post_upload($galleryID)
-    {
-        $path = path('public').'images/'.$galleryID;
-        Fineuploader::init($path);
-        $name = Fineuploader::getName();
-        $fuResponse = Fineuploader::upload($name);
-
-        if (isset($fuResponse['success']) && ($fuResponse['success'] == true)) {
-            $file = Fineuploader::getUploadName();
-            
-            Bundle::start('resizer');
-            $success = Resizer::open($file)
-                ->resize(300, 300, 'landscape')
-                ->save($path.'/thumbs/'.$name , 90 );
-            
-            Images::create($galleryID, $name);
-        }
-
-        return Response::json($fuResponse);
-    }
-
+        return Datatables::of($images)
+		       ->make();
+	}
 }

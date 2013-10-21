@@ -239,12 +239,12 @@ class AdminRolesController extends AdminController {
 
         return Datatables::of($roles)
       
-	   ->edit_column('users', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/usersforrole\' ) }}}" class="btn btn-link btn-xs" >{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}</a>')
+	   ->edit_column('users', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/usersforrole\' ) }}}" class="btn btn-link btn-sm" >{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}</a>')
       				
 		
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-xs btn-default">{{{ Lang::get(\'button.edit\') }}}</a>
-                                <a href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-xs btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default">{{{ Lang::get(\'button.edit\') }}}</a>
+                                <a href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
                     ')
 
         ->remove_column('id')
