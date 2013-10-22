@@ -1,30 +1,22 @@
 @extends('admin.layouts.modal')
- <?=HTML::style('fineuploader/fineuploader.css'); ?>
-  <?=HTML::style('css/bootstrap.css'); ?>
-  
 {{-- Content --}}
 @section('content')
 	{{-- Edit Gallery Form --}}
-	<form class="form-horizontal" method="post" action="@if (isset($galleries)){{ URL::to('admin/galleries/' . $galleries->id . '/edit') }}@endif" autocomplete="off">
 		<!-- CSRF Token -->
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		<!-- ./ csrf token -->
 
-			<p>Gallery: <b>{{$gallery->content}}</b></p>
-</div>
-<div id="jquery-wrapped-fine-uploader"></div>
-</div>
+			<p>Gallery: <b>{{$galleries->title}}</b></p>
+
+		<div id="jquery-wrapped-fine-uploader"></div>
+
 
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-12">
 				<button type="reset" class="btn btn-link close_popup">Cancel</button>
-				<button type="reset" class="btn btn-default">Reset</button>
-				<button type="submit" class="btn btn-success">@if (isset($galleries)){{ "Update" }} @else {{ "Create" }} @endif</button>
 			</div>
 		</div>
-		<!-- ./ form actions -->
-	</form>
 @stop
 
 {{-- Scripts --}}
@@ -36,8 +28,8 @@ $(document).ready(function () {
 
   $('#jquery-wrapped-fine-uploader').fineUploader({
     request: {
-      endpoint: '<?=URL::to("admin/galleries/upload/".$gallery->id); ?>',
-      params: { 'gid' : <?=$gallery->id; ?> },
+      endpoint: '<?=URL::to("admin/galleries/".$galleries->id."/upload/"); ?>',
+      params: { 'gid' : {{$galleries->id}},'_token':'{{ csrf_token() }}' },
     },
     text: {
       uploadButton: 'Upload Your Images'
@@ -59,5 +51,4 @@ $(document).ready(function () {
 });
 
 </script>
-  <?=HTML::script('fineuploader/jquery.fineuploader-3.1.1.js'); ?>
 @stop

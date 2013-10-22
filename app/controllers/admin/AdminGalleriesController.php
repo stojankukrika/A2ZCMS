@@ -202,9 +202,9 @@ class AdminGalleriesController extends AdminController {
      */
      public function getData()
     {
-         $blogcategorys = Gallery::select(array('gallery.id', 'gallery.title', 'gallery.id as images_count','gallery.id as comments_count','gallery.created_at'));
+         $galleries = Gallery::select(array('gallery.id', 'gallery.title', 'gallery.id as images_count','gallery.id as comments_count','gallery.created_at'));
 
-        return Datatables::of($blogcategorys)
+        return Datatables::of($galleries)
 
         ->edit_column('images_count', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/imagesforgallery\' ) }}}" class="btn btn-link btn-xs" >{{ DB::table(\'gallery_images\')->where(\'gallery_id\', \'=\', $id)->where(\'deleted_at\', \'=\', NULL)->count() }}</a>')
        
@@ -221,15 +221,56 @@ class AdminGalleriesController extends AdminController {
     }
 
 	/*
-	 * Upload pictures for gallery
+	 * Get upload pictures for gallery
 	 * */
 	  public function getUpload($galleries)
 	{
 		// Title
         $title = Lang::get('admin/galleries/title.gallery_add_picture');
 
+    	$id = $galleries->id;
+	 	$galleries = Gallery::find($id);
+           
 	        // Show the page
         return View::make('admin/galleries/upload', compact('galleries', 'title'));
 	}
+	/*
+	 * Upload pictures for gallery
+	 * */
+	public function postUpload()
+    {
+    	 $rules = array(
+            'gid' => 'required|integer',
+            'qqfile' => 'required|image|max:3000',
+        );
+        // Validate the inputs
+        $validator = Validator::make(Input::all(), $rules);
+
+        // Check if the form validates with success
+        if ($validator->passes())
+        {
+        		
+        	$id = Input::get('gid');
+        	 
+			$galleries = Gallery::find($id);
+			
+	        $path = public_path().'\images\\/'.$galleries->folderid;
+					 
+		    $file = Input::file('qqfile'); 
+		    $extension = File::extension($file['name']);
+		    $filename = sha1(time().time()).".{$extension}";
+		  
+		    $upload_success = Input::file('file')->move($path, $filename);
+		 
+		    if( $upload_success ) {
+		        return Response::json('success', 200);
+		    } else {
+		        return Response::json('error', 400);
+		    }
+		}
+		else {
+			return Response::json('error', 400);
+		}
+    }
 	
 }

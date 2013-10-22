@@ -321,7 +321,7 @@
 							<li><a href="{{{ URL::to('/user') }}}"><i class="icon-user"></i> Profile</a></li>
 							<li><a href="{{{ URL::to('user/settings') }}}"><i class="icon-cog"></i> {{ Lang::get('admin/general.settings') }}</a></li>
 							<li><a href="#"><i class="icon-envelope"></i> Messages</a></li>
-							<li><a href="{{{ URL::to('user/logout') }}}"><i class="icon-off"></i> {{ Lang::get('admin/general.logout') }}</a></li>
+							<li><a href="{{{ URL::to('user/logout') }}}"><i class="icon-road icon-white"></i> {{ Lang::get('admin/general.logout') }}</a></li>
 						</ul>
 					</li>
 					<!-- end: User Dropdown -->

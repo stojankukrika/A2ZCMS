@@ -1,4 +1,4 @@
-<?php
+<?php namespace A2ZCMS\Helpers;
 
 require('fineuploader/qqfile.php');
 
