@@ -23,6 +23,7 @@ Route::model('galleryimages', 'GalleryImages');
 Route::model('galleryimageslikes', 'GalleryImagesLikes');
 Route::model('galleryimagecomment', 'GalleryImageComment');
 Route::model('gallery', 'Gallery');
+Route::model('todolist', 'Todolist');
 Route::model('role', 'Role');
 Route::model('settings', 'Settings');
 
@@ -180,6 +181,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	# Settings
     Route::get('settings', 'AdminSettingsController@getIndex');
     Route::post('settings', 'AdminSettingsController@postIndex');
+	
+	 # To-do list
+     Route::get('todolists/{todolist}/edit', 'AdminTodolistController@getEdit')
+        ->where('todolist', '[0-9]+');
+    Route::post('todolists/{todolist}/edit', 'AdminTodolistController@postEdit')
+        ->where('todolist', '[0-9]+');
+    Route::get('todolists/{todolist}/delete', 'AdminTodolistController@getDelete')
+        ->where('todolist', '[0-9]+');
+    Route::post('todolists/{todolist}/delete', 'AdminTodolistController@postDelete')
+        ->where('todolist', '[0-9]+');
+    Route::controller('todolists', 'AdminTodolistController');
 	
 	
     # Admin Dashboard

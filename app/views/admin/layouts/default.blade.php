@@ -341,6 +341,7 @@
 				<div class="sidebar-nav nav-collapse collapse navbar-collapse">
 					<ul class="nav main-menu">
 						<li><a href="{{{ URL::to('admin') }}}"><i class="icon-dashboard"></i><span class="hidden-sm text">Dashboard</span></a></li>	
+						<li><a href="{{{ URL::to('admin/todolists') }}}"><i class="icon-lightbulb"></i><span class="hidden-sm text">To-do list</span></a></li>	
 						<li>
 							<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> Pages</span><span class="chevron closed"></span></a>
 							<ul>
