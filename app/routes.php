@@ -86,7 +86,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('galleryimagecomments', 'AdminGalleryImageCommentsController');
 	
 	 # Gallery Images Management
-     Route::post('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@postDelete')
+    Route::get('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@getDelete')
         ->where('galleryimage', '[0-9]+');
     Route::controller('galleryimages', 'AdminGalleryImagesController');
 	

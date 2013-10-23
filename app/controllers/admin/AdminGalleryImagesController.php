@@ -51,35 +51,18 @@ class AdminGalleryImagesController extends AdminController {
      */
     public function getDelete($gallery_image)
     {
-        // Declare the rules for the form validation
-        $rules = array(
-            'id' => 'required|integer'
-        );
-        // Validate the inputs
-        $validator = Validator::make(Input::all(), $rules);
-
-        // Check if the form validates with success
-        if ($validator->passes())
-        {
-        	$id = $gallery_image->id;
-			$gallery = Gallery::find($id);
-			
-			File::delete(base_path().'\public\images\/'.$gallery->folderid.'\/'.$gallery_image->content);
-        	File::delete(base_path().'\public\images\/'.$gallery->folderid.'\/thumbs\/'.$gallery_image->content);
-				
-			
-			$gallery_image->delete();
+    	
+			$image = GalleryImage::find($gallery_image);
+					
+			$image->delete();
 
             // Was the blog post deleted?
-            $gallery_image = GalleryImage::find($id);
+            $gallery_image = GalleryImage::find($image->id);
             if(empty($gallery_image))
             {            	
-                // Redirect to the blog posts management page
+                // Redirect to last page
                 return Redirect::to('admin/galleryimages')->with('success', Lang::get('admin/galleries/messages.delete.success'));
             }
-        }
-        // There was a problem deleting the blog post
-        return Redirect::to('admin/galleryimages')->with('error', Lang::get('admin/galleries/messages.delete.error'));
     }
 	
     /**

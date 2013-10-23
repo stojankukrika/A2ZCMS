@@ -33,7 +33,7 @@
 		        success: function(data){
 		        	$.each(data.aaData, function( i, val ) {
 		        		var arr = val.toString().split(',');
-					$( "#pictures" ).append( '<div class="col-sm-2 col-xs-6" style="margin-bottom:30px"><img alt="" src="{{ Config::get('app.url')}}/images/'+arr[2]+'/thumbs/'+arr[1]+'" class="img-thumbnail"><div class="image-bar"> <i class="icon-eye-open"></i> '+arr[3]+' <i class="icon-heart"></i> '+arr[4]+'  <a href="{{ Config::get('app.url')}}/admin/galleryimages/'+arr[0]+'/delete/"><i class="icon-trash"></i></a></div></div>');
+					$( "#pictures" ).append( '<div class="col-sm-2 col-xs-6" style="margin-bottom:30px"><img alt="" src="{{ Config::get('app.url')}}/images/'+arr[2]+'/thumbs/'+arr[1]+'" class="img-thumbnail"><div class="image-bar"> <i class="icon-eye-open"></i> '+arr[3]+' <i class="icon-heart"></i> '+arr[4]+'  <a href="{{ Config::get('app.url')}}admin/galleryimages/'+arr[0]+'/delete"><i class="icon-trash"></i></a></div></div>');
 						});
 		         }
 		    });
