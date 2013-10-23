@@ -186,15 +186,17 @@ class AdminGalleryImageCommentsController extends AdminController {
     public function getDataforgallery($gallery_id)
     {
        $comments = GalleryImageComment::join('users', 'gallery_images_comments.user_id', '=','users.id' )
+	   					->join('gallery', 'gallery_images_comments.gallery_id', '=','gallery.id' )
 						->where('gallery_images_comments.gallery_id','=',$gallery_id)
 						->where('gallery_images_comments.deleted_at','=',NULL)
-                        ->select(array('gallery_images_comments.id as id', 'users.id as userid', 
-                        'gallery_images_comments.content','users.username as poster_name', 
-                        'gallery_images_comments.created_at'));
+                        ->select(array('gallery_images_comments.id as id', 'gallery_images_comments.gallery_id as gallery_id','gallery_images_comments.content as comment','gallery.title as content','users.id as userid', 
+                        'users.username as poster_name', 'gallery_images_comments.created_at'));
 
         return Datatables::of($comments)
 
-        ->edit_column('content', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>')
+        ->edit_column('content', '<a href="{{{ URL::to(\'admin/galleries/\'. $gallery_id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>')
+		
+		->edit_column('comment', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($comment, 40, \'...\') }}}</a>')
 
         ->edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>')
 
@@ -203,6 +205,7 @@ class AdminGalleryImageCommentsController extends AdminController {
             ')
 
         ->remove_column('id')
+		->remove_column('gallery_id')
         ->remove_column('userid')
 
         ->make();

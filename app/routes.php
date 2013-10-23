@@ -89,11 +89,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
      Route::post('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@postDelete')
         ->where('galleryimage', '[0-9]+');
     Route::controller('galleryimages', 'AdminGalleryImagesController');
-
+	
     # Galleries Management
-     Route::get('galleries/{gallerycategory}/imagesforgallery', 'AdminGalleriesController@getImagesForGallery')
+    Route::get('galleries/{gallerycategory}/imagesforgallery', 'AdminGalleriesController@getImagesForGallery')
         ->where('gallerycategory', '[0-9]+');
-    Route::get('galleries/{gallery}/show', 'AdminGalleriesController@getShow')
+     Route::get('galleries/{gallery}/show', 'AdminGalleriesController@getShow')
         ->where('gallery', '[0-9]+');
     Route::get('galleries/{gallery}/edit', 'AdminGalleriesController@getEdit')
         ->where('gallery', '[0-9]+');

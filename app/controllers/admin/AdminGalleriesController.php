@@ -286,6 +286,14 @@ class AdminGalleriesController extends AdminController {
 			return Response::json('error', 400);
 		}
     }
+	public function getImagesForGallery($gallery_id)
+	{
+		// Title
+        $title = Lang::get('admin/galleries/title.gallery_management_for_category');
+		$galleries = Gallery::find($gallery_id);
+	        // Show the page
+        return View::make('admin/galleries/imagesforgallery', compact('galleries', 'title'));
+	}
 
 	
 }
