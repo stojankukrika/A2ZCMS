@@ -7,15 +7,17 @@ class AdminGalleriesController extends AdminController {
      * @var Post
      */
     protected $gallery;
+	protected $gallery_image;
 
     /**
      * Inject the models.
      * @param Post $post
      */
-    public function __construct(Gallery $gallery)
+    public function __construct(Gallery $gallery,GalleryImage $gallery_image)
     {
         parent::__construct();
         $this->gallery = $gallery;
+		$this->gallery_image = $gallery_image;
     }
 
     /**
@@ -255,22 +257,35 @@ class AdminGalleriesController extends AdminController {
 			$galleries = Gallery::find($id);
 			
 	        $path = public_path().'\images\\/'.$galleries->folderid;
-					 
-		    $file = Input::file('qqfile'); 
-		    $extension = File::extension($file['name']);
-		    $filename = sha1(time().time()).".{$extension}";
-		  
-		    $upload_success = Input::file('file')->move($path, $filename);
-		 
-		    if( $upload_success ) {
-		        return Response::json('success', 200);
-		    } else {
-		        return Response::json('error', 400);
-		    }
+			Fineuploader::init($path);
+			
+			$name = Fineuploader::getName();
+			
+			$info = new SplFileInfo($name);
+			$extension = $info->getExtension();
+			
+			$name = sha1($name . $galleries->folderid.time()).'.'.$extension;
+    			
+			$user = Auth::user();
+			$this->gallery_image->gallery_id 	   = $id;
+			$this->gallery_image->content          = $name;
+		    $this->gallery_image->user_id        = $user->id;
+			$this->gallery_image->save();
+			
+			Fineuploader::upload($name);
+			
+			$path2 = public_path().'\images\\/'.$galleries->folderid.'\thumbs\/';			
+			Fineuploader::init($path2);
+   			$upload_success = Fineuploader::upload($name);
+			
+			Thumbnail::generate_image_thumbnail($path2.$name, $path2.$name);
+			
+		    return Response::json($upload_success);
 		}
 		else {
 			return Response::json('error', 400);
 		}
     }
+
 	
 }

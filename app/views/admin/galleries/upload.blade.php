@@ -1,4 +1,21 @@
 @extends('admin.layouts.modal')
+<style>
+  /* Fine Uploader
+      -------------------------------------------------- */
+    .qq-upload-list {
+      text-align: left;
+    }
+    /* For the bootstrapped demos */
+    li.alert-success {
+      background-color: #DFF0D8;
+    }
+    li.alert-error {
+      background-color: #F2DEDE;
+    }
+    .alert-error .qq-upload-failed-text {
+      display: inline;
+    }
+</style>
 {{-- Content --}}
 @section('content')
 	{{-- Edit Gallery Form --}}
