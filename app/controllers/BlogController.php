@@ -18,18 +18,18 @@ class BlogController extends BaseController {
      * @var Settings
      */
 	protected $settings;
-
     /**
      * Inject the models.
      * @param Blog $blog
      * @param User $user
      */
+    protected $navigation;
     public function __construct(Blog $blog, User $user, Settings $settings)
     {
         parent::__construct();
-
         $this->blog = $blog;
         $this->user = $user;
+		$this->navigation=parent::main_menu();
 		$settings = Settings::all();
 		$this->settings = $settings;
 		
@@ -50,7 +50,7 @@ class BlogController extends BaseController {
 		} 
 		// Get all the blog posts
 		$blogs = $this->blog->orderBy('created_at', 'DESC')->paginate($pageitem);
-		$menu = NavigationController::main_menu();
+		$menu = $this->navigation;
 		
 		// Show the page
 		return View::make('site/blog/index', compact('blogs','menu'));
@@ -87,9 +87,9 @@ class BlogController extends BaseController {
         if(!empty($user)) {
             $canBlogComment = $user->can('post_blog_comment');
         }
-
+		$menu = $this->navigation;
 		// Show the page
-		return View::make('site/blog/view_post', compact('blog', 'blog_comments', 'canBlogComment'));
+		return View::make('site/blog/view_post', compact('blog', 'blog_comments', 'canBlogComment','menu'));
 	}
 
 	/**
