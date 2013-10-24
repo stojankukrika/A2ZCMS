@@ -43,6 +43,7 @@
 		  	<div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li><a href="{{{ URL::to('') }}}">{{Lang::get('site.home')}}</a></li>
+                     @if (isset($menu)) $menu @endif
                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             External Pages

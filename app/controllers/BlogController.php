@@ -50,9 +50,10 @@ class BlogController extends BaseController {
 		} 
 		// Get all the blog posts
 		$blogs = $this->blog->orderBy('created_at', 'DESC')->paginate($pageitem);
-
+		$menu = NavigationController::main_menu();
+		
 		// Show the page
-		return View::make('site/blog/index', compact('blogs'));
+		return View::make('site/blog/index', compact('blogs','menu'));
 	}
 
 	/**
