@@ -5,50 +5,72 @@ use Robbo\Presenter\PresentableInterface;
 class Todolist extends Eloquent implements PresentableInterface {
 		
 	protected $table = "todolist";
-	public $timestamps = false;
-	
+	protected $softDelete = true;
 	/**
-	 * Returns a formatted varname entry,
+	 * Deletes a blog post and all
+	 * the associated comments.
+	 *
+	 * @return bool
+	 */
+	public function delete()
+	{
+		// Delete the comments
+		$this->todolists()->softDeletes();
+
+		return true;
+	}
+
+	/**
+	 * Returns a formatted post content entry,
 	 * this ensures that line breaks are returned.
 	 *
 	 * @return string
 	 */
-	public function varname()
+	public function content()
 	{
-		return nl2br($this->varname);
+		return nl2br($this->content);
 	}
 	
-	/**
-	 * Returns a formatted groupname entry,
-	 * this ensures that line breaks are returned.
-	 *
-	 * @return string
-	 */
-	public function groupname()
+	public function work_done()
 	{
-		return nl2br($this->groupname);
+		return $this->work_done;
 	}
-	
+
+    /**
+     * Get the date the post was created.
+     *
+     * @param \Carbon|null $date
+     * @return string
+     */
+    public function date($date=null)
+    {
+        if(is_null($date)) {
+            $date = $this->created_at;
+        }
+
+        return String::date($date);
+    }
+
 	/**
-	 * Returns a formatted value entry,
-	 * this ensures that line breaks are returned.
+	 * Returns the date of the blog post creation,
+	 * on a good and more readable format :)
 	 *
 	 * @return string
 	 */
-	public function value()
+	public function created_at()
 	{
-		return nl2br($this->value);
+		return $this->date($this->created_at);
 	}
-	
+
 	/**
-	 * Returns a formatted defaultvalue entry,
-	 * this ensures that line breaks are returned.
+	 * Returns the date of the blog post last update,
+	 * on a good and more readable format :)
 	 *
 	 * @return string
 	 */
-	public function defaultvalue()
+	public function updated_at()
 	{
-		return nl2br($this->defaultvalue);
+        return $this->date($this->updated_at);
 	}
 	
 	public function getPresenter()

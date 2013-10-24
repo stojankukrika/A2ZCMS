@@ -24,13 +24,10 @@ class AdminTodolistController extends AdminController {
     public function getIndex()
     {
         // Title
-        $title = Lang::get('admin/blogcategorys/title.category_management');
-
-        // Grab all the blog_category posts
-        $blogcategorys = $this->blog_category;
+        $title = Lang::get('admin/todolists/title.to_do_management');
 
         // Show the page
-        return View::make('admin/blogcategorys/index', compact('blogcategorys', 'title'));
+        return View::make('admin/todolists/index', compact('title'));
     }
 
     /**
@@ -41,11 +38,10 @@ class AdminTodolistController extends AdminController {
 	public function getCreate()
 	{
         // Title
-        // Title
-        $title = Lang::get('admin/blogcategorys/title.create_a_new_category');
+        $title = Lang::get('admin/todolists/title.create_a_new_to_do');
 
         // Show the page
-        return View::make('admin/blogcategorys/edit', compact('title'));
+        return View::make('admin/todolists/edit', compact('title'));
 	}
 
 	/**
@@ -57,7 +53,7 @@ class AdminTodolistController extends AdminController {
 	{
         // Declare the rules for the form validation
         $rules = array(
-            'title'   => 'required|min:3'
+            'content'   => 'required|min:3'
         );
 		
 	     // Validate the inputs
@@ -65,22 +61,24 @@ class AdminTodolistController extends AdminController {
 
         // Check if the form validates with success
         if ($validator->passes())
-        {           
-            // Update the blog post data
-            $this->blog_category->title            = Input::get('title');
-            // Was the blog post created?
-            if($this->blog_category->save())
+        {
+        	$user = Auth::user();    
+            
+            $this->todolist->content            = Input::get('content');
+			$this->todolist->user_id          = $user->id;
+            // create todo list
+            if($this->todolist->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/blogcategorys/' . $this->blog_category->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+                return Redirect::to('admin/todolists/' . $this->todolist->id . '/edit')->with('success', Lang::get('admin/todolists/messages.create.success'));
             }
 
             // Redirect to the blog post create page
-            return Redirect::to('admin/blogcategorys/create')->with('error', Lang::get('admin/blogcategorys/messages.create.error'));
+            return Redirect::to('admin/todolists/create')->with('error', Lang::get('admin/todolists/messages.create.error'));
         }
 
         // Form validation failed
-        return Redirect::to('admin/blogcategorys/create')->withInput()->withErrors($validator);
+        return Redirect::to('admin/todolists/create')->withInput()->withErrors($validator);
 	}
 	 
 	 /**
@@ -89,13 +87,13 @@ class AdminTodolistController extends AdminController {
      * @param $blog_category
      * @return Response
      */
-	public function getEdit($blog_category)
+	public function getEdit($todolist)
 	{
         // Title
-        $title = Lang::get('admin/blogcategorys/title.category_update');
+        $title = Lang::get('admin/todolists/title.to_do_update');
 
         // Show the page
-        return View::make('admin/blogcategorys/edit', compact('blog_category', 'title'));
+        return View::make('admin/todolists/edit', compact('todolist', 'title'));
 	}
 
     /**
@@ -104,11 +102,11 @@ class AdminTodolistController extends AdminController {
      * @param $blog_category
      * @return Response
      */
-	public function postEdit($blog_category)
+	public function postEdit($todolist)
 	{
         // Declare the rules for the form validation
         $rules = array(
-            'title' => 'required|min:3'
+            'content' => 'required|min:3'
         );
 
         // Validate the inputs
@@ -118,21 +116,21 @@ class AdminTodolistController extends AdminController {
         if ($validator->passes())
         {
             // Update the blog_category post data
-            $blog_category->title = Input::get('title');
+            $todolist->content = Input::get('content');
 
             // Was the blog_category post updated?
-            if($blog_category->save())
+            if($todolist->save())
             {
                 // Redirect to the new blog_category post page
-                return Redirect::to('admin/blogcategorys/' . $blog_category->id . '/edit')->with('success', Lang::get('admin/blogcategorys/messages.update.success'));
+                return Redirect::to('admin/todolists/' . $todolist->id . '/edit')->with('success', Lang::get('admin/todolists/messages.update.success'));
             }
 
             // Redirect to the comments post management page
-            return Redirect::to('admin/blogcategorys/' . $blog_category->id . '/edit')->with('error', Lang::get('admin/blogcategorys/messages.update.error'));
+            return Redirect::to('admin/todolists/' . $todolist->id . '/edit')->with('error', Lang::get('admin/todolists/messages.update.error'));
         }
 
         // Form validation failed
-        return Redirect::to('admin/blogcategorys/' . $blog_category->id . '/edit')->withInput()->withErrors($validator);
+        return Redirect::to('admin/todolists/' . $todolist->id . '/edit')->withInput()->withErrors($validator);
 	}
 
     /**
@@ -141,13 +139,13 @@ class AdminTodolistController extends AdminController {
      * @param $comment
      * @return Response
      */
-	public function getDelete($blog_category)
+     public function getDelete($todolist)
 	{
         // Title
-        $title = Lang::get('admin/blogcategorys/title.category_delete');
+        $title = Lang::get('admin/todolists/title.to_do_delete');
 
         // Show the page
-        return View::make('admin/blogcategorys/delete', compact('blog_category', 'title'));
+        return View::make('admin/todolists/delete', compact('todolist', 'title'));
 	}
 
     /**
@@ -156,7 +154,7 @@ class AdminTodolistController extends AdminController {
      * @param $comment
      * @return Response
      */
-	public function postDelete($blog_category)
+	public function postDelete($todolist)
 	{
         // Declare the rules for the form validation
         $rules = array(
@@ -169,19 +167,34 @@ class AdminTodolistController extends AdminController {
         // Check if the form validates with success
         if ($validator->passes())
         {
-            $id = $blog_category->id;
-            $blog_category->delete();
+           	$id = $todolist;
+			 $todolist->delete();
 
-            // Was the comment post deleted?
-            $blog_category = BlogCategory::find($id);
-            if(empty($blog_category))
+            // Was the blog post deleted?
+            $todo_list = Todolist::find($id);
+            if(empty($todo_list))
             {
                 // Redirect to the comment posts management page
-                return Redirect::to('admin/blogcategorys')->with('success', Lang::get('admin/blogcategorys/messages.delete.success'));
+                return Redirect::to('admin/todolists')->with('success', Lang::get('admin/todolists/messages.delete.success'));
             }
         }
         // There was a problem deleting the comment post
-        return Redirect::to('admin/blogcategorys')->with('error', Lang::get('admin/blogcategorys/messages.delete.error'));
+        return Redirect::to('admin/todolists')->with('error', Lang::get('admin/todolists/messages.delete.error'));
+	}
+	
+	/** Change to-do to work ore done
+	 * @param $todolist
+     * @return Redirect
+	 * */
+	public function getChange($todolist)
+	{
+		 $todo_list = Todolist::find($todolist->id);
+         $todolist->work_done = ($todo_list->work_done+1)%2;
+		 $todolist->save();
+
+        // Form validation failed
+        return Redirect::to('admin/todolists');
+
 	}
 
     /**
@@ -191,14 +204,15 @@ class AdminTodolistController extends AdminController {
      */
     public function getData()
     {
-         $blogcategorys = BlogCategory::select(array('blog_categorys.id', 'blog_categorys.title', 'blog_categorys.id as blog_count','blog_categorys.created_at'));
+         $todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done','todolist.created_at'));
 
-        return Datatables::of($blogcategorys)
+        return Datatables::of($todolists)
 
-        ->edit_column('blog_count', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/blogsforcategory\' ) }}}" class="btn btn-link btn-sm" >{{ DB::table(\'blogs\')->where(\'blogcategory_id\', \'=\', $id)->count() }}</a>')
+        ->edit_column('work_done', '@if ($work_done==0){{ "Work" }} @else {{ "Done" }} @endif')
         
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/change\' ) }}}" class="btn btn-link btn-sm" >{{{ Lang::get(\'admin/todolists/table.change\') }}}</a>
+        <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
+                <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
         
         ->remove_column('id')

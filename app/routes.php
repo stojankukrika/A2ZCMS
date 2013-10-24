@@ -183,7 +183,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('settings', 'AdminSettingsController@postIndex');
 	
 	 # To-do list
-     Route::get('todolists/{todolist}/edit', 'AdminTodolistController@getEdit')
+	Route::get('todolists/{todolist}/change', 'AdminTodolistController@getChange')
+        ->where('todolist', '[0-9]+');
+    Route::get('todolists/{todolist}/edit', 'AdminTodolistController@getEdit')
         ->where('todolist', '[0-9]+');
     Route::post('todolists/{todolist}/edit', 'AdminTodolistController@postEdit')
         ->where('todolist', '[0-9]+');
