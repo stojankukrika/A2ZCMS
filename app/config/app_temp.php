@@ -201,6 +201,7 @@ return array(
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
 
+
 	),
 	'available_language' => array('en'),
 );

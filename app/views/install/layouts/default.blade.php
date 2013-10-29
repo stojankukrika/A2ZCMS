@@ -56,9 +56,9 @@
             <div class="row">
 				<div class="span12">	
         			<!-- Title -->
-        			<h1>
+        			<h3>
 						@yield('title')
-					</h1>
+					</h3>
 					<!-- ./ title -->
 					<!-- Content -->
 						@yield('content')
