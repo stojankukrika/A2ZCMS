@@ -18,13 +18,15 @@
 	<thead>
 		<tr>
 			<th class="span2">{{{ Lang::get('admin/pages/table.name') }}}</th>
-			<th class="span3">{{{ Lang::get('admin/pages/table.slug') }}}</th>
 			<th class="span3">{{{ Lang::get('admin/pages/table.status') }}}</th>
+			<th class="span3">{{{ Lang::get('admin/pages/table.votes') }}}</th>
+			<th class="span3">{{{ Lang::get('admin/pages/table.hits') }}}</th>
 			<th class="span2">{{{ Lang::get('table.actions') }}}</th>
 		</tr>
 	</thead>
 	<tbody></tbody>
 </table>
+
 @stop
 
 {{-- Scripts --}}

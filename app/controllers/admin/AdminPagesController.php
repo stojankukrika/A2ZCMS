@@ -168,12 +168,16 @@ class AdminPagesController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$pages = Page::select(array('pages.id', 'pages.name', 'pages.slug', 'pages.status'));
+		$pages = Page::select(array('pages.id', 'pages.name', 'pages.status','pages.voteup','pages.votedown','hits'));
 
-		return Datatables::of($pages) -> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
-                               <a href="{{{ URL::to(\'admin/pages/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
-                               
-            ') -> remove_column('id') -> make();
+		return Datatables::of($pages) 
+			-> edit_column('voteup', '{{ $voteup-$votedown }}') 
+			-> edit_column('status', '{{($status)? "<button class=\"btn btn-link btn-sm\">Active</button>":"<button class=\"btn btn-default btn-sm\">Inactive</button>";}}') 
+			-> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
+                            <a href="{{{ URL::to(\'admin/pages/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>') 
+            -> remove_column('id') 
+			-> remove_column('votedown') 
+            -> make();
 	}
 
 }

@@ -6,6 +6,8 @@ return array(
 	'slug'  => 'Slug',
 	'content'  => 'Content',
 	'status'  => 'Status',
+	'votes' => 'Votes',
+	'hits'=> 'Hits',
 	'page_css' => 'Page CSS',
 	'page_javascript' => 'Page Java Script',
 	'show_title'=>'Show Title',
