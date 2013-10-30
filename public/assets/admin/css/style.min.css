@@ -6740,4 +6740,5 @@ table.dataTable tr.even td.sorting_3 { background-color: transparent!important; 
 .btn-link {
 	background: #3eb123!important;
 	color: #ffffff!important;
+	text-decoration: none!important;
 }
