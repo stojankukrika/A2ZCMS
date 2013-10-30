@@ -10,7 +10,7 @@
 <div class="page-header">
 	<h3> {{{ $title }}}
 	<div class="pull-right">
-		<a href="{{{ URL::to('admin/navigation/groups/create') }}}" class="btn btn-small btn-info iframe"><i class="icon-plus-sign icon-white"></i> Create</a>
+		<a href="{{{ URL::to('admin/navigationgroups/create') }}}" class="btn btn-small btn-info iframe"><i class="icon-plus-sign icon-white"></i> Create</a>
 	</div></h3>
 </div>
 
@@ -39,7 +39,7 @@
 			},
 			"bProcessing" : true,
 			"bServerSide" : true,
-			"sAjaxSource" : "{{ URL::to('admin/navigation/groups/data') }}",
+			"sAjaxSource" : "{{ URL::to('admin/navigationgroups/data') }}",
 			"fnDrawCallback" : function(oSettings) {
 				$(".iframe").colorbox({
 					iframe : true,

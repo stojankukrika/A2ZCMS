@@ -12,19 +12,19 @@ class AddMetadataToPages extends Migration {
 	 */
 	public function up() {
 		Schema::table('pages', function(Blueprint $table) {
-			$table -> string('meta_title');
-			$table -> string('meta_description');
-			$table -> string('meta_keywords');
-			$table -> text('page_css');
-			$table -> text('page_javascript');
-			$table -> boolean('sidebar');
-			$table -> boolean('showtitle');
-			$table -> boolean('showvote');
-			$table -> boolean('showdate');
-			$table -> integer('voteup');
-			$table -> integer('votedown');
-			$table -> string('password');
-			$table -> integer('hits');
+			$table -> string('meta_title')->after('slug');
+			$table -> string('meta_description')->after('meta_title');
+			$table -> string('meta_keywords')->after('meta_description');
+			$table -> text('page_css')->after('meta_keywords');
+			$table -> text('page_javascript')->after('page_css');
+			$table -> boolean('sidebar')->after('page_javascript');
+			$table -> boolean('showtitle')->after('sidebar');
+			$table -> boolean('showvote')->after('showtitle');
+			$table -> boolean('showdate')->after('showvote');
+			$table -> integer('voteup')->after('showdate');
+			$table -> integer('votedown')->after('voteup');
+			$table -> string('password')->after('votedown');
+			$table -> integer('hits')->after('password');
 		});
 	}
 

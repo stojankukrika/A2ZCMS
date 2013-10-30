@@ -238,7 +238,7 @@
 								<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> Pages</span><span class="chevron closed"></span></a>
 								<ul>
 									<li>
-										<a href="{{{ URL::to('admin/navigation/groups') }}}"><i class="icon-th-list"></i> Navigation Group</a>
+										<a href="{{{ URL::to('admin/navigationgroups') }}}"><i class="icon-th-list"></i> Navigation Group</a>
 									</li>
 									<li>
 										<a href="{{{ URL::to('admin/pages') }}}"><i class="icon-envelope"></i> Pages</a>

@@ -17,5 +17,8 @@ return array(
 	'sidebar'=> 'Sidebar Position',
 	'left'=>'Left',
 	'right'=>'Right',
-	'passwordprotect' =>'Password Protected'
+	'passwordprotect' =>'Password Protected',
+	'showmenu' => 'Show in Header',
+	'showfooter' => 'Show in Footer',
+	'showsidebar' => 'Show in Sidebar'
 );
