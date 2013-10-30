@@ -10,26 +10,23 @@ class CreateGridsTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
+	public function up() {
 		Schema::create('grids', function(Blueprint $table) {
-			$table->increments('id');
-			$table->integer('plugin_id')->unsigned();			
-			$table->foreign('plugin_id')->references('id')->on('plugins')->onDelete('cascade');			
-			$table->integer('order');
-			$table->timestamps();			
-			$table->softDeletes();	
+			$table -> increments('id');
+			$table -> integer('plugin_id') -> unsigned();
+			$table -> foreign('plugin_id') -> references('id') -> on('plugins') -> onDelete('cascade');
+			$table -> integer('order');
+			$table -> timestamps();
+			$table -> softDeletes();
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
+	public function down() {
 		Schema::drop('grids');
 	}
 

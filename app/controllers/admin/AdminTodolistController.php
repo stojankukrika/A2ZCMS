@@ -2,46 +2,44 @@
 
 class AdminTodolistController extends AdminController {
 
-	 /**
-     * Post Model
-     * @var Post
-     */
-    protected $todolist;
-    /**
-     * Inject the models.
-     * @param Post $post
-     */
-    public function __construct(Todolist $todolist)
-    {
-        parent::__construct();
-        $this->todolist = $todolist;
-    } 
-	  /**
-     * Show a list of all the todo list.
-     *
-     * @return View
-     */
-    public function getIndex()
-    {
-        // Title
-        $title = Lang::get('admin/todolists/title.to_do_management');
+	/**
+	 * Post Model
+	 * @var Post
+	 */
+	protected $todolist;
+	/**
+	 * Inject the models.
+	 * @param Post $post
+	 */
+	public function __construct(Todolist $todolist) {
+		parent::__construct();
+		$this -> todolist = $todolist;
+	}
 
-        // Show the page
-        return View::make('admin/todolists/index', compact('title'));
-    }
+	/**
+	 * Show a list of all the todo list.
+	 *
+	 * @return View
+	 */
+	public function getIndex() {
+		// Title
+		$title = Lang::get('admin/todolists/title.to_do_management');
 
-    /**
+		// Show the page
+		return View::make('admin/todolists/index', compact('title'));
+	}
+
+	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	public function getCreate()
-	{
-        // Title
-        $title = Lang::get('admin/todolists/title.create_a_new_to_do');
+	public function getCreate() {
+		// Title
+		$title = Lang::get('admin/todolists/title.create_a_new_to_do');
 
-        // Show the page
-        return View::make('admin/todolists/edit', compact('title'));
+		// Show the page
+		return View::make('admin/todolists/edit', compact('title'));
 	}
 
 	/**
@@ -49,175 +47,138 @@ class AdminTodolistController extends AdminController {
 	 *
 	 * @return Response
 	 */
-	public function postCreate()
-	{
-        // Declare the rules for the form validation
-        $rules = array(
-            'content'   => 'required|min:3'
-        );
-		
-	     // Validate the inputs
-        $validator = Validator::make(Input::all(), $rules);
+	public function postCreate() {
+		// Declare the rules for the form validation
+		$rules = array('content' => 'required|min:3');
 
-        // Check if the form validates with success
-        if ($validator->passes())
-        {
-        	$user = Auth::user();    
-            
-            $this->todolist->content            = Input::get('content');
-			$this->todolist->user_id          = $user->id;
-            // create todo list
-            if($this->todolist->save())
-            {
-                // Redirect to the new blog post page
-                return Redirect::to('admin/todolists/' . $this->todolist->id . '/edit')->with('success', Lang::get('admin/todolists/messages.create.success'));
-            }
+		// Validate the inputs
+		$validator = Validator::make(Input::all(), $rules);
 
-            // Redirect to the blog post create page
-            return Redirect::to('admin/todolists/create')->with('error', Lang::get('admin/todolists/messages.create.error'));
-        }
+		// Check if the form validates with success
+		if ($validator -> passes()) {
+			$user = Auth::user();
 
-        // Form validation failed
-        return Redirect::to('admin/todolists/create')->withInput()->withErrors($validator);
-	}
-	 
-	 /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $blog_category
-     * @return Response
-     */
-	public function getEdit($todolist)
-	{
-        // Title
-        $title = Lang::get('admin/todolists/title.to_do_update');
+			$this -> todolist -> content = Input::get('content');
+			$this -> todolist -> user_id = $user -> id;
+			// create todo list
+			if ($this -> todolist -> save()) {
+				// Redirect to the new blog post page
+				return Redirect::to('admin/todolists/' . $this -> todolist -> id . '/edit') -> with('success', Lang::get('admin/todolists/messages.create.success'));
+			}
 
-        // Show the page
-        return View::make('admin/todolists/edit', compact('todolist', 'title'));
+			// Redirect to the blog post create page
+			return Redirect::to('admin/todolists/create') -> with('error', Lang::get('admin/todolists/messages.create.error'));
+		}
+
+		// Form validation failed
+		return Redirect::to('admin/todolists/create') -> withInput() -> withErrors($validator);
 	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param $blog_category
-     * @return Response
-     */
-	public function postEdit($todolist)
-	{
-        // Declare the rules for the form validation
-        $rules = array(
-            'content' => 'required|min:3'
-        );
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param $blog_category
+	 * @return Response
+	 */
+	public function getEdit($todolist) {
+		// Title
+		$title = Lang::get('admin/todolists/title.to_do_update');
 
-        // Validate the inputs
-        $validator = Validator::make(Input::all(), $rules);
-
-        // Check if the form validates with success
-        if ($validator->passes())
-        {
-            // Update the blog_category post data
-            $todolist->content = Input::get('content');
-
-            // Was the blog_category post updated?
-            if($todolist->save())
-            {
-                // Redirect to the new blog_category post page
-                return Redirect::to('admin/todolists/' . $todolist->id . '/edit')->with('success', Lang::get('admin/todolists/messages.update.success'));
-            }
-
-            // Redirect to the comments post management page
-            return Redirect::to('admin/todolists/' . $todolist->id . '/edit')->with('error', Lang::get('admin/todolists/messages.update.error'));
-        }
-
-        // Form validation failed
-        return Redirect::to('admin/todolists/' . $todolist->id . '/edit')->withInput()->withErrors($validator);
+		// Show the page
+		return View::make('admin/todolists/edit', compact('todolist', 'title'));
 	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param $comment
-     * @return Response
-     */
-     public function getDelete($todolist)
-	{
-        // Title
-        $title = Lang::get('admin/todolists/title.to_do_delete');
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param $blog_category
+	 * @return Response
+	 */
+	public function postEdit($id) {
+		// Declare the rules for the form validation
+		$rules = array('content' => 'required|min:3');
 
-        // Show the page
-        return View::make('admin/todolists/delete', compact('todolist', 'title'));
+		// Validate the inputs
+		$validator = Validator::make(Input::all(), $rules);
+
+		$todo = TodoList::find($id);
+
+		$inputs = Input::all();
+
+		// Check if the form validates with success
+		if ($validator -> passes()) {
+			// Was the page updated?
+			if ($todo -> update($inputs)) {
+				// Redirect to the new blog_category post page
+				return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> with('success', Lang::get('admin/todolists/messages.update.success'));
+			}
+
+			// Redirect to the comments post management page
+			return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> with('error', Lang::get('admin/todolists/messages.update.error'));
+		}
+
+		// Form validation failed
+		return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> withInput() -> withErrors($validator);
 	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param $comment
-     * @return Response
-     */
-	public function postDelete($todolist)
-	{
-        // Declare the rules for the form validation
-        $rules = array(
-            'id' => 'required|integer'
-        );
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param $comment
+	 * @return Response
+	 */
+	public function getDelete($todolist) {
+		// Title
+		$title = Lang::get('admin/todolists/title.to_do_delete');
 
-        // Validate the inputs
-        $validator = Validator::make(Input::all(), $rules);
-
-        // Check if the form validates with success
-        if ($validator->passes())
-        {
-           	$id = $todolist;
-			 $todolist->delete();
-
-            // Was the blog post deleted?
-            $todo_list = Todolist::find($id);
-            if(empty($todo_list))
-            {
-                // Redirect to the comment posts management page
-                return Redirect::to('admin/todolists')->with('success', Lang::get('admin/todolists/messages.delete.success'));
-            }
-        }
-        // There was a problem deleting the comment post
-        return Redirect::to('admin/todolists')->with('error', Lang::get('admin/todolists/messages.delete.error'));
+		// Show the page
+		return View::make('admin/todolists/delete', compact('todolist', 'title'));
 	}
-	
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param $comment
+	 * @return Response
+	 */
+	public function postDelete($todolist) {
+		//echo $pageId;exit;
+		$todo_list = GalleryImage::find($id);
+		// Was the role Todolist?
+		if ($todo_list -> delete()) {
+			// Redirect to the comment posts management page
+			return Redirect::to('admin/todolists') -> with('success', Lang::get('admin/todolists/messages.delete.success'));
+		}
+		// There was a problem deleting the comment post
+		return Redirect::to('admin/todolists') -> with('error', Lang::get('admin/todolists/messages.delete.error'));
+	}
+
 	/** Change to-do to work ore done
 	 * @param $todolist
-     * @return Redirect
+	 * @return Redirect
 	 * */
-	public function getChange($todolist)
-	{
-		 $todo_list = Todolist::find($todolist->id);
-         $todolist->work_done = ($todo_list->work_done+1)%2;
-		 $todolist->save();
+	public function getChange($todolist) {
+		$todo_list = Todolist::find($todolist -> id);
+		$todolist -> work_done = ($todo_list -> work_done + 1) % 2;
+		$todolist -> save();
 
-        // Form validation failed
-        return Redirect::to('admin/todolists');
+		// Form validation failed
+		return Redirect::to('admin/todolists');
 
 	}
 
-    /**
-     * Show a list of all the comments formatted for Datatables.
-     *
-     * @return Datatables JSON
-     */
-    public function getData()
-    {
-         $todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done','todolist.created_at'));
+	/**
+	 * Show a list of all the comments formatted for Datatables.
+	 *
+	 * @return Datatables JSON
+	 */
+	public function getData() {
+		$todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done', 'todolist.created_at'));
 
-        return Datatables::of($todolists)
-
-        ->edit_column('work_done', '@if ($work_done==0){{ "Work" }} @else {{ "Done" }} @endif')
-        
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/change\' ) }}}" class="btn btn-link btn-sm" >{{{ Lang::get(\'admin/todolists/table.change\') }}}</a>
+		return Datatables::of($todolists) -> edit_column('work_done', '@if ($work_done==0){{ "Work" }} @else {{ "Done" }} @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/change\' ) }}}" class="btn btn-link btn-sm" >{{{ Lang::get(\'admin/todolists/table.change\') }}}</a>
         <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
-            ')
-        
-        ->remove_column('id')
-        
-        ->make();
-    }
+            ') -> remove_column('id') -> make();
+	}
 
 }

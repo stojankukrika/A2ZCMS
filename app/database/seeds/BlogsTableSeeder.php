@@ -2,7 +2,7 @@
 
 class BlogsTableSeeder extends Seeder {
 
-    protected $content = 'In mea autem etiam menandri, quot elitr vim ei, eos semper disputationi id? Per facer appetere eu, duo et animal maiestatis. Omnesque invidunt mnesarchum ex mel, vis no case senserit dissentias. Te mei minimum singulis inimicus, ne labores accusam necessitatibus vel, vivendo nominavi ne sed. Posidonium scriptorem consequuntur cum ex? Posse fabulas iudicabit in nec, eos cu electram forensibus, pro ei commodo tractatos reformidans. Qui eu lorem augue alterum, eos in facilis pericula mediocritatem?
+	protected $content = 'In mea autem etiam menandri, quot elitr vim ei, eos semper disputationi id? Per facer appetere eu, duo et animal maiestatis. Omnesque invidunt mnesarchum ex mel, vis no case senserit dissentias. Te mei minimum singulis inimicus, ne labores accusam necessitatibus vel, vivendo nominavi ne sed. Posidonium scriptorem consequuntur cum ex? Posse fabulas iudicabit in nec, eos cu electram forensibus, pro ei commodo tractatos reformidans. Qui eu lorem augue alterum, eos in facilis pericula mediocritatem?
 
 Est hinc legimus oporteat in. Sit ei melius delicatissimi. Duo ex qualisque adolescens! Pri cu solum aeque. Aperiri docendi vituperatoribus has ea!
 
@@ -22,58 +22,13 @@ Ex dicta perpetua qui, pericula intellegam scripserit id vel. Id fabulas ornatus
 
 Te his dolorem adversarium? Pri eu rebum viris, tation molestie id pri. Mel ei stet inermis dissentias. Sed ea dolorum detracto vituperata. Possit oportere similique cu nec, ridens animal quo ex?';
 
-    public function run()
-    {
-        //DB::table('blogs')->delete();
+	public function run() {
+		//DB::table('blogs')->delete();
 
-        $user_id = User::first()->id;
-		$blogcategory = Blogcategory::find(1)->id;
+		$user_id = User::first() -> id;
+		$blogcategory = Blogcategory::find(1) -> id;
 
-        DB::table('blogs')->insert( array(
-            array(
-                'user_id'    => $user_id,
-				'blogcategory_id' => $blogcategory,
-                'title'      => 'Lorem ipsum dolor sit amet',
-                'slug'       => 'lorem-ipsum-dolor-sit-amet',
-                'content'    => $this->content,
-				'resource_link'=>null,
-                'meta_title' => 'meta_title1',
-                'meta_description' => 'meta_description1',
-                'meta_keywords' => 'meta_keywords1',
-				'start_publish' => new DateTime,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
-			
-            ),
-            array(
-                'user_id'    => $user_id,
-				'blogcategory_id' => $blogcategory,
-                'title'      => 'Vivendo suscipiantur vim te vix',
-                'slug'       => 'vivendo-suscipiantur-vim-te-vix',
-                'content'    => $this->content,
-				'resource_link'=>null,
-                'meta_title' => 'meta_title2',
-                'meta_description' => 'meta_description2',
-                'meta_keywords' => 'meta_keywords2',
-				'start_publish' => new DateTime,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
-            ),
-            array(
-                'user_id'    => $user_id,
-				'blogcategory_id' => $blogcategory,
-                'title'      => 'In iisque similique reprimique eum',
-                'slug'       => 'in-iisque-similique-reprimique-eum',
-                'content'    => $this->content,
-				'resource_link'=>null,
-                'meta_title' => 'meta_title3',
-                'meta_description' => 'meta_description3',
-                'meta_keywords' => 'meta_keywords3',
-				'start_publish' => new DateTime,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
-            ))
-        );
-    }
+		DB::table('blogs') -> insert(array( array('user_id' => $user_id, 'blogcategory_id' => $blogcategory, 'title' => 'Lorem ipsum dolor sit amet', 'slug' => 'lorem-ipsum-dolor-sit-amet', 'content' => $this -> content, 'resource_link' => null, 'meta_title' => 'meta_title1', 'meta_description' => 'meta_description1', 'meta_keywords' => 'meta_keywords1', 'start_publish' => new DateTime, 'created_at' => new DateTime, 'updated_at' => new DateTime, ), array('user_id' => $user_id, 'blogcategory_id' => $blogcategory, 'title' => 'Vivendo suscipiantur vim te vix', 'slug' => 'vivendo-suscipiantur-vim-te-vix', 'content' => $this -> content, 'resource_link' => null, 'meta_title' => 'meta_title2', 'meta_description' => 'meta_description2', 'meta_keywords' => 'meta_keywords2', 'start_publish' => new DateTime, 'created_at' => new DateTime, 'updated_at' => new DateTime, ), array('user_id' => $user_id, 'blogcategory_id' => $blogcategory, 'title' => 'In iisque similique reprimique eum', 'slug' => 'in-iisque-similique-reprimique-eum', 'content' => $this -> content, 'resource_link' => null, 'meta_title' => 'meta_title3', 'meta_description' => 'meta_description3', 'meta_keywords' => 'meta_keywords3', 'start_publish' => new DateTime, 'created_at' => new DateTime, 'updated_at' => new DateTime, )));
+	}
 
 }

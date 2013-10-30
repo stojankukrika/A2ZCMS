@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\URL; 
+use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
 class BlogCategory extends Eloquent implements PresentableInterface {
@@ -13,10 +13,9 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	 *
 	 * @return bool
 	 */
-	public function delete()
-	{
+	public function delete() {
 		// Delete the comments
-		$this->categorys()->softDeletes();
+		$this -> categorys() -> softDeletes();
 
 		return true;
 	}
@@ -27,25 +26,23 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function title()
-	{
-		return nl2br($this->title);
+	public function title() {
+		return nl2br($this -> title);
 	}
 
-    /**
-     * Get the date the post was created.
-     *
-     * @param \Carbon|null $date
-     * @return string
-     */
-    public function date($date=null)
-    {
-        if(is_null($date)) {
-            $date = $this->created_at;
-        }
+	/**
+	 * Get the date the post was created.
+	 *
+	 * @param \Carbon|null $date
+	 * @return string
+	 */
+	public function date($date = null) {
+		if (is_null($date)) {
+			$date = $this -> created_at;
+		}
 
-        return String::date($date);
-    }
+		return String::date($date);
+	}
 
 	/**
 	 * Returns the date of the blog post creation,
@@ -53,9 +50,8 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function created_at()
-	{
-		return $this->date($this->created_at);
+	public function created_at() {
+		return $this -> date($this -> created_at);
 	}
 
 	/**
@@ -64,16 +60,12 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function updated_at()
-	{
-        return $this->date($this->updated_at);
+	public function updated_at() {
+		return $this -> date($this -> updated_at);
 	}
-	
-	public function getPresenter()
-    {
-        return new CommentPresenter($this);
-    }
+
+	public function getPresenter() {
+		return new CommentPresenter($this);
+	}
 
 }
-
-

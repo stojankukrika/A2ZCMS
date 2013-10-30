@@ -1,20 +1,19 @@
 <?php
-use Illuminate\Support\Facades\URL; 
+use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
 class Blog extends Eloquent implements PresentableInterface {
 
-	 protected $softDelete = true;
+	protected $softDelete = true;
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.
 	 *
 	 * @return bool
 	 */
-	public function delete()
-	{
+	public function delete() {
 		// Delete the comments
-		$this->blogcomments()->delete();
+		$this -> blogcomments() -> delete();
 
 		// Delete the blog post
 		return parent::delete();
@@ -26,9 +25,8 @@ class Blog extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function content()
-	{
-		return nl2br($this->content);
+	public function content() {
+		return nl2br($this -> content);
 	}
 
 	/**
@@ -36,9 +34,8 @@ class Blog extends Eloquent implements PresentableInterface {
 	 *
 	 * @return User
 	 */
-	public function author()
-	{
-		return $this->belongsTo('User', 'user_id');
+	public function author() {
+		return $this -> belongsTo('User', 'user_id');
 	}
 
 	/**
@@ -46,45 +43,40 @@ class Blog extends Eloquent implements PresentableInterface {
 	 *
 	 * @return array
 	 */
-	public function blogcomments()
-	{
-		return $this->hasMany('BlogComment');
+	public function blogcomments() {
+		return $this -> hasMany('BlogComment');
 	}
-	
+
 	/**
 	 * Get the blog's category.
 	 *
 	 * @return array
 	 */
-	public function category()
-	{
-		return $this->belongsTo('BlogCategory');
+	public function category() {
+		return $this -> belongsTo('BlogCategory');
 	}
-	
 
-    /**
-     * Get the date the blog was created.
-     *
-     * @param \Carbon|null $date
-     * @return string
-     */
-    public function date($date=null)
-    {
-        if(is_null($date)) {
-            $date = $this->created_at;
-        }
+	/**
+	 * Get the date the blog was created.
+	 *
+	 * @param \Carbon|null $date
+	 * @return string
+	 */
+	public function date($date = null) {
+		if (is_null($date)) {
+			$date = $this -> created_at;
+		}
 
-        return String::date($date);
-    }
+		return String::date($date);
+	}
 
 	/**
 	 * Get the URL to the blog.
 	 *
 	 * @return string
 	 */
-	public function url()
-	{
-		return Url::to($this->slug);
+	public function url() {
+		return Url::to($this -> slug);
 	}
 
 	/**
@@ -93,9 +85,8 @@ class Blog extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function created_at()
-	{
-		return $this->date($this->created_at);
+	public function created_at() {
+		return $this -> date($this -> created_at);
 	}
 
 	/**
@@ -104,14 +95,12 @@ class Blog extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function updated_at()
-	{
-        return $this->date($this->updated_at);
+	public function updated_at() {
+		return $this -> date($this -> updated_at);
 	}
 
-    public function getPresenter()
-    {
-        return new PostPresenter($this);
-    }
+	public function getPresenter() {
+		return new PostPresenter($this);
+	}
 
 }

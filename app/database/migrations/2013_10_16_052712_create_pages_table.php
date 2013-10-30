@@ -10,15 +10,14 @@ class CreatePagesTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
+	public function up() {
 		Schema::create('pages', function(Blueprint $table) {
-			$table->increments('id');
-			$table->string('name');
-			$table->string('slug');
-			$table->text('content');
-			$table->boolean('status');
-			$table->timestamps();
+			$table -> increments('id');
+			$table -> string('name');
+			$table -> string('slug');
+			$table -> text('content');
+			$table -> boolean('status');
+			$table -> timestamps();
 		});
 	}
 
@@ -27,8 +26,7 @@ class CreatePagesTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
+	public function down() {
 		Schema::drop('pages');
 	}
 

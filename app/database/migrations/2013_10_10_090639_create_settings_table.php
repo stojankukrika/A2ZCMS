@@ -10,25 +10,22 @@ class CreateSettingsTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
+	public function up() {
 		Schema::create('settings', function(Blueprint $table) {
-			$table->increments('id');
-			$table->string('varname');
-			$table->string('groupname');
-			$table->string('value');
-			$table->string('defaultvalue');
+			$table -> increments('id');
+			$table -> string('varname');
+			$table -> string('groupname');
+			$table -> string('value');
+			$table -> string('defaultvalue');
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
+	public function down() {
 		Schema::drop('settings');
 	}
 
