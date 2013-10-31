@@ -30,11 +30,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 		<?php
-		$asset = Config::get('app.url');
+			$asset = Config::get('app.url');
 		?>
 		<!-- start: CSS -->
 		<link href="{{$asset}}assets/admin/css/bootstrap.min.css" rel="stylesheet">
-		<link href="{{$asset}}assets/admin/css/retina.min.css" rel="stylesheet">
 		<link href="{{$asset}}assets/admin/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 		<link href="{{$asset}}assets/admin/css/jquery.dataTables.css" rel="stylesheet">
 		<link href="{{$asset}}assets/admin/css/colorbox.css" rel="stylesheet">
@@ -83,7 +82,7 @@
 						<!-- start: User Dropdown -->
 						<li class="dropdown">
 							<a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
-							<div class="avatar"><img src="{{$asset}}assets/admin/img/avatar/avatar.png" alt="Avatar">
+							<div class="avatar"><img src="{{$asset}}avatar/avatar.png" alt="Avatar">
 							</div>
 							<div class="user">
 								<span class="hello">Welcome!</span>
@@ -225,15 +224,10 @@
 
 		<!-- start: JavaScript-->
 		<!--[if !IE]>-->
-
 		<script src="{{$asset}}assets/admin/js/jquery-2.0.3.min.js"></script>
-
 		<!--<![endif]-->
-
 		<!--[if IE]>
-
 		<script src="{{$asset}}assets/admin/js/jquery-1.10.2.min.js"></script>
-
 		<![endif]-->
 
 		<script src="{{$asset}}assets/admin/js/jquery-migrate-1.2.1.min.js"></script>
@@ -242,22 +236,11 @@
 		<!-- page scripts -->
 		<script src="{{$asset}}assets/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.sparkline.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/fullcalendar.min.js"></script>
-		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{$asset}}assets/admin/js/excanvas.min.js"></script><![endif]-->
-		<script src="{{$asset}}assets/admin/js/jquery.flot.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.flot.pie.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.flot.stack.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.flot.resize.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.flot.time.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.autosize.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.placeholder.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/moment.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/daterangepicker.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.easy-pie-chart.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.dataTables.js"></script>
-		<script src="{{$asset}}assets/admin/js/dataTables.bootstrap.min.js"></script>
+				<!--[if lte IE 8]>
+			<script language="javascript" type="text/javascript" src="{{$asset}}assets/admin/js/excanvas.min.js"></script>
+		<![endif]-->		
 		<script src="{{$asset}}assets/admin/js/jquery.dataTables.min.js"></script>
+		<script src="{{$asset}}assets/admin/js/dataTables.bootstrap.min.js"></script>
 		<!-- theme scripts -->
 		<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/core.min.js"></script>

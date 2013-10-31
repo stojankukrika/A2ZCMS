@@ -1,26 +1,10 @@
 @import "jquery-ui-1.10.3.custom.css";
-@import "fullcalendar.css";
 @import "chosen.css";
 @import "select2.css";
-@import "jquery.cleditor.css";
-@import "jquery.noty.css";
-@import "noty_theme_default.css";
-@import "elfinder.min.css";
-@import "elfinder.theme.css";
-@import "uploadify.css";
-@import "jquery.gritter.css";
 @import "font-awesome.min.css";
 @import "font-awesome-ie7.min.css";
 @import "glyphicons.css";
-@import "halflings.css";
-@import "dropzone.css";
-@import "xcharts.min.css";
-@import "jquery.easy-pie-chart.css";
-@import "icheck/all.css";
 @import "bootstrap-editable.css";
-@import url(http://fonts.googleapis.com/css?family=Lato:300);
-@import url(http://fonts.googleapis.com/css?family=Lato:400);
-@import url(http://fonts.googleapis.com/css?family=Kaushan+Script);/*!
 
 	/*!* Bootstrap version: 3.0.0*/
 .no-space [class*="span"]
@@ -6745,3 +6729,28 @@ table.dataTable tr.even td.sorting_3 { background-color: transparent!important; 
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
 #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
 #sortable li span { position: absolute; margin-left: -1.3em; }
+
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi)
+{
+.timeslot .task .arrow
+{
+	background:url(../img/timeline-left-arrow%402x.png) no-repeat;
+	background-size:100%
+}
+.timeslot.alt .task .arrow
+{
+	background:url(../img/timeline-right-arrow%402x.png) no-repeat;
+	background-size:100%
+}
+	ul.chat li.left .message .arrow
+{
+	background:url(../img/chat-left%402x.png) no-repeat 0 0;
+	background-size:100%
+}
+	ul.chat li.right .message .arrow
+{
+	background:url(../img/chat-right%402x.png) no-repeat 0 0;
+	background-size:100%
+}
+
+}

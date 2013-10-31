@@ -10,7 +10,8 @@
 <div class="page-header">
 	<h3> {{{ $title }}}
 	<div class="pull-right">
-		<a href="{{{ URL::to('admin/navigation/create') }}}" class="btn btn-small btn-info iframe"><i class="icon-plus-sign icon-white"></i> Create</a>
+		<a href="{{{ URL::to('admin/navigation/create') }}}" class="btn btn-small btn-info iframe">
+			<i class="icon-plus-sign icon-white"></i> Create</a>
 	</div></h3>
 </div>
 

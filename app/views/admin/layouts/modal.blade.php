@@ -102,8 +102,6 @@
 		<!-- page scripts -->
 		<script src="{{$asset}}assets/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.sparkline.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/fullcalendar.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/fineuploader/jquery.fineuploader-3.1.1.js"></script>
 		<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
 		<script type="text/javascript">
