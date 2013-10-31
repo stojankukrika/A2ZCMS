@@ -17,10 +17,11 @@
 <table id="todos" class="table table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="col-md-3">{{{ Lang::get('admin/todolists/table.title') }}}</th>
-			<th class="col-md-3">{{{ Lang::get('admin/todolists/table.active') }}}</th>
+			<th class="col-md-4">{{{ Lang::get('admin/todolists/table.title') }}}</th>
+			<th class="col-md-2">{{{ Lang::get('admin/todolists/table.active') }}}</th>
+			<th class="col-md-2">{{{ Lang::get('admin/todolists/table.finished') }}}</th>			
 			<th class="col-md-2">{{{ Lang::get('admin/todolists/table.created_at') }}}</th>
-			<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
+			<th class="col-md-3">{{{ Lang::get('table.actions') }}}</th>
 		</tr>
 	</thead>
 </table>

@@ -46,6 +46,7 @@
 		<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
 		<link href="{{$asset}}assets/admin/css/style_modal.min.css" rel="stylesheet">
 		<link href="{{$asset}}assets/admin/css/fineuploader/fineuploader.css" rel="stylesheet">
+		<link href="{{$asset}}assets/admin/css/colorbox.css" rel="stylesheet">
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 
@@ -104,6 +105,7 @@
 		<script src="{{$asset}}assets/admin/js/jquery.sparkline.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/fullcalendar.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/fineuploader/jquery.fineuploader-3.1.1.js"></script>
+		<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$('form').submit(function(event) {
@@ -127,12 +129,17 @@
 					parent.oTable.fnReloadAjax();
 					parent.jQuery.fn.colorbox.close();
 				});
+				 $( "#sortable" ).sortable();
+				$( "#sortable" ).disableSelection();
+				$( "#finished" ).spinner({
+						step: 0.01,
+						numberFormat: "n"
+					});
 
 			});
 		</script>
 
 		@yield('scripts')
-
 	</body>
 
 </html>

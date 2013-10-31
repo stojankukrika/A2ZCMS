@@ -39,7 +39,7 @@ class AdminTodolistController extends AdminController {
 		$title = Lang::get('admin/todolists/title.create_a_new_to_do');
 
 		// Show the page
-		return View::make('admin/todolists/edit', compact('title'));
+		return View::make('admin/todolists/create_edit', compact('title'));
 	}
 
 	/**
@@ -59,6 +59,8 @@ class AdminTodolistController extends AdminController {
 			$user = Auth::user();
 
 			$this -> todolist -> content = Input::get('content');
+			$this -> todolist -> finished = Input::get('finished');
+			$this -> todolist -> work_done = (Input::get('finished')==100.00)?'1':'0';
 			$this -> todolist -> user_id = $user -> id;
 			// create todo list
 			if ($this -> todolist -> save()) {
@@ -85,7 +87,7 @@ class AdminTodolistController extends AdminController {
 		$title = Lang::get('admin/todolists/title.to_do_update');
 
 		// Show the page
-		return View::make('admin/todolists/edit', compact('todolist', 'title'));
+		return View::make('admin/todolists/create_edit', compact('todolist', 'title'));
 	}
 
 	/**
@@ -101,14 +103,15 @@ class AdminTodolistController extends AdminController {
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 
-		$todo = TodoList::find($id);
+		$todolist = Todolist::find($id['id']);
 
 		$inputs = Input::all();
 
 		// Check if the form validates with success
 		if ($validator -> passes()) {
-			// Was the page updated?
-			if ($todo -> update($inputs)) {
+			// Was the blog updated?			
+				$todolist -> work_done = (Input::get('finished')==100.00)?'1':'0';
+			if ($todolist -> update($inputs)) {
 				// Redirect to the new blog_category post page
 				return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> with('success', Lang::get('admin/todolists/messages.update.success'));
 			}
@@ -160,6 +163,7 @@ class AdminTodolistController extends AdminController {
 	public function getChange($todolist) {
 		$todo_list = Todolist::find($todolist -> id);
 		$todolist -> work_done = ($todo_list -> work_done + 1) % 2;
+		$todolist -> finished = (($todo_list -> work_done + 1) % 2)*100.00;
 		$todolist -> save();
 
 		// Form validation failed
@@ -173,7 +177,7 @@ class AdminTodolistController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done', 'todolist.created_at'));
+		$todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done','todolist.finished', 'todolist.created_at'));
 
 		return Datatables::of($todolists) -> edit_column('work_done', '@if ($work_done==0){{ "Work" }} @else {{ "Done" }} @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/change\' ) }}}" class="btn btn-link btn-sm" >{{{ Lang::get(\'admin/todolists/table.change\') }}}</a>
         <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" >{{{ Lang::get(\'button.edit\') }}}</a>

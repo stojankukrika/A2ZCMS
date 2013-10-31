@@ -46,7 +46,7 @@
 							</li>
 							@endif
 							<li>
-								<a href="{{{ URL::to('user') }}}">{{Lang::get('site.logged_in_as')}} {{{ Auth::user()->username }}}</a>
+								<a href="{{{ URL::to('user') }}}">{{Lang::get('site.logged_in_as')}} {{{ Auth::user()->name }}} {{{ Auth::user()->surname }}}</a>
 							</li>
 							<li>
 								<a href="{{{ URL::to('user/logout') }}}">{{Lang::get('site.logout')}}</a>
@@ -59,6 +59,10 @@
 								<a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a>
 							</li>
 							@endif
+							<li>
+								<a href="{{{ URL::to('contact-us') }}}">{{Lang::get('site.contact_us')}}</a>
+							</li>
+							
 						</ul>
 					</div>
 				</div>

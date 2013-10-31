@@ -22,5 +22,7 @@ return array(
 	'passwordprotect' =>'Password Protected',
 	'showmenu' => 'Show in Header',
 	'showfooter' => 'Show in Footer',
-	'showsidebar' => 'Show in Sidebar'
+	'showsidebar' => 'Show in Sidebar',
+	'page_grid' => 'Grid',
+	
 );

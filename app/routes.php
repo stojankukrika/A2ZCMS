@@ -177,12 +177,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('role', '[0-9]+');
     Route::controller('roles', 'AdminRolesController');
 
-
-	# Settings
-    Route::get('settings', 'AdminSettingsController@getIndex');
-    Route::post('settings', 'AdminSettingsController@postIndex');
-	
-	 # To-do list
+	# To-do list
 	Route::get('todolists/{todolist}/change', 'AdminTodolistController@getChange')
         ->where('todolist', '[0-9]+');
     Route::get('todolists/{todolist}/edit', 'AdminTodolistController@getEdit')
@@ -194,7 +189,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('todolists/{todolist}/delete', 'AdminTodolistController@postDelete')
         ->where('todolist', '[0-9]+');
     Route::controller('todolists', 'AdminTodolistController');
-	
+
+	# Settings
+    Route::get('settings', 'AdminSettingsController@getIndex');
+    Route::post('settings', 'AdminSettingsController@postIndex');
 	
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');

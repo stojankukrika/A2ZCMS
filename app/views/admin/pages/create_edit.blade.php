@@ -3,6 +3,12 @@
 {{-- Content --}}
 @section('content')
 
+<script>
+$(function() {
+	$( "#sortable" ).sortable();
+	$( "#sortable" ).disableSelection();
+});
+</script>
 <ul class="nav nav-tabs">
 	<li class="active">
 		<a href="#tab-general" data-toggle="tab">General</a>
@@ -16,11 +22,14 @@
 	<li class="">
 		<a href="#tab-javascript" data-toggle="tab">Page Java Script</a>
 	</li>
+	<li class="">
+		<a href="#tab-grid" data-toggle="tab">Page Grid</a>
+	</li>
 </ul>
 
 {{-- Edit Page Form --}}
 <!-- <form class="form-horizontal" method="page" action="{{ URL::to('admin/pages/create') }}" > -->
-<form class="form-horizontal" method="post" action="@if (isset($Page)){{ URL::to('admin/pages/' . $Page->id . '/edit') }}@endif" >
+<form class="form-horizontal" method="post" action="@if (isset($page)){{ URL::to('admin/pages/' . $page->id . '/edit') }}@endif" >
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
@@ -217,9 +226,27 @@
 		</div>
 		<!-- ./ Javascript tab -->
 		
-		
-		
-		
+		<!-- Grid tab -->
+		<div class="tab-pane" id="tab-grid">
+			<!-- Content -->
+			<div class="form-group {{{ $errors->has('page_javascript') ? 'error' : '' }}}">
+				<div class="col-lg-12">
+					<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_grid') }}}</label>
+					
+					<ul id="sortable">
+						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+					</ul>
+				</div>
+			</div>
+			<!-- ./ content -->
+		</div>
+		<!-- ./ Grid tab -->
 		
 	</div>
 	<!-- ./ tabs content -->
@@ -241,3 +268,4 @@
 	<!-- ./ form actions -->
 </form>
 @stop
+

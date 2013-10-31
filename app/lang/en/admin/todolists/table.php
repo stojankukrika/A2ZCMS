@@ -6,5 +6,6 @@ return array(
 	'active'   => 'Active',
 	'created_at' => 'Created at',
 	'change' => 'Change',
+	'finished' => 'Finished',
 
 );
