@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.e_mail') }} <small>{{ Lang::get('confide.signup.confirmation_required') }}</small></label>
+			<label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.e_mail') }}</label>
 			<div class="col-md-10">
 				<input class="form-control" tabindex="4" placeholder="{{ Lang::get('confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}">
 			</div>

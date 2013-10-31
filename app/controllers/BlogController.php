@@ -40,6 +40,7 @@ class BlogController extends BaseController {
 	 * @return View
 	 */
 	public function getIndex() {
+		$pageitem = 2;
 		foreach ($this->settings as $v) {
 			if ($v -> varname == 'pageitem') {
 				$pageitem = $v -> value;

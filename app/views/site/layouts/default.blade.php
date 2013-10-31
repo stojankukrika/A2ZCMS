@@ -13,11 +13,10 @@
 		<?php
 		$asset = Config::get('app.url');
 		?>
-		<link rel="stylesheet" type="text/css"  href="{{$asset}}assets/site/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/css/theme.css">
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/css/blog.css">
-		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-
+		<link rel="stylesheet" type="text/css"  href="{{$asset}}assets/site/css/bootstrap.min.css">
+		
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/css/a2zcms.css">		
+		
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="{{$asset}}assets/site/js/html5.js"></script>
@@ -27,15 +26,22 @@
 	</head>
 
 	<body>
-		<a href="#" class="scrolltop"> <span>up</span> </a>
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-					<a class="brand" href="{{{ URL::to('') }}}"> A2Z CMS </a>
-					<div class="nav-collapse collapse">
-						<ul class="nav pull-right">
-							<li>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+          	<a class="navbar-brand"href="{{{ URL::to('') }}}"> A2Z CMS </a>
+           </div>
+					  <!-- Collect the nav links, forms, and other content for toggling -->
+			        <div class="collapse navbar-collapse navbar-ex1-collapse">
+			          <ul class="nav navbar-nav navbar-right">
+			        		<li>
 								<a href="{{{ URL::to('') }}}">{{Lang::get('site.home')}}</a>
 							</li>
 							@if (isset($menu)) {{ $menu }} @endif
@@ -63,102 +69,88 @@
 								<a href="{{{ URL::to('contact-us') }}}">{{Lang::get('site.contact_us')}}</a>
 							</li>
 							
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+						 </ul>
+			        </div><!-- /.navbar-collapse -->
+			      </div><!-- /.container -->
+			    </nav>
 
-		<div id="blog_post">
-			<div class="container">
-				<div class="row">
+		 <div class="container">
 
-					<div class="span8">
+      		<div class="row">
+
+       		 <div class="col-lg-12">
+         		<h1 class="page-header">
 						<!-- Page title -->
 						@yield('page_title')
 						<!-- ./ page title -->
-
+					  </h1>
+			          <ol class="breadcrumb">
+			            <li><a href="#">Home</a></li>
+			            <li class="active">Blog Home</li>
+			          </ol>
+			        </div>
+			
+			      </div>
+			
+			      <div class="row">
+			      	
+			        <div class="col-lg-8">
 						<!-- Content -->
 						@yield('content')
 						<!-- ./ content -->
-					</div>
+					 </div>
+					 <div class="col-lg-4">
+			          <div class="well">
+			            <h4>Blog Search</h4>
+			            <div class="input-group">
+			              <input type="text" class="form-control">
+			              <span class="input-group-btn">
+			                <button class="btn btn-default" type="button">
+			                	<i class="icon-search"></i>
+			                </button>
+			              </span>
+			            </div><!-- /input-group -->
+			          </div><!-- /well -->
+			          <div class="well">
+			            <h4>Popular Blog Categories</h4>
+			              <div class="row">
+			                <div class="col-lg-6">
+			                  <ul class="list-unstyled">
+			                    <li><a href="#dinosaurs">Dinosaurs</a></li>
+			                    <li><a href="#spaceships">Spaceships</a></li>
+			                    <li><a href="#fried-foods">Fried Foods</a></li>
+			                    <li><a href="#wild-animals">Wild Animals</a></li>
+			                  </ul>
+			                </div>
+			                <div class="col-lg-6">
+			                  <ul class="list-unstyled">
+			                    <li><a href="#alien-abductions">Alien Abductions</a></li>
+			                    <li><a href="#business-casual">Business Casual</a></li>
+			                    <li><a href="#robots">Robots</a></li>
+			                    <li><a href="#fireworks">Fireworks</a></li>
+			                  </ul>
+			                </div>
+			              </div>
+			          </div><!-- /well -->
+			          <div class="well">
+			            <h4>Side Widget Well</h4>
+			            <p>Bootstrap's default well's work great for side widgets! What is a widget anyways...?</p>
+			          </div><!-- /well -->
+			        </div>
+			      </div>
 
-					<div class="span3 sidebar offset1">
-						<br>
-						<input type="text" class="input-large search-query" placeholder="Search">
-
-						<h4 class="sidebar_header"> Menu </h4>
-
-						<ul class="sidebar_menu">
-							<li>
-								<a href="#">Suspendisse Semper Ipsum</a>
-							</li>
-							<li>
-								<a href="#">Maecenas Euismod Elit</a>
-							</li>
-							<li>
-								<a href="#">Suspendisse Semper Ipsum</a>
-							</li>
-							<li>
-								<a href="#">Maecenas Euismod Elit</a>
-							</li>
-							<li>
-								<a href="#">Suspendisse Semper Ipsum</a>
-							</li>
-						</ul>
-
-						<h4 class="sidebar_header"> Recent posts </h4>
-
-						<ul class="recent_posts">
-							<li>
-								<div class="row">
-									<div class="span1">
-										<a href="blog-post.html"> <img class="thumb" alt="thumb post" src="http://placehold.it/300x272" /> </a>
-									</div>
-									<div class="span2">
-										<a class="link" href="blog-post.html">Suspendisse Semper Ipsum</a>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="row">
-									<div class="span1">
-										<a href="blog-post.html"> <img class="thumb" alt="thumb post" src="http://placehold.it/300x272" /> </a>
-									</div>
-									<div class="span2">
-										<a class="link" href="blog-post.html">Maecenas Euismod Elit</a>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="row">
-									<div class="span1">
-										<a href="blog-post.html"> <img class="thumb" alt="thumb post" src="http://placehold.it/300x272" /> </a>
-									</div>
-									<div class="span2">
-										<a class="link" href="blog-post.html">Suspendisse Semper Ipsum</a>
-									</div>
-								</div>
-							</li>
-						</ul>
-
-					</div>
-
-				</div>
-			</div>
+    	</div><!-- /.container -->
+    
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+			<span style="text-align:left;float:left">
+				&copy; 2013 <a class="a2zcms" href="#">A2Z CMS</a></span>
+			<span style="text-align:right;float:right">
+				Powered by: <a class="a2zcms" href="http://laravel.com/" alt="Laravel 4">Laravel 4</a></span>
 		</div>
-		<div id="footer">
-			<div class="container">
-				<div class="row copyright">
-					<div class="span5"></div>
-					<div class="span2 offset5 copy">
-						<p>
-							&copy; 2013 - A2Z CMS
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
+        </div>
+      </footer>
 
 		<!-- start: JavaScript-->
 		<!--[if !IE]>-->
@@ -190,7 +182,7 @@
 		<![endif]-->
 		<script src="{{$asset}}assets/site/js/jquery-migrate-1.2.1.min.js"></script>
 
-		<script src="{{$asset}}assets/site/js/bootstrap.min.js"></script>
+		<script src="{{$asset}}assets/site/js/bootstrap.js"></script>
 		<script src="{{$asset}}assets/site/js/theme.js"></script>
 	</body>
 </html>

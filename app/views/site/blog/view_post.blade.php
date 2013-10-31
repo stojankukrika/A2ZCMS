@@ -1,69 +1,39 @@
 @extends('site.layouts.default')
 
-{{-- Web site Title --}}
-@section('title')
-{{{ String::title($blog->title) }}} ::
-@parent
+{{-- Page title --}}
+@section('page_title')
+{{ $blog->title }}
 @stop
 
-{{-- Update the Meta Title --}}
-@section('meta_title')
-@parent
-
-@stop
-
-{{-- Update the Meta Description --}}
-@section('meta_description')
-@parent
-
-@stop
-
-{{-- Update the Meta Keywords --}}
-@section('meta_keywords')
-@parent
-
-@stop
 
 {{-- Content --}}
 @section('content')
-<h1 class="header">{{ $blog->title }}</h1>
-<img class="main_pic" alt="main pic" src="http://placehold.it/738x430" />
-<div class="post_content">
-	<p>
-		{{ $blog->content() }}
-	</p>
-	<div class="author">
-		{{{ $blog->author->username }}}
-	</div>
-	<div class="date">
-		Posted {{{ $blog->date() }}}
-	</div>
-</div>
-<hr />
-<div class="comments">
+
+ <hr>
+          <p><i class="icon-time"></i> Posted on {{{ $blog->date() }}} by 
+          	<a href="#">{{{ $blog->author->username }}}</a></p>
+          <hr>
+          <img src="http://placehold.it/900x300" class="img-responsive">
+          <hr>
+          <p>
+			{{ $blog->content() }}
+			</p>
+   		<p>
+   			<strong>Resource:</strong>{{$blog->resource_link}}
+   		</p>          
+     <hr>
+
+<!-- the comment box -->
+  <div class="well">            
 	<h4>{{{ $blog_comments->count() }}} Comments</h4>
 
 	@if ($blog_comments->count())
 	@foreach ($blog_comments as $comment)
 
-	<div class="comment">
-		<div class="row">
-			<div class="span1">
-				<img src="http://placehold.it/171x174" class="img-circle author_pic" />
-			</div>
-			<div class="span6">
-				<div class="name">
-					{{{ $comment->author->username }}}
-				</div>
-				<div class="date">
-					{{{ $comment->date() }}}
-				</div>
-				<div class="response">
-					{{{ $comment->content() }}}
-				</div>
-			</div>
-		</div>
-	</div>
+		<h3>{{{ $comment->author->username }}}
+				<small>	{{{ $comment->date() }}}</small>
+		</h3>
+          <p>{{{ $comment->content() }}}</p>
 
 	@endforeach
 	@else
@@ -96,16 +66,12 @@ You don't have the correct permissions to add comments.
 	<h4>Add Comment</h4>
 	<form method="post" action="{{{ URL::to($blog->slug) }}}">
 		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
-		<div class="row">
-			<div class="span6">
-				<textarea placeholder="Comments" rows="7">{{{ Request::old('comment') }}}</textarea>
+			<div class="form-group">
+				<textarea class="form-control" name="comment" placeholder="comment" rows="7">{{{ Request::old('comment') }}}</textarea>
 			</div>
-		</div>
-		<div class="row">
-			<div class="span6">
-				<a href="#" class="btn">Submit</a>
+			<div class="form-group">
+				<a href="#" class="btn btn-success">Submit</a>
 			</div>
-		</div>
 	</form>
 </div>
 @endif

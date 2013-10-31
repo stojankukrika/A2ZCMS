@@ -25,13 +25,14 @@
 				<input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide.username_e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}">
 			</div>
 		</div>
+		<div class="form-group">&nbsp;</div>
 		<div class="form-group">
 			<label class="col-md-2 control-label" for="password"> {{ Lang::get('confide::confide.password') }} </label>
 			<div class="col-md-10">
 				<input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide.password') }}" type="password" name="password" id="password">
 			</div>
 		</div>
-
+	
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<div class="checkbox">
@@ -54,7 +55,7 @@
 			{{ Session::get('notice') }}
 		</div>
 		@endif
-
+		
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<button tabindex="3" type="submit" class="btn btn-primary">
@@ -65,6 +66,7 @@
 		</div>
 	</fieldset>
 </form>
+<div class="form-group">&nbsp;</div>
 <div class="container col-md-6">
 	<div class="jumbotron">
 		<h2>Need an Account?</h2>

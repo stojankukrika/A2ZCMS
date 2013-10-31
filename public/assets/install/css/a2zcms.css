@@ -308,3 +308,13 @@ footer {
   }
 }
 /* End : Responsive CSS section */
+a.a2zcms  {
+	color:#ffffff!important;
+    text-decoration: none!important;
+}
+a:hover.a2zcms { 
+	color: #999999!important;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s linear 0s;
+}
