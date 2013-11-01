@@ -18,7 +18,7 @@ return array(
 	'login' => 'Login',
 	'home' => 'Home',
 	'admin_panel' =>'Admin Panel',
-	'logged_in_as' =>'Logged in as',
+	'edit_profile' =>'Edit profile',
 	'logout' =>'Logout',
-
+	'messages' =>'Messages',
 );
