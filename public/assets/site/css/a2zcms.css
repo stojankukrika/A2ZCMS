@@ -187,3 +187,7 @@ a.navbar-brand  {
 .pager li>a,.pager li>span{
 	border-radius:10px!important;
 }
+
+label {
+    font-weight: lighter!important;
+}

@@ -241,9 +241,11 @@ Route::get('contact-us', function()
 });
 
 # Posts - Second to last set, match slug
-Route::get('{postSlug}', 'BlogController@getView');
-Route::post('{postSlug}', 'BlogController@postView');
+Route::get('blog/{postSlug}', 'BlogController@getView');
+Route::post('blog/{postSlug}', 'BlogController@postView');
 
+Route::get('page/{postSlug}', 'WebsiteController@getView');
+Route::post('page/{postSlug}', 'WebsiteController@postView');
 /*Route::get('/', function()
 {
 	return View::make('hello');

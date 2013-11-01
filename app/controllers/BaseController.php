@@ -94,10 +94,10 @@ class BaseController extends Controller {
 		if (isset($menu['parents'][$parent])) {
 			foreach ($menu['parents'][$parent] as $itemId) {
 				if (!isset($menu['parents'][$itemId])) {
-					$html .= "<li> <a href='" . $menu['items'][$itemId]['target'] . "'>" . $menu['items'][$itemId]['title'] . "</a></li>";
+					$html .= "<li> <a href='{{{ URL::to('/page/') }}}" . $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a></li>";
 				}
 				if (isset($menu['parents'][$itemId])) {
-					$html .= "<li class='dropdown'> <a class='dropdown-toggle' data-toggle='dropdown' href='" . $menu['items'][$itemId]['target'] . "'>" . $menu['items'][$itemId]['title'] . "</a>
+					$html .= "<li class='dropdown'> <a class='dropdown-toggle' data-toggle='dropdown' href='{{{ URL::to('/page/') }}}" . $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a>
 						<ul class='dropdown-menu'>";
 					$html .= $this -> buildMenu($itemId, $menu);
 					$html .= " </ul></li>";
