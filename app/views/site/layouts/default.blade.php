@@ -36,7 +36,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-          	<a class="navbar-brand"href="{{{ URL::to('') }}}"> A2Z CMS </a>
+          	<a class="navbar-brand" href="{{{ URL::to('') }}}"> A2Z CMS </a>
            </div>
 					  <!-- Collect the nav links, forms, and other content for toggling -->
 			        <div class="collapse navbar-collapse navbar-ex1-collapse">
