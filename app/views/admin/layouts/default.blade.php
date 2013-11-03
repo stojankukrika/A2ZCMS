@@ -243,7 +243,6 @@
 		<script src="{{$asset}}assets/admin/js/dataTables.bootstrap.min.js"></script>
 		<!-- theme scripts -->
 		<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/core.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
 
 		<!-- end: JavaScript-->
