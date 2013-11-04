@@ -157,8 +157,8 @@ class AdminNavigationGroupsController extends AdminController {
 	public function getData() {
 		$navs = NavigationGroup::select(array('navigation_groups.id', 'navigation_groups.title', 'navigation_groups.abbrev'));
 
-		return Datatables::of($navs) -> add_column('actions', '<a href="{{{ URL::to(\'admin/navigationgroups/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
-                               <a href="{{{ URL::to(\'admin/navigationgroups/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+		return Datatables::of($navs) -> add_column('actions', '<a href="{{{ URL::to(\'admin/navigationgroups/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
+                               <a href="{{{ URL::to(\'admin/navigationgroups/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
                                
             ') -> remove_column('id') -> make();
 	}

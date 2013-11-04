@@ -279,10 +279,10 @@ class AdminUsersController extends AdminController {
                             Yes
                         @else
                             No
-                        @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default">{{{ Lang::get(\'button.edit\') }}}</a>
+                        @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
                                 @if($username == \'admin\')
                                 @else
-                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
                                 @endif
             ') -> remove_column('id') -> make();
 	}
@@ -299,10 +299,10 @@ class AdminUsersController extends AdminController {
                             Yes
                         @else
                             No
-                        @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default">{{{ Lang::get(\'button.edit\') }}}</a>
+                        @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
                                 @if($username == \'admin\')
                                 @else
-                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
                                 @endif
             ') -> remove_column('id') -> make();
 	}

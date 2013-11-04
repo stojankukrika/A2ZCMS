@@ -132,8 +132,11 @@ class AdminGalleryImageCommentsController extends AdminController {
 	public function getData() {
 		$comments = GalleryImageComment::join('gallery', 'gallery.id', '=', 'gallery_images_comments.gallery_id') -> join('users', 'users.id', '=', 'gallery_images_comments.user_id') -> select(array('gallery_images_comments.id as id', 'gallery_images_comments.content as post', 'gallery.title as gallerytitle', 'gallery.id as galleryid', 'users.id as userid', 'users.username as poster_name', 'gallery_images_comments.created_at'));
 
-		return Datatables::of($comments) -> edit_column('gallerytitle', '<a href="{{{ URL::to(\'admin/galleries/\'. $galleryid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($gallerytitle, 40, \'...\') }}}</a>') -> edit_column('post', '<a href="{{{ URL::to(\'admin/galleries/\'. $galleryid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($post, 40, \'...\') }}}</a>') -> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+		return Datatables::of($comments) -> edit_column('gallerytitle', '<a href="{{{ URL::to(\'admin/galleries/\'. $galleryid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($gallerytitle, 40, \'...\') }}}</a>') 
+				-> edit_column('post', '<a href="{{{ URL::to(\'admin/galleries/\'. $galleryid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($post, 40, \'...\') }}}</a>') 
+				-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') 
+				-> add_column('actions', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
+                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> remove_column('galleryid') -> remove_column('userid') -> make();
 	}
 
@@ -145,8 +148,11 @@ class AdminGalleryImageCommentsController extends AdminController {
 	public function getDataforgallery($gallery_id) {
 		$comments = GalleryImageComment::join('users', 'gallery_images_comments.user_id', '=', 'users.id') -> join('gallery', 'gallery_images_comments.gallery_id', '=', 'gallery.id') -> where('gallery_images_comments.gallery_id', '=', $gallery_id) -> where('gallery_images_comments.deleted_at', '=', NULL) -> select(array('gallery_images_comments.id as id', 'gallery_images_comments.gallery_id as gallery_id', 'gallery_images_comments.content as comment', 'gallery.title as content', 'users.id as userid', 'users.username as poster_name', 'gallery_images_comments.created_at'));
 
-		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/galleries/\'. $gallery_id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') -> edit_column('comment', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($comment, 40, \'...\') }}}</a>') -> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/galleries/\'. $gallery_id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') 
+				-> edit_column('comment', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($comment, 40, \'...\') }}}</a>') 
+				-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') 
+				-> add_column('actions', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
+                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> remove_column('gallery_id') -> remove_column('userid') -> make();
 	}
 

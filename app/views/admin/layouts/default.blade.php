@@ -38,7 +38,7 @@
 		<link href="{{$asset}}assets/admin/css/jquery.dataTables.css" rel="stylesheet">
 		<link href="{{$asset}}assets/admin/css/colorbox.css" rel="stylesheet">
 		<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
-
+		<link href="{{$asset}}assets/admin/css/bootstrap-dataTables.css" rel="stylesheet">
 		<!-- end: CSS -->
 
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -243,10 +243,13 @@
 		<script src="{{$asset}}assets/admin/js/dataTables.bootstrap.min.js"></script>
 		<!-- theme scripts -->
 		<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
+		<script src="{{$asset}}assets/admin/js/core.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
+		<script src="{{$asset}}assets/admin/js/bootstrap-dataTables-paging.js"></script>
 
 		<!-- end: JavaScript-->
 		@yield('scripts')
+		
 
 	</body>
 </html>

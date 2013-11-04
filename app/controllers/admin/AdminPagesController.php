@@ -172,9 +172,9 @@ class AdminPagesController extends AdminController {
 
 		return Datatables::of($pages) 
 			-> edit_column('voteup', '{{ $voteup-$votedown }}') 
-			-> edit_column('status', '{{($status)? "<button class=\"btn btn-link btn-sm\">Active</button>":"<button class=\"btn btn-default btn-sm\">Inactive</button>";}}') 
-			-> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
-                            <a href="{{{ URL::to(\'admin/pages/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>') 
+			-> edit_column('status', '{{($status)? "<i class=\"icon-eye-open\"></i>":"<i class=\"icon-eye-close\"></i>";}}') 
+			-> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
+                            <a href="{{{ URL::to(\'admin/pages/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>') 
             -> remove_column('id') 
 			-> remove_column('votedown') 
             -> make();

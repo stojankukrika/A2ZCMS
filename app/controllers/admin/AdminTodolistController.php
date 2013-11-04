@@ -180,8 +180,8 @@ class AdminTodolistController extends AdminController {
 		$todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done','todolist.finished', 'todolist.created_at'));
 
 		return Datatables::of($todolists) -> edit_column('work_done', '@if ($work_done==0){{ "Work" }} @else {{ "Done" }} @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/change\' ) }}}" class="btn btn-link btn-sm" >{{{ Lang::get(\'admin/todolists/table.change\') }}}</a>
-        <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+        <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
+                <a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> make();
 	}
 

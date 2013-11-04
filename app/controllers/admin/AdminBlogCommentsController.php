@@ -132,7 +132,9 @@ class AdminBlogCommentsController extends AdminController {
 	public function getData() {
 		$comments = BlogComment::join('blogs', 'blogs.id', '=', 'blog_comments.blog_id') -> join('users', 'users.id', '=', 'blog_comments.user_id') -> select(array('blog_comments.id as id', 'blogs.id as blogid', 'users.id as userid', 'blog_comments.content', 'blogs.title as post_name', 'users.username as poster_name', 'blog_comments.created_at'));
 
-		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/blogcomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') -> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $blogid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($post_name, 40, \'...\') }}}</a>') -> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-xs">{{{ Lang::get(\'button.edit\') }}}</a>
+		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/blogcomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') 
+			-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $blogid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($post_name, 40, \'...\') }}}</a>') 
+			-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-xs"><i class="icon-edit "></i></a>
                 <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-xs btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
             ') -> remove_column('id') -> remove_column('blogid') -> remove_column('userid') -> make();
 	}
@@ -145,8 +147,10 @@ class AdminBlogCommentsController extends AdminController {
 	public function getDataforblog($blog_id) {
 		$comments = BlogComment::join('blogs', 'blogs.id', '=', 'blog_comments.blog_id') -> join('users', 'users.id', '=', 'blog_comments.user_id') -> where('blogs.id', '=', $blog_id) -> select(array('blog_comments.id as id', 'blogs.id as postid', 'users.id as userid', 'blog_comments.content', 'users.username as poster_name', 'blog_comments.created_at'));
 
-		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/blogcomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') -> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm">{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/blogcomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') 
+			-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') 
+			-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
+                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> remove_column('postid') -> remove_column('userid') -> make();
 	}
 
