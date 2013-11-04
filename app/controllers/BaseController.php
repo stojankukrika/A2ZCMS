@@ -27,6 +27,19 @@ class BaseController extends Controller {
 			header('Location: install');
 			exit ;
 		}
+		$settings = Settings::all();
+		
+		$offline = 0;
+		foreach ($settings as $v) {
+			if ($v -> varname == 'offline') {
+				$offline = $v -> value;
+			}
+		}
+		if($offline<>0)
+		{
+			header('Location: offline');
+			exit ;
+		}
 	}
 	/* Attempt to do login
 	 *

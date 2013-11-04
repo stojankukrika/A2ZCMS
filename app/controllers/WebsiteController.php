@@ -33,4 +33,15 @@ class WebsiteController extends BaseController {
 		// Show the page
 		return View::make('site/page/view_page', compact('page', 'menu'));
 	}
+	public function getOffline()
+	{
+		$settings = Settings::all();
+		$offline_msg = '<br>';
+		foreach ($settings as $v) {
+			if ($v -> varname == 'offline_msg') {
+				$offline_msg = $v -> value;
+			}
+		}
+		return View::make('site/offline')->with('offline_msg', $offline_msg);
+	}
 }

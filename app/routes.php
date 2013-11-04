@@ -246,10 +246,13 @@ Route::post('blog/{postSlug}', 'BlogController@postView');
 
 Route::get('page/{postSlug}', 'WebsiteController@getView');
 Route::post('page/{postSlug}', 'WebsiteController@postView');
-/*Route::get('/', function()
+
+# Offline Static Page
+Route::get('offline', function()
 {
-	return View::make('hello');
-});*/
+    // Return about us page
+    return View::make('site/offline');
+});
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
