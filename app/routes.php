@@ -182,16 +182,16 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('roles', 'AdminRolesController');
 
 	# To-do list
-	Route::get('todolists/{todolist}/change', 'AdminTodolistController@getChange')
-        ->where('todolist', '[0-9]+');
-    Route::get('todolists/{todolist}/edit', 'AdminTodolistController@getEdit')
-        ->where('todolist', '[0-9]+');
-    Route::post('todolists/{todolist}/edit', 'AdminTodolistController@postEdit')
-        ->where('todolist', '[0-9]+');
-    Route::get('todolists/{todolist}/delete', 'AdminTodolistController@getDelete')
-        ->where('todolist', '[0-9]+');
-    Route::post('todolists/{todolist}/delete', 'AdminTodolistController@postDelete')
-        ->where('todolist', '[0-9]+');
+	Route::get('todolists/{todo}/change', 'AdminTodolistController@getChange')
+        ->where('todo', '[0-9]+');
+    Route::get('todolists/{todo}/edit', 'AdminTodolistController@getEdit')
+        ->where('todo', '[0-9]+');
+    Route::post('todolists/{todo}/edit', 'AdminTodolistController@postEdit')
+        ->where('todo', '[0-9]+');
+    Route::get('todolists/{todo}/delete', 'AdminTodolistController@getDelete')
+        ->where('todo', '[0-9]+');
+    Route::post('todolists/{todo}/delete', 'AdminTodolistController@postDelete')
+        ->where('todo', '[0-9]+');
     Route::controller('todolists', 'AdminTodolistController');
 
 	# Settings

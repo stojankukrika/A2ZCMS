@@ -44,7 +44,7 @@
 				<span class="icon-refresh"></span> Reset
 			</button>
 			<button type="submit" class="btn btn-success">
-				<span class="icon-ok"></span> @if (isset($blog_category)){{ "Update" }} @else {{ "Create" }} @endif
+				<span class="icon-ok"></span> @if (isset($blog_comment)){{ "Update" }} @else {{ "Create" }} @endif
 			</button>
 		</div>
 	</div>
