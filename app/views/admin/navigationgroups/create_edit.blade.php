@@ -84,13 +84,13 @@
 	<div class="form-group">
 		<div class="col-lg-12">
 			<button type="reset" class="btn btn-link close_popup">
-				Cancel
+				<span class="icon-remove"></span>  Cancel
 			</button>
-			<button type="reset" class="btn">
-				Reset
+			<button type="reset" class="btn btn-default">
+				<span class="icon-refresh"></span> Reset
 			</button>
 			<button type="submit" class="btn btn-success">
-				Save
+				<span class="icon-ok"></span> @if (isset($blog_category)){{ "Update" }} @else {{ "Create" }} @endif
 			</button>
 		</div>
 	</div>

@@ -42,4 +42,24 @@ class Page extends Eloquent {
 		return nl2br($this -> content);
 	}
 	
+	/**
+	 * Returns a formatted post content css,
+	 * this ensures that line breaks are returned.
+	 *
+	 * @return string
+	 */
+	public function page_css() {
+		return nl2br($this -> page_css);
+	}
+	
+	/**
+	 * Returns a formatted post content javacript,
+	 * this ensures that line breaks are returned.
+	 *
+	 * @return string
+	 */
+	public function page_javascript() {
+		return nl2br($this -> page_javascript);
+	}
+	
 }

@@ -40,7 +40,6 @@
 
 		<!-- CSS -->
 		<link href="{{$asset}}assets/admin/css/bootstrap.min.css" rel="stylesheet">
-		<link href="{{$asset}}assets/admin/css/retina.min.css" rel="stylesheet">
 		<link href="{{$asset}}assets/admin/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 
 		<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
@@ -72,7 +71,7 @@
 				<h3> {{ $title }}
 				<div class="pull-right">
 					<button class="btn btn-link btn-small btn-inverse close_popup">
-						<span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+						<span class="icon-remove-sign"></span> Back
 					</button>
 				</div></h3>
 			</div>

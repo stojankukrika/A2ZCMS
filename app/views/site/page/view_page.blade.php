@@ -12,7 +12,7 @@
 {{{ $page->page_css() }}}
 </style>
 <script>
-{{{ $page->page_javascript() }}}
+{{ $page->page_javascript() }}
 </script>
  <hr>
           <p><i class="icon-time"></i> Posted on {{{ $page->date() }}} </p>

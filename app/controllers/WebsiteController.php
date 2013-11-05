@@ -30,9 +30,10 @@ class WebsiteController extends BaseController {
 
 	public function getView($slug) {
 		// Get this webpage data
-		$page = $this -> page -> where('id', '=', $slug) -> first();
+		$navigation_link = Navigation::where('id', '=', $slug) -> first();
+		$page = $this -> page -> where('id', '=', $navigation_link->page_id) -> first();
 
-		// Check if the blog blog exists
+		// Check if the blog page exists
 		if (is_null($page)) {
 			// If we ended up in here, it means that
 			// a page or a blog blog didn't exist.

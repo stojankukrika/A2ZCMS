@@ -3,12 +3,6 @@
 {{-- Content --}}
 @section('content')
 
-<script>
-$(function() {
-	$( "#sortable" ).sortable();
-	$( "#sortable" ).disableSelection();
-});
-</script>
 <ul class="nav nav-tabs">
 	<li class="active">
 		<a href="#tab-general" data-toggle="tab">General</a>
@@ -255,17 +249,25 @@ $(function() {
 	<div class="form-group">
 		<div class="col-md-12">
 			<button type="reset" class="btn btn-link close_popup">
-				Cancel
+				<span class="icon-remove"></span>  Cancel
 			</button>
-			<button type="reset" class="btn">
-				Reset
+			<button type="reset" class="btn btn-default">
+				<span class="icon-refresh"></span> Reset
 			</button>
 			<button type="submit" class="btn btn-success">
-				Save
+				<span class="icon-ok"></span> @if (isset($blog_category)){{ "Update" }} @else {{ "Create" }} @endif
 			</button>
 		</div>
 	</div>
 	<!-- ./ form actions -->
 </form>
 @stop
-
+{{-- Scripts --}}
+@section('scripts')
+<script>
+$(function() {
+	$( "#sortable" ).sortable();
+	$( "#sortable" ).disableSelection();
+});
+</script>
+@stop
