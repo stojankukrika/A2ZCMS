@@ -7,6 +7,17 @@ class WebsiteController extends BaseController {
 	 * @var Page
 	 */
 	protected $page;
+	/**
+	 * Settings Model
+	 * @var Settings
+	 */
+	protected $settings;
+	/**
+	 * Inject the models.
+	 * @param Blog $blog
+	 * @param User $user
+	 */
+	protected $navigation;
 		
 	public function __construct(Page $page, Settings $settings) {
 		parent::__construct();
@@ -32,16 +43,5 @@ class WebsiteController extends BaseController {
 		$menu = $this -> navigation;
 		// Show the page
 		return View::make('site/page/view_page', compact('page', 'menu'));
-	}
-	public function getOffline()
-	{
-		$settings = Settings::all();
-		$offline_msg = '<br>';
-		foreach ($settings as $v) {
-			if ($v -> varname == 'offline_msg') {
-				$offline_msg = $v -> value;
-			}
-		}
-		return View::make('site/offline')->with('offline_msg', $offline_msg);
 	}
 }

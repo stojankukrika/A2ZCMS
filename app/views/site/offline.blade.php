@@ -7,5 +7,5 @@
 
 {{-- Content --}}
 @section('content')
-{{$offline_msg}}
+{{isset($offlinemessage)?$offlinemessage:"sasas";}}
 @stop

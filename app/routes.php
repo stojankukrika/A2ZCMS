@@ -162,6 +162,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('user', '[0-9]+');
     Route::post('users/{user}/delete', 'AdminUsersController@postDelete')
         ->where('user', '[0-9]+');
+	#Profile
+	Route::get('users/profile', 'AdminUsersController@getProfileEdit');
+    Route::post('users/profile', 'AdminUsersController@postProfileEdit');
+	
     Route::controller('users', 'AdminUsersController');
 
     # User Role Management
@@ -250,10 +254,17 @@ Route::post('page/{postSlug}', 'WebsiteController@postView');
 # Offline Static Page
 Route::get('offline', function()
 {
-    // Return about us page
-    return View::make('site/offline');
+		$settings = Settings::all();
+		$offlinemessage = '';
+		foreach ($settings as $v) {
+			if ($v -> varname == 'offlinemessage') {
+				$offlinemessage = $v -> value;
+			}
+		}
+    // Return offline page
+    return View::make('site/offline', compact('offlinemessage'));
 });
 
 # Index Page - Last route, no matches
-Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
+Route::get('/', array('uses' => 'BlogController@getIndex'));
 

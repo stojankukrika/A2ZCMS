@@ -93,10 +93,7 @@
 									<a href="{{{ URL::to('/') }}}"><i class="icon-home"></i> {{ Lang::get('admin/general.homepage') }}</a>
 								</li>
 								<li>
-									<a href="{{{ URL::to('/user') }}}"><i class="icon-user"></i> Profile</a>
-								</li>
-								<li>
-									<a href="{{{ URL::to('user/settings') }}}"><i class="icon-cog"></i> {{ Lang::get('admin/general.settings') }}</a>
+									<a href="{{{ URL::to('/admin/users/profile') }}}"><i class="icon-cog"></i> Profile</a>
 								</li>
 								<li>
 									<a href="#"><i class="icon-envelope"></i> Messages</a>

@@ -22,9 +22,10 @@ class BaseController extends Controller {
 		$user = new User;
 		$this -> user = $user;
 		$this -> beforeFilter('csrf', array('on' => 'post'));
+		$this -> beforeFilter('detectLang');
 		// Redirect to /install if the db isn't setup.
 		if (Config::get("a2zcms.installed") !== true) {
-			header('Location: install');
+			header('Location: '. Config::get("app.url").'install');
 			exit ;
 		}
 		$settings = Settings::all();
@@ -35,9 +36,9 @@ class BaseController extends Controller {
 				$offline = $v -> value;
 			}
 		}
-		if($offline<>0)
+		if($offline==1)
 		{
-			header('Location: offline');
+			header('Location: '. Config::get("app.url").'offline');
 			exit ;
 		}
 	}

@@ -76,7 +76,7 @@ class Blog extends Eloquent implements PresentableInterface {
 	 * @return string
 	 */
 	public function url() {
-		return Url::to($this -> slug);
+		return Url::to('blog/'.$this -> slug);
 	}
 
 	/**

@@ -306,5 +306,77 @@ class AdminUsersController extends AdminController {
                                 @endif
             ') -> remove_column('id') -> make();
 	}
+	
+	/*edit admin user profile*/
+	/**
+	 * Users settings page
+	 *
+	 * @return View
+	 */
+	public function getProfileEdit() {
+			
+			$user_auth = Auth::user();
+			$user = User::where('id', '=', $user_auth->id) -> first();
+			// Title
+			$title = Lang::get('admin/users/title.user_update');
+			// mode
+			$mode = 'edit';
+
+			return View::make('admin/users/profile', compact('user', 'title', 'mode'));
+	}
+	
+	 
+	 /**
+	 * Edits a user
+	 *
+	 */
+	public function postProfileEdit() {
+			// Declare the rules for the form validation
+		$rules = array('surname' => 'required', 
+						'name'=>'required');
+
+		// Validate the inputs
+		$validator = Validator::make(Input::all(), $rules);
+		
+		$user_auth = Auth::user();
+		$user = User::where('id', '=', $user_auth->id) -> first();
+		
+		if ($validator -> passes()) {
+		
+			$oldUser = clone $user;
+			$user -> name = Input::get('name');
+			$user -> surname = Input::get('surname');
+			$password = Input::get('password');
+			$passwordConfirmation = Input::get('password_confirmation');
+
+			if (!empty($password)) {
+				if ($password === $passwordConfirmation) {
+					$user -> password = $password;
+					// The password confirmation will be removed from model
+					// before saving. This field will be used in Ardent's
+					// auto validation.
+					$user -> password_confirmation = $passwordConfirmation;
+				} else {
+					// Redirect to the new user page
+					return Redirect::to('users') -> with('error', Lang::get('admin/users/messages.password_does_not_match'));
+				}
+			} else {
+				unset($user -> password);
+				unset($user -> password_confirmation);
+			}
+
+			$user -> amend();
+		}
+
+		// Get validation errors (see Ardent package)
+		$error = $user -> errors() -> all();
+		
+		if (empty($error)) {
+			return Redirect::to('admin/users/profile') -> with('success', Lang::get('user/user.user_account_updated'));
+		} else {
+			return Redirect::to('admin/users/profile') -> withInput(Input::except('password', 'password_confirmation')) -> with('error', $error);
+		}
+	}
+	
 
 }
