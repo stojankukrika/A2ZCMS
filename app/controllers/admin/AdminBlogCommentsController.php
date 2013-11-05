@@ -79,7 +79,7 @@ class AdminBlogCommentsController extends AdminController {
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Was the page updated?
-			if ($blogcategory -> update($inputs)) {
+			if ($blog_comment -> update($inputs)) {
 				// Redirect to the new comment post page
 				return Redirect::to('admin/blogcomments/' . $blog_comment -> id . '/edit') -> with('success', Lang::get('admin/blogcomments/messages.update.success'));
 			}
