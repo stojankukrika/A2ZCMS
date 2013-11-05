@@ -33,7 +33,7 @@
 <div class="form-group">
 	<div class="col-md-12">
 		<button type="reset" class="btn btn-link close_popup">
-			Cancel
+			<span class="icon-remove"></span>  Cancel
 		</button>
 	</div>
 </div>
