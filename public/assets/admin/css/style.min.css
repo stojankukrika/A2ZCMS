@@ -3849,16 +3849,19 @@
 {
 	font-weight:normal;
 	float:left;
-	text-align:left
+	text-align:left;
+	padding-left: 10px;
+	width:155px;
 }
 	div.dataTables_length select
 {
-	width:75px
+	width:125px;
 }
 	div.dataTables_filter label
 {
 	font-weight:normal;
 	float:right
+	width:155px;
 }
 	div.dataTables_info
 {

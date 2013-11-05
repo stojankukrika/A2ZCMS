@@ -22,10 +22,9 @@
 			<th class="col-md-2">{{{ Lang::get('admin/users/table.last_name') }}}</th>
 			<th class="col-md-2">{{{ Lang::get('admin/users/table.username') }}}</th>
 			<th class="col-md-2">{{{ Lang::get('admin/users/table.email') }}}</th>
-			<th class="col-md-2">{{{ Lang::get('admin/users/table.roles') }}}</th>
-			<th class="col-md-2">{{{ Lang::get('admin/users/table.activated') }}}</th>
+			<th class="col-md-1">{{{ Lang::get('admin/users/table.activated') }}}</th>
 			<th class="col-md-2">{{{ Lang::get('admin/users/table.created_at') }}}</th>
-			<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
+			<th class="col-md-1">{{{ Lang::get('table.actions') }}}</th>
 		</tr>
 	</thead>
 	<tbody></tbody>

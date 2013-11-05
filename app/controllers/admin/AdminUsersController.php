@@ -270,12 +270,11 @@ class AdminUsersController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id') -> leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id') -> select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'roles.name as rolename', 'users.confirmed', 'users.created_at'));
+		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id') 
+		 -> select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'users.confirmed', 'users.created_at'));
 
 		return Datatables::of($users)
-		// -> edit_column('created_at','{{{ Carbon::now()->diffForHumans(Carbon::createFromFormat(\'Y-m-d H\', $test)) }}}')
-
-		-> edit_column('confirmed', '@if($confirmed)
+			-> edit_column('confirmed', '@if($confirmed)
                             Yes
                         @else
                             No
