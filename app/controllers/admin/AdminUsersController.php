@@ -270,8 +270,7 @@ class AdminUsersController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id') 
-		 -> select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'users.confirmed', 'users.created_at'));
+		$users = User::select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'users.confirmed', 'users.created_at'));
 
 		return Datatables::of($users)
 			-> edit_column('confirmed', '@if($confirmed)

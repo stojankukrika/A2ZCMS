@@ -60,7 +60,7 @@
 				<span class="icon-refresh"></span> Reset
 			</button>
 			<button type="submit" class="btn btn-success">
-				<span class="icon-ok"></span> @if (isset($permission)){{ "Update" }} @else {{ "Create" }} @endif
+				<span class="icon-ok"></span> Update
 			</button>
 		</div>
 	</div>
