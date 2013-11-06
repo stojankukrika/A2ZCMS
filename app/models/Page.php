@@ -51,4 +51,8 @@ class Page extends Eloquent implements PresentableInterface {
 		return nl2br($this -> page_javascript);
 	}
 	
+	public function getPresenter() {
+		return new PostPresenter($this);
+	}
+	
 }

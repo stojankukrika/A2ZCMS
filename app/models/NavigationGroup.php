@@ -7,5 +7,8 @@ class NavigationGroup extends Eloquent implements PresentableInterface {
 	public $table = "navigation_groups";
 	protected $softDelete = true;
 	protected $guarded = array();
-
+	
+	public function getPresenter() {
+		return new PostPresenter($this);
+	}
 }
