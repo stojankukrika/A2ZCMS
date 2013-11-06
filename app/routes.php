@@ -43,7 +43,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('blogcomment', '[0-9]+');
     Route::get('blogcomments/{blogcomment}/delete', 'AdminBlogCommentsController@getDelete')
         ->where('blogcomment', '[0-9]+');
-    Route::post('blogcomments/{blogcomment}/delete', 'AdminBlogCommentsController@postDelete')
+    Route::post('blogcomments/{blogcomment}/delete', 'AdminBlogCommentsController@getDelete')
         ->where('blogcomment', '[0-9]+');
     Route::controller('blogcomments', 'AdminBlogCommentsController');
 	
@@ -54,7 +54,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('blogcategory', '[0-9]+');
     Route::get('blogcategorys/{blogcategory}/delete', 'AdminBlogCategorysController@getDelete')
         ->where('blogcategory', '[0-9]+');
-    Route::post('blogcategorys/{blogcategory}/delete', 'AdminBlogCategorysController@postDelete')
+    Route::post('blogcategorys/{blogcategory}/delete', 'AdminBlogCategorysController@getDelete')
         ->where('blogcategory', '[0-9]+');
     Route::controller('blogcategorys', 'AdminBlogCategorysController');
 
@@ -69,7 +69,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('blog', '[0-9]+');
     Route::get('blogs/{blog}/delete', 'AdminBlogsController@getDelete')
         ->where('blog', '[0-9]+');
-    Route::post('blogs/{blog}/delete', 'AdminBlogsController@postDelete')
+    Route::post('blogs/{blog}/delete', 'AdminBlogsController@getDelete')
         ->where('blog', '[0-9]+');
     Route::controller('blogs', 'AdminBlogsController');
 	
@@ -82,12 +82,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('galleryimagecomment', '[0-9]+');
     Route::get('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentsController@getDelete')
         ->where('galleryimagecomment', '[0-9]+');
-    Route::post('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentsController@postDelete')
+    Route::post('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentsController@getDelete')
         ->where('galleryimagecomment', '[0-9]+');
     Route::controller('galleryimagecomments', 'AdminGalleryImageCommentsController');
 	
 	 # Gallery Images Management
-    Route::get('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@getDelete')
+    Route::get('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@postDelete')
         ->where('galleryimage', '[0-9]+');
     Route::controller('galleryimages', 'AdminGalleryImagesController');
 	
@@ -102,7 +102,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('gallery', '[0-9]+');
     Route::get('galleries/{gallery}/delete', 'AdminGalleriesController@getDelete')
         ->where('gallery', '[0-9]+');
-    Route::post('galleries/{gallery}/delete', 'AdminGalleriesController@postDelete')
+    Route::post('galleries/{gallery}/delete', 'AdminGalleriesController@getDelete')
         ->where('gallery', '[0-9]+');
 	Route::get('galleries/{gallery}/upload', 'AdminGalleriesController@getUpload')
         ->where('gallery', '[0-9]+');
@@ -119,7 +119,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('group', '[0-9]+');
     Route::get('pages/{nav}/delete', 'AdminPagesController@getDelete')
         ->where('group', '[0-9]+');
-    Route::post('pages/{nav}/delete', 'AdminPagesController@postDelete')
+    Route::post('pages/{nav}/delete', 'AdminPagesController@getDelete')
         ->where('group', '[0-9]+');
     Route::controller('pages', 'AdminPagesController');
     
@@ -132,7 +132,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('group', '[0-9]+');
     Route::get('navigationgroups/{group}/delete', 'AdminNavigationGroupsController@getDelete')
         ->where('group', '[0-9]+');
-    Route::post('navigationgroups/{group}/delete', 'AdminNavigationGroupsController@postDelete')
+    Route::post('navigationgroups/{group}/delete', 'AdminNavigationGroupsController@getDelete')
         ->where('group', '[0-9]+');
     Route::controller('navigationgroups', 'AdminNavigationGroupsController');
 
@@ -145,7 +145,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('group', '[0-9]+');
     Route::get('navigation/{nav}/delete', 'AdminNavigationController@getDelete')
         ->where('group', '[0-9]+');
-    Route::post('navigation/{nav}/delete', 'AdminNavigationController@postDelete')
+    Route::post('navigation/{nav}/delete', 'AdminNavigationController@getDelete')
         ->where('group', '[0-9]+');
     Route::controller('navigation', 'AdminNavigationController');
 
@@ -160,7 +160,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('user', '[0-9]+');
     Route::get('users/{user}/delete', 'AdminUsersController@getDelete')
         ->where('user', '[0-9]+');
-    Route::post('users/{user}/delete', 'AdminUsersController@postDelete')
+    Route::post('users/{user}/delete', 'AdminUsersController@getDelete')
         ->where('user', '[0-9]+');
 	#Profile
 	Route::get('users/profile', 'AdminUsersController@getProfileEdit');
@@ -177,7 +177,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('role', '[0-9]+');
     Route::get('roles/{role}/delete', 'AdminRolesController@getDelete')
         ->where('role', '[0-9]+');
-    Route::post('roles/{role}/delete', 'AdminRolesController@postDelete')
+    Route::post('roles/{role}/delete', 'AdminRolesController@getDelete')
         ->where('role', '[0-9]+');
     Route::controller('roles', 'AdminRolesController');
 
@@ -190,7 +190,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('todo', '[0-9]+');
     Route::get('todolists/{todo}/delete', 'AdminTodolistController@getDelete')
         ->where('todo', '[0-9]+');
-    Route::post('todolists/{todo}/delete', 'AdminTodolistController@postDelete')
+    Route::post('todolists/{todo}/delete', 'AdminTodolistController@getDelete')
         ->where('todo', '[0-9]+');
     Route::controller('todolists', 'AdminTodolistController');
 

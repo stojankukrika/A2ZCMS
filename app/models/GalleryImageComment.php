@@ -1,22 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
 class GalleryImageComment extends Eloquent implements PresentableInterface {
 
 	protected $softDelete = true;
 	protected $table = "gallery_images_comments";
-	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete() {
-		// Delete the post
-		return delete();
-	}
-
 	/*
 	 *//**
 	 * Get the comment's content.

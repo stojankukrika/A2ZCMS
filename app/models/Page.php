@@ -1,13 +1,12 @@
 <?php
+use Illuminate\Support\Facades\URL;
+use Robbo\Presenter\PresentableInterface;
 
-class Page extends Eloquent {
+class Page extends Eloquent implements PresentableInterface {
 
 	public $table = 'pages';
-
-	protected $guarded = array();
-
-	public static $rules = array('name' => 'required', 'content' => 'required', 'status' => 'required');
-	
+	protected $softDelete = true;
+	protected $guarded = array();	
 	/**
 	 * Get the date the blog was created.
 	 *
@@ -20,16 +19,6 @@ class Page extends Eloquent {
 		}
 
 		return String::date($date);
-	}
-	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete() {
-		// Delete the blog post
-		return parent::delete();
 	}
 
 	/**

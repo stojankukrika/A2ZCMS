@@ -5,19 +5,6 @@ use Robbo\Presenter\PresentableInterface;
 class Blog extends Eloquent implements PresentableInterface {
 
 	protected $softDelete = true;
-	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete() {
-		// Delete the comments
-		$this -> blogcomments() -> delete();
-
-		// Delete the blog post
-		return parent::delete();
-	}
 
 	/**
 	 * Returns a formatted post content entry,

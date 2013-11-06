@@ -6,19 +6,6 @@ class BlogComment extends Eloquent implements PresentableInterface {
 
 	protected $softDelete = true;
 	protected $table = "blog_comments";
-	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete() {
-		// Delete the comments
-		$this -> gallerycomments() -> delete();
-
-		// Delete the blog post
-		return parent::delete();
-	}
 
 	/*
 	 *//**

@@ -214,7 +214,7 @@ class AdminRolesController extends AdminController {
 
 		return Datatables::of($roles) -> edit_column('users', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/usersforrole\' ) }}}" class="btn btn-link btn-sm" >{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}</a>') 
 					-> add_column('actions', '<a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
-                                <a href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
+                                <a href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
                     ') -> remove_column('id') -> make();
 	}
 

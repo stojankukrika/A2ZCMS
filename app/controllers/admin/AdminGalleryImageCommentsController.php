@@ -99,30 +99,7 @@ class AdminGalleryImageCommentsController extends AdminController {
 	 * @return Response
 	 */
 	public function getDelete($gallery_comment) {
-		// Title
-		$title = Lang::get('admin/galleryimagecomments/title.comment_delete');
-
-		// Show the page
-		return View::make('admin/galleryimagecomments/delete', compact('gallery_comment', 'title'));
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param $blog_comment
-	 * @return Response
-	 */
-	public function postDelete($gallery_comment) {
-		 // Declare the rules for the form validation
-	    $rules = array(
-	        'id' => 'required|integer'
-	    );
-	    // Validate the inputs
-	    $validator = Validator::make(Input::all(), $rules);
-	
-	    // Check if the form validates with success
-	    if ($validator->passes())
-	    {
+		
 			$id = $gallery_comment->id;
 			$gallerycomment = GalleryImageComment::find($id);
 			// Was the role deleted?
@@ -130,10 +107,10 @@ class AdminGalleryImageCommentsController extends AdminController {
 				// Redirect to the comment posts management page
 				return Redirect::to('admin/galleryimagecomments') -> with('success', Lang::get('admin/galleryimagecomments/messages.delete.success'));
 			}
-		}
 		// There was a problem deleting the comment post
 		return Redirect::to('admin/galleryimagecomments') -> with('error', Lang::get('admin/galleryimagecomments/messages.delete.error'));
-		}
+	}
+
 
 	/**
 	 * Show a list of all the comments formatted for Datatables.
@@ -147,7 +124,7 @@ class AdminGalleryImageCommentsController extends AdminController {
 				-> edit_column('post', '<a href="{{{ URL::to(\'admin/galleries/\'. $galleryid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($post, 40, \'...\') }}}</a>') 
 				-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') 
 				-> add_column('actions', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
-                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
+                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> remove_column('galleryid') -> remove_column('userid') -> make();
 	}
 
@@ -163,7 +140,7 @@ class AdminGalleryImageCommentsController extends AdminController {
 				-> edit_column('comment', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($comment, 40, \'...\') }}}</a>') 
 				-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') 
 				-> add_column('actions', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
-                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
+                <a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> remove_column('gallery_id') -> remove_column('userid') -> make();
 	}
 

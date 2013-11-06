@@ -8,19 +8,6 @@ class BlogCategory extends Eloquent implements PresentableInterface {
 	protected $table = "blog_categorys";
 	protected $softDelete = true;
 	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete() {
-		// Delete the comments
-		$this -> categorys() -> softDeletes();
-
-		return true;
-	}
-
-	/**
 	 * Returns a formatted post content entry,
 	 * this ensures that line breaks are returned.
 	 *

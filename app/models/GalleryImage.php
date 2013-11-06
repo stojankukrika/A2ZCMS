@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
 class GalleryImage extends Eloquent implements PresentableInterface {

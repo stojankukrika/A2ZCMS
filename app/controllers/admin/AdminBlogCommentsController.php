@@ -99,24 +99,11 @@ class AdminBlogCommentsController extends AdminController {
 	 * @return Response
 	 */
 	public function getDelete($blog_comment) {
-		// Title
-		$title = Lang::get('admin/blogcomments/title.comment_delete');
-
-		// Show the page
-		return View::make('admin/blogcomments/delete', compact('blog_comment', 'title'));
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param $blog_comment
-	 * @return Response
-	 */
-	public function postDelete($id) {
-		//echo $pageId;exit;
-		$blog_comment = BlogComment::find($id);
+		
+		$id = $blog_comment->id;
+		$blogcomment = BlogComment::find($id);
 		// Was the role deleted?
-		if ($blog_comment -> delete()) {
+		if ($blogcomment -> delete()) {
 			// Redirect to the comment posts management page
 			return Redirect::to('admin/blogcomments') -> with('success', Lang::get('admin/blogcomments/messages.delete.success'));
 		}
@@ -134,8 +121,8 @@ class AdminBlogCommentsController extends AdminController {
 
 		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/blogcomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') 
 			-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $blogid .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($post_name, 40, \'...\') }}}</a>') 
-			-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
-                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
+			-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="cboxElement">{{{ $poster_name }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
+                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> remove_column('blogid') -> remove_column('userid') -> make();
 	}
 
@@ -149,8 +136,8 @@ class AdminBlogCommentsController extends AdminController {
 
 		return Datatables::of($comments) -> edit_column('content', '<a href="{{{ URL::to(\'admin/blogcomments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>') 
 			-> edit_column('poster_name', '<a href="{{{ URL::to(\'admin/users/\'. $userid .\'/edit\') }}}" class="iframe cboxElement">{{{ $poster_name }}}</a>') 
-			-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
-                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
+			-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm"><i class="icon-edit "></i></a>
+                <a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> remove_column('postid') -> remove_column('userid') -> make();
 	}
 

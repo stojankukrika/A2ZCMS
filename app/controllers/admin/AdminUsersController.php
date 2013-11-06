@@ -228,20 +228,6 @@ class AdminUsersController extends AdminController {
 	 * @return Response
 	 */
 	public function getDelete($user) {
-		// Title
-		$title = Lang::get('admin/users/title.user_delete');
-
-		// Show the page
-		return View::make('admin/users/delete', compact('user', 'title'));
-	}
-
-	/**
-	 * Remove the specified user from storage.
-	 *
-	 * @param $user
-	 * @return Response
-	 */
-	public function postDelete($user) {
 		// Check if we are not trying to delete ourselves
 		if ($user -> id === Confide::user() -> id) {
 			// Redirect to the user management page
@@ -279,7 +265,7 @@ class AdminUsersController extends AdminController {
                         @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
                                 @if($username == \'admin\')
                                 @else
-                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
+                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
                                 @endif
             ') -> remove_column('id') -> make();
 	}

@@ -6,18 +6,6 @@ class Todolist extends Eloquent implements PresentableInterface {
 
 	protected $table = "todolist";
 	protected $softDelete = true;
-	/**
-	 * Deletes a blog post and all
-	 * the associated comments.
-	 *
-	 * @return bool
-	 */
-	public function delete() {
-		// Delete the comments
-		$this -> todolists() -> softDeletes();
-
-		return true;
-	}
 
 	/**
 	 * Returns a formatted post content entry,

@@ -23,6 +23,7 @@
 $(function(){
 	$("select[name='galleryid']").change(function() {;
 		var galleryid = $(this).val();
+		$( "#pictures" ).empty();
 		if(galleryid>0){
 			$.ajax({
 				url: 'galleryimages/imageforgallery/'+galleryid,

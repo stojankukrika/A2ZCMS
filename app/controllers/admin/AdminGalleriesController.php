@@ -135,23 +135,10 @@ class AdminGalleriesController extends AdminController {
 	 * @param $blog
 	 * @return Response
 	 */
-	public function getDelete($galleries) {
-		// Title
-		$title = Lang::get('admin/galleries/title.gallery_delete');
-
-		// Show the page
-		return View::make('admin/galleries/delete', compact('galleries', 'title'));
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param $blog
-	 * @return Response
-	 */
-	public function postDelete($id) {
-		//echo $pageId;exit;
-		$gallery = Gallery::find($id);
+	public function getDelete($gallerys) {
+		
+		$id = $gallerys->id;
+		$gallery = Gallery::find($gallerys->id);
 		// Was the role deleted?
 		if ($gallery -> delete()) {
 			// Redirect to the blog posts management page
@@ -173,7 +160,7 @@ class AdminGalleriesController extends AdminController {
 			-> edit_column('comments_count', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/commentsforgallery\' ) }}}" class="btn btn-link btn-sm" >{{ DB::table(\'gallery_images_comments\')->where(\'gallery_id\', \'=\', $id)->where(\'deleted_at\', \'=\', NULL)->count() }}</a>') 
 			-> add_column('actions', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/upload\' ) }}}" class="btn btn-info btn-sm iframe" ><i class="icon-picture "></i></a>
         		<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
-                <a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><i class="icon-trash "></i></a>
+                <a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> make();
 	}
 

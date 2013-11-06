@@ -9,8 +9,8 @@
 	</li>
 </ul>
 <!-- ./ tabs -->
-{{-- Edit ToDoList Comment Form --}}
-<form method="post" action="@if (isset($todolist)){{ URL::to('admin/todolists/' . $todolist->id . '/edit') }}@endif" autocomplete="off">
+{{-- Edit ToDoList Form --}}
+<form method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
@@ -24,8 +24,8 @@
 			<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
 				<div class="col-md-12">
 					<label class="control-label" for="content">Title:</label>
-					<input class="form-control" type="text" name="content" id="text" value="{{{ Input::old('title', isset($todolist) ? $todolist->content : null) }}}" />
-					{{{ $errors->first('content', '<span class="help-inline">:message</span>') }}}
+					<input class="form-control" type="text" name="content" id="text" value="{{ Input::old('title', isset($todolist) ? $todolist->content : null) }}" />
+					<span class="help-inline">{{{ $errors->first('content', ':message') }}}</span>
 				</div>
 				
 				<div class="col-md-12">

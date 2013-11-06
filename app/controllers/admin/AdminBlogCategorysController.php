@@ -131,21 +131,8 @@ class AdminBlogCategorysController extends AdminController {
 	 * @return Response
 	 */
 	public function getDelete($blog_category) {
-		// Title
-		$title = Lang::get('admin/blogcategorys/title.category_delete');
-
-		// Show the page
-		return View::make('admin/blogcategorys/delete', compact('blog_category', 'title'));
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param $comment
-	 * @return Response
-	 */
-	public function postDelete($id) {
-		//echo $pageId;exit;
+		
+		$id = $blog_category->id;
 		$blogcategory = BlogCategory::find($id);
 		// Was the role deleted?
 		if ($blogcategory -> delete()) {
@@ -155,6 +142,7 @@ class AdminBlogCategorysController extends AdminController {
 		// There was a problem deleting the comment post
 		return Redirect::to('admin/blogcategorys') -> with('error', Lang::get('admin/blogcategorys/messages.delete.error'));
 	}
+
 
 	/**
 	 * Show a list of all the comments formatted for Datatables.
@@ -166,7 +154,7 @@ class AdminBlogCategorysController extends AdminController {
 
 		return Datatables::of($blogcategorys) -> edit_column('blog_count', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/blogsforcategory\' ) }}}" class="btn btn-link btn-sm" >{{ DB::table(\'blogs\')->where(\'blogcategory_id\', \'=\', $id)->count() }}</a>') 
 				-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
-                <a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><i class="icon-trash "></i></a>
+                <a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> make();
 	}
 
