@@ -14,10 +14,10 @@
 	<div class="control-group">
 		<div class="controls">
 			<button type="reset" class="btn btn-link close_popup">
-				Cancel
+				<span class="icon-remove"></span>  Cancel
 			</button>
 			<button type="submit" class="btn btn-danger close_popup">
-				Delete
+				<span class="icon-trash"></span>  Delete
 			</button>
 		</div>
 	</div>

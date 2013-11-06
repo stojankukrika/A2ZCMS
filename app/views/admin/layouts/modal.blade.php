@@ -114,7 +114,7 @@
 					}).done(function() {
 						// Optionally alert the user of success here...
 						parent.$.colorbox.close();
-						window.parent.location.reload();
+						//window.parent.location.reload();
 					}).fail(function() {
 						// Optionally alert the user of an error here...
 					});
@@ -124,7 +124,7 @@
 
 				$('.close_popup').click(function() {
 					parent.$.colorbox.close()
-					window.parent.location.reload();
+					//window.parent.location.reload();
 				});
 				 $( "#sortable" ).sortable();
 				$( "#sortable" ).disableSelection();

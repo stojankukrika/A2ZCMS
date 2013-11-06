@@ -112,17 +112,28 @@ class AdminGalleryImageCommentsController extends AdminController {
 	 * @param $blog_comment
 	 * @return Response
 	 */
-	public function postDelete($id) {
-		//echo $pageId;exit;
-		$gallery_comment = GalleryImageComment::find($id);
-		// Was the role deleted?
-		if ($gallery_comment -> delete()) {
-			// Redirect to the comment posts management page
-			return Redirect::to('admin/galleryimagecomments') -> with('success', Lang::get('admin/galleryimagecomments/messages.delete.success'));
+	public function postDelete($gallery_comment) {
+		 // Declare the rules for the form validation
+	    $rules = array(
+	        'id' => 'required|integer'
+	    );
+	    // Validate the inputs
+	    $validator = Validator::make(Input::all(), $rules);
+	
+	    // Check if the form validates with success
+	    if ($validator->passes())
+	    {
+			$id = $gallery_comment->id;
+			$gallerycomment = GalleryImageComment::find($id);
+			// Was the role deleted?
+			if ($gallerycomment -> delete()) {
+				// Redirect to the comment posts management page
+				return Redirect::to('admin/galleryimagecomments') -> with('success', Lang::get('admin/galleryimagecomments/messages.delete.success'));
+			}
 		}
 		// There was a problem deleting the comment post
 		return Redirect::to('admin/galleryimagecomments') -> with('error', Lang::get('admin/galleryimagecomments/messages.delete.error'));
-	}
+		}
 
 	/**
 	 * Show a list of all the comments formatted for Datatables.

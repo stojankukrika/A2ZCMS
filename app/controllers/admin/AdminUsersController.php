@@ -256,7 +256,6 @@ class AdminUsersController extends AdminController {
 		// Was the comment post deleted?
 		$user = User::find($id);
 		if (empty($user)) {
-			// TODO needs to delete all of that user's content
 			return Redirect::to('admin/users') -> with('success', Lang::get('admin/users/messages.delete.success'));
 		} else {
 			// There was a problem deleting the user

@@ -14,7 +14,7 @@ class GalleryImageComment extends Eloquent implements PresentableInterface {
 	 */
 	public function delete() {
 		// Delete the post
-		return parent::delete();
+		return delete();
 	}
 
 	/*
