@@ -16,6 +16,15 @@ class Messages extends Eloquent implements PresentableInterface {
 	public function content() {
 		return nl2br($this -> content);
 	}
+		/**
+	 * Returns a formatted post content entry,
+	 * this ensures that line breaks are returned.
+	 *
+	 * @return string
+	 */
+	public function subject() {
+		return nl2br($this -> subject);
+	}
 	/**
 	 * Returns is message read.
 	 *

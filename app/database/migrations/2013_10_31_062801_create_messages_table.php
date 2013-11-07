@@ -18,6 +18,7 @@ class CreateMeesagesTable extends Migration {
 			$table -> foreign('user_id_from') -> references('id') -> on('users');
 			$table -> integer('user_id_to') -> unsigned();
 			$table -> foreign('user_id_to') -> references('id') -> on('users');
+			$table -> string('subject');
 			$table -> text('content');
 			$table -> boolean('read');
 			$table -> timestamps();
