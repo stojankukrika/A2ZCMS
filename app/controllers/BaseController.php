@@ -61,6 +61,11 @@ class BaseController extends Controller {
 			header('Location: '. Config::get("app.url").'offline');
 			exit ;
 		}
+		$user = Auth::user();
+		if(!empty($user)){
+			$unreadmessages = Messages::where('user_id_to','=',$user->id)->where('read','=','0')->count();
+			View::share('unreadmessages',  $unreadmessages);
+		}
 		
 	}
 	/* Attempt to do login

@@ -24,6 +24,8 @@ Route::model('galleryimageslikes', 'GalleryImagesLikes');
 Route::model('galleryimagecomment', 'GalleryImageComment');
 Route::model('gallery', 'Gallery');
 Route::model('todolist', 'Todolist');
+Route::model('grid', 'Grid');
+Route::model('plugin', 'Plugin');
 Route::model('role', 'Role');
 Route::model('settings', 'Settings');
 
@@ -31,7 +33,7 @@ Route::model('settings', 'Settings');
  *  Admin Routes
  *  ------------------------------------------
  */
-Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
+Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function()
 {
 
     # Blog Comment Management
@@ -166,8 +168,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
         ->where('user', '[0-9]+');
 	#Profile
 	Route::get('users/profile', 'AdminUsersController@getProfileEdit');
-    Route::post('users/profile', 'AdminUsersController@postProfileEdit');
-	
+    Route::post('users/profile', 'AdminUsersController@postProfileEdit');	
     Route::controller('users', 'AdminUsersController');
 
     # User Role Management
@@ -199,7 +200,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	# Settings
     Route::get('settings', 'AdminSettingsController@getIndex');
     Route::post('settings', 'AdminSettingsController@postIndex');
-	
+		
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');
 	
@@ -224,6 +225,9 @@ Route::post('user/{user}/edit', 'UserController@postEdit')
 
 //:: User Account Routes ::
 Route::post('user/login', 'UserController@postLogin');
+
+//User messages
+Route::get('user/messages', 'UserMessagesController@getIndex');
 
 //:: User Account Routes ::
 Route::post('login', 'BaseController@postLogin');

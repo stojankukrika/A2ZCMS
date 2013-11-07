@@ -93,7 +93,7 @@
 							</li>
 							@endif
 							<li>
-								<a href="{{{ URL::to('user') }}}">{{Lang::get('site.messages')}}</a>
+								<a href="{{{ URL::to('user/messages') }}}">{{Lang::get('site.messages')}} ({{$unreadmessages}})</a>
 							</li>
 							<li>
 								<a href="{{{ URL::to('user') }}}">{{Lang::get('site.edit_profile')}}</a>
