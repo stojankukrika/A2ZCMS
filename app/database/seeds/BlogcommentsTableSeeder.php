@@ -12,7 +12,40 @@ class BlogCommentsTableSeeder extends Seeder {
 		$user_id = User::first() -> id;
 		$blog_id = Blog::first() -> id;
 
-		DB::table('blog_comments') -> insert(array( array('user_id' => $user_id, 'blog_id' => $blog_id, 'content' => $this -> content1, 'created_at' => new DateTime, 'updated_at' => new DateTime), array('user_id' => $user_id, 'blog_id' => $blog_id, 'content' => $this -> content2, 'created_at' => new DateTime, 'updated_at' => new DateTime), array('user_id' => $user_id, 'blog_id' => $blog_id, 'content' => $this -> content3, 'created_at' => new DateTime, 'updated_at' => new DateTime), array('user_id' => $user_id, 'blog_id' => $blog_id + 1, 'content' => $this -> content1, 'created_at' => new DateTime, 'updated_at' => new DateTime), array('user_id' => $user_id, 'blog_id' => $blog_id + 1, 'content' => $this -> content2, 'created_at' => new DateTime, 'updated_at' => new DateTime), array('user_id' => $user_id, 'blog_id' => $blog_id + 2, 'content' => $this -> content1, 'created_at' => new DateTime, 'updated_at' => new DateTime)));
+		DB::table('blog_comments') -> insert(
+											array( 
+												array('user_id' => $user_id, 
+														'blog_id' => $blog_id, 
+														'content' => $this -> content1, 
+														'created_at' => new DateTime, 
+														'updated_at' => new DateTime), 
+												array('user_id' => $user_id, 
+														'blog_id' => $blog_id, 
+														'content' => $this -> content2, 
+														'created_at' => new DateTime, 
+														'updated_at' => new DateTime), 
+												array('user_id' => $user_id, 
+														'blog_id' => $blog_id, 
+														'content' => $this -> content3, 
+														'created_at' => new DateTime,
+														'updated_at' => new DateTime), 
+												array('user_id' => $user_id, 
+														'blog_id' => $blog_id + 1, 
+														'content' => $this -> content1, 
+														'created_at' => new DateTime, 
+														'updated_at' => new DateTime), 
+												array('user_id' => $user_id, 
+														'blog_id' => $blog_id + 1, 
+														'content' => $this -> content2, 
+														'created_at' => new DateTime, 
+														'updated_at' => new DateTime), 
+												array('user_id' => $user_id, 
+														'blog_id' => $blog_id + 2, 
+														'content' => $this -> content1, 
+														'created_at' => new DateTime, 
+														'updated_at' => new DateTime)
+												)
+											);
 	}
 
 }
