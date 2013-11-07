@@ -12,7 +12,7 @@ class CreateMeesagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('meesages', function(Blueprint $table) {
+		Schema::create('messages', function(Blueprint $table) {
 			$table->increments('id');
 			$table -> integer('user_id_from') -> unsigned();
 			$table -> foreign('user_id_from') -> references('id') -> on('users');
@@ -33,7 +33,7 @@ class CreateMeesagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('meesages');
+		Schema::drop('messages');
 	}
 
 }

@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
-class Grid extends Eloquent implements PresentableInterface {
+class Messages extends Eloquent implements PresentableInterface {
 
-	protected $table = "grids";
+	protected $table = "messages";
 	protected $softDelete = true;
 	/**
 	 * Returns a formatted post content entry,
@@ -13,17 +13,34 @@ class Grid extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function order() {
-		return nl2br($this -> order);
+	public function content() {
+		return nl2br($this -> content);
 	}
+	/**
+	 * Returns is message read.
+	 *
+	 * @return string
+	 */
+	public function read() {
+		return nl2br($this -> read);
+	}
+	
 	
 	/**
 	 * Get the pugin.
 	 *
-	 * @return Plugin
+	 * @return user receiver
 	 */
-	public function plugin() {
-		return $this -> belongsTo('Plugins', 'plugin_id');
+	public function user_id_to() {
+		return $this -> belongsTo('Users', 'user_id_to');
+	}
+	/**
+	 * Get the pugin.
+	 *
+	 * @return user sender
+	 */
+	public function user_id_from() {
+		return $this -> belongsTo('Users', 'user_id_from');
 	}
 
 	/**
