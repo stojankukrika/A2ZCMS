@@ -20,6 +20,10 @@ class Todolist extends Eloquent implements PresentableInterface {
 	public function work_done() {
 		return $this -> work_done;
 	}
+	
+	public function finished() {
+		return $this -> finished;
+	}
 
 	/**
 	 * Get the date the post was created.

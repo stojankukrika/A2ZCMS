@@ -131,7 +131,7 @@
 				$( "#finished" ).spinner({
 						step: 0.01,
 						numberFormat: "n"
-					}).val("0.00");
+					});
 
 			});
 		</script>

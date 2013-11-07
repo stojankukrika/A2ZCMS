@@ -65,11 +65,7 @@ class AdminTodolistController extends AdminController {
 			// create todo list
 			$this -> todolist -> save();
 			
-			if ($this -> todolist -> id) {
-				// Redirect to the new page
-				return Redirect::to('admin/todolists/' . $this -> todolist -> id . '/edit') -> with('success', Lang::get('admin/todolists/messages.create.success'));
-			} else {
-				// Get validation errors (see Ardent package)
+			if (!$this -> todolist -> save()) {
 				$error = $this -> todolist -> errors() -> all();
 
 				return Redirect::to('admin/todolists/create') -> with('error', $error);
@@ -101,6 +97,7 @@ class AdminTodolistController extends AdminController {
 	 * @return Response
 	 */
 	public function postEdit($id) {
+	
 		// Declare the rules for the form validation
 		$rules = array('content' => 'required');
 
@@ -113,19 +110,18 @@ class AdminTodolistController extends AdminController {
 
 		// Check if the form validates with success
 		if ($validator -> passes()) {
-			// Was the to-do finished?			
+				$user = Auth::user();
+				$todolist -> content = Input::get('content');
+				$todolist -> finished = Input::get('finished');
+				$todolist -> user_id = $user -> id;
 				$todolist -> work_done = (Input::get('finished')==100.00)?'1':'0';
-			if ($todolist -> update($inputs)) {
-				// Redirect to the new blog_category post page
-				return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> with('success', Lang::get('admin/todolists/messages.update.success'));
+				
+			if (!$todolist -> save()) {
+				return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> with('error', Lang::get('admin/todolists/messages.update.error'));
 			}
-
-			// Redirect to the comments post management page
-			return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> with('error', Lang::get('admin/todolists/messages.update.error'));
-		}
-
 		// Form validation failed
 		return Redirect::to('admin/todolists/' . $todolist -> id . '/edit') -> withInput() -> withErrors($validator);
+		}
 	}
 
 	/**

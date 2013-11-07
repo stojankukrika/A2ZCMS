@@ -27,12 +27,12 @@
 					<input class="form-control" type="text" name="content" id="text" value="{{ Input::old('title', isset($todolist) ? $todolist->content : null) }}" />
 					<span class="help-inline">{{{ $errors->first('content', ':message') }}}</span>
 				</div>
-				
+			</div>
+			<div class="form-group">
 				<div class="col-md-12">
-					 <label class="control-label"  for="finished">Finished:</label>
+					 <label class="control-label"  for="finished">Finished:</label></br>
 					 <input id="finished" class="form-control"  name="finished" value="{{{ Input::old('finished', isset($todolist) ? $todolist->finished : '0.00') }}}" />
-				</div>
-				
+				</div>				
 			</div>
 			<!-- ./ content -->
 		</div>
