@@ -7,10 +7,6 @@ class BaseController extends Controller {
 	 * @var User
 	 */
 	protected $user;
-	 /* 
-	 * navigation for webpage
-	 * */
-	protected $navigation;
 	/**
 	 * Initializer.
 	 *
@@ -66,6 +62,11 @@ class BaseController extends Controller {
 			$unreadmessages = Messages::where('user_id_to','=',$user->id)->where('read','=','0')->count();
 			View::share('unreadmessages',  $unreadmessages);
 		}
+		$navigation = $this->main_menu();
+		if(!empty($navigation)){
+			View::share('menu',  $navigation);
+		}
+			
 		
 	}
 	/* Attempt to do login

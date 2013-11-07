@@ -17,12 +17,9 @@ class WebsiteController extends BaseController {
 	 * @param Blog $blog
 	 * @param User $user
 	 */
-	protected $navigation;
-		
 	public function __construct(Page $page, Settings $settings) {
 		parent::__construct();
 		$this -> page = $page;
-		$this -> navigation = parent::main_menu();
 		$settings = Settings::all();
 		$this -> settings = $settings;
 
@@ -41,8 +38,15 @@ class WebsiteController extends BaseController {
 			// 404 error page.
 			return App::abort(404);
 		}
-		$menu = $this -> navigation;
 		// Show the page
-		return View::make('site/page/view_page', compact('page', 'menu'));
+		return View::make('site/page/view_page', compact('page'));
+	}
+	public function getContactus()
+	{
+		return View::make('site/contact_us', compact('page'));
+	}
+	public function postContactus()
+	{
+		return View::make('site/contact_us', compact('page'));
 	}
 }

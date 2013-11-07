@@ -243,12 +243,9 @@ Route::controller('install', 'InstallController');
 # Filter for detect language
 Route::when('contact-us','detectLang');
 
-# Contact Us Static Page
-Route::get('contact-us', function()
-{
-    // Return about us page
-    return View::make('site/contact-us');
-});
+# Contact Us page
+Route::get('contact-us', 'WebsiteController@getContactus');
+Route::post('contact-us', 'WebsiteController@postContactus');
 
 # Posts - Second to last set, match slug
 Route::get('blog/{postSlug}', 'BlogController@getView');

@@ -7,74 +7,68 @@
 
 {{-- Content --}}
 @section('content')
-
-<ul id="myTab" class="nav nav-tabs">
+		<ul id="myTab" class="nav nav-tabs">
             <li class="active"><a href="#service-one" data-toggle="tab">Inbox</a></li>
             <li><a href="#service-two" data-toggle="tab">Send</a></li>
+            <li><a href="#service-three" data-toggle="tab">New message</a></li>
           </ul>
             <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="service-one">
-              <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit?
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseOne" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus?
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-            </div>
+           
+              @foreach  ($received as $item)
+                <div class="panel panel-default">
+	              <div class="panel-heading">
+	                <h4 class="panel-title">
+	                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{{$item->id}}}">
+	                   {{{ $item->subject }}}
+	                  </a>
+	                </h4><span>Test user</span>
+	              </div>
+	              <div id="{{{$item->id}}}" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                  {{{$item->content}}}
+	                </div>
+	              </div>
+	            </div>
+	         @endforeach
           </div>
            <div class="tab-pane fade in" id="service-two">
              
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
-                    Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus?
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseEight" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-            </div>
+          @foreach  ($send as $item)
+              	 <div class="panel panel-default">
+	              <div class="panel-heading">
+	                <h4 class="panel-title">
+	                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{{$item->id}}}">
+	                    {{{ $item->subject }}}
+	                  </a>
+	                </h4><span>Admin Adminovic</span>
+	              </div>
+	              <div id="{{{$item->id}}}" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                  {{{$item->content}}}
+	                </div>
+	              </div>
+	            </div>
+	         @endforeach
 
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
-                    Aenean consequat lorem ut felis ullamcorper?
-                  </a>
-                </h4>
+          </div>
+          <div class="tab-pane fade in" id="service-three">
+             
+             <form role="form" method="POST" action="contact-form-submission.php">
+              <div class="form-group col-lg-4">
+                <label for="input1">Name</label>
+                <input type="text" name="contact_name" class="form-control" id="input1">
               </div>
-              <div id="collapseNine" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
+               <div class="clearfix"></div>
+              <div class="form-group col-lg-12">
+                <label for="input4">Message</label>
+                <textarea name="contact_message" class="form-control" rows="6" id="input4"></textarea>
               </div>
-            </div>
+              <div class="form-group col-lg-12">
+                <input type="hidden" name="save" value="contact">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
 
           </div>
        </div>

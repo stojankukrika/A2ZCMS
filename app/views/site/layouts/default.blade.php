@@ -84,9 +84,10 @@
 						<!-- ./ content -->
 					 </div>
 					 <div class="col-lg-4">
-			          <div class="well">
+			          <div class="well">			          	
 			          	<ul class="list-unstyled">
 			           	@if (Auth::check())
+			           	<h4>Welcome {{Auth::user()->name}} {{Auth::user()->surname}}</h4>
 							@if (Auth::user()->hasRole('admin'))
 							<li>
 								<a href="{{{ URL::to('admin') }}}">{{Lang::get('site.admin_panel')}}</a>

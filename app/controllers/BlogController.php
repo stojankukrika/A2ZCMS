@@ -28,7 +28,6 @@ class BlogController extends BaseController {
 		parent::__construct();
 		$this -> blog = $blog;
 		$this -> user = $user;
-		$this -> navigation = parent::main_menu();
 		$settings = Settings::all();
 		$this -> settings = $settings;
 
@@ -48,10 +47,9 @@ class BlogController extends BaseController {
 		}
 		// Get all the blog posts
 		$blogs = $this -> blog -> orderBy('created_at', 'DESC') -> paginate($pageitem);
-		$menu = $this -> navigation;
-
+		
 		// Show the page
-		return View::make('site/blog/index', compact('blogs', 'menu'));
+		return View::make('site/blog/index', compact('blogs'));
 	}
 
 	/**
@@ -83,9 +81,8 @@ class BlogController extends BaseController {
 		if (!empty($user)) {
 			$canBlogComment = $user -> can('post_blog_comment');
 		}
-		$menu = $this -> navigation;
 		// Show the page
-		return View::make('site/blog/view_post', compact('blog', 'blog_comments', 'canBlogComment', 'menu'));
+		return View::make('site/blog/view_post', compact('blog', 'blog_comments', 'canBlogComment'));
 	}
 
 	/**

@@ -41,7 +41,7 @@ class Messages extends Eloquent implements PresentableInterface {
 	 * @return user receiver
 	 */
 	public function user_id_to() {
-		return $this -> belongsTo('Users', 'user_id_to');
+		return $this -> belongsTo('User', 'user_id_to');
 	}
 	/**
 	 * Get the pugin.
@@ -49,7 +49,7 @@ class Messages extends Eloquent implements PresentableInterface {
 	 * @return user sender
 	 */
 	public function user_id_from() {
-		return $this -> belongsTo('Users', 'user_id_from');
+		return $this -> belongsTo('User', 'user_id_from');
 	}
 
 	/**
