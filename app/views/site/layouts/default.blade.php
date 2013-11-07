@@ -3,13 +3,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>A2Z CMS</title>
+		<title>{{$title}}</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- @todo: fill with your company info or remove -->
-		<meta name="description" content="">
-		<meta name="author" content="">
+		<meta name="description" content="{{$metadesc}}">
+		<meta name="keywords" content="{{$metakey}}">
+		<meta name="author" content="{{$metaauthor}}">
 		<?php
 		$asset = Config::get('app.url');
 		?>
@@ -23,6 +24,9 @@
 		<![endif]-->
 
 		<link rel="shortcut icon" href="{{$asset}}assets/admin/ico/favicon.ico">
+		
+		{{$analytics}}
+		
 	</head>
 
 	<body>
@@ -197,6 +201,7 @@
           <div class="col-lg-12">
 			<span style="text-align:left;float:left">
 				&copy; 2013 <a class="a2zcms" href="#">A2Z CMS</a></span>
+			<span style="text-align: center;padding-left: 30%">{{$copyright}}</span>
 			<span style="text-align:right;float:right">
 				Powered by: <a class="a2zcms" href="http://laravel.com/" alt="Laravel 4">Laravel 4</a></span>
 		</div>

@@ -162,6 +162,18 @@ class AdminPagesController extends AdminController {
 		return Redirect::to('admin/pages') -> with('error', Lang::get('admin/pages/messages.delete.error'));
 	}
 
+	public function getVisible($id)
+	{
+		//echo $pageId;exit;
+		$page = Page::find($id);
+		// Was the role deleted?
+		$page -> status = ($page -> status + 1) % 2;
+		$page -> save();	
+
+		// There was a problem deleting the role
+		return Redirect::to('admin/pages');
+		
+	}
 	/**
 	 * Show a list of all the pages formatted for Datatables.
 	 *
@@ -173,7 +185,8 @@ class AdminPagesController extends AdminController {
 		return Datatables::of($pages) 
 			-> edit_column('voteup', '{{ $voteup-$votedown }}') 
 			-> edit_column('status', '{{($status)? "<i class=\"icon-eye-open\"></i>":"<i class=\"icon-eye-close\"></i>";}}') 
-			-> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
+			-> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/visible\' ) }}}" class="btn btn-link btn-sm"><i class="icon-exchange "></i></a>
+							<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
                             <a href="{{{ URL::to(\'admin/pages/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>') 
             -> remove_column('id') 
 			-> remove_column('votedown') 

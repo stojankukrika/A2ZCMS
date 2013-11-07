@@ -34,13 +34,34 @@ class BaseController extends Controller {
 		foreach ($settings as $v) {
 			if ($v -> varname == 'offline') {
 				$offline = $v -> value;
+				View::share('key', 'value');
 			}
+			if ($v -> varname == 'metadesc') {
+				View::share('metadesc',  $v -> value);
+			}
+			if ($v -> varname == 'metakey') {
+				View::share('metakey', $v -> value);
+			}
+			if ($v -> varname == 'metaauthor') {
+				View::share('metaauthor',  $v -> value);
+			}
+			if ($v -> varname == 'title') {
+				View::share('title',  $v -> value);
+			}
+			if ($v -> varname == 'copyright') {
+				View::share('copyright',  $v -> value);
+			}
+			if ($v -> varname == 'analytics') {
+				View::share('analytics',  $v -> value);
+			}						
+			
 		}
 		if($offline==1)
 		{
 			header('Location: '. Config::get("app.url").'offline');
 			exit ;
 		}
+		
 	}
 	/* Attempt to do login
 	 *

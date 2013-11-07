@@ -111,16 +111,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('galleries', 'AdminGalleriesController');
 	
 		# Navigation Management
+	Route::get('pages/{nav}/visible', 'AdminPagesController@getVisible')
+        ->where('nav', '[0-9]+');
     Route::get('pages/{nav}/show', 'AdminPagesController@getShow')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::get('pages/{nav}/edit', 'AdminPagesController@getEdit')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::post('pages/{nav}/edit', 'AdminPagesController@postEdit')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::get('pages/{nav}/delete', 'AdminPagesController@getDelete')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::post('pages/{nav}/delete', 'AdminPagesController@getDelete')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::controller('pages', 'AdminPagesController');
     
     # Navigation Group Management
@@ -138,15 +140,15 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
     # Navigation Management
     Route::get('navigation/{nav}/show', 'AdminNavigationController@getShow')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::get('navigation/{nav}/edit', 'AdminNavigationController@getEdit')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::post('navigation/{nav}/edit', 'AdminNavigationController@postEdit')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::get('navigation/{nav}/delete', 'AdminNavigationController@getDelete')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::post('navigation/{nav}/delete', 'AdminNavigationController@getDelete')
-        ->where('group', '[0-9]+');
+        ->where('nav', '[0-9]+');
     Route::controller('navigation', 'AdminNavigationController');
 
     # User Management    
