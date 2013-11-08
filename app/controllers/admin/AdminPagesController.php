@@ -38,9 +38,11 @@ class AdminPagesController extends AdminController {
 	public function getCreate() {
 		// Title
 		$title = Lang::get('admin/pages/title.create_a_new_page');
-
+		
+		$pluginfunction_content = PluginFunctions::where('type','=','content')->get();
+		$pluginfunction_slider = PluginFunctions::where('type','=','sidebar')->get();
 		// Show the page
-		return View::make('admin/pages/create_edit', compact('title'));
+		return View::make('admin/pages/create_edit', compact('title','pluginfunction_content','pluginfunction_slider'));
 	}
 
 	/**

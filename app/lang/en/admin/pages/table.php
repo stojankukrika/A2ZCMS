@@ -23,6 +23,7 @@ return array(
 	'showmenu' => 'Show in Header',
 	'showfooter' => 'Show in Footer',
 	'showsidebar' => 'Show in Sidebar',
-	'page_grid' => 'Grid',
+	'page_sidebar' => 'Sidebar Widgets',
+	'page_content' => 'Content',
 	
 );

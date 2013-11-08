@@ -21,9 +21,6 @@ class CreateBlogsTable extends Migration {
 			$table -> string('title');
 			$table -> string('slug');
 			$table -> text('content');
-			$table -> string('meta_title');
-			$table -> string('meta_description');
-			$table -> string('meta_keywords');
 			$table -> date('start_publish');
 			$table -> date('end_publish') -> nullable();
 			$table -> string('resource_link') -> nullable();

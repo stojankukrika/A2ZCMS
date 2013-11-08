@@ -225,23 +225,19 @@
 			<div class="form-group {{{ $errors->has('page_javascript') ? 'error' : '' }}}">
 				<div class="row responsive-utilities-test hidden-on">
 					  <div class="col-md-5 col-xs-5">
-					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_grid') }}}</label><br>
+					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_content') }}}</label><br>
 						<ul id="sortable1">
-							<li class="ui-state-default">Item 1</li>
-							<li class="ui-state-default">Item 2</li>
-							<li class="ui-state-default">Item 3</li>
-							<li class="ui-state-default">Item 4</li>
-							<li class="ui-state-default">Item 5</li>
+							@foreach($pluginfunction_content as $item)
+								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" name="content[]"> {{$item->title}}</li>
+							@endforeach
 						</ul>
 					  </div>
 					  <div class="col-md-5 col-xs-5">
-					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_grid') }}}</label><br>
+					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_sidebar') }}}</label><br>
 						<ul id="sortable2">
-							<li class="ui-state-default"><input type="checkbox" value="1" name="hookshow[]"> Login form</li>
-							<li class="ui-state-default"><input type="checkbox" value="2" name="hookshow[]"> Item 2</li>
-							<li class="ui-state-default"><input type="checkbox" value="3" name="hookshow[]"> Item 3</li>
-							<li class="ui-state-default"><input type="checkbox" value="4" name="hookshow[]"> Item 4</li>
-							<li class="ui-state-default"><input type="checkbox" value="5" name="hookshow[]"> Item 5</li>
+							@foreach($pluginfunction_slider as $item)
+								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" name="slider[]"> {{$item->title}}</li>
+							@endforeach
 						</ul>
 					  </div>
 				</div>
