@@ -213,24 +213,28 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
  *  ------------------------------------------
  */
 
+ Route::group(array('before' => 'auth'), function()
+{
+    //:: User Account Routes ::
+	Route::post('user/{user}/edit', 'UserController@postEdit')
+    		->where('user', '[0-9]+');
+	//User messages
+	Route::get('user/messages', 'UserMessagesController@getIndex');
+	Route::get('user/messages/{messageid}/read', 'UserMessagesController@getRead')
+	        ->where('messageid', '[0-9]+');
+	Route::post('user/messages/sendmessage', 'UserMessagesController@postSendmessage');
+	
+});
+
 // User reset routes
 Route::get('user/reset/{token}', 'UserController@getReset')
     ->where('token', '[0-9a-z]+');
 // User password reset
 Route::post('user/reset/{token}', 'UserController@postReset')
     ->where('token', '[0-9a-z]+');
-//:: User Account Routes ::
-Route::post('user/{user}/edit', 'UserController@postEdit')
-    ->where('user', '[0-9]+');
 
 //:: User Account Routes ::
 Route::post('user/login', 'UserController@postLogin');
-
-//User messages
-Route::get('user/messages', array('before' => 'auth'), 'UserMessagesController@getIndex');
-Route::get('user/messages/{messageid}/read', array('before' => 'auth'), 'UserMessagesController@getRead')
-        ->where('messageid', '[0-9]+');
-Route::post('user/messages/sendmessage', array('before' => 'auth'), 'UserMessagesController@postSendmessage');
 
 //:: User Account Routes ::
 Route::post('login', 'BaseController@postLogin');
