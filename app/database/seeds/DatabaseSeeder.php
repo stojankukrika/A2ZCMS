@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder {
 		$this -> call('GallerysPermissionSeeder');
 		$this -> call('TodolistTableSeeder');
 		$this -> call('PluginsTableSeeder');
-		$this -> call('PluginfunctionsTableSeeder');
+		$this -> call('PluginfunctionTableSeeder');
 	}
 
 }

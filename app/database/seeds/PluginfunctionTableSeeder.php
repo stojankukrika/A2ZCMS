@@ -1,6 +1,6 @@
 <?php
 
-class PluginfunctionsTableSeeder extends Seeder {
+class PluginfunctionTableSeeder extends Seeder {
 
 	public function run()
 	{
@@ -49,14 +49,14 @@ class PluginfunctionsTableSeeder extends Seeder {
 					array('title' => 'Display gallery', 
 						'plugin_id' => $plugin_gallery,
 						'function'=>'showGallery',
-						'params'=>'sort:asc;order:id;limit:0;',
+						'params'=>'',
 						'type' => 'content',
 						'created_at' => new DateTime, 
 						'updated_at' => new DateTime,),
 					array('title' => 'Display blogs', 
 						'plugin_id' => $plugin_blog,
 						'function'=>'showBlogs',
-						'params'=>'sort:asc;order:id;limit:0;',
+						'params'=>'',
 						'type' => 'content',
 						'created_at' => new DateTime, 
 						'updated_at' => new DateTime,),);

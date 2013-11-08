@@ -222,7 +222,7 @@
 		<!-- Grid tab -->
 		<div class="tab-pane" id="tab-grid">
 			<!-- Content -->
-			<div class="form-group {{{ $errors->has('page_javascript') ? 'error' : '' }}}">
+			<div id="grids">
 				<div class="row responsive-utilities-test hidden-on">
 					  <div class="col-md-5 col-xs-5">
 					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_content') }}}</label><br>
