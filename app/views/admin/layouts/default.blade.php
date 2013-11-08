@@ -33,12 +33,13 @@
 			$asset = Config::get('app.url');
 		?>
 		<!-- start: CSS -->
-		<link href="{{$asset}}assets/admin/css/bootstrap.min.css" rel="stylesheet">
-		<link href="{{$asset}}assets/admin/css/print.css" rel="stylesheet" type="text/css" media="print"/>
-		<link href="{{$asset}}assets/admin/css/jquery.dataTables.css" rel="stylesheet">
-		<link href="{{$asset}}assets/admin/css/colorbox.css" rel="stylesheet">
-		<link href="{{$asset}}assets/admin/css/style.min.css" rel="stylesheet">
-		<link href="{{$asset}}assets/admin/css/bootstrap-dataTables.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/print.css" rel="stylesheet"media="print"/>
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/jquery.dataTables.css">
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/colorbox.css">
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/style.min.css">
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/jquery-ui-1.10.3.custom.css">		
+		<link href="{{$asset}}assets/admin/css/bootstrap-dataTables.css">
 		<!-- end: CSS -->
 
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->

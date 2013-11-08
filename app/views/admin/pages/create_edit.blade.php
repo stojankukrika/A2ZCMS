@@ -2,7 +2,6 @@
 
 {{-- Content --}}
 @section('content')
-
 <ul class="nav nav-tabs">
 	<li class="active">
 		<a href="#tab-general" data-toggle="tab">General</a>
@@ -198,7 +197,7 @@
 			<div class="form-group {{{ $errors->has('page_css') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_css') }}}</label>
-					<textarea class="full-width col-md-12 wysihtml5" name="page_css" value="page_css" rows="10" class="form-control">{{{ Input::old('page_css', isset($page) ? $page->page_css : null) }}}</textarea>
+					<textarea class="full-width col-md-12 wysihtml5" name="page_css" value="page_css" rows="8" class="form-control">{{{ Input::old('page_css', isset($page) ? $page->page_css : null) }}}</textarea>
 					{{{ $errors->first('page_css', '<span class="help-inline">:message</span>') }}}
 				</div>
 			</div>
@@ -212,7 +211,7 @@
 			<div class="form-group {{{ $errors->has('page_javascript') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_javascript') }}}</label>
-					<textarea class="full-width col-md-12 wysihtml5" name="page_javascript" value="page_javascript" rows="10" class="form-control">{{{ Input::old('page_javascript', isset($page) ? $page->page_javascript : null) }}}</textarea>
+					<textarea class="full-width col-md-12 wysihtml5" name="page_javascript" value="page_javascript" rows="8" class="form-control">{{{ Input::old('page_javascript', isset($page) ? $page->page_javascript : null) }}}</textarea>
 					{{{ $errors->first('page_javascript', '<span class="help-inline">:message</span>') }}}
 				</div>
 			</div>
@@ -224,20 +223,30 @@
 		<div class="tab-pane" id="tab-grid">
 			<!-- Content -->
 			<div class="form-group {{{ $errors->has('page_javascript') ? 'error' : '' }}}">
-				<div class="col-lg-12">
-					<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_grid') }}}</label>
-					
-					<ul id="sortable">
-						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-						<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
-					</ul>
+				<div class="row responsive-utilities-test hidden-on">
+					  <div class="col-md-5 col-xs-5">
+					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_grid') }}}</label><br>
+						<ul id="sortable1">
+							<li class="ui-state-default">Item 1</li>
+							<li class="ui-state-default">Item 2</li>
+							<li class="ui-state-default">Item 3</li>
+							<li class="ui-state-default">Item 4</li>
+							<li class="ui-state-default">Item 5</li>
+						</ul>
+					  </div>
+					  <div class="col-md-5 col-xs-5">
+					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_grid') }}}</label><br>
+						<ul id="sortable2">
+							<li class="ui-state-default"><input type="checkbox" value="1" name="hookshow[]"> Login form</li>
+							<li class="ui-state-default"><input type="checkbox" value="2" name="hookshow[]"> Item 2</li>
+							<li class="ui-state-default"><input type="checkbox" value="3" name="hookshow[]"> Item 3</li>
+							<li class="ui-state-default"><input type="checkbox" value="4" name="hookshow[]"> Item 4</li>
+							<li class="ui-state-default"><input type="checkbox" value="5" name="hookshow[]"> Item 5</li>
+						</ul>
+					  </div>
 				</div>
 			</div>
+		</div>
 			<!-- ./ content -->
 		</div>
 		<!-- ./ Grid tab -->
@@ -266,8 +275,9 @@
 @section('scripts')
 <script>
 $(function() {
-	$( "#sortable" ).sortable();
-	$( "#sortable" ).disableSelection();
-});
+	 $( "#sortable1, #sortable2" ).sortable({
+			items: "li:not(.ui-state-disabled)"
+		}).disableSelection();
+	});
 </script>
 @stop

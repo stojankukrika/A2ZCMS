@@ -120,7 +120,7 @@ class BaseController extends Controller {
 	}
 
 	public function main_menu() {
-		$navigation = Navigation::select('id', 'title', 'parent', 'link_type', 'target', 'position') -> get();
+		$navigation = Navigation::select('id', 'title', 'parent', 'link_type', 'target', 'position','class') -> get();
 
 		$menu = array('items' => array(), 'parents' => array());
 		// Builds the array lists with data from the menu table
@@ -141,10 +141,10 @@ class BaseController extends Controller {
 		if (isset($menu['parents'][$parent])) {
 			foreach ($menu['parents'][$parent] as $itemId) {
 				if (!isset($menu['parents'][$itemId])) {
-					$html .= "<li> <a href='".URL::to('page') ."/". $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a></li>";
+					$html .= "<li> <a class='".$menu['items'][$itemId]['class']."' href='".URL::to('page') ."/". $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a></li>";
 				}
 				if (isset($menu['parents'][$itemId])) {
-					$html .= "<li class='dropdown'> <a class='dropdown-toggle' href='".URL::to('page') ."/". $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a>
+					$html .= "<li class='dropdown'> <a class='dropdown-toggle ".$menu['items'][$itemId]['class']."' href='".URL::to('page') ."/". $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a>
 						<ul class='dropdown-menu'>";
 					$html .= $this -> buildMenu($itemId, $menu);
 					$html .= " </ul></li>";
