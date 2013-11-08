@@ -3,19 +3,27 @@
 use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
-class Grid extends Eloquent implements PresentableInterface {
+class PluginFunctions extends Eloquent implements PresentableInterface {
 
-	protected $table = "grids";
+	protected $table = "plugin_functions";
 	protected $softDelete = true;
 	/**
-	 * Returns a formatted post content entry,
-	 * this ensures that line breaks are returned.
+	 * Returns a web function who is called
 	 *
 	 * @return string
 	 */
-	public function order() {
-		return nl2br($this -> order);
+	public function webfunction() {
+		return nl2br($this -> function);
 	}
+	/**
+	 * Returns a params for functions
+	 *
+	 * @return string
+	 */
+	public function params() {
+		return nl2br($this -> params);
+	}
+	
 	
 	/**
 	 * Get the pugin.

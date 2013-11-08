@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateGridsTable extends Migration {
+class CreatePluginFunctionsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,11 +11,13 @@ class CreateGridsTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('grids', function(Blueprint $table) {
+		Schema::create('plugin_functions', function(Blueprint $table) {
 			$table -> increments('id');
-			$table -> integer('plugin_id') -> unsigned();
-			$table -> foreign('plugin_id') -> references('id') -> on('plugins') -> onDelete('cascade');
-			$table -> integer('order');
+			$table -> string('title');
+			$table -> integer('plugin_id') -> nullable() -> default(NULL);
+			$table -> string('function');
+			$table -> string('params');
+			$table -> string('type');
 			$table -> timestamps();
 			$table -> softDeletes();
 		});
@@ -27,7 +29,7 @@ class CreateGridsTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('grids');
+		Schema::drop('plugin_functions');
 	}
 
 }
