@@ -14,8 +14,9 @@
 		<?php
 		$asset = Config::get('app.url');
 		?>
-		<link rel="stylesheet" type="text/css"  href="{{$asset}}assets/site/css/bootstrap.min.css">
-		
+		<link rel="stylesheet" type="text/css"  href="{{$asset}}assets/site/css/bootstrap.min.css">	
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/css/jquery-ui-1.10.3.custom.css">		
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/css/jquery.multiselect.css">	
 		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/css/a2zcms.css">		
 		
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -238,8 +239,11 @@
 
 		<![endif]-->
 		<script src="{{$asset}}assets/site/js/jquery-migrate-1.2.1.min.js"></script>
-
 		<script src="{{$asset}}assets/site/js/bootstrap.js"></script>
 		<script src="{{$asset}}assets/site/js/theme.js"></script>
+		<script src="{{$asset}}assets/site/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="{{$asset}}assets/site/js/jquery.multiselect.js"></script>
+		<!-- end: JavaScript-->
+		@yield('scripts')
 	</body>
 </html>

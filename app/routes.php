@@ -227,7 +227,10 @@ Route::post('user/{user}/edit', 'UserController@postEdit')
 Route::post('user/login', 'UserController@postLogin');
 
 //User messages
-Route::get('user/messages', 'UserMessagesController@getIndex');
+Route::get('user/messages', array('before' => 'auth'), 'UserMessagesController@getIndex');
+Route::get('user/messages/{messageid}/read', array('before' => 'auth'), 'UserMessagesController@getRead')
+        ->where('messageid', '[0-9]+');
+Route::post('user/messages/sendmessage', array('before' => 'auth'), 'UserMessagesController@postSendmessage');
 
 //:: User Account Routes ::
 Route::post('login', 'BaseController@postLogin');

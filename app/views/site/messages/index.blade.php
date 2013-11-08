@@ -19,10 +19,11 @@
                 <div class="panel panel-default">
 	              <div class="panel-heading">
 	                <h4 class="panel-title">
-	                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{{$item->id}}}">
-	                   {{{ $item->subject }}}
+	                  <a class="accordion-toggle" id="msg-{{{$item->id}}}" data-toggle="collapse" data-parent="#accordion" href="#{{{$item->id}}}">
+	                   <b>{{{ $item->subject }}}</b>
 	                  </a>
-	                </h4><span>Test user</span>
+	                </h4><span>{{{ $item->sender->surname }}} {{{ $item->sender->name }}}</span> 
+	                ({{{ date($dateformat.$timeformat, strtotime($item->sender->created_at)) }}})
 	              </div>
 	              <div id="{{{$item->id}}}" class="panel-collapse collapse">
 	                <div class="panel-body">
@@ -38,10 +39,11 @@
               	 <div class="panel panel-default">
 	              <div class="panel-heading">
 	                <h4 class="panel-title">
-	                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{{$item->id}}}">
-	                    {{{ $item->subject }}}
+	                  <a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#{{{$item->id}}}">
+	                    <b>{{{ $item->subject }}}</b>
 	                  </a>
-	                </h4><span>Admin Adminovic</span>
+	                </h4><span>{{{ $item->receiver->surname }}} {{{ $item->receiver->name }}}</span> 
+ 					({{{ date($dateformat.$timeformat, strtotime($item->sender->created_at)) }}})
 	              </div>
 	              <div id="{{{$item->id}}}" class="panel-collapse collapse">
 	                <div class="panel-body">
@@ -54,20 +56,29 @@
           </div>
           <div class="tab-pane fade in" id="service-three">
              
-             <form role="form" method="POST" action="contact-form-submission.php">
-              <div class="form-group col-lg-4">
-                <label for="input1">Name</label>
-                <input type="text" name="contact_name" class="form-control" id="input1">
-              </div>
-               <div class="clearfix"></div>
-              <div class="form-group col-lg-12">
-                <label for="input4">Message</label>
-                <textarea name="contact_message" class="form-control" rows="6" id="input4"></textarea>
-              </div>
-              <div class="form-group col-lg-12">
-                <input type="hidden" name="save" value="contact">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+             <form role="form" method="POST" action="messages/sendmessage">
+	             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+	              <div class="form-group col-lg-4">
+	                <label for="input1">Subject</label>
+	              	<input class="form-control" type="text" name="subject" id="subject" >
+	              </div>
+	               <div class="clearfix"></div>
+	               <div class="form-group col-lg-4">
+	                <label for="input1">Receivers</label>
+	               <select name="recipients[]" multiple="multiple" id="recipients">
+	                     @foreach($allUsers as $usr)
+	                        <option value="{{ $usr->id}}">{{ $usr->surname }} {{ $usr->name }}</option>
+	                     @endforeach     
+	                </select>     
+	              </div>
+	               <div class="clearfix"></div>
+	              <div class="form-group col-lg-12">
+	                <label for="input4">Message</label>
+	                <textarea name="content" class="form-control" rows="6" id="content"></textarea>
+	              </div>
+	              <div class="form-group col-lg-12">
+	                <button type="submit" class="btn btn-primary">Submit</button>
+	              </div>
             </form>
 
           </div>
@@ -77,9 +88,22 @@
 	{{-- Scripts --}}
 	@section('scripts')
 	<script>
-		$('#sidebar-left').addClass('minified');
-		$(window).bind('beforeunload', function(){
-		 	$('#sidebar-left').removeClass('minified');
+		$( document ).ready(function() {
+			
+			/*set a multiselect users for sending a message*/
+			$("#recipients").multiselect();
+		
+			/*mark message as read*/
+			$("[id^='msg-']").click(function() {
+
+				var values = $(this).attr("id");
+				var value = values.split('-')[1];
+					$.ajax({
+						url: 'messages/'+value+'/read',
+						type: "GET",							
+					})
+			})
+		
 		});
 	</script>
 	@stop

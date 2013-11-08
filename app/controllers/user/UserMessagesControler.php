@@ -26,15 +26,47 @@ class UserMessagesController extends BaseController {
 	public function getIndex() {
 		
 		$user = $this -> user -> currentUser();
-		
+		$allUsers = User::where('id','<>',$user->id)->get();
 		list($user, $redirect) = $this -> user -> checkAuthAndRedirect('user');
 		if ($redirect) {
 			return $redirect;
 		}
-		$received = $this -> messages -> where('user_id_to','=',$user->id)-> get();
-		$send = $this -> messages -> where('user_id_from','=',$user->id)-> get();
+		$received = $this -> messages -> where('user_id_to','=',$user->id)->orderBy('id', 'DESC')-> get();
+		$send = $this -> messages -> where('user_id_from','=',$user->id)->orderBy('id', 'DESC')-> get();
 
 		// Show the page
-		return View::make('site/messages/index', compact('user','received','send'));
+		return View::make('site/messages/index', compact('user','received','send','allUsers'));
+	}
+	
+	public function postSendmessage() {
+		// Declare the rules for the form validation
+		$rules = array('content' => 'required|min:3','subject' => 'required|min:3','recipients' => 'required');
+
+		// Validate the inputs
+		$validator = Validator::make(Input::all(), $rules);
+
+		// Check if the form validates with success
+		if ($validator -> passes()) {
+			
+			$user = $this -> user -> currentUser();
+			
+			$this -> messages -> subject = Input::get('subject');
+			$this -> messages -> content = Input::get('content');
+			$this -> messages -> user_id_from = $user->id;
+			foreach (Input::get('recipients') as $recipient) {
+				$this -> messages -> user_id_to = $recipient;
+				$this -> messages -> save();
+			}
+		}	
+
+		// Show the page
+		return Redirect::to('user/messages');
+	}
+	
+	public function getRead($message_id)
+	{
+		$message = Messages::where('id', '=', $message_id)->first();
+		$message->read = 1;
+		$message->save();
 	}
 }

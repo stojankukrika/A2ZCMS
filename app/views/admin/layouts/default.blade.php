@@ -96,7 +96,7 @@
 									<a href="{{{ URL::to('/admin/users/profile') }}}"><i class="icon-cog"></i> Profile</a>
 								</li>
 								<li>
-									<a href="{{{ URL::to('user/messagess') }}}"><i class="icon-envelope"></i> Messages</a>
+									<a href="{{{ URL::to('user/messages') }}}"><i class="icon-envelope"></i> Messages</a>
 								</li>
 								<li>
 									<a href="{{{ URL::to('user/logout') }}}"><i class="icon-road icon-white"></i> {{ Lang::get('admin/general.logout') }}</a>

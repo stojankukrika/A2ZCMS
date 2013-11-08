@@ -49,7 +49,13 @@ class BaseController extends Controller {
 			}
 			if ($v -> varname == 'analytics') {
 				View::share('analytics',  $v -> value);
-			}						
+			}	
+			if ($v -> varname == 'dateformat') {
+				View::share('dateformat',  $v -> value);
+			}
+			if ($v -> varname == 'timeformat') {
+				View::share('timeformat',  $v -> value);
+			}					
 			
 		}
 		if($offline==1)

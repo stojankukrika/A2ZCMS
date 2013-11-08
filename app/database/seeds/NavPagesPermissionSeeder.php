@@ -6,9 +6,9 @@ class NavPagesPermissionSeeder extends Seeder {
 
 		$permissions = array( 
 					array('name' => 'manage_navigation', 
-							'display_name' => 'manage navigation'), 
+							'display_name' => 'Manage navigation'), 
 					array('name' => 'manage_pages', 
-							'display_name' => 'manage pages'), 
+							'display_name' => 'Manage pages'), 
 					array('name' => 'manage_navigation_groups', 
 							'display_name' => 'Manage navigation groups'));
 
