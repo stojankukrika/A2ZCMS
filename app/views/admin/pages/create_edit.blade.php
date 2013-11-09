@@ -50,7 +50,7 @@
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showtitle', 0, (Input::old('showtitle') == '0' || (isset($page->showtitle) && $page->showtitle == 0)) ? true : false, array('id'=>'showtitle', 'class'=>'radio')) }}
+						{{ Form::radio('showtitle', 0, (Input::old('showtitle') == '0' || (isset($page->showtitle) && $page->showtitle == 0) || !isset($page->showtitle)) ? true : false, array('id'=>'showtitle', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>
 	
@@ -67,7 +67,7 @@
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showdate', 0, (Input::old('showdate') == '0' || (isset($page->showdate) && $page->showdate == 0)) ? true : false, array('id'=>'showdate', 'class'=>'radio')) }}
+						{{ Form::radio('showdate', 0, (Input::old('showdate') == '0' || (isset($page->showdate) && $page->showdate == 0) || !isset($page->showdate)) ? true : false, array('id'=>'showdate', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>
 	
@@ -84,7 +84,7 @@
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showvote', 0, (Input::old('showvote') == '0' || (isset($page->showvote) && $page->showvote == 0)) ? true : false, array('id'=>'showvote', 'class'=>'radio')) }}
+						{{ Form::radio('showvote', 0, (Input::old('showvote') == '0' || (isset($page->showvote) && $page->showvote == 0) || !isset($page->showvote)) ? true : false, array('id'=>'showvote', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>	
 				</div>
@@ -100,7 +100,7 @@
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showtags', 0, (Input::old('showtags') == '0' || (isset($page->showtags) && $page->showtags == 0)) ? true : false, array('id'=>'showtags', 'class'=>'radio')) }}
+						{{ Form::radio('showtags', 0, (Input::old('showtags') == '0' || (isset($page->showtags) && $page->showtags == 0) || !isset($page->showtags)) ? true : false, array('id'=>'showtags', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>
 	
@@ -117,7 +117,7 @@
 						{{{ Lang::get('admin/pages/table.left') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('sidebar', 0, (Input::old('sidebar') == '0' || (isset($page->sidebar) && $page->sidebar == 0)) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
+						{{ Form::radio('sidebar', 0, (Input::old('sidebar') == '0' || (isset($page->sidebar) && $page->sidebar == 0) || !isset($page->sidebar)) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.right') }}}	
 					</label>
 	
@@ -224,19 +224,41 @@
 			<!-- Content -->
 			<div id="grids">
 				<div class="row responsive-utilities-test hidden-on">
-					  <div class="col-md-5 col-xs-5">
+					  <div class="col-md-8 col-xs-8">
 					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_content') }}}</label><br>
 						<ul id="sortable1">
 							@foreach($pluginfunction_content as $item)
-								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" name="content[]"> {{$item->title}}</li>
+								<li class="ui-state-default">
+									{{$item->title}}
+									<div>
+										@if(strpos($item->params,'sort') !== false)
+											<label class="control-label" for="sort">Sorting: </label>
+											<select name="sort{{$item->id}}" id="sort{{$item->id}}"> 
+											  <option>Ascending</option>
+											  <option>Dending</option>
+											</select>
+										@endif
+										@if(strpos($item->params,'order') !== false)
+											<label class="control-label" for="order">Order: </label>
+											<select name="order{{$item->id}}" id="order{{$item->id}}"> 
+											  <option value="id" >ID</option>
+											  <option value="views" >Views</option>
+											</select>
+										@endif
+										@if(strpos($item->params,'limit') !== false)
+											<label class="control-label" for="limit">Limit: </label>
+											<input type="text" name="limit{{$item->id}}" value="0" id="limit{{$item->id}}">
+										@endif
+									<div>
+								</li>
 							@endforeach
 						</ul>
 					  </div>
-					  <div class="col-md-5 col-xs-5">
+					  <div class="col-md-4 col-xs-4">
 					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_sidebar') }}}</label><br>
 						<ul id="sortable2">
 							@foreach($pluginfunction_slider as $item)
-								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" name="slider[]"> {{$item->title}}</li>
+								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" name="content[]"> {{$item->title}}</li>
 							@endforeach
 						</ul>
 					  </div>
@@ -272,8 +294,9 @@
 <script>
 $(function() {
 	 $( "#sortable1, #sortable2" ).sortable({
-			items: "li:not(.ui-state-disabled)"
-		}).disableSelection();
+			items: "li:not(.ui-state-disabled)",
+		});
 	});
+	 $("input[id^='limit']").spinner();
 </script>
 @stop

@@ -49,4 +49,32 @@ class WebsiteController extends BaseController {
 	{
 		return View::make('site/contact_us', compact('page'));
 	}
+	/*public function login()
+	{
+		
+	}
+	public function search()
+	{
+		
+	}
+	public function mostReadBlogs()
+	{
+		
+	}
+	public function newBlogs()
+	{
+		
+	}
+	public function content()
+	{
+		
+	}
+	public function showGallery()
+	{
+		
+	}
+	public function showBlogs()
+	{
+		
+	}*/
 }
