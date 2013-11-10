@@ -249,6 +249,30 @@
 											<label class="control-label" for="limit">Limit: </label>
 											<input type="text" name="limit{{$item->id}}" value="0" id="limit{{$item->id}}">
 										@endif
+										@if(strpos($item->params,'id') !== false)
+											<label class="control-label" for="selectError1">Select items for page: </label>
+											<div class="controls">
+											  <select id="id{{$item->id}}" name="id{{$item->id}}" class="form-control" multiple data-rel="chosen">
+												<option>Option 1</option>
+												<option selected>Option 2</option>
+												<option>Option 3</option>
+												<option>Option 4</option>
+												<option>Option 5</option>
+											  </select>
+											</div>
+										@endif
+										@if(strpos($item->params,'grid') !== false)
+											<label class="control-label" for="selectError1">Select groups for page: </label>
+											<div class="controls">
+											  <select id="grid{{$item->id}}" name="grid{{$item->id}}" class="form-control" multiple data-rel="chosen">
+												<option>Option 1</option>
+												<option selected>Option 2</option>
+												<option>Option 3</option>
+												<option>Option 4</option>
+												<option>Option 5</option>
+											  </select>
+											</div>
+										@endif
 									<div>
 								</li>
 							@endforeach
