@@ -97,6 +97,7 @@ class AdminPagesController extends AdminController {
 					$pagepluginfunction = new PagePluginFunction;
 					$pagepluginfunction -> plugin_function_id = $value;
 					$pagepluginfunction -> order = $order;
+					$pagepluginfunction -> params = PluginFunction::find($value)->params;
 					$pagepluginfunction -> page_id = $this -> page -> id;
 					$pagepluginfunction -> save();
 					$order ++;
@@ -167,10 +168,35 @@ class AdminPagesController extends AdminController {
 		if ($id) {
 			// Title
 			$title = Lang::get('admin/pages/title.page_update');
-			// mode
-			$mode = 'edit';
+			
 			$page = Page::find($id);
-			return View::make('admin/pages/create_edit', compact('page', 'title', 'mode'));
+			
+			$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
+									->leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+									->whereRaw("(page_plugin_functions.page_id  = '".$page->id."' OR page_plugin_functions.page_id IS NULL)")
+									->where('plugin_functions.type','=','content')
+									->whereRaw('page_plugin_functions.deleted_at IS NULL')
+									->orderBy('page_plugin_functions.order','ASC')
+									->get(array('plugin_functions.id','plugin_functions.title','page_plugin_functions.params','plugins.function_id','plugins.function_grid','page_plugin_functions.order'));
+			
+			foreach ($pluginfunction_content as $key => $value) {
+					$function_id = $value['function_id'];
+					$function_grid = $value['function_grid'];
+					if($function_id!=NULL){
+						$value['function_id'] = $this->$function_id();
+					}
+					if($function_grid!=NULL){
+						$value['function_grid'] = $this->$function_grid();
+					}
+				}
+			$pluginfunction_slider = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+								->whereRaw("(page_plugin_functions.page_id  = '".$page->id."' OR page_plugin_functions.page_id IS NULL)")
+								->where('plugin_functions.type','=','sidebar')
+								->whereRaw('page_plugin_functions.deleted_at IS NULL')
+								->orderBy('page_plugin_functions.order','ASC')
+								->get(array('plugin_functions.id','plugin_functions.title','plugin_functions.params','page_plugin_functions.order'));
+		
+			return View::make('admin/pages/create_edit', compact('page', 'title', 'pluginfunction_content','pluginfunction_slider'));
 		} else {
 			return Redirect::to('admin/pages') -> with('error', Lang::get('admin/users/messages.does_not_exist'));
 		}
@@ -196,19 +222,38 @@ class AdminPagesController extends AdminController {
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Was the page updated?
-			if ($page -> update($inputs)) {
+			
+			$page -> name = Input::get('name');
+			$page -> slug = Str::slug(Input::get('name'));
+			$page -> content = Input::get('content');
+			$page -> status = Input::get('status');
+			$page -> meta_title = Input::get('meta_title');
+			$page -> meta_description = Input::get('meta_description');
+			$page -> meta_keywords = Input::get('meta_keywords');
+			$page -> page_css = Input::get('page_css');
+			$page -> page_javascript = Input::get('page_javascript');
+			$page -> sidebar = Input::get('sidebar');
+			$page -> showtitle = Input::get('showtitle');
+			$page -> showvote = Input::get('showvote');
+			$page -> password = Input::get('password');
+			$page -> showdate = Input::get('showdate');
+			
+			if ($page -> save()) {
+				
+				$old = PagePluginFunction::where('page_id','=',$page -> id);
+				$old->delete();
 				
 				if(Input::has('pagesidebar')){
-				$order = 1;
-				foreach (Input::get('pagesidebar') as $value) {
-					$pagepluginfunction = new PagePluginFunction;
-					$pagepluginfunction -> plugin_function_id = $value;
-					$pagepluginfunction -> order = $order;
-					$pagepluginfunction -> page_id = $page -> id;
-					$pagepluginfunction -> save();
-					$order ++;
+					$order = 1;
+					foreach (Input::get('pagesidebar') as $value) {
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order;
+						$pagepluginfunction -> page_id = $page -> id;
+						$pagepluginfunction -> save();
+						$order ++;
+						}
 				}
-			}
 			
 			$pagecontentorder = Input::get('pagecontentorder');
 			$pagecontent = Input::get('pagecontent');

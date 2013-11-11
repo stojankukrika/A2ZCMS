@@ -91,7 +91,7 @@
 			</div>
 			<!-- ./ show vote -->
 			
-			<!-- Show Tags -->
+			<!-- Show Tags 
 			<div class="form-group {{{ $errors->has('showtags') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label" for="showtags">{{{ Lang::get('admin/pages/table.showtags') }}}</label>
@@ -279,7 +279,7 @@
 					  	<label class="control-label" for="sortable2">{{{ Lang::get('admin/pages/table.page_sidebar') }}}</label><br>
 						<ul id="sortable2">
 							@foreach($pluginfunction_slider as $item)
-								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" {{$item->checked}} name="pagesidebar[]"> {{$item->title}}</li>
+								<li class="ui-state-default"><input type="checkbox" {{($item->order!='')?'checked':'';}} value="{{$item->id}}" name="pagesidebar[]"> {{$item->title}}</li>
 							@endforeach
 						</ul>
 					  </div>
