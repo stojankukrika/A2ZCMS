@@ -31,7 +31,7 @@ class PluginFunction extends Eloquent implements PresentableInterface {
 	 * @return Plugin
 	 */
 	public function plugin() {
-		return $this -> belongsTo('Plugins', 'plugin_id');
+		return $this -> belongsTo('Plugin', 'plugin_id');
 	}
 
 	/**

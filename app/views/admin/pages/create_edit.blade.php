@@ -232,10 +232,11 @@
 								<li class="ui-state-default" name="pagecontent[{{$item->id}}]" value="{{$item->id}}">
 									{{$item->title}}
 									<div>
+										<?php print_r($item->params); ?>
 										@if(strpos($item->params,'sort') !== false)
 											<label class="control-label" for="sort">Sorting: </label>
 											<select name="pagecontent[{{$item->id}}][sort]" id="sort{{$item->id}}"> 
-											  <option value="ASC">Ascending</option>
+											  <option value="ASC" >Ascending</option>
 											  <option value="DESC">Descending</option>
 											</select>
 										@endif

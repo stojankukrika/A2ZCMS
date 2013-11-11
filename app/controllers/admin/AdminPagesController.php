@@ -97,7 +97,7 @@ class AdminPagesController extends AdminController {
 					$pagepluginfunction = new PagePluginFunction;
 					$pagepluginfunction -> plugin_function_id = $value;
 					$pagepluginfunction -> order = $order;
-					$pagepluginfunction -> params = PluginFunction::find($value)->params;
+					$pagepluginfunction -> params = substr(PluginFunction::find($value)->params,0,-1);
 					$pagepluginfunction -> page_id = $this -> page -> id;
 					$pagepluginfunction -> save();
 					$order ++;
@@ -114,22 +114,24 @@ class AdminPagesController extends AdminController {
 						$params .= "id:";
 						foreach ($pagecontent[$value]['id'] as $value2) {
 							$params .= $value2.",";
-						}						
+						}
+						$params .= ";";						
 					}
 					if(!empty($pagecontent[$value]['grid'])){
 						$params .= "grid:";
 						foreach ($pagecontent[$value]['grid'] as $value2) {
 							$params .= $value2.",";
 						}
+						$params .= ";";
 					}
 					if(isset($pagecontent[$value]['sort'])){
-						$params .= "sort:".$pagecontent[$value]['sort'].",";
+						$params .= "sort:".$pagecontent[$value]['sort'].";";
 					}
 					if(isset($pagecontent[$value]['order'])){
-						$params .= "order:".$pagecontent[$value]['order'].",";
+						$params .= "order:".$pagecontent[$value]['order'].";";
 					}
 					if(isset($pagecontent[$value]['limit'])){
-						$params .= "limit:".$pagecontent[$value]['limit'].",";
+						$params .= "limit:".$pagecontent[$value]['limit'].";";
 					}
 
 					$params = ($params!="")?substr($params, 0, -1):"";
@@ -182,12 +184,38 @@ class AdminPagesController extends AdminController {
 			foreach ($pluginfunction_content as $key => $value) {
 					$function_id = $value['function_id'];
 					$function_grid = $value['function_grid'];
+					$params = $value['params'];
 					if($function_id!=NULL){
 						$value['function_id'] = $this->$function_id();
 					}
 					if($function_grid!=NULL){
 						$value['function_grid'] = $this->$function_grid();
 					}
+					if($params!=NULL){
+						$params = explode(';', $params);
+						foreach ($params as $value2) {
+							$value2 = explode(':', $value2);
+							switch ($value2['0']) {
+								case 'sort':
+									$value['params']['sort'] = $value2['1'];
+									break;
+								case 'order':
+									$value['params']['order'] = $value2['1'];
+									break;
+								case 'limit':
+									$value['params']['limit'] = $value2['1'];
+									break;
+								case 'id':
+									$value['params']['id'] = $value2['1'];
+									break;
+								case 'grid':
+									$value['params']['grid'] = $value2['1'];
+									break;
+							}
+						}
+						
+					}
+					
 				}
 			$pluginfunction_slider = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
 								->whereRaw("(page_plugin_functions.page_id  = '".$page->id."' OR page_plugin_functions.page_id IS NULL)")
@@ -248,6 +276,7 @@ class AdminPagesController extends AdminController {
 					foreach (Input::get('pagesidebar') as $value) {
 						$pagepluginfunction = new PagePluginFunction;
 						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> params = substr(PluginFunction::find($value)->params,0,-1);
 						$pagepluginfunction -> order = $order;
 						$pagepluginfunction -> page_id = $page -> id;
 						$pagepluginfunction -> save();
@@ -265,22 +294,24 @@ class AdminPagesController extends AdminController {
 						$params .= "id:";
 						foreach ($pagecontent[$value]['id'] as $value2) {
 							$params .= $value2.",";
-						}						
+						}
+						$params .= ";";						
 					}
 					if(!empty($pagecontent[$value]['grid'])){
 						$params .= "grid:";
 						foreach ($pagecontent[$value]['grid'] as $value2) {
 							$params .= $value2.",";
 						}
+						$params .= ";";
 					}
 					if(isset($pagecontent[$value]['sort'])){
-						$params .= "sort:".$pagecontent[$value]['sort'].",";
+						$params .= "sort:".$pagecontent[$value]['sort'].";";
 					}
 					if(isset($pagecontent[$value]['order'])){
-						$params .= "order:".$pagecontent[$value]['order'].",";
+						$params .= "order:".$pagecontent[$value]['order'].";";
 					}
 					if(isset($pagecontent[$value]['limit'])){
-						$params .= "limit:".$pagecontent[$value]['limit'].",";
+						$params .= "limit:".$pagecontent[$value]['limit'].";";
 					}
 
 					$params = ($params!="")?substr($params, 0, -1):"";
