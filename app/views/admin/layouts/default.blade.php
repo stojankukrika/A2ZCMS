@@ -39,7 +39,7 @@
 		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/colorbox.css">
 		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/style.min.css">
 		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/jquery-ui-1.10.3.custom.css">		
-		<link href="{{$asset}}assets/admin/css/bootstrap-dataTables.css">
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/bootstrap-dataTables.css">
 		<!-- end: CSS -->
 
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
-class Plugin extends Eloquent implements PresentableInterface {
+class Plugins extends Eloquent implements PresentableInterface {
 
 	protected $table = "plugins";
 	protected $softDelete = true;

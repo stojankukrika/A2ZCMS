@@ -14,6 +14,8 @@ class CreatePluginsTable extends Migration {
 		Schema::create('plugins', function(Blueprint $table) {
 			$table -> increments('id');
 			$table -> string('content');
+			$table -> string('function_id') -> nullable();
+			$table -> string('function_grid') -> nullable();
 			$table -> timestamps();
 			$table -> softDeletes();
 		});

@@ -9,10 +9,14 @@ class PluginsTableSeeder extends Seeder {
 
 		$plugins = array( 
 					array('content' => 'Blog', 
+						'function_id' => 'getBlogId',
+						'function_grid' => 'getBlogGroupId',
 						'created_at' => new DateTime, 
 						'updated_at' => new DateTime, ), 
 		
 					array('content' => 'Gallery', 
+						'function_id' => 'getGalleryId',
+						'function_grid' => NULL,
 						'created_at' => new DateTime, 
 						'updated_at' => new DateTime, ), 
 				);

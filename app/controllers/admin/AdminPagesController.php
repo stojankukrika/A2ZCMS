@@ -39,8 +39,21 @@ class AdminPagesController extends AdminController {
 		// Title
 		$title = Lang::get('admin/pages/title.create_a_new_page');
 		
-		$pluginfunction_content = PluginFunction::where('type','=','content')->get();
+		$pluginfunction_content = PluginFunction::join('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
+		->where('type','=','content')->get();
 		$pluginfunction_slider = PluginFunction::where('type','=','sidebar')->get();
+		
+		foreach ($pluginfunction_content as $key => $value) {
+			$function_id = $value['function_id'];
+			$function_grid = $value['function_grid'];
+			if($function_id!=NULL){
+				$value['function_id'] = $this->$function_id();
+			}
+			if($function_grid!=NULL){
+				$value['function_grid'] = $this->$function_grid();
+			}
+		}
+		
 		// Show the page
 		return View::make('admin/pages/create_edit', compact('title','pluginfunction_content','pluginfunction_slider'));
 	}
@@ -193,6 +206,19 @@ class AdminPagesController extends AdminController {
             -> remove_column('id') 
 			-> remove_column('votedown') 
             -> make();
+	}
+	
+	/*function for plugins*/
+	public function getBlogId(){
+		return Blog::get(array('id','title'));
+	}
+	
+	public function getBlogGroupId(){
+		return BlogCategory::get(array('id','title'));
+	}
+	
+	public function getGalleryId(){
+		return Gallery::get(array('id','title'));
 	}
 
 }

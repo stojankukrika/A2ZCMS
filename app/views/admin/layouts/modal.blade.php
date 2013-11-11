@@ -46,7 +46,7 @@
 		<link href="{{$asset}}assets/admin/css/style.min.css"rel="stylesheet" type="text/css" >
 		<link href="{{$asset}}assets/admin/css/fineuploader/fineuploader.css" rel="stylesheet" type="text/css" >
 		<link href="{{$asset}}assets/admin/css/colorbox.css" rel="stylesheet" type="text/css" >		
-		<link href="{{$asset}}assets/admin/css/chosen.css" rel="stylesheet" type="text/css" >		
+		<link href="{{$asset}}assets/admin/css/jquery.multiselect.css" rel="stylesheet" type="text/css" >		
 		<link href="{{$asset}}assets/admin/css/style_modal.min.css" rel="stylesheet" type="text/css" >
 		
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -106,7 +106,7 @@
 		<script src="{{$asset}}assets/admin/js/jquery.ui.touch-punch.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/fineuploader/jquery.fineuploader-3.1.1.js"></script>
 		<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.chosen.min.js"></script>
+		<script src="{{$asset}}assets/admin/js/jquery.multiselect.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$('form').submit(function(event) {
@@ -136,7 +136,7 @@
 						step: 0.01,
 						numberFormat: "n"
 					});
-
+				$("select[id^='id'],select[id^='grid']").multiselect();
 			});
 		</script>
 
