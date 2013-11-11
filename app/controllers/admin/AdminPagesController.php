@@ -88,9 +88,60 @@ class AdminPagesController extends AdminController {
 			$this -> page -> showvote = Input::get('showvote');
 			$this -> page -> password = Input::get('password');
 			$this -> page -> showdate = Input::get('showdate');
-
+			
 			$this -> page -> save();
+			
+			if(Input::has('pagesidebar')){
+				$order = 1;
+				foreach (Input::get('pagesidebar') as $value) {
+					$pagepluginfunction = new PagePluginFunction;
+					$pagepluginfunction -> plugin_function_id = $value;
+					$pagepluginfunction -> order = $order;
+					$pagepluginfunction -> page_id = $this -> page -> id;
+					$pagepluginfunction -> save();
+					$order ++;
+				}
+			}
+			
+			$pagecontentorder = Input::get('pagecontentorder');
+			$pagecontent = Input::get('pagecontent');
+			$order2 = 1;
+			$items = explode(',', $pagecontentorder);
+				foreach ($items as $value) {
+					$params = "";
+					if(!empty($pagecontent[$value]['id'])){
+						$params .= "id:";
+						foreach ($pagecontent[$value]['id'] as $value2) {
+							$params .= $value2.",";
+						}						
+					}
+					if(!empty($pagecontent[$value]['grid'])){
+						$params .= "grid:";
+						foreach ($pagecontent[$value]['grid'] as $value2) {
+							$params .= $value2.",";
+						}
+					}
+					if(isset($pagecontent[$value]['sort'])){
+						$params .= "sort:".$pagecontent[$value]['sort'].",";
+					}
+					if(isset($pagecontent[$value]['order'])){
+						$params .= "order:".$pagecontent[$value]['order'].",";
+					}
+					if(isset($pagecontent[$value]['limit'])){
+						$params .= "limit:".$pagecontent[$value]['limit'].",";
+					}
 
+					$params = ($params!="")?substr($params, 0, -1):"";
+					
+					$pagepluginfunction = new PagePluginFunction;
+					$pagepluginfunction -> plugin_function_id = $value;
+					$pagepluginfunction -> params = $params;
+					$pagepluginfunction -> order = $order2;
+					$pagepluginfunction -> page_id = $this -> page -> id;
+					$pagepluginfunction -> save();
+					
+					$order2 ++;
+				}
 			if ($this -> page -> id) {
 				// Redirect to the new page
 				return Redirect::to('admin/pages/' . $this -> page -> id . '/edit') -> with('success', Lang::get('admin/pages/messages.create.success'));
@@ -146,6 +197,58 @@ class AdminPagesController extends AdminController {
 		if ($validator -> passes()) {
 			// Was the page updated?
 			if ($page -> update($inputs)) {
+				
+				if(Input::has('pagesidebar')){
+				$order = 1;
+				foreach (Input::get('pagesidebar') as $value) {
+					$pagepluginfunction = new PagePluginFunction;
+					$pagepluginfunction -> plugin_function_id = $value;
+					$pagepluginfunction -> order = $order;
+					$pagepluginfunction -> page_id = $page -> id;
+					$pagepluginfunction -> save();
+					$order ++;
+				}
+			}
+			
+			$pagecontentorder = Input::get('pagecontentorder');
+			$pagecontent = Input::get('pagecontent');
+			$order2 = 1;
+			$items = explode(',', $pagecontentorder);
+				foreach ($items as $value) {
+					$params = "";
+					if(!empty($pagecontent[$value]['id'])){
+						$params .= "id:";
+						foreach ($pagecontent[$value]['id'] as $value2) {
+							$params .= $value2.",";
+						}						
+					}
+					if(!empty($pagecontent[$value]['grid'])){
+						$params .= "grid:";
+						foreach ($pagecontent[$value]['grid'] as $value2) {
+							$params .= $value2.",";
+						}
+					}
+					if(isset($pagecontent[$value]['sort'])){
+						$params .= "sort:".$pagecontent[$value]['sort'].",";
+					}
+					if(isset($pagecontent[$value]['order'])){
+						$params .= "order:".$pagecontent[$value]['order'].",";
+					}
+					if(isset($pagecontent[$value]['limit'])){
+						$params .= "limit:".$pagecontent[$value]['limit'].",";
+					}
+
+					$params = ($params!="")?substr($params, 0, -1):"";
+					
+					$pagepluginfunction = new PagePluginFunction;
+					$pagepluginfunction -> plugin_function_id = $value;
+					$pagepluginfunction -> params = $params;
+					$pagepluginfunction -> order = $order2;
+					$pagepluginfunction -> page_id = $page -> id;
+					$pagepluginfunction -> save();
+					
+					$order2 ++;
+				}
 				// Redirect to the page page
 				return Redirect::to('admin/pages/' . $page -> id . '/edit') -> with('success', Lang::get('admin/pages/messages.update.success'));
 			} else {

@@ -19,7 +19,7 @@ class PivotPagePluginFunctionsTable extends Migration {
 			$table -> foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
 			$table -> foreign('plugin_function_id')->references('id')->on('plugin_functions')->onDelete('cascade');
 			$table -> integer('order');
-			$table -> integer('params');
+			$table -> string('params');
 			$table -> timestamps();
 			$table -> softDeletes();
 		});

@@ -196,7 +196,7 @@
 			<!-- Content -->
 			<div class="form-group {{{ $errors->has('page_css') ? 'error' : '' }}}">
 				<div class="col-lg-12">
-					<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_css') }}}</label>
+					<label class="control-label" for="page_css">{{{ Lang::get('admin/pages/table.page_css') }}}</label>
 					<textarea class="full-width col-md-12 wysihtml5" name="page_css" value="page_css" rows="8" class="form-control">{{{ Input::old('page_css', isset($page) ? $page->page_css : null) }}}</textarea>
 					{{{ $errors->first('page_css', '<span class="help-inline">:message</span>') }}}
 				</div>
@@ -210,7 +210,7 @@
 			<!-- Content -->
 			<div class="form-group {{{ $errors->has('page_javascript') ? 'error' : '' }}}">
 				<div class="col-lg-12">
-					<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_javascript') }}}</label>
+					<label class="control-label" for="page_javascript">{{{ Lang::get('admin/pages/table.page_javascript') }}}</label>
 					<textarea class="full-width col-md-12 wysihtml5" name="page_javascript" value="page_javascript" rows="8" class="form-control">{{{ Input::old('page_javascript', isset($page) ? $page->page_javascript : null) }}}</textarea>
 					{{{ $errors->first('page_javascript', '<span class="help-inline">:message</span>') }}}
 				</div>
@@ -225,34 +225,35 @@
 			<div id="grids">
 				<div class="row responsive-utilities-test hidden-on">
 					  <div class="col-md-8 col-xs-8">
-					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_content') }}}</label><br>
+					  	<label class="control-label" for="sortable1">{{{ Lang::get('admin/pages/table.page_content') }}}</label><br>
 						<ul id="sortable1">
+							<input type="hidden" value="" name="pagecontentorder" id="pagecontentorder">
 							@foreach($pluginfunction_content as $item)
-								<li class="ui-state-default" name="{{$item->id}}">
+								<li class="ui-state-default" name="pagecontent[{{$item->id}}]" value="{{$item->id}}">
 									{{$item->title}}
 									<div>
 										@if(strpos($item->params,'sort') !== false)
 											<label class="control-label" for="sort">Sorting: </label>
-											<select name="sort{{$item->id}}" id="sort{{$item->id}}"> 
-											  <option>Ascending</option>
-											  <option>Dending</option>
+											<select name="pagecontent[{{$item->id}}][sort]" id="sort{{$item->id}}"> 
+											  <option value="ASC">Ascending</option>
+											  <option value="DESC">Descending</option>
 											</select>
 										@endif
 										@if(strpos($item->params,'order') !== false)
 											<label class="control-label" for="order">Order: </label>
-											<select name="order{{$item->id}}" id="order{{$item->id}}"> 
+											<select name="pagecontent[{{$item->id}}][order]" id="order{{$item->id}}"> 
 											  <option value="id" >ID</option>
 											  <option value="views" >Views</option>
 											</select>
 										@endif
 										@if(strpos($item->params,'limit') !== false)
 											<label class="control-label" for="limit">Limit: </label>
-											<input type="text" name="limit{{$item->id}}" value="0" id="limit{{$item->id}}">
+											<input type="text" name="pagecontent[{{$item->id}}][limit]" value="0" id="limit{{$item->id}}">
 										@endif
 										@if(strpos($item->params,'id') !== false)											
 										<div class="controls">
-											<label class="control-label" for="selectError1">Select items for page: </label>
-											  <select id="id{{$item->id}}" name="id{{$item->id}}" class="form-control" multiple data-rel="chosen">
+											<label class="control-label" for="id">Select items for page: </label>
+											  <select id="id{{$item->id}}" name="pagecontent[{{$item->id}}][id][]" class="form-control" multiple data-rel="chosen">
 												@foreach ($item->function_id as $id)
 												<option value="{{$id->id}}">{{$id->title}}</option>
 												@endforeach
@@ -262,7 +263,7 @@
 										@if(strpos($item->params,'grid') !== false)										
 										<div class="controls">
 											<label class="control-label" for="selectError1">Select groups for page: </label>
-											  <select id="grid{{$item->id}}" name="grid{{$item->id}}" class="form-control" multiple data-rel="chosen">
+											  <select id="grid{{$item->id}}" name="pagecontent[{{$item->id}}][grid][]" class="form-control" multiple data-rel="chosen">
 												@foreach ($item->function_id as $id)
 												<option value="{{$id->id}}">{{$id->title}}</option>
 												@endforeach
@@ -275,10 +276,10 @@
 						</ul>
 					  </div>
 					  <div class="col-md-4 col-xs-4">
-					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_sidebar') }}}</label><br>
+					  	<label class="control-label" for="sortable2">{{{ Lang::get('admin/pages/table.page_sidebar') }}}</label><br>
 						<ul id="sortable2">
 							@foreach($pluginfunction_slider as $item)
-								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" name="content[]"> {{$item->title}}</li>
+								<li class="ui-state-default"><input type="checkbox" value="{{$item->id}}" {{$item->checked}} name="pagesidebar[]"> {{$item->title}}</li>
 							@endforeach
 						</ul>
 					  </div>
@@ -318,5 +319,16 @@ $(function() {
 		});
 	});
 	 $("input[id^='limit']").spinner();
+	 $('.btn-success').click(function(){
+	 	 var neworder = new Array();
+        $('#sortable1 li').each(function() { 
+            //get the id
+            var id  = $(this).attr("value");
+             neworder.push(id);
+
+        });
+        $('#pagecontentorder').val(neworder);
+	 })
+	
 </script>
 @stop

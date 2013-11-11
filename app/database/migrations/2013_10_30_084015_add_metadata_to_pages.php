@@ -12,7 +12,7 @@ class AddMetadataToPages extends Migration {
 	 */
 	public function up() {
 		Schema::table('pages', function(Blueprint $table) {
-			$table -> string('meta_title')->after('slug');
+			$table -> string('meta_title')->after('slug')-> nullable();
 			$table -> string('meta_description')->after('meta_title')-> nullable();
 			$table -> string('meta_keywords')->after('meta_description')-> nullable();
 			$table -> text('page_css')->after('meta_keywords')-> nullable();
