@@ -228,7 +228,7 @@
 					  	<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.page_content') }}}</label><br>
 						<ul id="sortable1">
 							@foreach($pluginfunction_content as $item)
-								<li class="ui-state-default">
+								<li class="ui-state-default" name="{{$item->id}}">
 									{{$item->title}}
 									<div>
 										@if(strpos($item->params,'sort') !== false)
@@ -269,7 +269,7 @@
 											  </select>
 											</div>
 										@endif										
-									<div>
+									</div>
 								</li>
 							@endforeach
 						</ul>

@@ -39,8 +39,9 @@ class AdminPagesController extends AdminController {
 		// Title
 		$title = Lang::get('admin/pages/title.create_a_new_page');
 		
-		$pluginfunction_content = PluginFunction::join('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
-		->where('type','=','content')->get();
+		$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
+		->where('type','=','content')
+		->get(array('plugin_functions.id','plugin_functions.title','plugin_functions.params','plugins.function_id','plugins.function_grid'));
 		$pluginfunction_slider = PluginFunction::where('type','=','sidebar')->get();
 		
 		foreach ($pluginfunction_content as $key => $value) {
