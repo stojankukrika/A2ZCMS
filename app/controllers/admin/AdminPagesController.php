@@ -94,12 +94,29 @@ class AdminPagesController extends AdminController {
 			if(Input::has('pagesidebar')){
 				$order = 1;
 				foreach (Input::get('pagesidebar') as $value) {
-					$pagepluginfunction = new PagePluginFunction;
-					$pagepluginfunction -> plugin_function_id = $value;
-					$pagepluginfunction -> order = $order;
-					$pagepluginfunction -> params = substr(PluginFunction::find($value)->params,0,-1);
-					$pagepluginfunction -> page_id = $this -> page -> id;
-					$pagepluginfunction -> save();
+					$params = PluginFunction::find($value)->params;
+					if($params!=""){
+						$params = explode(';', $params);
+						foreach ($params as $param) {
+							$param = explode(':', $param);
+							$pagepluginfunction = new PagePluginFunction;
+							$pagepluginfunction -> plugin_function_id = $value;
+							$pagepluginfunction -> order = $order;
+							$pagepluginfunction -> param = $param['0'];
+							if(strstr($param['1'], ',')){
+								$pagepluginfunction -> type = 'array';
+							}
+							else if(is_int($param['1'])){
+								$pagepluginfunction -> type = 'int';
+							}
+							else {
+								$pagepluginfunction -> type = 'string';
+							}
+							$pagepluginfunction -> value = $param['1'];
+							$pagepluginfunction -> page_id = $this -> page -> id;
+							$pagepluginfunction -> save();
+						}
+					}					
 					$order ++;
 				}
 			}
