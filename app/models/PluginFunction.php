@@ -21,7 +21,7 @@ class PluginFunction extends Eloquent implements PresentableInterface {
 	 * @return string
 	 */
 	public function params() {
-		return nl2br($this -> params);
+		return nl2br($this -> param);
 	}
 	
 	

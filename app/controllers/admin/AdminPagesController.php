@@ -91,86 +91,10 @@ class AdminPagesController extends AdminController {
 			
 			$this -> page -> save();
 			
-			if(Input::has('pagesidebar')){
-				$order = 1;
-				foreach (Input::get('pagesidebar') as $value) {
-					$params = PluginFunction::find($value)->params;
-					if($params!=""){
-						$params = explode(';', $params);
-						foreach ($params as $param) {
-							$param = explode(':', $param);
-							$pagepluginfunction = new PagePluginFunction;
-							$pagepluginfunction -> plugin_function_id = $value;
-							$pagepluginfunction -> order = $order;
-							$pagepluginfunction -> param = $param['0'];
-							if(strstr($param['1'], ',')){
-								$pagepluginfunction -> type = 'array';
-							}
-							else if(is_int($param['1'])){
-								$pagepluginfunction -> type = 'int';
-							}
-							else {
-								$pagepluginfunction -> type = 'string';
-							}
-							$pagepluginfunction -> value = $param['1'];
-							$pagepluginfunction -> page_id = $this -> page -> id;
-							$pagepluginfunction -> save();
-						}
-					}					
-					$order ++;
-				}
-			}
-			
+			$pagesidebar = (Input::has('pagesidebar'))?Input::get('pagesidebar'):"";
 			$pagecontentorder = Input::get('pagecontentorder');
 			$pagecontent = Input::get('pagecontent');
-			$order2 = 1;
-			$items = explode(',', $pagecontentorder);
-				foreach ($items as $value) {
-					$params = "";
-					if(!empty($pagecontent[$value]['id'])){
-						$params .= "id:";
-						foreach ($pagecontent[$value]['id'] as $value2) {
-							$params .= $value2.",";
-						}
-						$params .= ";";						
-					}
-					if(!empty($pagecontent[$value]['grid'])){
-						$params .= "grid:";
-						foreach ($pagecontent[$value]['grid'] as $value2) {
-							$params .= $value2.",";
-						}
-						$params .= ";";
-					}
-					if(isset($pagecontent[$value]['sort'])){
-						$params .= "sort:".$pagecontent[$value]['sort'].";";
-					}
-					if(isset($pagecontent[$value]['order'])){
-						$params .= "order:".$pagecontent[$value]['order'].";";
-					}
-					if(isset($pagecontent[$value]['limit'])){
-						$params .= "limit:".$pagecontent[$value]['limit'].";";
-					}
-
-					$params = ($params!="")?substr($params, 0, -1):"";
-					
-					$pagepluginfunction = new PagePluginFunction;
-					$pagepluginfunction -> plugin_function_id = $value;
-					$pagepluginfunction -> params = $params;
-					$pagepluginfunction -> order = $order2;
-					$pagepluginfunction -> page_id = $this -> page -> id;
-					$pagepluginfunction -> save();
-					
-					$order2 ++;
-				}
-			if ($this -> page -> id) {
-				// Redirect to the new page
-				return Redirect::to('admin/pages/' . $this -> page -> id . '/edit') -> with('success', Lang::get('admin/pages/messages.create.success'));
-			} else {
-				// Get validation errors (see Ardent package)
-				$error = $this -> page -> errors() -> all();
-
-				return Redirect::to('admin/pages/create') -> with('error', $error);
-			}
+			$this->saveData($pagesidebar,$pagecontentorder, $pagecontent,$this -> page -> id);
 		}
 
 		// Form validation failed
@@ -189,58 +113,41 @@ class AdminPagesController extends AdminController {
 			$title = Lang::get('admin/pages/title.page_update');
 			
 			$page = Page::find($id);
-			
+				
 			$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
 									->leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
-									->whereRaw("(page_plugin_functions.page_id  = '".$page->id."' OR page_plugin_functions.page_id IS NULL)")
+									->whereRaw("page_plugin_functions.page_id  = '".$page->id."'")
 									->where('plugin_functions.type','=','content')
 									->whereRaw('page_plugin_functions.deleted_at IS NULL')
 									->orderBy('page_plugin_functions.order','ASC')
-									->get(array('plugin_functions.id','plugin_functions.title','page_plugin_functions.params','plugins.function_id','plugins.function_grid','page_plugin_functions.order'));
-			
+									->groupBy('page_plugin_functions.order')
+									->get(array('plugin_functions.id',
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE page_plugin_functions.page_id  = '.$page->id.' and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="id" limit 1) AS ids')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE page_plugin_functions.page_id  = '.$page->id.' and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="grid" limit 1) AS grids')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE page_plugin_functions.page_id  = '.$page->id.' and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="sort" limit 1) AS sorts')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE page_plugin_functions.page_id  = '.$page->id.' and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="limit" limit 1) AS limits')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE page_plugin_functions.page_id  = '.$page->id.' and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="order" limit 1) AS orders')),
+									'plugin_functions.title','page_plugin_functions.order','plugins.function_id','plugin_functions.params','plugins.function_grid'));
+		
 			foreach ($pluginfunction_content as $key => $value) {
-					$function_id = $value['function_id'];
-					$function_grid = $value['function_grid'];
-					$params = $value['params'];
-					if($function_id!=NULL){
-						$value['function_id'] = $this->$function_id();
-					}
-					if($function_grid!=NULL){
-						$value['function_grid'] = $this->$function_grid();
-					}
-					if($params!=NULL){
-						$params = explode(';', $params);
-						foreach ($params as $value2) {
-							$value2 = explode(':', $value2);
-							switch ($value2['0']) {
-								case 'sort':
-									$value['params']['sort'] = $value2['1'];
-									break;
-								case 'order':
-									$value['params']['order'] = $value2['1'];
-									break;
-								case 'limit':
-									$value['params']['limit'] = $value2['1'];
-									break;
-								case 'id':
-									$value['params']['id'] = $value2['1'];
-									break;
-								case 'grid':
-									$value['params']['grid'] = $value2['1'];
-									break;
-							}
-						}
-						
-					}
-					
+				$function_id = $value['function_id'];
+				$function_grid = $value['function_grid'];
+				if($function_id!=NULL){
+					$value['function_id'] = $this->$function_id();
 				}
+				if($function_grid!=NULL){
+					$value['function_grid'] = $this->$function_grid();
+				}
+			}
+
 			$pluginfunction_slider = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
 								->whereRaw("(page_plugin_functions.page_id  = '".$page->id."' OR page_plugin_functions.page_id IS NULL)")
 								->where('plugin_functions.type','=','sidebar')
 								->whereRaw('page_plugin_functions.deleted_at IS NULL')
 								->orderBy('page_plugin_functions.order','ASC')
-								->get(array('plugin_functions.id','plugin_functions.title','plugin_functions.params','page_plugin_functions.order'));
-		
+								->groupBy('page_plugin_functions.order')
+								->get(array('plugin_functions.id','plugin_functions.title','page_plugin_functions.order'));
+
 			return View::make('admin/pages/create_edit', compact('page', 'title', 'pluginfunction_content','pluginfunction_slider'));
 		} else {
 			return Redirect::to('admin/pages') -> with('error', Lang::get('admin/users/messages.does_not_exist'));
@@ -288,60 +195,10 @@ class AdminPagesController extends AdminController {
 				$old = PagePluginFunction::where('page_id','=',$page -> id);
 				$old->delete();
 				
-				if(Input::has('pagesidebar')){
-					$order = 1;
-					foreach (Input::get('pagesidebar') as $value) {
-						$pagepluginfunction = new PagePluginFunction;
-						$pagepluginfunction -> plugin_function_id = $value;
-						$pagepluginfunction -> params = substr(PluginFunction::find($value)->params,0,-1);
-						$pagepluginfunction -> order = $order;
-						$pagepluginfunction -> page_id = $page -> id;
-						$pagepluginfunction -> save();
-						$order ++;
-						}
-				}
-			
-			$pagecontentorder = Input::get('pagecontentorder');
-			$pagecontent = Input::get('pagecontent');
-			$order2 = 1;
-			$items = explode(',', $pagecontentorder);
-				foreach ($items as $value) {
-					$params = "";
-					if(!empty($pagecontent[$value]['id'])){
-						$params .= "id:";
-						foreach ($pagecontent[$value]['id'] as $value2) {
-							$params .= $value2.",";
-						}
-						$params .= ";";						
-					}
-					if(!empty($pagecontent[$value]['grid'])){
-						$params .= "grid:";
-						foreach ($pagecontent[$value]['grid'] as $value2) {
-							$params .= $value2.",";
-						}
-						$params .= ";";
-					}
-					if(isset($pagecontent[$value]['sort'])){
-						$params .= "sort:".$pagecontent[$value]['sort'].";";
-					}
-					if(isset($pagecontent[$value]['order'])){
-						$params .= "order:".$pagecontent[$value]['order'].";";
-					}
-					if(isset($pagecontent[$value]['limit'])){
-						$params .= "limit:".$pagecontent[$value]['limit'].";";
-					}
-
-					$params = ($params!="")?substr($params, 0, -1):"";
-					
-					$pagepluginfunction = new PagePluginFunction;
-					$pagepluginfunction -> plugin_function_id = $value;
-					$pagepluginfunction -> params = $params;
-					$pagepluginfunction -> order = $order2;
-					$pagepluginfunction -> page_id = $page -> id;
-					$pagepluginfunction -> save();
-					
-					$order2 ++;
-				}
+				$pagesidebar = (Input::has('pagesidebar'))?Input::get('pagesidebar'):"";
+				$pagecontentorder = Input::get('pagecontentorder');
+				$pagecontent = Input::get('pagecontent');
+				$this->saveData($pagesidebar,$pagecontentorder, $pagecontent,$page -> id);
 				// Redirect to the page page
 				return Redirect::to('admin/pages/' . $page -> id . '/edit') -> with('success', Lang::get('admin/pages/messages.update.success'));
 			} else {
@@ -352,6 +209,125 @@ class AdminPagesController extends AdminController {
 
 		// Form validation failed
 		return Redirect::to('admin/pages/' . $page -> id . '/edit') -> withInput() -> withErrors($validator);
+	}
+
+	public function saveData($pagesidebar="",$pagecontentorder,$pagecontent,$page_id)
+	{
+		if($pagesidebar!=""){
+				$order = 1;
+				foreach ($pagesidebar as $value) {
+					$params = PluginFunction::find($value)->params;
+					if($params!=NULL){
+						$params = explode(';', $params);
+						foreach ($params as $param) {
+							if($param!=""){
+								$param = explode(':', $param);
+								$pagepluginfunction = new PagePluginFunction;
+								$pagepluginfunction -> plugin_function_id = $value;
+								$pagepluginfunction -> order = $order;
+								$pagepluginfunction -> param = $param['0'];
+								if(strstr($param['1'], ',')){
+									$pagepluginfunction -> type = 'array';
+								}
+								else if(is_int($param['1'])){
+									$pagepluginfunction -> type = 'int';
+								}
+								else {
+									$pagepluginfunction -> type = 'string';
+								}
+								$pagepluginfunction -> value = $param['1'];
+								$pagepluginfunction -> page_id = $page_id;
+								$pagepluginfunction -> save();
+							}
+						}
+					}	
+				else {
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order;
+						$pagepluginfunction -> page_id = $page_id;
+						$pagepluginfunction -> save();
+					}				
+					$order ++;
+				}
+			}
+			$order2 = 1;
+			$items = explode(',', $pagecontentorder);
+				foreach ($items as $value) {
+					$params = "";
+					if(!empty($pagecontent[$value]['id'])){
+						foreach ($pagecontent[$value]['id'] as $value2) {
+							$params .= $value2.",";
+						}
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order2;
+						$pagepluginfunction -> param = 'id';
+						$pagepluginfunction -> type = 'array';
+						$pagepluginfunction -> value = $params;
+						$pagepluginfunction -> page_id = $page_id;
+						$pagepluginfunction -> save();
+												
+					}
+					if(!empty($pagecontent[$value]['grid'])){
+						foreach ($pagecontent[$value]['grid'] as $value2) {
+							$params .= $value2.",";
+						}
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order2;
+						$pagepluginfunction -> param = 'grid';
+						$pagepluginfunction -> type = 'array';
+						$pagepluginfunction -> value = $params;
+						$pagepluginfunction -> page_id = $page_id;
+						$pagepluginfunction -> save();
+					}
+					if(isset($pagecontent[$value]['sort'])){
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order2;
+						$pagepluginfunction -> param = 'sort';
+						$pagepluginfunction -> type = 'string';
+						$pagepluginfunction -> value = $pagecontent[$value]['sort'];
+						$pagepluginfunction -> page_id = $page_id;
+						$pagepluginfunction -> save();
+					}
+					if(isset($pagecontent[$value]['order'])){
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order2;
+						$pagepluginfunction -> param = 'order';
+						$pagepluginfunction -> type = 'string';
+						$pagepluginfunction -> value = $pagecontent[$value]['order'];
+						$pagepluginfunction -> page_id = $page_id;
+						$pagepluginfunction -> save();
+					}
+					if(isset($pagecontent[$value]['limit'])){
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order2;
+						$pagepluginfunction -> param = 'limit';
+						$pagepluginfunction -> type = 'int';
+						$pagepluginfunction -> value = $pagecontent[$value]['limit'];
+						$pagepluginfunction -> page_id = $page_id;
+						$pagepluginfunction -> save();
+					}
+					if(empty($pagecontent[$value]['id']) && empty($pagecontent[$value]['grid']) && 
+						!isset($pagecontent[$value]['sort']) && !isset($pagecontent[$value]['order']) &&
+						!isset($pagecontent[$value]['limit']))
+						{
+							$pagepluginfunction = new PagePluginFunction;
+							$pagepluginfunction -> plugin_function_id = $value;
+							$pagepluginfunction -> order = $order2;
+							$pagepluginfunction -> param = '';
+							$pagepluginfunction -> type = '';
+							$pagepluginfunction -> value = '';
+							$pagepluginfunction -> page_id = $page_id;
+							$pagepluginfunction -> save();
+						}
+					
+					$order2 ++;
+				}
 	}
 
 	/**

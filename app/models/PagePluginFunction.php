@@ -35,8 +35,13 @@ class PagePluginFunction extends Eloquent implements PresentableInterface {
 	 * @return Plugin
 	 */
 	public function plugin() {
-		return $this -> belongsTo('PluginFunction', 'plugin_function_id');
+		return $this -> belongsToMany('PluginFunction', 'plugin_function_id');
 	}
+	
+	public function page() {
+		return $this -> belongsToMany('Page', 'page_id');
+	}
+	
 
 	/**
 	 * Returns a formatted post content entry,

@@ -232,41 +232,40 @@
 								<li class="ui-state-default" name="pagecontent[{{$item->id}}]" value="{{$item->id}}">
 									{{$item->title}}
 									<div>
-										<?php print_r($item->params); ?>
-										@if(strpos($item->params,'sort') !== false)
+										@if($item->sorts != "" || strpos($item->params,'sort') !== false)
 											<label class="control-label" for="sort">Sorting: </label>
 											<select name="pagecontent[{{$item->id}}][sort]" id="sort{{$item->id}}"> 
-											  <option value="ASC" >Ascending</option>
-											  <option value="DESC">Descending</option>
+											  <option value="ASC" {{ ($item->sorts=="ASC")?"selected":"";}}>Ascending</option>
+											  <option value="DESC" {{ ($item->sorts=="DESC")?"selected":"";}}>Descending</option>
 											</select>
 										@endif
-										@if(strpos($item->params,'order') !== false)
+										@if($item->orders != "" || strpos($item->params,'order') !== false)
 											<label class="control-label" for="order">Order: </label>
 											<select name="pagecontent[{{$item->id}}][order]" id="order{{$item->id}}"> 
-											  <option value="id" >ID</option>
-											  <option value="views" >Views</option>
+											  <option value="id" {{ ($item->orders=="id")?"selected":"";}}>ID</option>
+											  <option value="views" {{ ($item->orders=="views")?"selected":"";}}>Views</option>
 											</select>
 										@endif
-										@if(strpos($item->params,'limit') !== false)
+										@if($item->limits != "" || strpos($item->params,'limit') !== false)
 											<label class="control-label" for="limit">Limit: </label>
-											<input type="text" name="pagecontent[{{$item->id}}][limit]" value="0" id="limit{{$item->id}}">
+											<input type="text" name="pagecontent[{{$item->id}}][limit]" value="{{ ($item->limits!="")?$item->limits:"0";}}" id="limit{{$item->id}}">
 										@endif
-										@if(strpos($item->params,'id') !== false)											
+										@if($item->ids != "" || strpos($item->params,'id') !== false)											
 										<div class="controls">
 											<label class="control-label" for="id">Select items for page: </label>
 											  <select id="id{{$item->id}}" name="pagecontent[{{$item->id}}][id][]" class="form-control" multiple data-rel="chosen">
 												@foreach ($item->function_id as $id)
-												<option value="{{$id->id}}">{{$id->title}}</option>
+												<option value="{{$id->id}}" {{ (strpos($item->ids,(string)$id->id) !== false)?'selected="selected"':'';}}>{{$item->ids}}{{$id->title}}</option>
 												@endforeach
 											  </select>
 											</div>
 										@endif
-										@if(strpos($item->params,'grid') !== false)										
+										@if($item->grids != "" || strpos($item->params,'grid') !== false)										
 										<div class="controls">
 											<label class="control-label" for="selectError1">Select groups for page: </label>
 											  <select id="grid{{$item->id}}" name="pagecontent[{{$item->id}}][grid][]" class="form-control" multiple data-rel="chosen">
 												@foreach ($item->function_id as $id)
-												<option value="{{$id->id}}">{{$id->title}}</option>
+												<option value="{{$id->id}}" {{ (strpos($item->grids,$id->id) !== false)?'selected="selected"':'';}}>{{$id->title}}</option>
 												@endforeach
 											  </select>
 											</div>
@@ -329,6 +328,7 @@ $(function() {
 
         });
         $('#pagecontentorder').val(neworder);
+        $("select[id^='id'],select[id^='grid']").multiselect({selectedList: 0}) // 0-based index;
 	 })
 	
 </script>

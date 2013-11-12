@@ -23,6 +23,7 @@ Route::model('galleryimages', 'GalleryImages');
 Route::model('galleryimageslikes', 'GalleryImagesLikes');
 Route::model('galleryimagecomment', 'GalleryImageComment');
 Route::model('gallery', 'Gallery');
+Route::model('page', 'Page');
 Route::model('todolist', 'Todolist');
 Route::model('grid', 'Grid');
 Route::model('plugin', 'Plugin');
