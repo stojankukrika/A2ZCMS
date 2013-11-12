@@ -95,7 +95,19 @@ class AdminBlogsController extends AdminController {
 			$this -> blog -> end_publish = (Input::get('end_publish') == '') ? null : Input::get('end_publish');
 			$this -> blog -> resource_link = Input::get('resource_link');
 			$this -> blog -> user_id = $user -> id;
-
+			if(Input::hasFile('image'))
+			{
+				$file = Input::file('image');
+				$destinationPath = public_path() . '\blog\\/';
+				$filename = $file->getClientOriginalName();				
+				$extension = $file -> getClientOriginalExtension();
+				$name = sha1($filename . time()) . '.' . $extension;		
+			
+				Input::file('image')->move($destinationPath, $name);
+				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .'thumbs\\/' . $name);
+				
+				$this -> blog -> image = $name;
+			}
 			// Was the blog post created?
 			if ($this -> blog -> save()) {
 				// Redirect to the new blog post page
@@ -120,7 +132,7 @@ class AdminBlogsController extends AdminController {
 		// Title
 		$title = Lang::get('admin/blogs/title.blog_update');
 
-		$blog = Blog::find($id);
+		$blog = Blog::find($id->id);
 		// Blog category
 		$blog_categorys = BlogCategory::all();
 
@@ -144,29 +156,45 @@ class AdminBlogsController extends AdminController {
 	public function postEdit($id) {
 
 		// Declare the rules for the form validation
-		$rules = array('title' => 'required|min:3', 'content' => 'required|min:3');
+		$rules = array('title' => 'required|min:3', 'content' => 'required|min:3', 'blogcategory_id' => 'required');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 
-		$blog = Blog::find($id);
-
-		$inputs = Input::all();
-
 		// Check if the form validates with success
 		if ($validator -> passes()) {
-			// Was the blog updated?
-			if ($blog -> update($inputs)) {
-				// Redirect to the new blog post page
+		
+			$blog = Blog::find($id->id);
+			$user = Auth::user();
+			
+			$blog -> title = Input::get('title');
+			$blog -> blogcategory_id = Input::get('blogcategory_id');
+			$blog -> slug = Str::slug(Input::get('title'));
+			$blog -> content = Input::get('content');
+			$blog -> start_publish = (Input::get('start_publish') == '') ? date('Y-m-d') : Input::get('start_publish');
+			$blog -> end_publish = (Input::get('end_publish') == '') ? null : Input::get('end_publish');
+			$blog -> resource_link = Input::get('resource_link');
+			$blog -> user_id = $user -> id;
+			if(Input::hasFile('image'))
+			{
+				$file = Input::file('image');
+				$destinationPath = public_path() . '\blog\\/';
+				$filename = $file->getClientOriginalName();				
+				$extension = $file -> getClientOriginalExtension();
+				$name = sha1($filename . time()) . '.' . $extension;		
+			
+				Input::file('image')->move($destinationPath, $name);
+				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .'thumbs\\/' . $name);
+				
+				$blog -> image = $name;
+			}
+			if ($blog -> save()) {
 				return Redirect::to('admin/blogs/' . $blog -> id . '/edit') -> with('success', Lang::get('admin/blogs/messages.update.success'));
 			}
-
-			// Redirect to the blogs post management page
-			return Redirect::to('admin/blogs/' . $blog -> id . '/edit') -> with('error', Lang::get('admin/blogs/messages.update.error'));
 		}
 
 		// Form validation failed
-		return Redirect::to('admin/blogs/' . $blog -> id . '/edit') -> withInput() -> withErrors($validator);
+		return Redirect::to('admin/blogs/' . $id->id . '/edit') -> withInput() -> withErrors($validator);
 	}
 
 	/**

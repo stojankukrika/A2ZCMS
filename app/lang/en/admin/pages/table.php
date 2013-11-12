@@ -25,5 +25,5 @@ return array(
 	'showsidebar' => 'Show in Sidebar',
 	'page_sidebar' => 'Sidebar Widgets',
 	'page_content' => 'Content',
-	
+	'tags' => 'Tags',
 );

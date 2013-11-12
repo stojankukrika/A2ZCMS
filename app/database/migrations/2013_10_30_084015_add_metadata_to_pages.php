@@ -18,13 +18,15 @@ class AddMetadataToPages extends Migration {
 			$table -> text('page_css')->after('meta_keywords')-> nullable();
 			$table -> text('page_javascript')->after('page_css');
 			$table -> boolean('sidebar')->after('page_javascript');
+			$table -> boolean('showtags')->after('sidebar');
 			$table -> boolean('showtitle')->after('sidebar');
 			$table -> boolean('showvote')->after('showtitle');
 			$table -> boolean('showdate')->after('showvote');
 			$table -> integer('voteup')->after('showdate');
 			$table -> integer('votedown')->after('voteup');
 			$table -> string('password')->after('votedown');
-			$table -> integer('hits')->after('password');
+			$table -> string('tags')->after('password')-> nullable();
+			$table -> integer('hits')->after('image');
 		});
 	}
 
@@ -47,6 +49,7 @@ class AddMetadataToPages extends Migration {
 			$table -> dropColumn('voteup');
 			$table -> dropColumn('votedown');
 			$table -> dropColumn('password');
+			$table -> dropColumn('tags');
 			$table -> dropColumn('hits');
 
 		});

@@ -23,7 +23,8 @@ class CreateBlogsTable extends Migration {
 			$table -> text('content');
 			$table -> date('start_publish');
 			$table -> date('end_publish') -> nullable();
-			$table -> string('resource_link') -> nullable();
+			$table -> string('resource_link') -> nullable();			
+			$table -> string('image')->nullable();
 			$table -> timestamps();
 			$table -> softDeletes();
 		});

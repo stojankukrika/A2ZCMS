@@ -7,5 +7,5 @@ return array(
 	'comments'   => '# of Comments',
 	'created_at' => 'Created at',
 	'post_id' => 'Post Id',
-
+	'image' => 'Image',
 );

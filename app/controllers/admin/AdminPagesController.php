@@ -88,6 +88,8 @@ class AdminPagesController extends AdminController {
 			$this -> page -> showvote = Input::get('showvote');
 			$this -> page -> password = Input::get('password');
 			$this -> page -> showdate = Input::get('showdate');
+			$this -> page -> showtags = Input::get('showtags');
+			$this -> page -> tags = Input::get('tags');
 			
 			$this -> page -> save();
 			
@@ -189,6 +191,8 @@ class AdminPagesController extends AdminController {
 			$page -> showvote = Input::get('showvote');
 			$page -> password = Input::get('password');
 			$page -> showdate = Input::get('showdate');
+			$page -> showtags = Input::get('showtags');
+			$page -> tags = Input::get('tags');
 			
 			if ($page -> save()) {
 				

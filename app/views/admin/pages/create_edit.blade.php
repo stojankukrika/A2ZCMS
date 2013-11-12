@@ -46,11 +46,11 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="showtitle">{{{ Lang::get('admin/pages/table.show_title') }}}</label>
 					<label class="radio">
-						{{ Form::radio('showtitle', 1, (Input::old('showtitle') == '1' || (isset($page->showtitle) && $page->showtitle == 1)) ? true : false, array('id'=>'showtitle', 'class'=>'radio')) }}
+						{{ Form::radio('showtitle', 1, (Input::old('showtitle') == '1' || (isset($page) && $page->showtitle == '1')) ? true : false, array('id'=>'showtitle', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showtitle', 0, (Input::old('showtitle') == '0' || (isset($page->showtitle) && $page->showtitle == 0) || !isset($page->showtitle)) ? true : false, array('id'=>'showtitle', 'class'=>'radio')) }}
+						{{ Form::radio('showtitle', 0, (Input::old('showtitle') == '0' || (isset($page) && $page->showtitle == '0') || !isset($page)) ? true : false, array('id'=>'showtitle', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>
 	
@@ -63,11 +63,11 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="showdate">{{{ Lang::get('admin/pages/table.showdate') }}}</label>
 					<label class="radio">
-						{{ Form::radio('showdate', 1, (Input::old('showdate') == '1' || (isset($page->showdate) && $page->showdate == 1)) ? true : false, array('id'=>'showdate', 'class'=>'radio')) }}
+						{{ Form::radio('showdate', 1, (Input::old('showdate') == '1' || (isset($page) && $page->showdate == '1')) ? true : false, array('id'=>'showdate', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showdate', 0, (Input::old('showdate') == '0' || (isset($page->showdate) && $page->showdate == 0) || !isset($page->showdate)) ? true : false, array('id'=>'showdate', 'class'=>'radio')) }}
+						{{ Form::radio('showdate', 0, (Input::old('showdate') == '0' || (isset($page) && $page->showdate == '0') || !isset($page)) ? true : false, array('id'=>'showdate', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>
 	
@@ -80,18 +80,18 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="showvote">{{{ Lang::get('admin/pages/table.showvote') }}}</label>
 					<label class="radio">
-						{{ Form::radio('showvote', 1, (Input::old('showvote') == '1' || (isset($page->showvote) && $page->showvote == 1)) ? true : false, array('id'=>'showvote', 'class'=>'radio')) }}
+						{{ Form::radio('showvote', 1, (Input::old('showvote') == '1' || (isset($page) && $page->showvote == '1')) ? true : false, array('id'=>'showvote', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showvote', 0, (Input::old('showvote') == '0' || (isset($page->showvote) && $page->showvote == 0) || !isset($page->showvote)) ? true : false, array('id'=>'showvote', 'class'=>'radio')) }}
+						{{ Form::radio('showvote', 0, (Input::old('showvote') == '0' || (isset($page) && $page->showvote == '0') || !isset($page)) ? true : false, array('id'=>'showvote', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>	
 				</div>
 			</div>
 			<!-- ./ show vote -->
 			
-			<!-- Show Tags 
+			<!-- Show Tags -->
 			<div class="form-group {{{ $errors->has('showtags') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label" for="showtags">{{{ Lang::get('admin/pages/table.showtags') }}}</label>
@@ -113,11 +113,11 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="sidebar">{{{ Lang::get('admin/pages/table.sidebar') }}}</label>
 					<label class="radio">
-						{{ Form::radio('sidebar', 1, (Input::old('sidebar') == '1' || (isset($page->sidebar) && $page->sidebar == 1)) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
+						{{ Form::radio('sidebar', 1, (Input::old('sidebar') == '1' || (isset($page) && $page->sidebar == '1')) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.left') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('sidebar', 0, (Input::old('sidebar') == '0' || (isset($page->sidebar) && $page->sidebar == 0) || !isset($page->sidebar)) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
+						{{ Form::radio('sidebar', 0, (Input::old('sidebar') == '0' || (isset($page) && $page->sidebar == '0') || !isset($page)) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.right') }}}	
 					</label>
 	
@@ -132,7 +132,17 @@
 					<input type="password" name="password" id="password" value="{{{ Input::old('password', isset($page) ? $page->password : null) }}}" class="form-control input-sm" />
 				</div>
 			</div>
+			<!-- ./ show password -->
+			
+			<!-- Show tags -->
+			<div class="form-group {{{ $errors->has('tags') ? 'error' : '' }}}">
+				<div class="col-lg-12">
+					<label class="control-label" for="tags">{{{ Lang::get('admin/pages/table.tags') }}}</label>
+					<input type="text" name="tags" id="tags" value="{{{ Input::old('tags', isset($page) ? $page->tags : null) }}}" class="form-control input-sm" />
+				</div>
+			</div>
 			<!-- ./ show tags -->
+			
 			<!-- Content -->
 			<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
 				<div class="col-lg-12">
@@ -317,6 +327,7 @@ $(function() {
 	 $( "#sortable1, #sortable2" ).sortable({
 			items: "li:not(.ui-state-disabled)",
 		});
+		$('#tags').tagit();        
 	});
 	 $("input[id^='limit']").spinner();
 	 $('.btn-success').click(function(){

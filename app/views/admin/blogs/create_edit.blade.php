@@ -14,7 +14,7 @@
 <!-- ./ tabs -->
 
 {{-- Edit Blog Form --}}
-<form class="form-horizontal" method="post" action="@if (isset($blog)){{ URL::to('admin/blogs/' . $blog->id . '/edit') }}@endif" autocomplete="off">
+<form class="form-horizontal" enctype="multipart/form-data"  method="post" action="@if (isset($blog)){{ URL::to('admin/blogs/' . $blog->id . '/edit') }}@endif" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
@@ -42,7 +42,16 @@
 				</div>
 			</div>
 			<!-- ./ resource link -->
-
+			
+			<!-- Show image -->
+			<div class="form-group {{{ $errors->has('image') ? 'error' : '' }}}">
+				<div class="col-lg-12">
+					<label class="control-label" for="image">{{{ Lang::get('admin/blogs/table.image') }}}</label>
+					<input type="file" name="image" id="image" value="{{{ Input::old('image', isset($page) ? $page->image : null) }}}" />
+				</div>
+			</div>
+			<!-- ./ show image -->
+			
 			<!-- Blog categorys Title -->
 			<div class="form-group {{{ $errors->has('blog_categorys') ? 'error' : '' }}}">
 				<div class="col-md-12">
