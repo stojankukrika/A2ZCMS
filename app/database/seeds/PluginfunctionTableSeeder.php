@@ -9,6 +9,7 @@ class PluginfunctionTableSeeder extends Seeder {
 		
 		$plugin_blog = Plugin::find(1) -> id;
 		$plugin_gallery = Plugin::find(2) -> id;
+		$plugin_contact = Plugin::find(3) -> id;
 		
 		$pluginfunctions = array( 
 					array('title' => 'Login form', 
@@ -59,7 +60,15 @@ class PluginfunctionTableSeeder extends Seeder {
 						'params'=>'id;sort;order;limit;',
 						'type' => 'content',
 						'created_at' => new DateTime, 
-						'updated_at' => new DateTime,),);
+						'updated_at' => new DateTime,),
+					array('title' => 'Display contact form', 
+						'plugin_id' => $plugin_contact,
+						'function'=>'getContacFormId',
+						'params'=>'id;',
+						'type' => 'content',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),	
+						);
 						
 
 		// Uncomment the below to run the seeder

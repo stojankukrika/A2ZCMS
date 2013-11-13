@@ -19,6 +19,12 @@ class PluginsTableSeeder extends Seeder {
 						'function_grid' => NULL,
 						'created_at' => new DateTime, 
 						'updated_at' => new DateTime, ), 
+					array('content' => 'Contact form', 
+						'function_id' => 'getContactFormId',
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 	
+						
 				);
 
 		// Uncomment the below to run the seeder

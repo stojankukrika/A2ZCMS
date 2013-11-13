@@ -86,7 +86,7 @@
 							<div class="avatar"><img src="{{$asset}}avatar/avatar.png" alt="Avatar">
 							</div>
 							<div class="user">
-								<span class="hello">Welcome!</span>
+								<span class="hello">{{ Lang::get('admin/general.welcome') }}!</span>
 								<span class="name">{{{ Auth::user()->name }}} {{{ Auth::user()->surname }}}</span>
 							</div> </a>
 							<ul class="dropdown-menu">
@@ -94,10 +94,10 @@
 									<a href="{{{ URL::to('/') }}}"><i class="icon-home"></i> {{ Lang::get('admin/general.homepage') }}</a>
 								</li>
 								<li>
-									<a href="{{{ URL::to('/admin/users/profile') }}}"><i class="icon-cog"></i> Profile</a>
+									<a href="{{{ URL::to('/admin/users/profile') }}}"><i class="icon-cog"></i> {{ Lang::get('admin/general.profile') }}</a>
 								</li>
 								<li>
-									<a href="{{{ URL::to('user/messages') }}}"><i class="icon-envelope"></i> Messages</a>
+									<a href="{{{ URL::to('user/messages') }}}"><i class="icon-envelope"></i> {{ Lang::get('admin/general.messages') }}</a>
 								</li>
 								<li>
 									<a href="{{{ URL::to('user/logout') }}}"><i class="icon-road icon-white"></i> {{ Lang::get('admin/general.logout') }}</a>
@@ -125,6 +125,9 @@
 							</li>
 							<li>
 								<a href="{{{ URL::to('admin/todolists') }}}"><i class="icon-lightbulb"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.to_do_list') }}}</span></a>
+							</li>
+							<li>
+								<a href="{{{ URL::to('admin/customform') }}}"><i class="icon-globe"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.custom_form') }}} </span></a>
 							</li>
 							<li>
 								<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.pages') }}}</span><span class="chevron closed"></span></a>
@@ -168,7 +171,7 @@
 									</li>
 								</ul>
 							</li>
-
+							
 							<li>
 								<a class="dropmenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-group"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.users') }}} </span><span class="chevron closed"></span></a>
 								<ul>

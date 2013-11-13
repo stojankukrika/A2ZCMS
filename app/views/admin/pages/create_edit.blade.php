@@ -324,7 +324,7 @@
 @section('scripts')
 <script>
 $(function() {
-	 $( "#sortable1, #sortable2" ).sortable({
+		$( "#sortable1, #sortable2" ).sortable({
 			items: "li:not(.ui-state-disabled)",
 		});
 		$('#tags').tagit();        

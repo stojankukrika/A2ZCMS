@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder {
 		$this -> call('TodolistTableSeeder');
 		$this -> call('PluginsTableSeeder');
 		$this -> call('PluginfunctionTableSeeder');
+		$this -> call('CustomFormsTableSeeder');
+		$this -> call('CustomFormFieldsTableSeeder');
 	}
 
 }

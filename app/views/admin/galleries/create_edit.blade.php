@@ -36,7 +36,7 @@
 	<!-- End publish -->
 	<div class="form-group {{{ $errors->has('end_publish') ? 'error' : '' }}}">
 		<div class="col-md-12 controls">
-			<label class="control-label" for="end_publish">{{{ Lang::get("admin/galleries/table.end_publish") }}}<</label>
+			<label class="control-label" for="end_publish">{{{ Lang::get("admin/galleries/table.end_publish") }}}</label>
 			<input class="form-control" type="text" name="end_publish" id="end_publish" value="{{{ Input::old('end_publish', isset($galleries) ? $galleries->end_publish : null) }}}" />
 			{{{ $errors->first('end_publish', '<span class="help-inline">:message</span>') }}}
 		</div>

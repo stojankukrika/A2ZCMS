@@ -85,6 +85,7 @@ Entrust::routeNeedsPermission( 'admin/navigationgroups*', 'manage_navigation_gro
 Entrust::routeNeedsPermission( 'admin/galleryimages*', 'manage_gallery_images', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/galleries*', 'manage_galleries', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/galleryimagecomments*', 'manage_gallery_imagecomments', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/customform*', 'customform', Redirect::to('/admin') );
 
 /*
 |--------------------------------------------------------------------------

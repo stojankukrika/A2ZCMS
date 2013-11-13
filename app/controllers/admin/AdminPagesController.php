@@ -397,5 +397,8 @@ class AdminPagesController extends AdminController {
 	public function getGalleryId(){
 		return Gallery::get(array('id','title'));
 	}
+	public function getCustomFormId(){
+		return CustomForm::get(array('id','title'));
+	}
 
 }

@@ -28,5 +28,9 @@ return array(
 	'gallery_images' => 'Gallery images',
 	'users' => 'Users',
 	'roles' => 'Roles',
-	
+	'profile' => 'Profile',
+	'messages' => 'Messages',
+	'welcome' => 'Welcome',
+	'custom_form' => 'Custom forms',
+	'new_contact_form' => 'New contact form',
 );

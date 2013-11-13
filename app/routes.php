@@ -29,6 +29,8 @@ Route::model('grid', 'Grid');
 Route::model('plugin', 'Plugin');
 Route::model('role', 'Role');
 Route::model('settings', 'Settings');
+Route::model('customform', 'CustomForm');
+Route::model('customformfields', 'CustomFormField');
 
 /** ------------------------------------------
  *  Admin Routes
@@ -116,8 +118,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
 		# Navigation Management
 	Route::get('pages/{nav}/visible', 'AdminPagesController@getVisible')
         ->where('nav', '[0-9]+');
-    Route::get('pages/{nav}/show', 'AdminPagesController@getShow')
-        ->where('nav', '[0-9]+');
     Route::get('pages/{nav}/edit', 'AdminPagesController@getEdit')
         ->where('nav', '[0-9]+');
     Route::post('pages/{nav}/edit', 'AdminPagesController@postEdit')
@@ -129,8 +129,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::controller('pages', 'AdminPagesController');
     
     # Navigation Group Management
-    Route::get('navigationgroups/{group}/show', 'AdminNavigationGroupsController@getShow')
-        ->where('group', '[0-9]+');
     Route::get('navigationgroups/{group}/edit', 'AdminNavigationGroupsController@getEdit')
         ->where('group', '[0-9]+');
     Route::post('navigationgroups/{group}/edit', 'AdminNavigationGroupsController@postEdit')
@@ -142,8 +140,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::controller('navigationgroups', 'AdminNavigationGroupsController');
 
     # Navigation Management
-    Route::get('navigation/{nav}/show', 'AdminNavigationController@getShow')
-        ->where('nav', '[0-9]+');
     Route::get('navigation/{nav}/edit', 'AdminNavigationController@getEdit')
         ->where('nav', '[0-9]+');
     Route::post('navigation/{nav}/edit', 'AdminNavigationController@postEdit')
@@ -197,6 +193,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::post('todolists/{todo}/delete', 'AdminTodolistController@getDelete')
         ->where('todo', '[0-9]+');
     Route::controller('todolists', 'AdminTodolistController');
+
+ 	# Contact form Management   
+    Route::get('customform/{cform}/edit', 'AdminCustomFormController@getEdit')
+        ->where('cform', '[0-9]+');
+    Route::post('customform/{cform}/edit', 'AdminCustomFormController@postEdit')
+        ->where('cform', '[0-9]+');
+    Route::get('customform/{cform}/delete', 'AdminCustomFormController@getDelete')
+        ->where('cform', '[0-9]+');
+    Route::post('customform/{cform}/delete', 'AdminCustomFormController@getDelete')
+        ->where('cform', '[0-9]+');
+    Route::controller('customform', 'AdminCustomFormController');
 
 	# Settings
     Route::get('settings', 'AdminSettingsController@getIndex');
