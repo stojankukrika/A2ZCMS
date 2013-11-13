@@ -11,7 +11,7 @@
 	<h3> {{{ $title }}}
 	<div class="pull-right">
 		<a href="{{{ URL::to('admin/pages/create') }}}" class="btn btn-small btn-info iframe">
-			<i class="icon-plus-sign icon-white"></i> Create</a>
+			<i class="icon-plus-sign icon-white"></i> {{{ Lang::get('admin/general.create') }}}</a>
 	</div></h3>
 </div>
 
@@ -39,7 +39,7 @@
 			"sDom" : "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
 			"sPaginationType" : "bootstrap",
 			"oLanguage" : {
-				"sLengthMenu" : "_MENU_ records per page"
+				"sLengthMenu" : "_MENU_ {{{ Lang::get('admin/general.records_per_page') }}}"
 			},
 			"bProcessing" : true,
 			"bServerSide" : true,

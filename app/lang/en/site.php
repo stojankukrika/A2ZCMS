@@ -21,4 +21,6 @@ return array(
 	'edit_profile' =>'Edit profile',
 	'logout' =>'Logout',
 	'messages' =>'Messages',
+	'submit' => 'Submit',
+
 );

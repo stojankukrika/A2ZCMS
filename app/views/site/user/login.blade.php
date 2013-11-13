@@ -61,7 +61,7 @@
 				<button tabindex="3" type="submit" class="btn btn-primary">
 					{{ Lang::get('confide.login.submit') }}
 				</button>
-				<a class="btn btn-default" href="forgot">{{ Lang::get('confide.login.forgot_password') }}</a>
+				<a class="btn btn-default" href="{{ Url::to('user/forgot') }}">{{ Lang::get('confide.login.forgot_password') }}</a>
 			</div>
 		</div>
 	</fieldset>

@@ -1,14 +1,14 @@
 @extends('install.layouts.default')
 
 @section('title')
-Installer | Step 2 of 4
+{{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 2 {{ Lang::get('install/installer.of') }} 4
 @stop
 
 @section('content')
 <div id="install-region">
 	@if (Session::has('install_errors'))
 	<div class="alert alert-block alert-error">
-		<strong>Error!</strong>
+		<strong>{{ Lang::get('install/installer.error') }}</strong>
 		@foreach ($errors->all() as $error)
 		<li>
 			{{ $error }}
@@ -26,25 +26,25 @@ Installer | Step 2 of 4
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="hostname">Host name</label>
+			<label class="control-label" for="hostname">{{ Lang::get('install/installer.host_name') }}</label>
 			<div class="controls">
 				<input type="text" id="hostname" name="hostname" placeholder="localhost" value="{{ (isset($old) ? $old->hostname : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="database">Database</label>
+			<label class="control-label" for="database">{{ Lang::get('install/installer.database') }}</label>
 			<div class="controls">
 				<input type="text" id="database" name="database" placeholder="database" value="{{ (isset($old) ? $old->database : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="username">Database username</label>
+			<label class="control-label" for="username">{{ Lang::get('install/installer.database_username') }}</label>
 			<div class="controls">
 				<input type="text" id="username" name="username" placeholder="username" value="{{ (isset($old) ? $old->username : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="password">Database password</label>
+			<label class="control-label" for="password">{{ Lang::get('install/installer.database_password') }}</label>
 			<div class="controls">
 				<input id="password" type="text" name="password" placeholder="password" value="{{ (isset($old) ? $old->password : '') }}">
 			</div>
@@ -52,7 +52,7 @@ Installer | Step 2 of 4
 		<div class="control-group">
 			<div class="controls">
 				<button type="submit" class="btn save">
-					Next Step
+					{{ Lang::get('install/installer.next_step') }}
 				</button>
 			</div>
 		</div>

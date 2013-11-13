@@ -52,12 +52,12 @@ class AdminGalleryImageCommentsController extends AdminController {
 	 * @param $comment
 	 * @return Response
 	 */
-	public function getEdit($blog_comment) {
+	public function getEdit($gallery_comment) {
 		// Title
 		$title = Lang::get('admin/galleryimagecomments/title.comment_update');
 
 		// Show the page
-		return View::make('admin/galleryimagecomments/edit', compact('blog_comment', 'title'));
+		return View::make('admin/galleryimagecomments/edit', compact('gallery_comment', 'title'));
 	}
 
 	/**
@@ -66,7 +66,7 @@ class AdminGalleryImageCommentsController extends AdminController {
 	 * @param $comment
 	 * @return Response
 	 */
-	public function postEdit($blog_comment) {
+	public function postEdit($id) {
 		// Declare the rules for the form validation
 		$rules = array('content' => 'required|min:3');
 
@@ -81,15 +81,15 @@ class AdminGalleryImageCommentsController extends AdminController {
 			// Was the page updated?
 			if ($gallerycomment -> update($inputs)) {
 				// Redirect to the new comment post page
-				return Redirect::to('admin/galleryimagecomments/' . $blog_comment -> id . '/edit') -> with('success', Lang::get('admin/blogcomments/messages.update.success'));
+				return Redirect::to('admin/galleryimagecomments/' . $gallerycomment -> id . '/edit') -> with('success', Lang::get('admin/galleryimagecomments/messages.update.success'));
 			}
 
 			// Redirect to the comments post management page
-			return Redirect::to('admin/galleryimagecomments/' . $blog_comment -> id . '/edit') -> with('error', Lang::get('admin/blogcomments/messages.update.error'));
+			return Redirect::to('admin/galleryimagecomments/' . $gallerycomment -> id . '/edit') -> with('error', Lang::get('admin/galleryimagecomments/messages.update.error'));
 		}
 
 		// Form validation failed
-		return Redirect::to('admin/galleryimagecomments/' . $blog_comment -> id . '/edit') -> withInput() -> withErrors($validator);
+		return Redirect::to('admin/galleryimagecomments/' . $gallerycomment -> id . '/edit') -> withInput() -> withErrors($validator);
 	}
 
 	/**

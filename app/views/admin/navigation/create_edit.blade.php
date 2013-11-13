@@ -16,7 +16,11 @@
 
 {{-- Content --}}
 @section('content')
-
+<ul class="nav nav-tabs">
+	<li class="active">
+		<a href="#tab-general" data-toggle="tab">{{{ Lang::get('admin/general.general') }}}</a>
+	</li>
+</ul>
 {{-- Edit Page Form --}}
 <!-- <form class="form-horizontal" method="post" action="{{ URL::to('admin/navigation/create') }}" > -->
 <form class="form-horizontal" method="post" action="@if (isset($navigationGroup)){{ URL::to('admin/navigation/groups/' . $navigationGroup->id . '/edit') }}@endif" >
@@ -31,7 +35,7 @@
 			<!-- Title -->
 			<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
 				<div class="col-lg-12">
-					<label class="control-label col-lg-2" for="title">{{{ Lang::get('admin/navigation/table.title') }}}</label>
+					<label class="control-label col-lg-2" for="title">{{{ Lang::get('admin/general.title') }}}</label>
 					{{ Form::text('title', Input::old('title', isset($navigation) ? $navigation->title : null), array('class' => 'form-control input-sm')) }}
 					<span class="help-inline">{{{ $errors->first('title', ':message') }}}</span>
 				</div>
@@ -42,8 +46,8 @@
 			<div class="form-group {{{ $errors->has('parent') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 				<label class="control-label col-lg-2" for="parent">{{{ Lang::get('admin/navigation/table.parent') }}}</label>
-					{{ Form::select('parent', array('' => 'Select Page') + (array)$navigationList, isset($navigation) ? $navigation->parent  : '', array('class' => 'form-control input-sm')) }}
-					<span class="help-inline">Do not select if this navigation is not under other navigation.</span>
+					{{ Form::select('parent', array('' => '{{Lang::get("admin/navigation/table.select_page")}}') + (array)$navigationList, isset($navigation) ? $navigation->parent  : '', array('class' => 'form-control input-sm')) }}
+					<span class="help-inline">{{Lang::get("admin/navigation/table.select_page_info")}}</span>
 					<span class="help-inline">{{{ $errors->first('parent', ':message') }}}</span>
 				</div>
 			</div>
@@ -53,7 +57,7 @@
 			<div class="form-group {{{ $errors->has('link_type') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label col-lg-2" for="link_type">{{{ Lang::get('admin/navigation/table.link_type') }}}</label>
-					{{ Form::select('link_type', array('page' => 'Page', 'url' => 'External Link', 'uri' => 'Site Link'), Input::old('link_type', isset($navigation) ? $navigation->link_type : ''), array('id' => 'link_type', 'class' => 'form-control input-sm')) }}
+					{{ Form::select('link_type', array('page' => '{{Lang::get("admin/navigation/table.page")}}', 'url' => '{{Lang::get("admin/navigation/table.external_link")}}', 'uri' => '{{Lang::get("admin/navigation/table.site_link")}}'), Input::old('link_type', isset($navigation) ? $navigation->link_type : ''), array('id' => 'link_type', 'class' => 'form-control input-sm')) }}
 					<span class="help-inline">{{{ $errors->first('link_type', ':message') }}}</span>
 				</div>
 			</div>
@@ -63,7 +67,7 @@
 			<div id="page" style="display: none;" class="form-group link_type {{{ $errors->has('page_id') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label col-lg-2" for="page_id">{{{ Lang::get('admin/navigation/table.page') }}}</label>
-					{{ Form::select('page_id', array('' => 'Select Page') + $pageList, Input::old('page_id', isset($navigation) ? $navigation->page_id : ''), array('class' => 'form-control input-sm')) }}
+					{{ Form::select('page_id', array('' => '{{Lang::get("admin/navigation/table.select_page")}}') + $pageList, Input::old('page_id', isset($navigation) ? $navigation->page_id : ''), array('class' => 'form-control input-sm')) }}
 					<span class="help-inline">{{{ $errors->first('page_id', ':message') }}}</span>
 				</div>
 			</div>
@@ -93,7 +97,7 @@
 			<div class="form-group {{{ $errors->has('navigation_group_id') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label col-lg-2" for="navigation_group_id">{{{ Lang::get('admin/navigation/table.navigation_group') }}}</label>
-					{{ Form::select('navigation_group_id', array('' => 'Select Group') + (array)$navigationGroupList, Input::old('page_id', isset($navigation) ? $navigation->navigation_group_id : ''), array('class' => 'form-control input-sm')); }}
+					{{ Form::select('navigation_group_id', array('' => '{{Lang::get("admin/navigation/table.select_group")}}') + (array)$navigationGroupList, Input::old('page_id', isset($navigation) ? $navigation->navigation_group_id : ''), array('class' => 'form-control input-sm')); }}
 					<span class="help-inline">{{{ $errors->first('navigation_group_id', ':message') }}}</span>
 				</div>
 			</div>
@@ -103,7 +107,7 @@
 			<div class="form-group {{{ $errors->has('target') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label col-lg-2" for="target">{{{ Lang::get('admin/navigation/table.target') }}}</label>
-					{{ Form::select('target', array('selected'=>'Self', '_blank' => 'Blank Page'), Input::old('page_id', isset($navigation) ? $navigation->target : ''), array('class' => 'form-control input-sm')) }}
+					{{ Form::select('target', array('selected'=>'Self', '_blank' => '{{Lang::get("admin/navigation/table.blank_page")}}'), Input::old('page_id', isset($navigation) ? $navigation->target : ''), array('class' => 'form-control input-sm')) }}
 					<span class="help-inline">{{{ $errors->first('target', ':message') }}}</span>
 				</div>
 			</div>
@@ -114,7 +118,7 @@
 				<div class="col-lg-12">
 					<label class="control-label col-lg-2" for="class">{{{ Lang::get('admin/navigation/table.class') }}}</label>
 					{{ Form::text('class', Input::old('class', isset($navigation) ? $navigation->class : null), array('class' => 'form-control input-sm')) }}
-					<span class="help-inline">The class will be appended on navigation class attribute</span>
+					<span class="help-inline">{{Lang::get("admin/navigation/table.class_info")}}</span>
 					<span class="help-inline">{{{ $errors->first('class', ':message') }}}</span>
 				</div>
 			</div>
@@ -128,15 +132,15 @@
 
 	<!-- Form Actions -->
 	<div class="form-group">
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<button type="reset" class="btn btn-link close_popup">
-				<span class="icon-remove"></span>  Cancel
+				<span class="icon-remove"></span>  {{{ Lang::get('admin/general.cancel') }}}
 			</button>
 			<button type="reset" class="btn btn-default">
-				<span class="icon-refresh"></span> Reset
+				<span class="icon-refresh"></span> {{{ Lang::get('admin/general.reset') }}}
 			</button>
 			<button type="submit" class="btn btn-success">
-				<span class="icon-ok"></span> @if (isset($navigation)){{ "Update" }} @else {{ "Create" }} @endif
+				<span class="icon-ok"></span> @if (isset($navigation)){{{ Lang::get('admin/general.update') }}} @else {{{ Lang::get('admin/general.create') }}} @endif
 			</button>
 		</div>
 	</div>

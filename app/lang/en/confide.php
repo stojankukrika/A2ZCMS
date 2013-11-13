@@ -8,8 +8,14 @@ return array(
     'e_mail' => 'Email',
 	'name' => 'Name',
 	'surname' => 'Surname',
+	'activate_user' => 'Activate User?',
+	'roles' =>'Roles',
+	'roles_info' =>'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned.',
     'username_e_mail' => 'Username or Email',
-
+	'name' => 'Name',
+	'permissions' => 'Permissions',
+	'update' => 'Update',
+	'edit_settings' =>'Edit your settings',
     'signup' => array(
         'title' => 'Signup',
         'desc' => 'Signup for new account',

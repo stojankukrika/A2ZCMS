@@ -33,7 +33,7 @@
 <div class="form-group">
 	<div class="col-md-12">
 		<button type="reset" class="btn btn-link close_popup">
-			<span class="icon-remove"></span>  Cancel
+			<span class="icon-remove"></span>  {{{ Lang::get("admin/general.cancel") }}}
 		</button>
 	</div>
 </div>
@@ -45,29 +45,27 @@
 <script>
 		$(document).ready(function () {
 
-	$('#jquery-wrapped-fine-uploader').fineUploader({
-	request: {
-	endpoint: '<?=URL::to("admin/galleries/" . $galleries -> id . "/upload/"); ?>
-		',
-		params: { 'gid' : {{$galleries->id}},'_token':'{{ csrf_token() }}' },
-		},
-		text: {
-		uploadButton: 'Upload Your Images'
-		},
-		template:
-		'<div class="qq-uploader span8 offset2">' +
-		'<pre class="qq-upload-drop-area span12"><span>{dragZoneText}</span></pre>' +
-		'<div class="qq-upload-button btn btn-success" style="width: auto;">{uploadButtonText}</div>' +
-		'<span class="qq-drop-processing"><span>{dropProcessingText}</span><span class="qq-drop-processing-spinner"></span></span>' +
-		'<ul class="qq-upload-list" style="margin-top: 10px; text-align: center;"></ul>' +
-		'</div>',
-		classes: {
-		success: 'alert alert-success',
-		fail: 'alert alert-error'
-		},
-		debug: true
-		});
-
+			$('#jquery-wrapped-fine-uploader').fineUploader({
+					request: {
+					endpoint: '<?=URL::to("admin/galleries/" . $galleries -> id . "/upload/"); ?>',
+					params: { 'gid' : {{$galleries->id}},'_token':'{{ csrf_token() }}' },
+				},
+				text: {
+					uploadButton: '{{{ Lang::get("admin/galleries/table.upload_your_images") }}}'
+				},
+				template:
+					'<div class="qq-uploader span8 offset2">' +
+					'<pre class="qq-upload-drop-area span12"><span>{dragZoneText}</span></pre>' +
+					'<div class="qq-upload-button btn btn-success" style="width: auto;">{uploadButtonText}</div>' +
+					'<span class="qq-drop-processing"><span>{dropProcessingText}</span><span class="qq-drop-processing-spinner"></span></span>' +
+					'<ul class="qq-upload-list" style="margin-top: 10px; text-align: center;"></ul>' +
+					'</div>',
+				classes: {
+					success: 'alert alert-success',
+					fail: 'alert alert-error'
+				},
+					debug: true
+				});
 		});
 </script>
 @stop

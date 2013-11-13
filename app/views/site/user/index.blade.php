@@ -17,7 +17,7 @@ background: #f2f2f2;
 {{-- Content --}}
 @section('content')
 <div class="page-header">
-	<h3>Edit your settings</h3>
+	<h3> {{ Lang::get('site.edit_settings') }}</h3>
 </div>
 <form class="" method="post" action="{{ URL::to('user/' . $user->id . '/edit') }}"  autocomplete="off">
 	<!-- CSRF Token -->
@@ -28,7 +28,7 @@ background: #f2f2f2;
 
 		<!-- Name -->
 		<div class="form-group {{{ $errors->has('name') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="name">Name</label>
+			<label class="col-md-2 control-label" for="name">{{ Lang::get('confide.name') }}</label>
 			<div class="col-md-10">
 				<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $user->name) }}}" />
 				{{{ $errors->first('name', '<span class="help-inline">:message</span>') }}}
@@ -38,7 +38,7 @@ background: #f2f2f2;
 
 		<!-- Surname -->
 		<div class="form-group {{{ $errors->has('surname') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="surname">Surname</label>
+			<label class="col-md-2 control-label" for="surname">{{ Lang::get('confide.surname') }}</label>
 			<div class="col-md-10">
 				<input class="form-control" type="text" name="surname" id="surname" value="{{{ Input::old('surname', $user->surname) }}}" />
 				{{{ $errors->first('surname', '<span class="help-inline">:message</span>') }}}
@@ -48,7 +48,7 @@ background: #f2f2f2;
 
 		<!-- Password -->
 		<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="password">Password</label>
+			<label class="col-md-2 control-label" for="password">{{ Lang::get('confide.password') }}</label>
 			<div class="col-md-10">
 				<input class="form-control" type="password" name="password" id="password" value="" />
 				{{{ $errors->first('password', '<span class="help-inline">:message</span>') }}}
@@ -58,7 +58,7 @@ background: #f2f2f2;
 
 		<!-- Password Confirm -->
 		<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="password_confirmation">Password Confirm</label>
+			<label class="col-md-2 control-label" for="password_confirmation">{{ Lang::get('confide.password_confirmation') }}</label>
 			<div class="col-md-10">
 				<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
 				{{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}}
@@ -72,7 +72,7 @@ background: #f2f2f2;
 	<div class="form-group">
 		<div class="col-md-offset-2 col-md-10">
 			<button type="submit" class="btn btn-success">
-				Update
+				{{ Lang::get('confide.update') }}
 			</button>
 		</div>
 	</div>

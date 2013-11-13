@@ -14,10 +14,10 @@
 	<div class="control-group">
 		<div class="controls">
 			<button type="reset" class="btn btn-link close_popup">
-				<span class="icon-remove"></span>  Cancel
+				<span class="icon-remove"></span>  {{{ Lang::get('admin/general.cancel') }}}
 			</button>
 			<button type="submit" class="btn btn-danger close_popup">
-				<span class="icon-trash"></span>  Delete
+				<span class="icon-trash"></span>  {{{ Lang::get('admin/general.delete') }}}
 			</button>
 		</div>
 	</div>

@@ -10,7 +10,7 @@
 @section('content')
 
  <hr>
-          <p><i class="icon-time"></i> Posted on {{{ $blog->date() }}} by 
+          <p><i class="icon-time"></i> {{ Lang::get('site/blog.posted_on') }} {{{ $blog->date() }}} {{ Lang::get('site/blog.by') }} 
           	<a href="#">{{{ $blog->author->username }}}</a></p>
           <hr>
           <img src="http://placehold.it/900x300" class="img-responsive">
@@ -19,13 +19,13 @@
 			{{ $blog->content() }}
 			</p>
    		<p>
-   			<strong>Resource:</strong>{{$blog->resource_link}}
+   			<strong>{{ Lang::get('site/blog.resource') }}:</strong>{{$blog->resource_link}}
    		</p>          
      <hr>
 
 <!-- the comment box -->
   <div class="well">            
-	<h4>{{{ $blog_comments->count() }}} Comments</h4>
+	<h4>{{{ $blog_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
 
 	@if ($blog_comments->count())
 	@foreach ($blog_comments as $comment)
@@ -42,12 +42,12 @@
 </div>
 
 @if ( ! Auth::check())
-You need to be logged in to add comments.
+{{ Lang::get('site.add_comment_login') }}
 <br />
 <br />
-Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
+{{ Lang::get('site/blog.click') }} <a href="{{{ URL::to('user/login') }}}">{{ Lang::get('site/blog.here') }}</a> {{ Lang::get('site/blog.to_login') }}
 @elseif ( ! $canBlogComment )
-You don't have the correct permissions to add comments.
+{{ Lang::get('site/blog.add_comment_permission') }}
 @else
 
 @if($errors->has())
@@ -63,14 +63,14 @@ You don't have the correct permissions to add comments.
 @endif
 
 <div class="new_comment">
-	<h4>Add Comment</h4>
+	<h4>{{ Lang::get('site/blog.add_comment') }}</h4>
 	<form method="post" action="{{{ URL::to($blog->slug) }}}">
 		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 			<div class="form-group">
 				<textarea class="form-control" name="comment" placeholder="comment" rows="7">{{{ Request::old('comment') }}}</textarea>
 			</div>
 			<div class="form-group">
-				<a href="#" class="btn btn-success">Submit</a>
+				<a href="#" class="btn btn-success">{{ Lang::get('site.submit') }}</a>
 			</div>
 	</form>
 </div>

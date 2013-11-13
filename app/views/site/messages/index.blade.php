@@ -8,9 +8,9 @@
 {{-- Content --}}
 @section('content')
 		<ul id="myTab" class="nav nav-tabs">
-            <li class="active"><a href="#service-one" data-toggle="tab">Inbox</a></li>
-            <li><a href="#service-two" data-toggle="tab">Send</a></li>
-            <li><a href="#service-three" data-toggle="tab">New message</a></li>
+            <li class="active"><a href="#service-one" data-toggle="tab">{{ Lang::get('site/messages.inbox') }}</a></li>
+            <li><a href="#service-two" data-toggle="tab">{{ Lang::get('site/messages.send') }}</a></li>
+            <li><a href="#service-three" data-toggle="tab">{{ Lang::get('site/messages.new_message') }}</a></li>
           </ul>
             <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="service-one">
@@ -59,12 +59,12 @@
              <form role="form" method="POST" action="messages/sendmessage">
 	             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	              <div class="form-group col-lg-4">
-	                <label for="input1">Subject</label>
+	                <label for="input1">{{ Lang::get('site/messages.subject') }}</label>
 	              	<input class="form-control" type="text" name="subject" id="subject" >
 	              </div>
 	               <div class="clearfix"></div>
 	               <div class="form-group col-lg-4">
-	                <label for="input1">Receivers</label>
+	                <label for="input1">{{ Lang::get('site/messages.receivers') }}</label>
 	               <select name="recipients[]" multiple="multiple" id="recipients">
 	                     @foreach($allUsers as $usr)
 	                        <option value="{{ $usr->id}}">{{ $usr->surname }} {{ $usr->name }}</option>
@@ -73,11 +73,11 @@
 	              </div>
 	               <div class="clearfix"></div>
 	              <div class="form-group col-lg-12">
-	                <label for="input4">Message</label>
+	                <label for="input4">{{ Lang::get('site/messages.message') }}</label>
 	                <textarea name="content" class="form-control" rows="6" id="content"></textarea>
 	              </div>
 	              <div class="form-group col-lg-12">
-	                <button type="submit" class="btn btn-primary">Submit</button>
+	                <button type="submit" class="btn btn-primary">{{ Lang::get('site.submit') }}</button>
 	              </div>
             </form>
 

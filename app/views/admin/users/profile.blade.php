@@ -5,20 +5,9 @@
 {{{ $title }}} :: @parent
 @stop
 
-@section('keywords')Settings @stop
-@section('author')A2Z CMS @stop
-@section('description')Settings @stop
-
-{{-- Content --}}
 @section('content')
 
-<li>
-	<a href="#">Home</a>
-</li>
-<li class="active" >
-	Profile
-</li>
-</ol>
+
 <div class="row">
 <form class="form-horizontal" method="post" action="{{ URL::to('admin/users/profile') }}" autocomplete="off">
 
@@ -43,7 +32,7 @@
 			<!-- surname -->
 			<!-- Password -->
 			<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="password">Password</label>
+				<label class="col-md-2 control-label" for="password">{{ Lang::get('confide.password') }}</label>
 				<div class="col-md-10">
 					<input class="form-control"  tabindex="5" placeholder="{{ Lang::get('confide.password') }}" type="password" name="password" id="password" value="" />
 					{{{ $errors->first('password', '<span class="help-inline">:message</span>') }}}
@@ -53,7 +42,7 @@
 
 			<!-- Password Confirm -->
 			<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="password_confirmation">Password Confirm</label>
+				<label class="col-md-2 control-label" for="password_confirmation">{{ Lang::get('confide.password_confirmation') }}</label>
 				<div class="col-md-10">
 					<input class="form-control" type="password" tabindex="6" placeholder="{{ Lang::get('confide.password_confirmation') }}"  name="password_confirmation" id="password_confirmation" value="" />
 					{{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}}
@@ -63,15 +52,15 @@
 
 	<!-- Form Actions -->
 	<div class="form-group">
-		<div class="col-md-offset-2 col-md-10">
+		<div class="col-md-12">
 			<button type="reset" class="btn btn-link close_popup">
-				Cancel
+				<span class="icon-remove"></span>  {{{ Lang::get('admin/general.cancel') }}}
 			</button>
 			<button type="reset" class="btn btn-default">
-				Reset
+				<span class="icon-refresh"></span> {{{ Lang::get('admin/general.reset') }}}
 			</button>
 			<button type="submit" class="btn btn-success">
-				OK
+				<span class="icon-ok"></span> @if (isset($user)){{{ Lang::get('admin/general.update') }}} @else {{{ Lang::get('admin/general.create') }}} @endif
 			</button>
 		</div>
 	</div>

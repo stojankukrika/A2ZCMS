@@ -240,6 +240,10 @@ Route::post('user/login', 'UserController@postLogin');
 //:: User Account Routes ::
 Route::post('login', 'BaseController@postLogin');
 
+//:: User Account Routes ::
+Route::get('user/forgot', 'UserController@getForgot');
+Route::post('user/forgot', 'UserController@postForgot');
+
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
 

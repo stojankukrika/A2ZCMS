@@ -15,7 +15,7 @@
 {{ $page->page_javascript() }}
 </script>
  <hr>
-          <p><i class="icon-time"></i> Posted on {{{ $page->date() }}} </p>
+          <p><i class="icon-time"></i> {{ Lang::get('site.posted_on') }} {{{ $page->date() }}} </p>
           <hr>
           <img src="http://placehold.it/900x300" class="img-responsive">
           <hr>

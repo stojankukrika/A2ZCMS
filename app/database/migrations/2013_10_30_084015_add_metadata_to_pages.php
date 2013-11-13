@@ -26,7 +26,7 @@ class AddMetadataToPages extends Migration {
 			$table -> integer('votedown')->after('voteup');
 			$table -> string('password')->after('votedown');
 			$table -> string('tags')->after('password')-> nullable();
-			$table -> integer('hits')->after('image');
+			$table -> integer('hits')->after('tags');
 		});
 	}
 

@@ -4,19 +4,19 @@
 @section('content')
 <ul class="nav nav-tabs">
 	<li class="active">
-		<a href="#tab-general" data-toggle="tab">General</a>
+		<a href="#tab-general" data-toggle="tab">{{{ Lang::get('admin/general.general') }}}</a>
 	</li>
 	<li class="">
-		<a href="#tab-meta-data" data-toggle="tab">Meta data</a>
+		<a href="#tab-meta-data" data-toggle="tab">{{Lang::get("admin/pages/table.meta_data")}}</a>
 	</li>
 	<li class="">
-		<a href="#tab-css" data-toggle="tab">Page CSS</a>
+		<a href="#tab-css" data-toggle="tab">{{Lang::get("admin/pages/table.page_css")}}</a>
 	</li>
 	<li class="">
-		<a href="#tab-javascript" data-toggle="tab">Page Java Script</a>
+		<a href="#tab-javascript" data-toggle="tab">{{Lang::get("admin/pages/table.page_java_script")}}</a>
 	</li>
 	<li class="">
-		<a href="#tab-grid" data-toggle="tab">Page Grid</a>
+		<a href="#tab-grid" data-toggle="tab">{{Lang::get("admin/pages/table.page_grid")}}</a>
 	</li>
 </ul>
 
@@ -172,7 +172,7 @@
 			<!-- Meta Title -->
 			<div class="form-group {{{ $errors->has('meta-title') ? 'error' : '' }}}">
 				<div class="col-md-12">
-					<label class="control-label" for="meta-title">Meta Title</label>
+					<label class="control-label" for="meta-title">{{{ Lang::get('admin/pages/table.meta_title') }}}</label>
 					<input class="form-control" type="text" name="meta_keywords" id="meta_keywords" value="{{{ Input::old('meta_keywords', isset($page) ? $page->meta_keywords : null) }}}" />
 					{{{ $errors->first('meta-title', '<span class="help-inline">:message</span>') }}}
 				</div>
@@ -182,7 +182,7 @@
 			<!-- Meta Description -->
 			<div class="form-group {{{ $errors->has('meta-description') ? 'error' : '' }}}">
 				<div class="col-md-12 controls">
-					<label class="control-label" for="meta-description">Meta Description</label>
+					<label class="control-label" for="meta-description">{{{ Lang::get('admin/pages/table.meta_description') }}}</label>
 					<input class="form-control" type="text" name="meta_description" id="meta_description" value="{{{ Input::old('meta_description', isset($page) ? $page->meta_description : null) }}}" />
 					{{{ $errors->first('meta-description', '<span class="help-inline">:message</span>') }}}
 				</div>
@@ -192,7 +192,7 @@
 			<!-- Meta Keywords -->
 			<div class="form-group {{{ $errors->has('meta-keywords') ? 'error' : '' }}}">
 				<div class="col-md-12">
-					<label class="control-label" for="meta-keywords">Meta Keywords</label>
+					<label class="control-label" for="meta-keywords">{{{ Lang::get('admin/pages/table.meta_keywords') }}}</label>
 					<input class="form-control" type="text" name="meta_keywords" id="meta_keywords" value="{{{ Input::old('meta_keywords', isset($page) ? $page->meta_keywords : null) }}}" />
 					{{{ $errors->first('meta-keywords', '<span class="help-inline">:message</span>') }}}
 				</div>
@@ -243,26 +243,26 @@
 									{{$item->title}}
 									<div>
 										@if($item->sorts != "" || strpos($item->params,'sort') !== false)
-											<label class="control-label" for="sort">Sorting: </label>
+											<label class="control-label" for="sort">{{{ Lang::get('admin/pages/table.sorting') }}} </label>
 											<select name="pagecontent[{{$item->id}}][sort]" id="sort{{$item->id}}"> 
-											  <option value="ASC" {{ ($item->sorts=="ASC")?"selected":"";}}>Ascending</option>
-											  <option value="DESC" {{ ($item->sorts=="DESC")?"selected":"";}}>Descending</option>
+											  <option value="ASC" {{ ($item->sorts=="ASC")?"selected":"";}}>{{{ Lang::get('admin/pages/table.ascending') }}}</option>
+											  <option value="DESC" {{ ($item->sorts=="DESC")?"selected":"";}}>{{{ Lang::get('admin/pages/table.descending') }}}</option>
 											</select>
 										@endif
 										@if($item->orders != "" || strpos($item->params,'order') !== false)
-											<label class="control-label" for="order">Order: </label>
+											<label class="control-label" for="order">{{{ Lang::get('admin/pages/table.order') }}} </label>
 											<select name="pagecontent[{{$item->id}}][order]" id="order{{$item->id}}"> 
-											  <option value="id" {{ ($item->orders=="id")?"selected":"";}}>ID</option>
-											  <option value="views" {{ ($item->orders=="views")?"selected":"";}}>Views</option>
+											  <option value="id" {{ ($item->orders=="id")?"selected":"";}}>{{{ Lang::get('admin/pages/table.ID') }}}</option>
+											  <option value="views" {{ ($item->orders=="views")?"selected":"";}}>{{{ Lang::get('admin/pages/table.views') }}}</option>
 											</select>
 										@endif
 										@if($item->limits != "" || strpos($item->params,'limit') !== false)
-											<label class="control-label" for="limit">Limit: </label>
+											<label class="control-label" for="limit">{{{ Lang::get('admin/pages/table.limit') }}} </label>
 											<input type="text" name="pagecontent[{{$item->id}}][limit]" value="{{ ($item->limits!="")?$item->limits:"0";}}" id="limit{{$item->id}}">
 										@endif
 										@if($item->ids != "" || strpos($item->params,'id') !== false)											
 										<div class="controls">
-											<label class="control-label" for="id">Select items for page: </label>
+											<label class="control-label" for="id">{{{ Lang::get('admin/pages/table.select_items') }}} </label>
 											  <select id="id{{$item->id}}" name="pagecontent[{{$item->id}}][id][]" class="form-control" multiple data-rel="chosen">
 												@foreach ($item->function_id as $id)
 												<option value="{{$id->id}}" {{ (strpos($item->ids,(string)$id->id) !== false)?'selected="selected"':'';}}>{{$item->ids}}{{$id->title}}</option>
@@ -272,7 +272,7 @@
 										@endif
 										@if($item->grids != "" || strpos($item->params,'grid') !== false)										
 										<div class="controls">
-											<label class="control-label" for="selectError1">Select groups for page: </label>
+											<label class="control-label" for="selectError1">{{{ Lang::get('admin/pages/table.select_groups') }}} </label>
 											  <select id="grid{{$item->id}}" name="pagecontent[{{$item->id}}][grid][]" class="form-control" multiple data-rel="chosen">
 												@foreach ($item->function_id as $id)
 												<option value="{{$id->id}}" {{ (strpos($item->grids,$id->id) !== false)?'selected="selected"':'';}}>{{$id->title}}</option>
@@ -303,17 +303,17 @@
 	</div>
 	<!-- ./ tabs content -->
 
-	<!-- Form Actions -->
+	<!-- Form Actions -->	
 	<div class="form-group">
 		<div class="col-md-12">
 			<button type="reset" class="btn btn-link close_popup">
-				<span class="icon-remove"></span>  Cancel
+				<span class="icon-remove"></span>  {{{ Lang::get('admin/general.cancel') }}}
 			</button>
 			<button type="reset" class="btn btn-default">
-				<span class="icon-refresh"></span> Reset
+				<span class="icon-refresh"></span> {{{ Lang::get('admin/general.reset') }}}
 			</button>
 			<button type="submit" class="btn btn-success">
-				<span class="icon-ok"></span> @if (isset($page)){{ "Update" }} @else {{ "Create" }} @endif
+				<span class="icon-ok"></span> @if (isset($page)){{{ Lang::get('admin/general.update') }}} @else {{{ Lang::get('admin/general.create') }}} @endif
 			</button>
 		</div>
 	</div>

@@ -5,7 +5,7 @@
 <!-- Tabs -->
 <ul class="nav nav-tabs">
 	<li class="active">
-		<a href="#tab-general" data-toggle="tab">General</a>
+		<a href="#tab-general" data-toggle="tab">{{{ Lang::get('admin/general.general') }}}</a>
 	</li>
 </ul>
 <!-- ./ tabs -->
@@ -38,7 +38,7 @@
 			<!-- surname -->
 			<!-- username -->
 			<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="username">Username</label>
+				<label class="col-md-2 control-label" for="username">{{ Lang::get('confide.username') }}</label>
 				<div class="col-md-10">
 					<input class="form-control" type="text" tabindex="3" placeholder="{{ Lang::get('confide.username') }}" name="username" id="username" value="{{{ Input::old('username', isset($user) ? $user->username : null) }}}" />
 					{{{ $errors->first('username', '<span class="help-inline">:message</span>') }}}
@@ -48,7 +48,7 @@
 
 			<!-- Email -->
 			<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="email">Email</label>
+				<label class="col-md-2 control-label" for="email">{{ Lang::get('confide.e_mail') }}</label>
 				<div class="col-md-10">
 					<input class="form-control" type="text" tabindex="4" placeholder="{{ Lang::get('confide.e_mail') }}" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
 					{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
@@ -58,7 +58,7 @@
 
 			<!-- Password -->
 			<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="password">Password</label>
+				<label class="col-md-2 control-label" for="password">{{ Lang::get('confide.password') }}</label>
 				<div class="col-md-10">
 					<input class="form-control"  tabindex="5" placeholder="{{ Lang::get('confide.password') }}" type="password" name="password" id="password" value="" />
 					{{{ $errors->first('password', '<span class="help-inline">:message</span>') }}}
@@ -68,7 +68,7 @@
 
 			<!-- Password Confirm -->
 			<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="password_confirmation">Password Confirm</label>
+				<label class="col-md-2 control-label" for="password_confirmation">{{ Lang::get('confide.password_confirmation') }}</label>
 				<div class="col-md-10">
 					<input class="form-control" type="password" tabindex="6" placeholder="{{ Lang::get('confide.password_confirmation') }}"  name="password_confirmation" id="password_confirmation" value="" />
 					{{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}}
@@ -78,7 +78,7 @@
 
 			<!-- Activation Status -->
 			<div class="form-group {{{ $errors->has('activated') || $errors->has('confirm') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="confirm">Activate User?</label>
+				<label class="col-md-2 control-label" for="confirm">{{ Lang::get('confide.activate_user') }}</label>
 				<div class="col-md-6">
 					@if ($mode == 'create')
 					<select class="form-control" name="confirm" id="confirm">
@@ -98,7 +98,7 @@
 
 			<!-- Groups -->
 			<div class="form-group {{{ $errors->has('roles') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="roles">Roles</label>
+				<label class="col-md-2 control-label" for="roles">{{ Lang::get('confide.roles') }}</label>
 				<div class="col-md-6">
 					<select class="form-control" name="roles[]" id="roles[]" multiple>
 						@foreach ($roles as $role)
@@ -110,7 +110,7 @@
 						@endforeach
 					</select>
 
-					<span class="help-block"> Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. </span>
+					<span class="help-block"> {{ Lang::get('confide.roles_info') }} </span>
 				</div>
 			</div>
 			<!-- ./ groups -->
@@ -122,15 +122,15 @@
 
 	<!-- Form Actions -->
 	<div class="form-group">
-		<div class="col-md-offset-2 col-md-10">
+		<div class="col-md-12">
 			<button type="reset" class="btn btn-link close_popup">
-				<span class="icon-remove"></span>  Cancel
+				<span class="icon-remove"></span>  {{{ Lang::get('admin/general.cancel') }}}
 			</button>
 			<button type="reset" class="btn btn-default">
-				<span class="icon-refresh"></span> Reset
+				<span class="icon-refresh"></span> {{{ Lang::get('admin/general.reset') }}}
 			</button>
 			<button type="submit" class="btn btn-success">
-				<span class="icon-ok"></span> @if (isset($blog_category)){{ "Update" }} @else {{ "Create" }} @endif
+				<span class="icon-ok"></span> @if (isset($user)){{{ Lang::get('admin/general.update') }}} @else {{{ Lang::get('admin/general.create') }}} @endif
 			</button>
 		</div>
 	</div>

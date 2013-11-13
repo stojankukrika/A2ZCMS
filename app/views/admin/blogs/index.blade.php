@@ -4,18 +4,13 @@
 @section('title')
 {{{ $title }}} :: @parent
 @stop
-
-@section('keywords')Blogs administration @stop
-@section('author')A2Z CMS @stop
-@section('description')Blogs administration index @stop
-
 {{-- Content --}}
 @section('content')
 <div class="page-header">
 	<h3> {{{ $title }}}
 	<div class="pull-right">
 		<a href="{{{ URL::to('admin/blogs/create') }}}" class="btn btn-small btn-info iframe">
-			<span class="icon-plus-sign icon-white"></span> Create</a>
+			<span class="icon-plus-sign icon-white"></span> {{{ Lang::get('admin/general.create') }}}</a>
 	</div></h3>
 </div>
 
@@ -42,7 +37,7 @@
 			"sDom" : "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
 			"sPaginationType" : "bootstrap",
 			"oLanguage" : {
-				"sLengthMenu" : "_MENU_ records per page"
+				"sLengthMenu" : "_MENU_ {{{ Lang::get('admin/general.records_per_page') }}}"
 			},
 			"bProcessing" : true,
 			"bServerSide" : true,

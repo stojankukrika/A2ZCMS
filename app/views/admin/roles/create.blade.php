@@ -5,10 +5,10 @@
 <!-- Tabs -->
 <ul class="nav nav-tabs">
 	<li class="active">
-		<a href="#tab-general" data-toggle="tab">General</a>
+		<a href="#tab-general" data-toggle="tab">{{{ Lang::get('admin/general.general') }}}</a>
 	</li>
 	<li>
-		<a href="#tab-permissions" data-toggle="tab">Permissions</a>
+		<a href="#tab-permissions" data-toggle="tab">{{ Lang::get('confide.permissions') }}</a>
 	</li>
 </ul>
 <!-- ./ tabs -->
@@ -25,7 +25,7 @@
 		<div class="tab-pane active" id="tab-general">
 			<!-- Name -->
 			<div class="form-group {{{ $errors->has('name') ? 'error' : '' }}}">
-				<label class="col-md-2 control-label" for="name">Name</label>
+				<label class="col-md-2 control-label" for="name">{{ Lang::get('confide.name') }}</label>
 				<div class="col-md-10">
 					<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name') }}}" />
 					{{{ $errors->first('name', '<span class="help-inline">:message</span>') }}}
@@ -52,15 +52,15 @@
 
 	<!-- Form Actions -->
 	<div class="form-group">
-		<div class="col-md-offset-2 col-md-10">
+		<div class="col-md-12">
 			<button type="reset" class="btn btn-link close_popup">
-				<span class="icon-remove"></span>  Cancel
+				<span class="icon-remove"></span>  {{{ Lang::get('admin/general.cancel') }}}
 			</button>
 			<button type="reset" class="btn btn-default">
-				<span class="icon-refresh"></span> Reset
+				<span class="icon-refresh"></span> {{{ Lang::get('admin/general.reset') }}}
 			</button>
 			<button type="submit" class="btn btn-success">
-				<span class="icon-ok"></span>Create
+				<span class="icon-ok"></span> {{{ Lang::get('admin/general.create') }}}
 			</button>
 		</div>
 	</div>

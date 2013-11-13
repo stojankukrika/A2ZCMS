@@ -74,7 +74,7 @@
 				<h3> {{ $title }}
 				<div class="pull-right">
 					<button class="btn btn-link btn-small btn-inverse close_popup">
-						<span class="icon-remove-sign"></span> Back
+						<span class="icon-remove-sign"></span> {{{ Lang::get('admin/general.back') }}}
 					</button>
 				</div></h3>
 			</div>

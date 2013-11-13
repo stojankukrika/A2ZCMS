@@ -11,7 +11,7 @@
 	<h3> {{{ $title }}}
 	<div class="pull-right">
 		<a href="{{{ URL::to('admin/navigation/create') }}}" class="btn btn-small btn-info iframe">
-			<i class="icon-plus-sign icon-white"></i> Create</a>
+			<i class="icon-plus-sign icon-white"></i> {{{ Lang::get('admin/general.create') }}}</a>
 	</div></h3>
 </div>
 
@@ -38,7 +38,7 @@
 			"sDom" : "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
 			"sPaginationType" : "bootstrap",
 			"oLanguage" : {
-				"sLengthMenu" : "_MENU_ records per page"
+				"sLengthMenu" : "_MENU_ {{{ Lang::get('admin/general.records_per_page') }}}"
 			},
 			"bProcessing" : true,
 			"bServerSide" : true,
@@ -68,9 +68,9 @@
 					list : navigationList
 				}, function(data) {
 					if (data.intSuccess == 1) {
-						alert('Display order updated');
+						alert('{{Lang::get("admin/navigation/messages.display_order_updated")}}');
 					} else {
-						alert('Sorry, there was a problem updating the display order.');
+						alert('{{Lang::get("admin/navigation/messages.display_order_error")}}');
 					}
 				});
 			}

@@ -121,62 +121,62 @@
 					<div class="sidebar-nav nav-collapse collapse navbar-collapse">
 						<ul class="nav main-menu">
 							<li>
-								<a href="{{{ URL::to('admin') }}}"><i class="icon-dashboard"></i><span class="hidden-sm text">Dashboard</span></a>
+								<a href="{{{ URL::to('admin') }}}"><i class="icon-dashboard"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.dashboard') }}}</span></a>
 							</li>
 							<li>
-								<a href="{{{ URL::to('admin/todolists') }}}"><i class="icon-lightbulb"></i><span class="hidden-sm text">To-do list</span></a>
+								<a href="{{{ URL::to('admin/todolists') }}}"><i class="icon-lightbulb"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.to_do_list') }}}</span></a>
 							</li>
 							<li>
-								<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> Pages</span><span class="chevron closed"></span></a>
+								<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.pages') }}}</span><span class="chevron closed"></span></a>
 								<ul>
 									<li>
-										<a href="{{{ URL::to('admin/navigationgroups') }}}"><i class="icon-th-list"></i> Navigation Group</a>
+										<a href="{{{ URL::to('admin/navigationgroups') }}}"><i class="icon-th-list"></i> {{{ Lang::get('admin/general.navigation_group') }}}</a>
 									</li>
 									<li>
-										<a href="{{{ URL::to('admin/pages') }}}"><i class="icon-envelope"></i> Pages</a>
+										<a href="{{{ URL::to('admin/pages') }}}"><i class="icon-envelope"></i> {{{ Lang::get('admin/general.pages') }}}</a>
 									</li>
 									<li>
-										<a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-file"></i> Navigation</a>
+										<a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-file"></i> {{{ Lang::get('admin/general.navigation') }}}</a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a class="dropmenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-external-link"></i><span class="hidden-sm text">Blog</span><span class="chevron closed"></span></a>
+								<a class="dropmenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-external-link"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.blog') }}}</span><span class="chevron closed"></span></a>
 								<ul>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/blogcategorys') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> Blog categorys</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/blogcategorys') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.blog_categorys') }}}</span></a>
 									</li>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-book"></i><span class="hidden-sm text"> Blog</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/blogs') }}}"><i class="icon-book"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.blog') }}}</span></a>
 									</li>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/blogcomments') }}}"><i class="icon-comment-alt"></i> <span class="hidden-sm text">Blog comments</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/blogcomments') }}}"><i class="icon-comment-alt"></i> <span class="hidden-sm text">{{{ Lang::get('admin/general.blog_comments') }}}</span></a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a class="dropmenu" href="{{{ URL::to('admin/galleries') }}}"><i class="icon-camera"></i><span class="hidden-sm text">Gallery</span><span class="chevron closed"></span></a>
+								<a class="dropmenu" href="{{{ URL::to('admin/galleries') }}}"><i class="icon-camera"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.gallery') }}}</span><span class="chevron closed"></span></a>
 								<ul>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/galleryimages') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> Gallery images</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/galleryimages') }}}"><i class="icon-rss"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.gallery_images') }}}</span></a>
 									</li>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/galleries') }}}"><i class="icon-camera-retro"></i><span class="hidden-sm text"> Gallery</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/galleries') }}}"><i class="icon-camera-retro"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.gallery') }}}</span></a>
 									</li>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/galleryimagecomments') }}}"><i class="icon-comments-alt"></i> <span class="hidden-sm text">Gallery comments</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/galleryimagecomments') }}}"><i class="icon-comments-alt"></i> <span class="hidden-sm text">{{{ Lang::get('admin/general.gallery_comments') }}}</span></a>
 									</li>
 								</ul>
 							</li>
 
 							<li>
-								<a class="dropmenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-group"></i><span class="hidden-sm text"> Users </span><span class="chevron closed"></span></a>
+								<a class="dropmenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-group"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.users') }}} </span><span class="chevron closed"></span></a>
 								<ul>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-user"></i><span class="hidden-sm text"> Users</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/users') }}}"><i class="icon-user"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.users') }}}</span></a>
 									</li>
 									<li>
-										<a class="submenu" href="{{{ URL::to('admin/roles') }}}"><i class="icon-user-md"></i><span class="hidden-sm text"> Roles</span></a>
+										<a class="submenu" href="{{{ URL::to('admin/roles') }}}"><i class="icon-user-md"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.roles') }}}</span></a>
 									</li>
 								</ul>
 							</li>

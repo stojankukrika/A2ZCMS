@@ -22,6 +22,8 @@ return array(
         'impossible' => 'You cannot delete yourself.',
         'error'      => 'There was an issue deleting the page. Please try again.',
         'success'    => 'The page was deleted successfully.'
-    )
+    ),
+	'display_order_updated' => 'Display order updated',
+	'display_order_error' => 'Sorry, there was a problem updating the display order.',
 
 );
