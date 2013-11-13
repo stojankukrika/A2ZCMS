@@ -13,8 +13,8 @@ class CustomFormField extends Eloquent implements PresentableInterface {
 	 *
 	 * @return string
 	 */
-	public function title() {
-		return nl2br($this -> title);
+	public function name() {
+		return nl2br($this -> name);
 	}
 	
 	/*get author of form*/
@@ -53,7 +53,6 @@ class CustomFormField extends Eloquent implements PresentableInterface {
 
 		return String::date($date);
 	}
-
 	/**
 	 * Returns the date of the blog post creation,
 	 * on a good and more readable format :)

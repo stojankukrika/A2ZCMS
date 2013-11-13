@@ -19,5 +19,5 @@ class CustomFormsTableSeeder extends Seeder {
 		// Uncomment the below to run the seeder
 		DB::table('custom_forms')->insert($custom_forms);
 	}
-
+	
 }

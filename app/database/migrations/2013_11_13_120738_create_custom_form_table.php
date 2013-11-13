@@ -24,7 +24,6 @@ class CreateCustomFormTable extends Migration {
 		});
 	}
 
-
 	/**
 	 * Reverse the migrations.
 	 *

@@ -25,10 +25,9 @@ class CustomForm extends Eloquent implements PresentableInterface {
 		return $this -> belongsTo('User', 'user_id');
 	}
 	
-	public function contactfFormfields() {
-		return $this -> hasMany('CustomFormFields');
-	}
-	
+	public function customformfields() {
+		return $this -> hasMany('CustomFormField')->orderBy('custom_form_fields.order', 'ASC');
+	}	
 	/**
 	 * Get the date the post was created.
 	 *

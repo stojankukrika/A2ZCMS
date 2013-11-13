@@ -28,7 +28,6 @@ class AdminCustomFormController extends AdminController {
 		// Grab all the blog posts
 		$customform = $this -> customform;
 
-
 		return View::make('admin/customform/index', compact('title', 'customform'));
 	}
 	
@@ -67,7 +66,10 @@ class AdminCustomFormController extends AdminController {
 			if ($this -> customform -> save()) {
 					
 				//add fileds to form
-				//TO-DOO
+				$pagecontentorder = Input::get('pagecontentorder');
+				if($pagecontentorder!=""){
+					$this->saveFilds($pagecontentorder,$this -> customform -> id,$user -> id);
+				}			
 				
 				// Redirect to the new blog post page
 				return Redirect::to('admin/customform/' . $this -> customform -> id . '/edit') -> with('success', Lang::get('admin/customform/messages.create.success'));
@@ -101,7 +103,9 @@ class AdminCustomFormController extends AdminController {
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
-
+		$pagecontentorder = Input::get('pagecontentorder');
+				print_r($pagecontentorder);
+				die();
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 	
@@ -114,8 +118,14 @@ class AdminCustomFormController extends AdminController {
 			$customform -> user_id = $user -> id;
 			
 			if ($contactform -> save()) {
+					
 				//add fileds to form
-				//TO-DOO
+				$pagecontentorder = Input::get('pagecontentorder');
+				print_r($pagecontentorder);
+				die();
+				if($pagecontentorder!=""){
+					$this->saveFilds($pagecontentorder,$contactform -> id,$user -> id);
+				}	
 				
 				return Redirect::to('admin/customform/' . $customform -> id . '/edit') -> with('success', Lang::get('admin/customform/messages.update.success'));
 			}
@@ -154,10 +164,52 @@ class AdminCustomFormController extends AdminController {
 		$blogs = CustomForm::select(array('title', 'id as fields', 'id as id', 'created_at'));
 
 		return Datatables::of($blogs) 
-			-> edit_column('fields', '{{ DB::table(\'custom_form_fields\')->where(\'custom_page_id\', \'=\', $id)->count() }}') 
+			-> edit_column('fields', '{{ DB::table(\'custom_form_fields\')->where(\'custom_form_id\', \'=\', $id)->count() }}') 
 			-> add_column('actions', '<a href="{{{ URL::to(\'admin/customform/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
                 <a href="{{{ URL::to(\'admin/customform/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') 
             -> remove_column('id') -> make();
+	}
+	
+	public function saveFilds($pagecontentorder,$customform_id,$user_id)
+	{
+		$order = 1;
+		foreach ($pagecontentorder as $value) {
+			print_r($value);
+			die();
+			$params = PluginFunction::find($value)->params;
+			if($params!=NULL){
+				$params = explode(';', $params);
+				foreach ($params as $param) {
+					if($param!=""){
+						$param = explode(':', $param);
+						$pagepluginfunction = new PagePluginFunction;
+						$pagepluginfunction -> plugin_function_id = $value;
+						$pagepluginfunction -> order = $order;
+						$pagepluginfunction -> param = $param['0'];
+						if(strstr($param['1'], ',')){
+							$pagepluginfunction -> type = 'array';
+						}
+						else if(is_int($param['1'])){
+							$pagepluginfunction -> type = 'int';
+						}
+						else {
+							$pagepluginfunction -> type = 'string';
+						}
+						$pagepluginfunction -> value = $param['1'];
+						$pagepluginfunction -> page_id = $page_id;
+						$pagepluginfunction -> save();
+					}
+				}
+			}	
+		else {
+				$pagepluginfunction = new PagePluginFunction;
+				$pagepluginfunction -> plugin_function_id = $value;
+				$pagepluginfunction -> order = $order;
+				$pagepluginfunction -> page_id = $page_id;
+				$pagepluginfunction -> save();
+			}				
+			$order ++;
+		}
 	}
 }

@@ -61,6 +61,35 @@
 				<div class="row responsive-utilities-test">
 					<div class="col-md-10 col-xs-10" id="form_fields">
 						<ul id="sortable1">
+							<input type="hidden" value="" name="pagecontentorder" id="pagecontentorder">
+							<?php $id=1;?>
+							@foreach($customform->customformfields as $item)
+								<li class="ui-state-default" name="formf" value="formf{{$id}}" id="formf{{$id}}">
+									<label class="control-label" for="name">Fild name</label>
+									<input type="text" id="name{{$item->id}}" value="{{$item->name}}" name="name{{$id}}">
+									<div>
+										<label class="control-label" for="mandatory">Mandatory </label>
+										<select name="mandatory{{$id}}" id="mandatory{{$id}}"> 
+											<option value="1" {{($item->mandatory=='1')?"selected":""}}>No</option>
+									  		<option value="2" {{($item->mandatory=='2')?"selected":""}}>Yes</option>
+									  		<option value="3" {{($item->mandatory=='3')?"selected":""}}>Only numbers</option>
+									  		<option value="4" {{($item->mandatory=='4')?"selected":""}}>Valid email adress</option>
+										</select>
+										<label class="control-label" for="type">Type </label>
+										<select name="type{{$id}}" id="type{{$id}}"> 
+											<option value="1" {{($item->type=='1')?"selected":""}}>Input field</option>
+											<option value="2" {{($item->type=='2')?"selected":""}}>Text area</option>
+											<option value="3" {{($item->type=='3')?"selected":""}}>Select</option>
+											<option value="4" {{($item->type=='4')?"selected":""}}>Radio</option>
+											<option value="5" {{($item->type=='5')?"selected":""}}>Upload</option>
+											<option value="6" {{($item->type=='6')?"selected":""}}>Checkbox</option>
+										</select>
+										<label class="control-label" for="options"> Options</label>
+										<input type="text" name="options{{$id}}" value="{{$item->options}}" id="options{{$item->id}}">
+									</div>
+								</li>
+								<?php $id++;?>
+							@endforeach
 						</ul>
 					</div>
 				</div>
@@ -89,41 +118,60 @@
 </form>
 
 <div class="hidden" id ="addfield">
-	<li class="ui-state-default" name="formf" value="formf">
-				<label class="control-label" for="title">Fild name</label>
-				<input type="text" name="title" value="title" id="title">
-				<div>
-					<label class="control-label" for="mandatory">Mandatory </label>
-					<select name="7878" id="mandatory"> 
-						<option value="1">No</option>
-				  		<option value="2">Yes</option>
-				  		<option value="3">Only numbers</option>
-				  		<option value="4">Valid email adress</option>
-					</select>
-					<label class="control-label" for="type">Type </label>
-					<select name="gfg" id="type"> 
-						<option value="1">Input field</option>
-						<option value="2">Text area</option>
-						<option value="3">Select</option>
-						<option value="4">Radio</option>
-						<option value="5">Upload</option>
-						<option value="6">Checkbox</option>
-					</select>
-					<label class="control-label" for="options"> Options</label>
-					<input type="text" name="options" value="" id="options">
-				</div>
-			</li>
+	<li class="ui-state-default" name="formf" value="formf" id="formf">
+		<label class="control-label" for="name">Fild name</label>
+		<input type="text" id="name" value="" name="name">
+		<div>
+			<label class="control-label" for="mandatory">Mandatory </label>
+			<select name="mandatory" id="mandatory"> 
+				<option value="1">No</option>
+		  		<option value="2">Yes</option>
+		  		<option value="3">Only numbers</option>
+		  		<option value="4">Valid email adress</option>
+			</select>
+			<label class="control-label" for="type">Type </label>
+			<select name="type" id="type"> 
+				<option value="1">Input field</option>
+				<option value="2">Text area</option>
+				<option value="3">Select</option>
+				<option value="4">Radio</option>
+				<option value="5">Upload</option>
+				<option value="6">Checkbox</option>
+			</select>
+			<label class="control-label" for="options"> Options</label>
+			<input type="text" name="options" value="" id="options">
+		</div>
+	</li>
 </div>
-		
+	
 @stop
 @section('scripts')
 <script type="text/javascript">
 	$(function() {
+		var count = {{isset($customform)?$customform->customformfields->count():'0'}};
 		var formfild =$('#addfield').html();
 		$("#add").click(function(){
+			count++;
+			
+			formfild = formfild.replace('<li class="ui-state-default" name="formf" value="formf" id="formf">', '<li class="ui-state-default" name="formf'+count+'" value="'+count+'" id="formf'+count+'">');
+			formfild = formfild.replace('<input id="name" value="" name="name" type="text">', '<input id="name'+count+'" value="" name="name'+count+'" type="text">');
+			formfild = formfild.replace('<select name="mandatory" id="mandatory">', '<select name="mandatory'+count+'" id="mandatory'+count+'">');
+			formfild = formfild.replace('<select name="type" id="type">', '<select name="type'+count+'" id="type'+count+'">');
+			formfild = formfild.replace('<input name="options" value="" id="options" type="text">', '<input name="options'+count+'" value="" id="options'+count+'" type="text">');
+
 			$("#sortable1").append(formfild);
 		})
 		$( "#sortable1" ).sortable();
+		
+		$('.btn-success').click(function(){
+		 	var neworder = new Array();
+	        $('#sortable1 li').each(function() { 
+	            //get the id
+	            var id  = $(this).attr("value");
+	             neworder.push(id);
+	        });
+	        $('#pagecontentorder').val(neworder);
+        });
 	});
 </script>
 @stop
