@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder {
 		$this -> call('PluginfunctionTableSeeder');
 		$this -> call('CustomFormsTableSeeder');
 		$this -> call('CustomFormFieldsTableSeeder');
+		$this -> call('NavigationGroupsTableSeeder');
+		$this -> call('PagesTableSeeder');
+		$this -> call('NavigationLinksTableSeeder');
+		$this -> call('PagePluginFunctionsTableSeeder');
 	}
 
 }

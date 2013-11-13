@@ -16,7 +16,7 @@ class AddMetadataToPages extends Migration {
 			$table -> string('meta_description')->after('meta_title')-> nullable();
 			$table -> string('meta_keywords')->after('meta_description')-> nullable();
 			$table -> text('page_css')->after('meta_keywords')-> nullable();
-			$table -> text('page_javascript')->after('page_css');
+			$table -> text('page_javascript')->after('page_css')-> nullable();
 			$table -> boolean('sidebar')->after('page_javascript');
 			$table -> boolean('showtags')->after('sidebar');
 			$table -> boolean('showtitle')->after('sidebar');

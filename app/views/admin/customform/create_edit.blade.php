@@ -8,7 +8,7 @@
 		<a href="#tab-general" data-toggle="tab">{{{ Lang::get('admin/general.general') }}}</a>
 	</li>
 	<li class="">
-		<a href="#tab-dates" data-toggle="tab">{{{ Lang::get('admin/contactform/table.fields') }}}</a>
+		<a href="#tab-dates" data-toggle="tab">{{{ Lang::get('admin/customform/table.fields') }}}</a>
 	</li>
 </ul>
 <!-- ./ tabs -->
@@ -120,7 +120,6 @@
 <script type="text/javascript">
 	$(function() {
 		var formfild =$('#addfield').html();
-		console.log(formfild);
 		$("#add").click(function(){
 			$("#sortable1").append(formfild);
 		})
