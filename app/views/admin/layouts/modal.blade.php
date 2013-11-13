@@ -118,12 +118,12 @@
 						data : form.serialize()
 					}).done(function() {
 						// Optionally alert the user of success here...
-						parent.$.colorbox.close();
-						window.parent.location.reload();
+						//parent.$.colorbox.close();
+						//window.parent.location.reload();
 					}).fail(function() {
 						// Optionally alert the user of an error here...
 					});
-					event.preventDefault();
+					//event.preventDefault();
 					// Prevent the form from submitting via the browser.
 				});
 

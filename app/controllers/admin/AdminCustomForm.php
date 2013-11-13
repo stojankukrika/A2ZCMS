@@ -46,7 +46,7 @@ class AdminCustomFormController extends AdminController {
 	 */
 	public function postCreate() {
 		// Declare the rules for the form validation
-		$rules = array('title' => 'required|min:3', 'message' => 'required|min:3');
+		$rules = array('title' => 'required', 'message' => 'required');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -68,8 +68,8 @@ class AdminCustomFormController extends AdminController {
 				//add fileds to form
 				$pagecontentorder = Input::get('pagecontentorder');
 				if($pagecontentorder!=""){
-					$this->saveFilds($pagecontentorder,$this -> customform -> id,$user -> id);
-				}			
+					$this->saveFilds($pagecontentorder,$contactform -> id,$user -> id);
+				}				
 				
 				// Redirect to the new blog post page
 				return Redirect::to('admin/customform/' . $this -> customform -> id . '/edit') -> with('success', Lang::get('admin/customform/messages.create.success'));
@@ -99,13 +99,10 @@ class AdminCustomFormController extends AdminController {
 	 */
 	public function postEdit($id) {
 
-		$rules = array('title' => 'required|min:3', 'message' => 'required|min:3');
-
+		$rules = array('title' => 'required', 'message' => 'required');
+		
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
-		$pagecontentorder = Input::get('pagecontentorder');
-				print_r($pagecontentorder);
-				die();
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 	
@@ -121,8 +118,6 @@ class AdminCustomFormController extends AdminController {
 					
 				//add fileds to form
 				$pagecontentorder = Input::get('pagecontentorder');
-				print_r($pagecontentorder);
-				die();
 				if($pagecontentorder!=""){
 					$this->saveFilds($pagecontentorder,$contactform -> id,$user -> id);
 				}	
@@ -173,42 +168,26 @@ class AdminCustomFormController extends AdminController {
 	
 	public function saveFilds($pagecontentorder,$customform_id,$user_id)
 	{
-		$order = 1;
+		$pagecontentorder = explode(',', $pagecontentorder);
 		foreach ($pagecontentorder as $value) {
-			print_r($value);
-			die();
-			$params = PluginFunction::find($value)->params;
 			if($params!=NULL){
-				$params = explode(';', $params);
-				foreach ($params as $param) {
-					if($param!=""){
-						$param = explode(':', $param);
-						$pagepluginfunction = new PagePluginFunction;
-						$pagepluginfunction -> plugin_function_id = $value;
-						$pagepluginfunction -> order = $order;
-						$pagepluginfunction -> param = $param['0'];
-						if(strstr($param['1'], ',')){
-							$pagepluginfunction -> type = 'array';
-						}
-						else if(is_int($param['1'])){
-							$pagepluginfunction -> type = 'int';
-						}
-						else {
-							$pagepluginfunction -> type = 'string';
-						}
-						$pagepluginfunction -> value = $param['1'];
-						$pagepluginfunction -> page_id = $page_id;
-						$pagepluginfunction -> save();
-					}
+				$params = explode(',', $params);
+				$count = $params[0];
+				$order = 1;
+				for ($i=0; $i <= $count; $i=$i+5) {
+					 
+					$customformfield = new CustomFormField;
+					$customformfield -> name = $params[$i+1];
+					$customformfield -> mandatory = $params[$i+2];
+					$customformfield -> type = $params[$i+3];
+					$customformfield -> options = $params[$i+4];
+					$customformfield -> order = $order;
+					$customformfield -> custom_form_id = $customform_id;
+					$customformfield -> user_id = $user_id;						
+					$customformfield -> save();	
+					$order++;
 				}
-			}	
-		else {
-				$pagepluginfunction = new PagePluginFunction;
-				$pagepluginfunction -> plugin_function_id = $value;
-				$pagepluginfunction -> order = $order;
-				$pagepluginfunction -> page_id = $page_id;
-				$pagepluginfunction -> save();
-			}				
+			}		
 			$order ++;
 		}
 	}
