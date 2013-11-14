@@ -27,7 +27,8 @@ class CreateNavigationTable extends Migration {
 			$table -> unsignedInteger('page_id');
 			$table -> string('url');
 			$table -> string('uri');
-			$table -> unsignedInteger('navigation_group_id') -> references('id') -> on('navigation_groups');
+			$table -> integer('navigation_group_id') -> unsigned();
+			$table -> foreign('navigation_group_id') -> references('id') -> on('navigation_groups')-> onDelete('cascade');
 			$table -> integer('position');
 			$table -> enum('target', array('selected', '_blank')) -> default('selected');
 			$table -> string('restricted_to');

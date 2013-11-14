@@ -33,11 +33,11 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="showmenu">{{{ Lang::get('admin/pages/table.showmenu') }}}</label>
 					<label class="radio">
-						{{ Form::radio('showmenu', 1, (Input::old('showmenu') == '1' || (isset($navigationGroup->showmenu) && $navigationGroup->showmenu == 1)) ? true : false, array('id'=>'showmenu', 'class'=>'radio')) }}
+						{{ Form::radio('showmenu', 1, (Input::old('showmenu') == '1' || (isset($navigationGroup) && $navigationGroup->showmenu == '1')) ? true : false, array('id'=>'showmenu', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showmenu', 0, (Input::old('showmenu') == '0' || (isset($navigationGroup->showmenu) && $navigationGroup->showmenu == 0)) ? true : false, array('id'=>'showmenu', 'class'=>'radio')) }}
+						{{ Form::radio('showmenu', 0, (Input::old('showmenu') == '0' || (isset($navigationGroup) && $navigationGroup->showmenu == '0') || !isset($navigationGroup)) ? true : false, array('id'=>'showmenu', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>
 	
@@ -50,11 +50,11 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="showfooter">{{{ Lang::get('admin/pages/table.showfooter') }}}</label>
 					<label class="radio">
-						{{ Form::radio('showfooter', 1, (Input::old('showfooter') == '1' || (isset($navigationGroup->showfooter) && $navigationGroup->showfooter == 1)) ? true : false, array('id'=>'showfooter', 'class'=>'radio')) }}
+						{{ Form::radio('showfooter', 1, (Input::old('showfooter') == '1' || (isset($navigationGroup) && $navigationGroup->showfooter == '1')) ? true : false, array('id'=>'showfooter', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showfooter', 0, (Input::old('showfooter') == '0' || (isset($navigationGroup->showfooter) && $navigationGroup->showfooter == 0)) ? true : false, array('id'=>'showfooter', 'class'=>'radio')) }}
+						{{ Form::radio('showfooter', 0, (Input::old('showfooter') == '0' || (isset($navigationGroup) && $navigationGroup->showfooter == '0') || !isset($navigationGroup)) ? true : false, array('id'=>'showfooter', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>	
 				</div>
@@ -66,11 +66,11 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="showsidebar">{{{ Lang::get('admin/pages/table.showsidebar') }}}</label>
 					<label class="radio">
-						{{ Form::radio('showsidebar', 1, (Input::old('showsidebar') == '1' || (isset($navigationGroup->showsidebar) && $navigationGroup->showsidebar == 1)) ? true : false, array('id'=>'showsidebar', 'class'=>'radio')) }}
+						{{ Form::radio('showsidebar', 1, (Input::old('showsidebar') == '1' || (isset($navigationGroup) && $navigationGroup->showsidebar == '1')) ? true : false, array('id'=>'showsidebar', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.yes') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('showsidebar', 0, (Input::old('showsidebar') == '0' || (isset($navigationGroup->showsidebar) && $navigationGroup->showsidebar == 0)) ? true : false, array('id'=>'showsidebar', 'class'=>'radio')) }}
+						{{ Form::radio('showsidebar', 0, (Input::old('showsidebar') == '0' || (isset($navigationGroup) && $navigationGroup->showsidebar == '0') || !isset($navigationGroup)) ? true : false, array('id'=>'showsidebar', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.no') }}}	
 					</label>
 	

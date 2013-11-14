@@ -25,7 +25,8 @@ class WebsiteController extends BaseController {
 
 	}	
 
-	public function getView($slug) {
+	public function getView($slug=0) {
+		if($slug==0) $slug = 1;
 		// Get this webpage data
 		$navigation_link = Navigation::where('id', '=', $slug) -> first();
 		$page = $this -> page -> where('id', '=', $navigation_link->page_id) -> first();

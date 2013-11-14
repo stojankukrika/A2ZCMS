@@ -27,6 +27,7 @@
 		<link rel="shortcut icon" href="{{$asset}}assets/admin/ico/favicon.ico">
 		
 		{{$analytics}}
+		@yield('page_scripts')
 		
 	</head>
 
@@ -46,15 +47,8 @@
 					  <!-- Collect the nav links, forms, and other content for toggling -->
 			        <div class="collapse navbar-collapse navbar-ex1-collapse">
 			          <ul class="nav navbar-nav navbar-right">
-			        		<li>
-								<a href="{{{ URL::to('') }}}">{{Lang::get('site.home')}}</a>
-							</li>
-							@if (isset($menu)) {{ $menu }} @endif							
-							<li>
-								<a href="{{{ URL::to('contact-us') }}}">{{Lang::get('site.contact_us')}}</a>
-							</li>
-							
-						 </ul>
+			        		@if (isset($top_menu)) {{ $top_menu }} @endif							
+						</ul>
 			        </div><!-- /.navbar-collapse -->
 			      </div><!-- /.container -->
 			    </nav>
@@ -70,21 +64,23 @@
 						<!-- ./ page title -->
 					  </h1>
 			          <ol class="breadcrumb">
-			            <li><a href="#">Home</a></li>
-			            <li class="active">Blog Home</li>
+			           @yield('breadcrumb')			           
+			            <!--<li><a href="#">Home</a></li>
+			            <li class="active">Blog Home</li>-->
 			          </ol>
 			        </div>
 			
 			      </div>
 			
 			      <div class="row">
-			      	
+			      	@yield('sidebar_left')
 			        <div class="col-lg-8">
 						<!-- Content -->
 						@yield('content')
 						<!-- ./ content -->
 					 </div>
-					 <div class="col-lg-4">
+					 	@yield('sidebar_right')
+					 <div class="col-lg-4">					 
 			          <div class="well">			          	
 			          	<ul class="list-unstyled">
 			           	@if (Auth::check())
@@ -199,6 +195,13 @@
     	</div><!-- /.container -->
     
       <footer>
+      	  <div class="row">
+      	  	 <div class="collapse navbar-collapse navbar-ex1-collapse col-lg-12">
+	          	<ul class="nav navbar-nav navbar-left">
+	        		@if (isset($footer_menu)) {{ $footer_menu }} @endif							
+				</ul>
+			 </div>			        
+        </div>
         <div class="row">
           <div class="col-lg-12">
 			<span style="text-align:left;float:left">

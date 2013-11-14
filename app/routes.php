@@ -284,5 +284,5 @@ Route::get('offline', function()
 });
 
 # Index Page - Last route, no matches
-Route::get('/', array('uses' => 'BlogController@getIndex'));
+Route::get('/', 'WebsiteController@getView');
 

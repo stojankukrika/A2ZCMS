@@ -68,9 +68,19 @@ class BaseController extends Controller {
 			$unreadmessages = Messages::where('user_id_to','=',$user->id)->where('read','=','0')->count();
 			View::share('unreadmessages',  $unreadmessages);
 		}
-		$navigation = $this->main_menu();
-		if(!empty($navigation)){
-			View::share('menu',  $navigation);
+		$top_navigation = $this->main_menu('top');
+		if(!empty($top_navigation)){
+			View::share('top_menu',  $top_navigation);
+		}
+		
+		$footer_navigation = $this->main_menu('footer');
+		if(!empty($footer_navigation)){
+			View::share('footer_menu',  $footer_navigation);
+		}
+		
+		$side_navigation = $this->main_menu('side');
+		if(!empty($side_navigation)){
+			View::share('side_menu',  $side_navigation);
 		}
 			
 		
@@ -119,13 +129,35 @@ class BaseController extends Controller {
 		}
 	}
 
-	public function main_menu() {
-		$navigation = Navigation::select('id', 'title', 'parent', 'link_type', 'target', 'position','class') -> get();
+	public function main_menu($type) {
+		
+		switch ($type) {
+			case 'top':
+				$navigation = NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
+										->where('navigation_groups.showmenu','=',1) 
+										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
+										-> get();
+				break;
+			case 'footer':
+				$navigation =NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
+										->where('navigation_groups.showfooter','=',1) 
+										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
+										-> get();
+				break;
+			case 'side':
+				$navigation = NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
+										->where('navigation_groups.showsidebar','=',1) 
+										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
+										-> get();
+				break;
+		}		
+		$navigation = Navigation::select('id', 'title', 'parent', 'link_type', 'target', 'position','class') 
+								-> get();
 
 		$menu = array('items' => array(), 'parents' => array());
 		// Builds the array lists with data from the menu table
 		foreach ($navigation as $key => $items) {
-
+			
 			// Creates entry into items array with current menu item id ie. $menu['items'][1]
 			$menu['items'][$items['id']] = $items;
 			// Creates entry into parents array. Parents array contains a list of all items with children
