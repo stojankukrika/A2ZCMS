@@ -226,7 +226,7 @@ class AdminBlogController extends AdminController {
 		$blogs = Blog::join('blog_categorys', 'blogs.blogcategory_id', '=', 'blog_categorys.id') -> select(array('blogs.id', 'blogs.title', 'blog_categorys.title as blog_category', 'blogs.id as blog_comments', 'blogs.created_at'));
 
 		return Datatables::of($blogs) 
-			-> edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link  btn-sm" >{{ DB::table(\'blog_comments\')->where(\'blog_id\', \'=\', $id)->count() }}</a>') 
+			-> edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link  btn-sm" >{{ BlogComment::where(\'blog_id\', \'=\', $id)->count() }}</a>') 
 			-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') 
@@ -241,7 +241,7 @@ class AdminBlogController extends AdminController {
 	public function getDataforcategory($blogcategory_id) {
 		$blogs = Blog::where('blogs.blogcategory_id', '=', $blogcategory_id) -> select(array('blogs.id', 'blogs.title', 'blogs.id as blog_comments', 'blogs.created_at'));
 
-		return Datatables::of($blogs) -> edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link btn-sm" >{{ DB::table(\'blog_comments\')->where(\'blog_id\', \'=\', $id)->count() }}</a>') 
+		return Datatables::of($blogs) -> edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link btn-sm" >{{ BlogComment::where(\'blog_id\', \'=\', $id)->count() }}</a>') 
 			-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') -> remove_column('id') -> make();

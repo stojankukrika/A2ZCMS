@@ -186,7 +186,10 @@ class AdminNavigationController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$navs = Navigation::leftjoin('navigation_groups', 'navigation_groups.id', '=', 'navigation_links.navigation_group_id') -> leftjoin('navigation_links AS nl', 'nl.id', '=', 'navigation_links.parent') -> orderBy('navigation_links.position') -> select(array('navigation_links.id', 'navigation_links.title', 'nl.title as parent', 'navigation_links.link_type', 'navigation_groups.title as navigtion_group'));
+		$navs = Navigation::leftjoin('navigation_groups', 'navigation_groups.id', '=', 'navigation_links.navigation_group_id') 
+						-> leftjoin('navigation_links AS nl', 'nl.id', '=', 'navigation_links.parent') 
+						-> orderBy('navigation_links.position') 
+						-> select(array('navigation_links.id', 'navigation_links.title', 'nl.title as parent', 'navigation_links.link_type', 'navigation_groups.title as navigtion_group'));
 
 		return Datatables::of($navs) -> add_column('actions', '<a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
                                <a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>

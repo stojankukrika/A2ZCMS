@@ -64,6 +64,7 @@
 							<input type="hidden" value="{{isset($customform)?$customform->customformfields->count():'0'}}" name="count" id="count">
 							<input type="hidden" value="" name="pagecontentorder" id="pagecontentorder">
 							<?php $id=1;?>
+							@if(!empty($customform->customformfields))
 								@foreach($customform->customformfields as $item)
 									<li class="ui-state-default" name="formf" value="{{$id}}" id="formf{{$id}}">
 										<label class="control-label" for="name">Fild name</label>
@@ -91,6 +92,7 @@
 									</li>
 									<?php $id++;?>
 								@endforeach
+							@endif
 						</ul>
 					</div>
 				</div>

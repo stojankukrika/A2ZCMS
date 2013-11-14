@@ -57,9 +57,9 @@ class AdminCustomFormController extends AdminController {
 			$user = Auth::user();
 
 			// Update the blog post data
-			$this -> contactform -> title = Input::get('title');
-			$this -> contactform -> message = Input::get('message');
-			$this -> contactform -> recievers = Input::get('recievers');
+			$this -> customform -> title = Input::get('title');
+			$this -> customform -> message = Input::get('message');
+			$this -> customform -> recievers = Input::get('recievers');
 			$this -> customform -> user_id = $user -> id;
 			
 			// Was the blog post created?
@@ -67,7 +67,7 @@ class AdminCustomFormController extends AdminController {
 					
 				//add fileds to form
 				if(Input::get('pagecontentorder')!=""){
-					//$this->saveFilds(Input::get('pagecontentorder'),Input::get('count'),$this -> contactform -> id,$user -> id);
+					$this->saveFilds(Input::get('pagecontentorder'),Input::get('count'),$this -> customform -> id,$user -> id);
 				}				
 				
 				// Redirect to the new blog post page
@@ -113,11 +113,12 @@ class AdminCustomFormController extends AdminController {
 			$customform -> recievers = Input::get('recievers');
 			$customform -> user_id = $user -> id;
 			
-			if ($contactform -> save()) {
-					
+			if ($customform -> save()) {
+				
+				CustomFormField::where('custom_form_id','=',$id)->delete();
 				//add fileds to form
 				if(Input::get('pagecontentorder')!=""){
-					$this->saveFilds(Input::get('pagecontentorder'),Input::get('count'),$contactform -> id,$user -> id);
+					$this->saveFilds(Input::get('pagecontentorder'),Input::get('count'),$id,$user -> id);
 				}	
 				
 				return Redirect::to('admin/customform/' . $customform -> id . '/edit') -> with('success', Lang::get('admin/customform/messages.update.success'));
@@ -157,7 +158,7 @@ class AdminCustomFormController extends AdminController {
 		$blogs = CustomForm::select(array('title', 'id as fields', 'id as id', 'created_at'));
 
 		return Datatables::of($blogs) 
-			-> edit_column('fields', '{{ DB::table(\'custom_form_fields\')->where(\'custom_form_id\', \'=\', $id)->count() }}') 
+			-> edit_column('fields', '{{ CustomFormField::where(\'custom_form_id\', \'=\', $id)->count() }}') 
 			-> add_column('actions', '<a href="{{{ URL::to(\'admin/customform/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
                 <a href="{{{ URL::to(\'admin/customform/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') 
@@ -166,11 +167,9 @@ class AdminCustomFormController extends AdminController {
 	
 	public function saveFilds($pagecontentorder,$count,$customform_id,$user_id)
 	{
-		$formfields = CustomFormField::where('custom_form_id','=',$customform_id)->get();
-		$formfields->delete();
 		$params = explode(',', $pagecontentorder);
 		$order = 1;
-		for ($i=0; $i <= $count; $i=$i+4) {
+		for ($i=0; $i <= $count*4-1; $i=$i+4) {
 			 
 			$customformfield = new CustomFormField;
 			$customformfield -> name = $params[$i];

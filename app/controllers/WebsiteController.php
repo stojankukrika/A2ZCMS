@@ -76,5 +76,10 @@ class WebsiteController extends BaseController {
 	public function showBlogs()
 	{
 		
-	}*/
+	}
+	public function showCustomFormId()
+ 	{
+ 		
+	 }
+	 */
 }
