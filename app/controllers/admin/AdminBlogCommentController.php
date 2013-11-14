@@ -1,6 +1,6 @@
 <?php
 
-class AdminBlogCommentsController extends AdminController {
+class AdminBlogCommentController extends AdminController {
 
 	/**
 	 * Comment Model

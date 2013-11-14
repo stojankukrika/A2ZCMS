@@ -1,6 +1,6 @@
 <?php
 
-class AdminGalleriesController extends AdminController {
+class AdminGalleryController extends AdminController {
 
 	/**
 	 * Post Model
@@ -48,7 +48,7 @@ class AdminGalleriesController extends AdminController {
 		return View::make('admin/galleries/create_edit', compact('title'));
 	}
 
-	public function post_create() {
+	public function postCreate() {
 		// Declare the rules for the form validation
 		$rules = array('title' => 'required|min:3|max:250');
 

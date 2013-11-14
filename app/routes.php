@@ -40,104 +40,100 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
 {
 
     # Blog Comment Management
-    Route::get('blogcomments/{blog}/commentsforblog', 'AdminBlogCommentsController@getCommentsForBlog')
+    Route::get('blogcomments/{blog}/commentsforblog', 'AdminBlogCommentController@getCommentsForBlog')
         ->where('blog', '[0-9]+');
-    Route::get('blogcomments/{blogcomment}/edit', 'AdminBlogCommentsController@getEdit')
+    Route::get('blogcomments/{blogcomment}/edit', 'AdminBlogCommentController@getEdit')
         ->where('blogcomment', '[0-9]+');
-    Route::post('blogcomments/{blogcomment}/edit', 'AdminBlogCommentsController@postEdit')
+    Route::post('blogcomments/{blogcomment}/edit', 'AdminBlogCommentController@postEdit')
         ->where('blogcomment', '[0-9]+');
-    Route::get('blogcomments/{blogcomment}/delete', 'AdminBlogCommentsController@getDelete')
+    Route::get('blogcomments/{blogcomment}/delete', 'AdminBlogCommentController@getDelete')
         ->where('blogcomment', '[0-9]+');
-    Route::post('blogcomments/{blogcomment}/delete', 'AdminBlogCommentsController@getDelete')
+    Route::post('blogcomments/{blogcomment}/delete', 'AdminBlogCommentController@getDelete')
         ->where('blogcomment', '[0-9]+');
-    Route::controller('blogcomments', 'AdminBlogCommentsController');
+    Route::controller('blogcomments', 'AdminBlogCommentController');
 	
 	 # Blog Category Management
-    Route::get('blogcategorys/{blogcategory}/edit', 'AdminBlogCategorysController@getEdit')
+    Route::get('blogcategorys/{blogcategory}/edit', 'AdminBlogCategoryController@getEdit')
         ->where('blogcategory', '[0-9]+');
-    Route::post('blogcategorys/{blogcategory}/edit', 'AdminBlogCategorysController@postEdit')
+    Route::post('blogcategorys/{blogcategory}/edit', 'AdminBlogCategoryController@postEdit')
         ->where('blogcategory', '[0-9]+');
-    Route::get('blogcategorys/{blogcategory}/delete', 'AdminBlogCategorysController@getDelete')
+    Route::get('blogcategorys/{blogcategory}/delete', 'AdminBlogCategoryController@getDelete')
         ->where('blogcategory', '[0-9]+');
-    Route::post('blogcategorys/{blogcategory}/delete', 'AdminBlogCategorysController@getDelete')
+    Route::post('blogcategorys/{blogcategory}/delete', 'AdminBlogCategoryController@getDelete')
         ->where('blogcategory', '[0-9]+');
-    Route::controller('blogcategorys', 'AdminBlogCategorysController');
+    Route::controller('blogcategorys', 'AdminBlogCategoryController');
 
     # Blog Management
-     Route::get('blogs/{blogcategory}/blogsforcategory', 'AdminBlogsController@getBlogsForCategory')
+    Route::get('blogs/{blogcategory}/blogsforcategory', 'AdminBlogController@getBlogsForCategory')
         ->where('blogcategory', '[0-9]+');
-    Route::get('blogs/{blog}/show', 'AdminBlogsController@getShow')
+    Route::get('blogs/{blog}/edit', 'AdminBlogController@getEdit')
         ->where('blog', '[0-9]+');
-    Route::get('blogs/{blog}/edit', 'AdminBlogsController@getEdit')
+    Route::post('blogs/{blog}/edit', 'AdminBlogController@postEdit')
         ->where('blog', '[0-9]+');
-    Route::post('blogs/{blog}/edit', 'AdminBlogsController@postEdit')
+    Route::get('blogs/{blog}/delete', 'AdminBlogController@getDelete')
         ->where('blog', '[0-9]+');
-    Route::get('blogs/{blog}/delete', 'AdminBlogsController@getDelete')
+    Route::post('blogs/{blog}/delete', 'AdminBlogController@getDelete')
         ->where('blog', '[0-9]+');
-    Route::post('blogs/{blog}/delete', 'AdminBlogsController@getDelete')
-        ->where('blog', '[0-9]+');
-    Route::controller('blogs', 'AdminBlogsController');
+    Route::controller('blogs', 'AdminBlogController');
 	
 	  # Gallery Comment Management
-    Route::get('galleryimagecomments/{gallery}/commentsforgallery', 'AdminGalleryImageCommentsController@getCommentsforgallery')
+    Route::get('galleryimagecomments/{gallery}/commentsforgallery', 'AdminGalleryImageCommentController@getCommentsforgallery')
         ->where('gallery', '[0-9]+');
-    Route::get('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentsController@getEdit')
+    Route::get('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentController@getEdit')
         ->where('galleryimagecomment', '[0-9]+');
-    Route::post('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentsController@postEdit')
+    Route::post('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentController@postEdit')
         ->where('galleryimagecomment', '[0-9]+');
-    Route::get('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentsController@getDelete')
+    Route::get('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentController@getDelete')
         ->where('galleryimagecomment', '[0-9]+');
-    Route::post('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentsController@getDelete')
+    Route::post('galleryimagecomments/{galleryimagecomment}/delete', 'AdminGalleryImageCommentController@getDelete')
         ->where('galleryimagecomment', '[0-9]+');
-    Route::controller('galleryimagecomments', 'AdminGalleryImageCommentsController');
+    Route::controller('galleryimagecomments', 'AdminGalleryImageCommentController');
 	
 	 # Gallery Images Management
-    Route::get('galleryimages/{galleryimage}/delete', 'AdminGalleryImagesController@postDelete')
+    Route::get('galleryimages/{galleryimage}/delete', 'AdminGalleryImageController@postDelete')
         ->where('galleryimage', '[0-9]+');
-    Route::controller('galleryimages', 'AdminGalleryImagesController');
+    Route::controller('galleryimages', 'AdminGalleryImageController');
 	
     # Galleries Management
-    Route::get('galleries/{gallerycategory}/imagesforgallery', 'AdminGalleriesController@getImagesForGallery')
+    Route::get('galleries/{gallerycategory}/imagesforgallery', 'AdminGalleryController@getImagesForGallery')
         ->where('gallerycategory', '[0-9]+');
-     Route::get('galleries/{gallery}/show', 'AdminGalleriesController@getShow')
+    Route::get('galleries/{gallery}/edit', 'AdminGalleryController@getEdit')
         ->where('gallery', '[0-9]+');
-    Route::get('galleries/{gallery}/edit', 'AdminGalleriesController@getEdit')
+    Route::post('galleries/{gallery}/edit', 'AdminGalleryController@postEdit')
         ->where('gallery', '[0-9]+');
-    Route::post('galleries/{gallery}/edit', 'AdminGalleriesController@postEdit')
+    Route::get('galleries/{gallery}/delete', 'AdminGalleryController@getDelete')
         ->where('gallery', '[0-9]+');
-    Route::get('galleries/{gallery}/delete', 'AdminGalleriesController@getDelete')
+    Route::post('galleries/{gallery}/delete', 'AdminGalleryController@getDelete')
         ->where('gallery', '[0-9]+');
-    Route::post('galleries/{gallery}/delete', 'AdminGalleriesController@getDelete')
+	Route::get('galleries/{gallery}/upload', 'AdminGalleryController@getUpload')
         ->where('gallery', '[0-9]+');
-	Route::get('galleries/{gallery}/upload', 'AdminGalleriesController@getUpload')
-        ->where('gallery', '[0-9]+');
-    Route::post('galleries/{gallery}/upload', 'AdminGalleriesController@postUpload')
+    Route::post('galleries/{gallery}/upload', 'AdminGalleryController@postUpload')
         ->where('gallery', '[0-9]+');		
-    Route::controller('galleries', 'AdminGalleriesController');
+    Route::controller('galleries', 'AdminGalleryController');
 	
 		# Navigation Management
-	Route::get('pages/{nav}/visible', 'AdminPagesController@getVisible')
+	Route::get('pages/{nav}/visible', 'AdminPageController@getVisible')
         ->where('nav', '[0-9]+');
-    Route::get('pages/{nav}/edit', 'AdminPagesController@getEdit')
+    Route::get('pages/{nav}/edit', 'AdminPageController@getEdit')
         ->where('nav', '[0-9]+');
-    Route::post('pages/{nav}/edit', 'AdminPagesController@postEdit')
+    Route::post('pages/{nav}/edit', 'AdminPageController@postEdit')
         ->where('nav', '[0-9]+');
-    Route::get('pages/{nav}/delete', 'AdminPagesController@getDelete')
+    Route::get('pages/{nav}/delete', 'AdminPageController@getDelete')
         ->where('nav', '[0-9]+');
-    Route::post('pages/{nav}/delete', 'AdminPagesController@getDelete')
+    Route::post('pages/{nav}/delete', 'AdminPageController@getDelete')
         ->where('nav', '[0-9]+');
-    Route::controller('pages', 'AdminPagesController');
+    Route::controller('pages', 'AdminPageController');
     
     # Navigation Group Management
-    Route::get('navigationgroups/{group}/edit', 'AdminNavigationGroupsController@getEdit')
+    Route::get('navigationgroups/{group}/edit', 'AdminNavigationGroupController@getEdit')
         ->where('group', '[0-9]+');
-    Route::post('navigationgroups/{group}/edit', 'AdminNavigationGroupsController@postEdit')
+    Route::post('navigationgroups/{group}/edit', 'AdminNavigationGroupController@postEdit')
         ->where('group', '[0-9]+');
-    Route::get('navigationgroups/{group}/delete', 'AdminNavigationGroupsController@getDelete')
+    Route::get('navigationgroups/{group}/delete', 'AdminNavigationGroupController@getDelete')
         ->where('group', '[0-9]+');
-    Route::post('navigationgroups/{group}/delete', 'AdminNavigationGroupsController@getDelete')
+    Route::post('navigationgroups/{group}/delete', 'AdminNavigationGroupController@getDelete')
         ->where('group', '[0-9]+');
-    Route::controller('navigationgroups', 'AdminNavigationGroupsController');
+    Route::controller('navigationgroups', 'AdminNavigationGroupController');
 
     # Navigation Management
     Route::get('navigation/{nav}/edit', 'AdminNavigationController@getEdit')
@@ -151,35 +147,35 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::controller('navigation', 'AdminNavigationController');
 
     # User Management    
-    Route::get('users/{role}/usersforrole', 'AdminUsersController@getUsersForRole')
+    Route::get('users/{role}/usersforrole', 'AdminUserController@getUsersForRole')
         ->where('role', '[0-9]+');
-    Route::get('users/{user}/show', 'AdminUsersController@getShow')
+    Route::get('users/{user}/show', 'AdminUserController@getShow')
         ->where('user', '[0-9]+');
-    Route::get('users/{user}/edit', 'AdminUsersController@getEdit')
+    Route::get('users/{user}/edit', 'AdminUserController@getEdit')
         ->where('user', '[0-9]+');
-    Route::post('users/{user}/edit', 'AdminUsersController@postEdit')
+    Route::post('users/{user}/edit', 'AdminUserController@postEdit')
         ->where('user', '[0-9]+');
-    Route::get('users/{user}/delete', 'AdminUsersController@getDelete')
+    Route::get('users/{user}/delete', 'AdminUserController@getDelete')
         ->where('user', '[0-9]+');
-    Route::post('users/{user}/delete', 'AdminUsersController@getDelete')
+    Route::post('users/{user}/delete', 'AdminUserController@getDelete')
         ->where('user', '[0-9]+');
 	#Profile
-	Route::get('users/profile', 'AdminUsersController@getProfileEdit');
-    Route::post('users/profile', 'AdminUsersController@postProfileEdit');	
-    Route::controller('users', 'AdminUsersController');
+	Route::get('users/profile', 'AdminUserController@getProfileEdit');
+    Route::post('users/profile', 'AdminUserController@postProfileEdit');	
+    Route::controller('users', 'AdminUserController');
 
     # User Role Management
-    Route::get('roles/{role}/show', 'AdminRolesController@getShow')
+    Route::get('roles/{role}/show', 'AdminRoleController@getShow')
         ->where('role', '[0-9]+');
-    Route::get('roles/{role}/edit', 'AdminRolesController@getEdit')
+    Route::get('roles/{role}/edit', 'AdminRoleController@getEdit')
         ->where('role', '[0-9]+');
-    Route::post('roles/{role}/edit', 'AdminRolesController@postEdit')
+    Route::post('roles/{role}/edit', 'AdminRoleController@postEdit')
         ->where('role', '[0-9]+');
-    Route::get('roles/{role}/delete', 'AdminRolesController@getDelete')
+    Route::get('roles/{role}/delete', 'AdminRoleController@getDelete')
         ->where('role', '[0-9]+');
-    Route::post('roles/{role}/delete', 'AdminRolesController@getDelete')
+    Route::post('roles/{role}/delete', 'AdminRoleController@getDelete')
         ->where('role', '[0-9]+');
-    Route::controller('roles', 'AdminRolesController');
+    Route::controller('roles', 'AdminRoleController');
 
 	# To-do list
 	Route::get('todolists/{todo}/change', 'AdminTodolistController@getChange')
@@ -194,7 +190,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
         ->where('todo', '[0-9]+');
     Route::controller('todolists', 'AdminTodolistController');
 
- 	# Contact form Management   
+ 	# Custom form Management   
     Route::get('customform/{cform}/edit', 'AdminCustomFormController@getEdit')
         ->where('cform', '[0-9]+');
     Route::post('customform/{cform}/edit', 'AdminCustomFormController@postEdit')

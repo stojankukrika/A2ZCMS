@@ -1,6 +1,6 @@
 <?php
 
-class AdminGalleryImagesController extends AdminController {
+class AdminGalleryImageController extends AdminController {
 
 	/**
 	 * Comment Model

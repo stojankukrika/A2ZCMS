@@ -170,12 +170,10 @@
 		 	var neworder = new Array();
 	        $('#sortable1 li').each(function() { 
 	            //get the id
-	            var count = $('#count').attr("value");
 	            var name  = $(this).children('[name^="name"]').attr("value");
 	            var mandatory  = $(this).children().children('[name^="mandatory"]').attr("value");
 	            var type  = $(this).children().children('[name^="type"]').attr("value");
 	            var options  = $(this).children().children('[name^="options"]').attr("value");
-	            neworder.push(count);
 	            neworder.push(name);
 	            neworder.push(mandatory);
 	            neworder.push(type);

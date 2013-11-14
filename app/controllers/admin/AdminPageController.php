@@ -1,6 +1,6 @@
 <?php
 
-class AdminPagesController extends AdminController {
+class AdminPageController extends AdminController {
 
 	/**
 	 * Page Repository

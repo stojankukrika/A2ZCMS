@@ -1,6 +1,6 @@
 <?php
 
-class AdminUsersController extends AdminController {
+class AdminUserController extends AdminController {
 
 	/**
 	 * User Model

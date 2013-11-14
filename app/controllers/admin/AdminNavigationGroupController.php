@@ -1,6 +1,6 @@
 <?php
 
-class AdminNavigationGroupsController extends AdminController {
+class AdminNavigationGroupController extends AdminController {
 
 	/**
 	 * Navigation_group Repository

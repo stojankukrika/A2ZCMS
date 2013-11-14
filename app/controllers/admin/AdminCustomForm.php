@@ -66,9 +66,8 @@ class AdminCustomFormController extends AdminController {
 			if ($this -> customform -> save()) {
 					
 				//add fileds to form
-				$pagecontentorder = Input::get('pagecontentorder');
-				if($pagecontentorder!=""){
-					$this->saveFilds($pagecontentorder,$contactform -> id,$user -> id);
+				if(Input::get('pagecontentorder')!=""){
+					//$this->saveFilds(Input::get('pagecontentorder'),Input::get('count'),$this -> contactform -> id,$user -> id);
 				}				
 				
 				// Redirect to the new blog post page
@@ -82,6 +81,7 @@ class AdminCustomFormController extends AdminController {
 		// Form validation failed
 		return Redirect::to('admin/customform') -> withInput() -> withErrors($validator);
 	}	
+
 	public function getEdit($id) {
 
 		$title = Lang::get('admin/customform/title.contact_form_management');
@@ -94,7 +94,7 @@ class AdminCustomFormController extends AdminController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param $blog
+	 * @param $form
 	 * @return Response
 	 */
 	public function postEdit($id) {
@@ -108,7 +108,6 @@ class AdminCustomFormController extends AdminController {
 	
 			$customform = CustomForm::find($id);
 			$user = Auth::user();
-			
 			$customform -> title = Input::get('title');
 			$customform -> message = Input::get('message');
 			$customform -> recievers = Input::get('recievers');
@@ -117,9 +116,8 @@ class AdminCustomFormController extends AdminController {
 			if ($contactform -> save()) {
 					
 				//add fileds to form
-				$pagecontentorder = Input::get('pagecontentorder');
-				if($pagecontentorder!=""){
-					$this->saveFilds($pagecontentorder,$contactform -> id,$user -> id);
+				if(Input::get('pagecontentorder')!=""){
+					$this->saveFilds(Input::get('pagecontentorder'),Input::get('count'),$contactform -> id,$user -> id);
 				}	
 				
 				return Redirect::to('admin/customform/' . $customform -> id . '/edit') -> with('success', Lang::get('admin/customform/messages.update.success'));
@@ -166,29 +164,24 @@ class AdminCustomFormController extends AdminController {
             -> remove_column('id') -> make();
 	}
 	
-	public function saveFilds($pagecontentorder,$customform_id,$user_id)
+	public function saveFilds($pagecontentorder,$count,$customform_id,$user_id)
 	{
-		$pagecontentorder = explode(',', $pagecontentorder);
-		foreach ($pagecontentorder as $value) {
-			if($params!=NULL){
-				$params = explode(',', $params);
-				$count = $params[0];
-				$order = 1;
-				for ($i=0; $i <= $count; $i=$i+5) {
-					 
-					$customformfield = new CustomFormField;
-					$customformfield -> name = $params[$i+1];
-					$customformfield -> mandatory = $params[$i+2];
-					$customformfield -> type = $params[$i+3];
-					$customformfield -> options = $params[$i+4];
-					$customformfield -> order = $order;
-					$customformfield -> custom_form_id = $customform_id;
-					$customformfield -> user_id = $user_id;						
-					$customformfield -> save();	
-					$order++;
-				}
-			}		
-			$order ++;
+		$formfields = CustomFormField::where('custom_form_id','=',$customform_id)->get();
+		$formfields->delete();
+		$params = explode(',', $pagecontentorder);
+		$order = 1;
+		for ($i=0; $i <= $count; $i=$i+4) {
+			 
+			$customformfield = new CustomFormField;
+			$customformfield -> name = $params[$i];
+			$customformfield -> mandatory = $params[$i+1];
+			$customformfield -> type = $params[$i+2];
+			$customformfield -> options = $params[$i+3];
+			$customformfield -> order = $order;
+			$customformfield -> custom_form_id = $customform_id;
+			$customformfield -> user_id = $user_id;						
+			$customformfield -> save();	
+			$order++;
 		}
 	}
 }

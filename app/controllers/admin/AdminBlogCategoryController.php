@@ -1,6 +1,6 @@
 <?php
 
-class AdminBlogCategorysController extends AdminController {
+class AdminBlogCategoryController extends AdminController {
 
 	/**
 	 * BlogCategory Model
