@@ -57,140 +57,129 @@
 
       		<div class="row">
 
-       		 <div class="col-lg-12">
-         		<h1 class="page-header">
-						<!-- Page title -->
-						@yield('page_title')
-						<!-- ./ page title -->
-					  </h1>
-			          <ol class="breadcrumb">
-			           @yield('breadcrumb')			           
-			            <!--<li><a href="#">Home</a></li>
-			            <li class="active">Blog Home</li>-->
-			          </ol>
-			        </div>
-			
-			      </div>
-			
-			      <div class="row">
-			      	@yield('sidebar_left')
-			        <div class="col-lg-8">
-						<!-- Content -->
-						@yield('content')
-						<!-- ./ content -->
-					 </div>
-					 	@yield('sidebar_right')
-					 <div class="col-lg-4">					 
-			          <div class="well">			          	
-			          	<ul class="list-unstyled">
-			           	@if (Auth::check())
-			           	<h4>Welcome {{Auth::user()->name}} {{Auth::user()->surname}}</h4>
-							@if (Auth::user()->hasRole('admin'))
-							<li>
-								<a href="{{{ URL::to('admin') }}}">{{Lang::get('site.admin_panel')}}</a>
-							</li>
-							@endif
-							<li>
-								<a href="{{{ URL::to('user/messages') }}}">{{Lang::get('site.messages')}} ({{$unreadmessages}})</a>
-							</li>
-							<li>
-								<a href="{{{ URL::to('user') }}}">{{Lang::get('site.edit_profile')}}</a>
-							</li>
-							<li>
-								<a href="{{{ URL::to('user/logout') }}}">{{Lang::get('site.logout')}}</a>
-							</li>
-							@else
-							<div class="row">
-			               <h4>{{Lang::get('confide.login.desc')}}</h4>
-							<form method="POST" action="{{ URL::to('login') }}" accept-charset="UTF-8">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<fieldset>
-									<div class="form-group">
-										<label class="col-md-4 control-label" for="email">{{ Lang::get('confide.username_e_mail') }}</label>
-										<div class="col-md-8">
-											<input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide.username_e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}">
-										</div>
+       		 	<div class="col-lg-12">
+ 					@yield('page_header')						
+	           		@yield('page_breadcrumb')
+	        	</div>
+	       	</div>
+	       	<div class="row">
+		      	@yield('sidebar_left')
+		        <div class="col-lg-8">
+					<!-- Content -->
+					@yield('content')
+					<!-- ./ content -->
+				 </div>
+				 	@yield('sidebar_right')
+				    <div class="well">			          	
+		          	<ul class="list-unstyled">
+		           	@if (Auth::check())
+		           	<h4>Welcome {{Auth::user()->name}} {{Auth::user()->surname}}</h4>
+						@if (Auth::user()->hasRole('admin'))
+						<li>
+							<a href="{{{ URL::to('admin') }}}">{{Lang::get('site.admin_panel')}}</a>
+						</li>
+						@endif
+						<li>
+							<a href="{{{ URL::to('user/messages') }}}">{{Lang::get('site.messages')}} ({{$unreadmessages}})</a>
+						</li>
+						<li>
+							<a href="{{{ URL::to('user') }}}">{{Lang::get('site.edit_profile')}}</a>
+						</li>
+						<li>
+							<a href="{{{ URL::to('user/logout') }}}">{{Lang::get('site.logout')}}</a>
+						</li>
+						@else
+						<div class="row">
+		               <h4>{{Lang::get('confide.login.desc')}}</h4>
+						<form method="POST" action="{{ URL::to('login') }}" accept-charset="UTF-8">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<fieldset>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="email">{{ Lang::get('confide.username_e_mail') }}</label>
+									<div class="col-md-8">
+										<input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide.username_e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}">
 									</div>
-									<div class="form-group">&nbsp;</div>
-									<div class="form-group">
-										<label class="col-md-4 control-label" for="password"> {{ Lang::get('confide::confide.password') }} </label>
-										<div class="col-md-8">
-											<input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide.password') }}" type="password" name="password" id="password">
-										</div>
-									</div>
-								
-									<div class="form-group">
-										<div class="col-md-offset-2 col-md-10">
-											<div class="checkbox">
-												<label for="remember">{{ Lang::get('confide.login.remember') }}
-													<input type="hidden" name="remember" value="0">
-													<input tabindex="4" type="checkbox" name="remember" id="remember" value="1">
-												</label>
-											</div>
-										</div>
-									</div>							
-									@if ( Session::get('error') )
-									<div class="alert alert-danger">
-										{{ Session::get('error') }}
-									</div>
-									@endif
-							
-									@if ( Session::get('notice') )
-									<div class="alert">
-										{{ Session::get('notice') }}
-									</div>
-									@endif
-									
-									<div class="form-group">
-										<div class="col-md-offset-2 col-md-10">
-											<button tabindex="3" type="submit" class="btn btn-primary">
-												{{ Lang::get('confide.login.submit') }}
-											</button>
-											<a class="btn btn-default" href="{{ Url::to('user/forgot') }}">{{ Lang::get('confide.login.forgot_password') }}</a>
-										</div>
-									</div>
-								</fieldset>
-							</form>							
-							</div>
-								<div class="row">
-			                		    <h4>Need an Account?</h4>
-											<p>
-												Create an account here
-											</p>
-											<p>
-												<a href="{{ Url::to('user/create') }}" class="btn btn-info"> Create Account </a>
-											</p>
 								</div>
-							@endif
-						</ul>
-			          </div><!-- /well -->
-			          <div class="well">
-			            <h4>Popular Blog Categories</h4>
-			              <div class="row">
-			                <div class="col-lg-6">
-			                  <ul class="list-unstyled">
-			                    <li><a href="#dinosaurs">Dinosaurs</a></li>
-			                    <li><a href="#spaceships">Spaceships</a></li>
-			                    <li><a href="#fried-foods">Fried Foods</a></li>
-			                    <li><a href="#wild-animals">Wild Animals</a></li>
-			                  </ul>
-			                </div>
-			                <div class="col-lg-6">
-			                  <ul class="list-unstyled">
-			                    <li><a href="#alien-abductions">Alien Abductions</a></li>
-			                    <li><a href="#business-casual">Business Casual</a></li>
-			                    <li><a href="#robots">Robots</a></li>
-			                    <li><a href="#fireworks">Fireworks</a></li>
-			                  </ul>
-			                </div>
-			              </div>
-			          </div><!-- /well -->
-			          <div class="well">
-			            <h4>Side Widget Well</h4>
-			            <p>Bootstrap's default well's work great for side widgets! What is a widget anyways...?</p>
-			          </div><!-- /well -->
-			        </div>
-			      </div>
+								<div class="form-group">&nbsp;</div>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="password"> {{ Lang::get('confide::confide.password') }} </label>
+									<div class="col-md-8">
+										<input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide.password') }}" type="password" name="password" id="password">
+									</div>
+								</div>
+							
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-10">
+										<div class="checkbox">
+											<label for="remember">{{ Lang::get('confide.login.remember') }}
+												<input type="hidden" name="remember" value="0">
+												<input tabindex="4" type="checkbox" name="remember" id="remember" value="1">
+											</label>
+										</div>
+									</div>
+								</div>							
+								@if ( Session::get('error') )
+								<div class="alert alert-danger">
+									{{ Session::get('error') }}
+								</div>
+								@endif
+						
+								@if ( Session::get('notice') )
+								<div class="alert">
+									{{ Session::get('notice') }}
+								</div>
+								@endif
+								
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-10">
+										<button tabindex="3" type="submit" class="btn btn-primary">
+											{{ Lang::get('confide.login.submit') }}
+										</button>
+										<a class="btn btn-default" href="{{ Url::to('user/forgot') }}">{{ Lang::get('confide.login.forgot_password') }}</a>
+									</div>
+								</div>
+							</fieldset>
+						</form>							
+						</div>
+							<div class="row">
+		                		    <h4>Need an Account?</h4>
+										<p>
+											Create an account here
+										</p>
+										<p>
+											<a href="{{ Url::to('user/create') }}" class="btn btn-info"> Create Account </a>
+										</p>
+							</div>
+						@endif
+					</ul>
+		          </div><!-- /well -->
+		          <div class="well">
+		            <h4>Popular Blog Categories</h4>
+		              <div class="row">
+		                <div class="col-lg-6">
+		                  <ul class="list-unstyled">
+		                    <li><a href="#dinosaurs">Dinosaurs</a></li>
+		                    <li><a href="#spaceships">Spaceships</a></li>
+		                    <li><a href="#fried-foods">Fried Foods</a></li>
+		                    <li><a href="#wild-animals">Wild Animals</a></li>
+		                  </ul>
+		                </div>
+		                <div class="col-lg-6">
+		                  <ul class="list-unstyled">
+		                    <li><a href="#alien-abductions">Alien Abductions</a></li>
+		                    <li><a href="#business-casual">Business Casual</a></li>
+		                    <li><a href="#robots">Robots</a></li>
+		                    <li><a href="#fireworks">Fireworks</a></li>
+		                  </ul>
+		                </div>
+		              </div>
+		          </div><!-- /well -->
+		          <div class="well">
+		            <h4>Side Widget Well</h4>
+		            <p>Bootstrap's default well's work great for side widgets! What is a widget anyways...?</p>
+		          </div><!-- /well -->
+		        </div>
+		      </div>
 
     	</div><!-- /.container -->
     
