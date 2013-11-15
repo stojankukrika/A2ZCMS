@@ -47,7 +47,7 @@
 			<div class="form-group {{{ $errors->has('image') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label" for="image">{{{ Lang::get('admin/blogs/table.image') }}}</label>
-					<input type="file" name="image" id="image" value="{{{ Input::old('image', isset($page) ? $page->image : null) }}}" />
+					<input type="file" name="image" id="image" value="{{{ Input::old('image') }}}" />
 				</div>
 			</div>
 			<!-- ./ show image -->

@@ -90,7 +90,19 @@ class AdminPageController extends AdminController {
 			$this -> page -> showdate = Input::get('showdate');
 			$this -> page -> showtags = Input::get('showtags');
 			$this -> page -> tags = Input::get('tags');
+			if(Input::hasFile('image'))
+			{
+				$file = Input::file('image');
+				$destinationPath = public_path() . '\page\\/';
+				$filename = $file->getClientOriginalName();				
+				$extension = $file -> getClientOriginalExtension();
+				$name = sha1($filename . time()) . '.' . $extension;		
 			
+				Input::file('image')->move($destinationPath, $name);
+				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .'thumbs\\/' . $name);
+				
+				$this -> page -> image = $name;
+			}
 			$this -> page -> save();
 			
 			$pagesidebar = (Input::has('pagesidebar'))?Input::get('pagesidebar'):"";
@@ -193,7 +205,19 @@ class AdminPageController extends AdminController {
 			$page -> showdate = Input::get('showdate');
 			$page -> showtags = Input::get('showtags');
 			$page -> tags = Input::get('tags');
+			if(Input::hasFile('image'))
+			{
+				$file = Input::file('image');
+				$destinationPath = public_path() . '\page\\/';
+				$filename = $file->getClientOriginalName();				
+				$extension = $file -> getClientOriginalExtension();
+				$name = sha1($filename . time()) . '.' . $extension;		
 			
+				Input::file('image')->move($destinationPath, $name);
+				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .'thumbs\\/' . $name);
+				
+				$page -> image = $name;
+			}
 			if ($page -> save()) {
 				
 				$old = PagePluginFunction::where('page_id','=',$page -> id);

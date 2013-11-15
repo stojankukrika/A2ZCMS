@@ -8,10 +8,26 @@ class PagePluginFunctionsTableSeeder extends Seeder {
 		// DB::table('page_plugin_functions')->truncate();
 		
 		$page_id = Page::first()->id;
-		$plugin_function_id = PluginFunction::find(5)->id;
+
 		$page_plugin_functions = array( 
 					array('page_id' => $page_id, 
-						'plugin_function_id' => $plugin_function_id,
+						'plugin_function_id' => PluginFunction::find(1)->id,
+						'order' => '1',
+						'param' => '',
+						'type' => '',
+						'value' => '',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ),
+					array('page_id' => $page_id, 
+						'plugin_function_id' => PluginFunction::find(2)->id,
+						'order' => '2',
+						'param' => '',
+						'type' => '',
+						'value' => '',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ),	
+					array('page_id' => $page_id, 
+						'plugin_function_id' => PluginFunction::find(5)->id,
 						'order' => '1',
 						'param' => '',
 						'type' => '',

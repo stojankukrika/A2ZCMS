@@ -16,6 +16,7 @@ class CreatePagesTable extends Migration {
 			$table -> string('name');
 			$table -> string('slug');
 			$table -> text('content');
+			$table -> string('image')->nullable();
 			$table -> boolean('status');
 			$table -> timestamps();
 		});

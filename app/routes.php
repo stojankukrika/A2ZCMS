@@ -266,6 +266,9 @@ Route::post('contact-us', 'WebsiteController@postContactus');
 Route::get('blog/{postSlug}', 'BlogController@getView');
 Route::post('blog/{postSlug}', 'BlogController@postView');
 
+Route::get('gallery/{postSlug}', 'GalleryController@getView');
+Route::post('gallery/{postSlug}', 'GalleryController@postView');
+
 Route::get('page/{postSlug}', 'WebsiteController@getView');
 Route::post('page/{postSlug}', 'WebsiteController@postView');
 
