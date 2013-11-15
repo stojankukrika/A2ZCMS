@@ -32,7 +32,11 @@
 
 {{-- Sidebar left --}}
 @section('sidebar_left')
-	{{ $item['content'] }}
+	@foreach ($sidebar_left as $item)
+		  <div class="well">			
+			{{ $item['content'] }}
+		</div>
+	@endforeach 
 @stop
 
 {{-- Content --}}
