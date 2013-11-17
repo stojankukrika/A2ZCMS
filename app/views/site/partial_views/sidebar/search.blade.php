@@ -5,7 +5,7 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="email">{{{ Lang::get('site/partial_views/sidebar/search.term') }}}</label>
 			<div class="col-md-8">
-				<input class="form-control" tabindex="1" placeholder="{{{ Lang::get('site/partial_views/search.term') }}}" type="text" name="term" id="term" value="{{ Input::old('term') }}">
+				<input class="form-control" tabindex="1" placeholder="{{{ Lang::get('site/partial_views/sidebar/search.term') }}}" type="text" name="term" id="term" value="{{ Input::old('term') }}">
 			</div>
 		</div>
 		<p>

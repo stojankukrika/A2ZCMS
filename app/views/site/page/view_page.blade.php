@@ -2,10 +2,10 @@
 
 {{-- Page title --}}
 @section('page_header')
-	@if(isset($page->title))
-	<!--<h1 class="page-header">
-		{{ $page->title }}
-	</h1>-->
+	@if(isset($page->showtitle))
+	<h1 class="page-header">
+		{{ $page->name }}
+	</h1>
 	@endif
 @stop
 
@@ -29,10 +29,10 @@
 	{{ $page->page_javascript() }}
 	</script>
 @stop
-
 {{-- Sidebar left --}}
 @section('sidebar_left')
 	@foreach ($sidebar_left as $item)
+	
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>

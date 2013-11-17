@@ -36,6 +36,7 @@ class WebsiteController extends BaseController {
 		$function_content = $page_functions['pluginfunction_content'];
 		$function_slider = $page_functions['pluginfunction_slider'];
 		
+
 		$sidebar_right = array(); 
 		$sidebar_left = array(); 
 		$content = array();		
@@ -60,6 +61,7 @@ class WebsiteController extends BaseController {
 			$sorts = $item->sorts;
 			$limits = $item->limits;
 			$orders = $item->orders;
+			//echo 'f:'.$function.' i:'.$ids.' g:'.$grids.' s:'.$sorts.' l:'.$limits.' o:'.$orders.'<br>'.$item->params.'<br><br>';
 			if($item->params=="")
 			{
 				$content[] = array('content' =>$this->$function($page->id));
@@ -67,8 +69,7 @@ class WebsiteController extends BaseController {
 			else {
 				$content[] = array('content' =>$this->$function($ids,$grids,$sorts,$limits,$orders));
 			}
-		}
-		
+		}	
 		// Check if the blog page exists
 		if (is_null($page)) {
 			// If we ended up in here, it means that a page didn't exist.
@@ -170,22 +171,31 @@ class WebsiteController extends BaseController {
 	{
 		$showGallery ="";
 		$showImages ="";
-		if($ids!="" && $grids=""){
-			$showGallery = Gallery::whereIn('id', $ids)->orderBy($orders,$sorts)->take($limits)->get();
-			$showImages = GalleryImage::whereIn('gallery_id', $ids)->get();
+		if($ids!="" && $grids==""){
+			$showGallery = Gallery::whereIn('id', $ids)->orderBy($orders,$sorts)->select(array('id','title'))->get();
+			$showImages = GalleryImage::whereIn('gallery_id', $ids)->select(array('id','content'))->get();
 		}
 		else {
-			$showGallery = Gallery::orderBy($orders,$sorts)->take($limits);
+			$showGallery = Gallery::orderBy($orders,$sorts)->take($limits)->select(array('id','title'))->get();
 		}
 		return View::make('site.partial_views.content.showGallery', compact('showGallery','showImages'));
 	}
 	public function showBlogs($ids,$grids,$sorts,$limits,$orders)
 	{
-		
+		$showBlogs ="";
+		//$ids = rtrim($ids, ",");
+	
+		if($ids!="" && $grids==""){
+			$showBlogs = Blog::whereIn('id', array($ids))->orderBy($orders,$sorts)->select(array('id','slug','title','content'))->get();
+		}
+		else {
+			$showBlogs = Blog::orderBy($orders,$sorts)->take($limits)->select(array('id','slug','title','content'))->get();
+		}
+		return View::make('site.partial_views.content.showBlogs', compact('showBlogs'));
 	}
 	public function showCustomFormId($ids,$grids,$sorts,$limits,$orders)
  	{
- 		
+
 	 }
 	  /*
 	 * end site function

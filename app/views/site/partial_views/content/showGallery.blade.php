@@ -1,5 +1,4 @@
-<div class="col-sm-3">
-  <div class="panel panel-default text-center">
+ <div class="panel panel-default text-center">
   @if(!empty($showImages))
 	<p>
 	@if(!empty($showGallery))
@@ -20,5 +19,4 @@
 		</p>
 	@endif
 	@endif
-	</div>          
-</div>
+	</div> 

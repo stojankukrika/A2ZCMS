@@ -42,12 +42,6 @@
       </div>
 	</nav>
 	<div class="container">
-  		<div class="row">
-   		 	<div class="col-lg-12">
-				@yield('page_header')						
-           		@yield('page_breadcrumb')
-        	</div>
-       	</div>
        	<div class="row">
 	      	@yield('sidebar_left')
 	        <div class="col-lg-8">
