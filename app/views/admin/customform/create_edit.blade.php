@@ -13,7 +13,7 @@
 </ul>
 <!-- ./ tabs -->
 
-{{-- Edit Blog Form --}}
+{{-- Edit Custom Form --}}
 <form class="form-horizontal" enctype="multipart/form-data"  method="post" action="@if (isset($customform)){{ URL::to('admin/customform/' . $customform->id . '/edit') }}@endif" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -63,9 +63,9 @@
 						<ul id="sortable1">
 							<input type="hidden" value="{{isset($customform)?$customform->customformfields->count():'0'}}" name="count" id="count">
 							<input type="hidden" value="" name="pagecontentorder" id="pagecontentorder">
-							<?php $id=1;?>
-							@if(!empty($customform->customformfields))
-								@foreach($customform->customformfields as $item)
+							<?php $id=1; $custom = $customform->customformfields();?>
+							@if(!empty($custom))
+								@foreach($custom as $item)								
 									<li class="ui-state-default" name="formf" value="{{$id}}" id="formf{{$id}}">
 										<label class="control-label" for="name">Fild name</label>
 										<input type="text" id="name{{$item->id}}" value="{{$item->name}}" name="name{{$id}}">
@@ -74,17 +74,17 @@
 											<select name="mandatory{{$id}}" id="mandatory{{$id}}"> 
 												<option value="1" {{($item->mandatory=='1')?"selected":""}}>No</option>
 										  		<option value="2" {{($item->mandatory=='2')?"selected":""}}>Yes</option>
-										  		<option value="3" {{($item->mandatory=='3')?"selected":""}}>Only numbers</option>
-										  		<option value="4" {{($item->mandatory=='4')?"selected":""}}>Valid email adress</option>
+										  		<!--<option value="3" {{($item->mandatory=='3')?"selected":""}}>Only numbers</option>
+										  		<option value="4" {{($item->mandatory=='4')?"selected":""}}>Valid email adress</option>-->
 											</select>
 											<label class="control-label" for="type">Type </label>
 											<select name="type{{$id}}" id="type{{$id}}"> 
 												<option value="1" {{($item->type=='1')?"selected":""}}>Input field</option>
 												<option value="2" {{($item->type=='2')?"selected":""}}>Text area</option>
-												<option value="3" {{($item->type=='3')?"selected":""}}>Select</option>
+												<!--<option value="3" {{($item->type=='3')?"selected":""}}>Select</option>
 												<option value="4" {{($item->type=='4')?"selected":""}}>Radio</option>
 												<option value="5" {{($item->type=='5')?"selected":""}}>Upload</option>
-												<option value="6" {{($item->type=='6')?"selected":""}}>Checkbox</option>
+												<option value="6" {{($item->type=='6')?"selected":""}}>Checkbox</option>!-->
 											</select>
 											<label class="control-label" for="options"> Options</label>
 											<input type="text" name="options{{$id}}" value="{{$item->options}}" id="options{{$item->id}}">
@@ -129,17 +129,17 @@
 			<select name="mandatory" id="mandatory"> 
 				<option value="1">No</option>
 		  		<option value="2">Yes</option>
-		  		<option value="3">Only numbers</option>
-		  		<option value="4">Valid email adress</option>
+		  		<!--<option value="3">Only numbers</option>
+		  		<option value="4">Valid email adress</option>-->
 			</select>
 			<label class="control-label" for="type">Type </label>
 			<select name="type" id="type"> 
 				<option value="1">Input field</option>
 				<option value="2">Text area</option>
-				<option value="3">Select</option>
+				<!--<option value="3">Select</option>
 				<option value="4">Radio</option>
 				<option value="5">Upload</option>
-				<option value="6">Checkbox</option>
+				<option value="6">Checkbox</option>-->
 			</select>
 			<label class="control-label" for="options"> Options</label>
 			<input type="text" name="options" value="" id="options">

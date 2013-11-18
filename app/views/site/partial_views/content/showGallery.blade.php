@@ -1,22 +1,25 @@
- <div class="panel panel-default text-center">
-  @if(!empty($showImages))
-	<p>
+<hr>
+ <div class="row">
+  @if(empty($showImages))
 	@if(!empty($showGallery))
-	@foreach($showGallery as $items)
-		<h2>{{$item->title}}<h2>
+	@foreach($showGallery as $item)
+		<div class="col-lg-4 col-md-4">
+				<h3><a href="gallery/{{$item->id}}">{{$item->title}}</a><h3>
+		</div>
 	@endforeach
 	@endif
-	</p>
   @else
  	 @if(!empty($showGallery))	
-		<p>
-			@foreach($showGallery as $items)
-			<h2>{{$item->title}}<h2>
-				 <ul class="list-group">
-		             <li class="list-group-item">5 Projects</li>
-		         </ul>
+			@foreach($showGallery as $item)
+				<div class="col-lg-4 col-md-4">
+				<h3><a href="gallery/{{$item->id}}">{{$item->title}}</a><h3>
+					<p>
+				  	@foreach ($showImages[$item->id] as $img)
+				  		<img src="{{ URL::asset('images/'.$item->folderid.'/thumbs/'.$img->content)}}" />
+		            @endforeach
+		            </p>
+		     	 </div>
 			@endforeach
-		</p>
 	@endif
 	@endif
 	</div> 

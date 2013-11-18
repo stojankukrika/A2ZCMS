@@ -1,10 +1,11 @@
 @extends('site.layouts.default')
 
+
 {{-- Page title --}}
 @section('page_header')
-	@if(isset($page->showtitle))
+	@if($page->showtitle==1)
 	<h1 class="page-header">
-		{{ $page->name }}
+		{{{ $page->name }}}
 	</h1>
 	@endif
 @stop
@@ -23,12 +24,13 @@
 {{-- Add page scripts --}}
 @section('page_scripts')
 	<style>
-	{{{ $page->page_css() }}}
+	{{{ $page->page_css }}}
 	</style>
 	<script>
-	{{ $page->page_javascript() }}
+	{{ $page->page_javascript}}
 	</script>
 @stop
+
 {{-- Sidebar left --}}
 @section('sidebar_left')
 	@foreach ($sidebar_left as $item)

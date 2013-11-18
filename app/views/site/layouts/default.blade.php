@@ -101,7 +101,8 @@
 		<script src="{{$asset}}assets/site/js/bootstrap.js"></script>
 		<script src="{{$asset}}assets/site/js/theme.js"></script>
 		<script src="{{$asset}}assets/site/js/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="{{$asset}}assets/site/js/jquery.multiselect.js"></script>
+		<script src="{{$asset}}assets/site/js/jquery.validate.js"></script>
+		<script src="{{$asset}}assets/site/js/select2.js"></script>
 		<!-- end: JavaScript-->
 		@yield('scripts')
 	</body>

@@ -20,7 +20,11 @@ class Page extends Eloquent implements PresentableInterface {
 
 		return String::date($date);
 	}
-
+	public function pageplugins()
+	{
+	    return $this->hasMany('PagePluginFunction', 'page_id');
+	}
+	
 	/**
 	 * Returns a formatted post content entry,
 	 * this ensures that line breaks are returned.

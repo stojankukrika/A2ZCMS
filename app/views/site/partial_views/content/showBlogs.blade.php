@@ -1,10 +1,11 @@
- <div class="panel panel-default text-center">
-  	<p>
-	@if(!empty($showBlogs))
-	@foreach($showBlogs as $items)
-		<h2>{{$item->title}}<h2>
+<hr>
+ <div class="row">
+  	@if(!empty($showBlogs))
+  	<div class="col-lg-12 col-md-12">
+	@foreach($showBlogs as $item)
+		<h3><a href="blog/{{$item->id}}">{{$item->title}}</a><h3>
 		<p>{{$item->content}}</p>
 	@endforeach
+	</div>
 	@endif
-	</p>
-	</div> 
+</div> 

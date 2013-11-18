@@ -45,6 +45,7 @@ class WebsiteController extends BaseController {
 		{
 			$function = $item->function;
 			$params = $item->params;
+			
 			if($page->sidebar==1){
 				$sidebar_right[] = array('content' =>$this->$function($params));
 			}
@@ -61,7 +62,8 @@ class WebsiteController extends BaseController {
 			$sorts = $item->sorts;
 			$limits = $item->limits;
 			$orders = $item->orders;
-			//echo 'f:'.$function.' i:'.$ids.' g:'.$grids.' s:'.$sorts.' l:'.$limits.' o:'.$orders.'<br>'.$item->params.'<br><br>';
+		//	echo 'f:'.$function.' i:'.$ids.' g:'.$grids.' s:'.$sorts.' l:'.$limits.' o:'.$orders.'<br>'.$item->params.'<br><br>';
+			
 			if($item->params=="")
 			{
 				$content[] = array('content' =>$this->$function($page->id));
@@ -77,7 +79,13 @@ class WebsiteController extends BaseController {
 			return App::abort(404);
 		}
 		// Show the page
-		return View::make('site/page/view_page', compact('page','sidebar_right','content','sidebar_left'));
+		$data['sidebar_right'] = $sidebar_right;
+		$data['sidebar_left'] = $sidebar_left;
+		$data['content'] = $content;
+		$data['page'] = $page;
+		return View::make('site/page/view_page', $data);
+
+		//return View::make('site/page/view_page', compact('page','sidebar_right','content','sidebar_left'));
 	}
 	
 	
@@ -97,17 +105,17 @@ class WebsiteController extends BaseController {
 		}
 		$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
 									->leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
-									->whereRaw("page_plugin_functions.page_id  = '".$page_id."'")
+									->whereRaw("(page_plugin_functions.page_id  = '".$page_id."' OR page_plugin_functions.page_id IS NULL)")
 									->where('plugin_functions.type','=','content')
 									->whereRaw('page_plugin_functions.deleted_at IS NULL')
 									->orderBy('page_plugin_functions.order','ASC')
 									->groupBy('plugin_functions.id')
 									->get(array(
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="id" limit 1) AS ids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="grid" limit 1) AS grids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="sort" limit 1) AS sorts')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="limit" limit 1) AS limits')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="order" limit 1) AS orders')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="id" limit 1) AS ids')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="grid" limit 1) AS grids')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="sort" limit 1) AS sorts')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="limit" limit 1) AS limits')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="order" limit 1) AS orders')),
 									'plugin_functions.title','page_plugin_functions.order','plugins.function_id','plugin_functions.function','plugin_functions.params','plugins.function_grid'));
 
 			$pluginfunction_slider = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
@@ -124,25 +132,25 @@ class WebsiteController extends BaseController {
 	/*
 	 * sidebar function
 	 * */
-	public function login()
+	public function login($params)
 	{
 		return View::make('site.partial_views.sidebar.login');
 	}
-	public function search()
+	public function search($params)
 	{
 		return View::make('site.partial_views.sidebar.search');
 	}
 	public function newGallerys($params)
 	{
 		$param = $this->splitParams($params);
-		$gallery = Gallery::orderBy($param['order'],$param['sort'])->take($param['limit'])->select(array('id','title'))->get();
-		return View::make('site.partial_views.sidebar.newgallerys', compact('newGallerys'));
+		$newGallerys = Gallery::orderBy($param['order'],$param['sort'])->take($param['limit'])->select(array('id','title'))->get();
+		return View::make('site.partial_views.sidebar.newGallerys', compact('newGallerys'));
 	}
 	public function newBlogs($params)
 	{
 		$param = $this->splitParams($params);
-		$blogs = Blog::orderBy($param['order'],$param['sort'])->take($param['limit'])->select(array('id','title'))->get();
-		return View::make('site.partial_views.sidebar.newblogs', compact('newBlogs'));
+		$newBlogs = Blog::orderBy($param['order'],$param['sort'])->take($param['limit'])->select(array('id','title'))->get();
+		return View::make('site.partial_views.sidebar.newBlogs', compact('newBlogs'));
 	}
 	
 	private function splitParams($params)
@@ -169,33 +177,57 @@ class WebsiteController extends BaseController {
 	}
 	public function showGallery($ids="",$grids="",$sorts,$limits,$orders)
 	{
-		$showGallery ="";
-		$showImages ="";
+		$showGallery =array();
+		$showImages =array();
+			
 		if($ids!="" && $grids==""){
-			$showGallery = Gallery::whereIn('id', $ids)->orderBy($orders,$sorts)->select(array('id','title'))->get();
-			$showImages = GalleryImage::whereIn('gallery_id', $ids)->select(array('id','content'))->get();
+			$ids = rtrim($ids, ",");
+			$ids = explode(',', $ids);
+			$showGallery = Gallery::whereIn('id', $ids)->orderBy($orders,$sorts)->select(array('id','title','folderid'))->get();
+			foreach ($ids as $value) {
+				$showImages[$value] = GalleryImage::where('gallery_id', $value)->select(array('id','content'))->get();
+			}
+			
 		}
-		else {
+		else if($limits!=0)
+		{
 			$showGallery = Gallery::orderBy($orders,$sorts)->take($limits)->select(array('id','title'))->get();
 		}
 		return View::make('site.partial_views.content.showGallery', compact('showGallery','showImages'));
 	}
+
 	public function showBlogs($ids,$grids,$sorts,$limits,$orders)
 	{
-		$showBlogs ="";
-		//$ids = rtrim($ids, ",");
-	
+		$showBlogs = array();
+		$ids = rtrim($ids, ",");
+
 		if($ids!="" && $grids==""){
-			$showBlogs = Blog::whereIn('id', array($ids))->orderBy($orders,$sorts)->select(array('id','slug','title','content'))->get();
+			$ids = rtrim($ids, ",");
+			$ids = explode(',', $ids);
+			
+			$showBlogs = Blog::whereIn('id', $ids)->orderBy($orders,$sorts)->select(array('id','slug','title','content'))->get();
 		}
-		else {
+		else if($limits!=0) {
 			$showBlogs = Blog::orderBy($orders,$sorts)->take($limits)->select(array('id','slug','title','content'))->get();
 		}
 		return View::make('site.partial_views.content.showBlogs', compact('showBlogs'));
 	}
 	public function showCustomFormId($ids,$grids,$sorts,$limits,$orders)
  	{
+ 		
+		$showCustomFormId ="";
+		$showCustomFormFildId ="";
+		$ids = rtrim($ids, ",");
 
+		if($ids!=""){
+			$ids = rtrim($ids, ",");
+			$ids = explode(',', $ids);
+			$showCustomFormId = CustomForm::whereIn('id', $ids)->select(array('id','recievers','title','message'))->get();
+			foreach ($ids as $id){
+				$showCustomFormFildId[$id] = CustomFormField::where('custom_form_id',$id)->orderBy('order','ASC')->select(array('id','name','options','type','order','mandatory'))->get();
+			}
+		}
+		return View::make('site.partial_views.content.showCustomFormId', compact('showCustomFormId','showCustomFormFildId'));
 	 }
 	  /*
 	 * end site function

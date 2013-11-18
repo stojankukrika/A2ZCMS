@@ -136,13 +136,13 @@ class AdminPageController extends AdminController {
 									->orderBy('page_plugin_functions.order','ASC')
 									->groupBy('plugin_functions.id')
 									->get(array('plugin_functions.id',
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="id" limit 1) AS ids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="grid" limit 1) AS grids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="sort" limit 1) AS sorts')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="limit" limit 1) AS limits')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL)and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="order" limit 1) AS orders')),
-									'plugin_functions.title','page_plugin_functions.order','plugins.function_id','plugin_functions.params','plugins.function_grid'));
-		
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="id" limit 1) AS ids')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="grid" limit 1) AS grids')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="sort" limit 1) AS sorts')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="limit" limit 1) AS limits')),
+									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="order" limit 1) AS orders')),
+									'plugin_functions.title','page_plugin_functions.order','plugins.function_id','plugin_functions.function','plugin_functions.params','plugins.function_grid'));
+
 			foreach ($pluginfunction_content as $key => $value) {
 				$function_id = $value['function_id'];
 				$function_grid = $value['function_grid'];
