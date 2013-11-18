@@ -87,8 +87,9 @@ class AdminCustomFormController extends AdminController {
 		$title = Lang::get('admin/customform/title.contact_form_management');
 
 		$customform = CustomForm::find($id);
+		$customformfields = CustomFormField::where('custom_form_id','=',$id)->get();
 		
-		return View::make('admin/customform/create_edit', compact('title', 'customform'));
+		return View::make('admin/customform/create_edit', compact('title', 'customform','customformfields'));
 	}
 		
 	/**

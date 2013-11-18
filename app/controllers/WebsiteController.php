@@ -62,7 +62,6 @@ class WebsiteController extends BaseController {
 			$sorts = $item->sorts;
 			$limits = $item->limits;
 			$orders = $item->orders;
-		//	echo 'f:'.$function.' i:'.$ids.' g:'.$grids.' s:'.$sorts.' l:'.$limits.' o:'.$orders.'<br>'.$item->params.'<br><br>';
 			
 			if($item->params=="")
 			{
@@ -84,19 +83,7 @@ class WebsiteController extends BaseController {
 		$data['content'] = $content;
 		$data['page'] = $page;
 		return View::make('site/page/view_page', $data);
-
-		//return View::make('site/page/view_page', compact('page','sidebar_right','content','sidebar_left'));
 	}
-	
-	
-	/* public function getContactus()
-	{
-		return View::make('site/contact_us', compact('page'));
-	}
-	public function postContactus()
-	{
-		return View::make('site/contact_us', compact('page'));
-	}*/
 	
 	public function readModulsForPage($page_id = 0)
 	{
