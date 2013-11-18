@@ -12,7 +12,7 @@
 						</div>
 						<div class="col-lg-6">
 							      @if($field->type == '1')
-							            <input type="text" name="{{Str::slug($field->name)}}" />
+							            <input type="text" name="{{Str::slug($field->name)}}" value=""/>
 							      @elseif($field->type == '2')
 							             <textarea name="{{Str::slug($field->name)}}" /></textarea>
 							      @elseif($field->type == '3')
