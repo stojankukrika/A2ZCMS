@@ -247,7 +247,8 @@
 		<script src="{{$asset}}assets/admin/js/core.min.js"></script>
 		<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
 		<script src="{{$asset}}assets/admin/js/bootstrap-dataTables-paging.js"></script>
-		<script src="{{$asset}}assets/admin/js/select2.js"></script>
+		<script src="{{$asset}}assets/admin/js/select2.js"></script>		
+		<script src="{{$asset}}assets/admin/js/jquery.multiselect.js"></script>
 
 		<!-- end: JavaScript-->
 		@yield('scripts')
