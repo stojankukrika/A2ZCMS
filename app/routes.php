@@ -254,14 +254,14 @@ Route::controller('user', 'UserController');
 Route::controller('install', 'InstallController');
 
 //:: Application Routes ::
-
+/*
 # Filter for detect language
 Route::when('contact-us','detectLang');
 
 # Contact Us page
 Route::get('contact-us', 'WebsiteController@getContactus');
 Route::post('contact-us', 'WebsiteController@postContactus');
-
+*/
 # Posts - Second to last set, match slug
 Route::get('blog/{postSlug}', 'BlogController@getView');
 Route::post('blog/{postSlug}', 'BlogController@postView');

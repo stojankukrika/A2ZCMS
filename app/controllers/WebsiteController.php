@@ -178,7 +178,7 @@ class WebsiteController extends BaseController {
 		}
 		else if($limits!=0)
 		{
-			$showGallery = Gallery::orderBy($orders,$sorts)->take($limits)->select(array('id','title'))->get();
+			$showGallery = Gallery::orderBy($orders,$sorts)->take($limits)->select(array('id','title','folderid'))->get();
 		}
 		return View::make('site.partial_views.content.showGallery', compact('showGallery','showImages'));
 	}
