@@ -18,8 +18,8 @@ class CreateGalleryImagesCommentsTable extends Migration {
 			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');
 			$table -> integer('gallery_id') -> unsigned();
 			$table -> foreign('gallery_id') -> references('id') -> on('gallery') -> onDelete('cascade');
-			$table -> integer('gallery_images_id') -> unsigned();
-			$table -> foreign('gallery_images_id') -> references('id') -> on('gallery_images') -> onDelete('cascade');
+			$table -> integer('gallery_image_id') -> unsigned();
+			$table -> foreign('gallery_image_id') -> references('id') -> on('gallery_images') -> onDelete('cascade');
 			$table -> text('content');
 			$table -> timestamps();
 			$table -> softDeletes();

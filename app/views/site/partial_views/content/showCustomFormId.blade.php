@@ -6,6 +6,7 @@
 		<h3>{{$item->title}}<h3>
 			@if(!empty($showCustomFormId))
 				<form action="{{{ URL::to('customform/'.$item->id) }}}" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 				@foreach($showCustomFormFildId[$item->id] as $field)
 						<div class="col-lg-6">
 							{{ $field->name }}

@@ -36,7 +36,7 @@
 			<!-- Recievers -->
 			<div class="form-group {{{ $errors->has('recievers') ? 'error' : '' }}}">
 				<div class="col-md-12">
-					<label class="control-label" for="recievers">{{{ Lang::get('admin/customform/table.recievers') }}}</label>
+					<label class="control-label" for="recievers">{{{ Lang::get('admin/customform/table.recievers') }}} <small>{{Lang::get('admin/customform/table.info_recievers')}}</small></label>
 					<input class="form-control" type="text" name="recievers" id="recievers" value="{{{ Input::old('recievers', isset($customform) ? $customform->recievers : null) }}}" />
 					{{{ $errors->first('recievers', '<span class="help-inline">:message</span>') }}}
 				</div>

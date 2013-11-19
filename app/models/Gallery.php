@@ -27,12 +27,12 @@ class Gallery extends Eloquent implements PresentableInterface {
 	}
 
 	/**
-	 * Get the blog's comments.
+	 * Get the galllery's images.
 	 *
 	 * @return array
 	 */
-	public function gallerycomments() {
-		return $this -> hasMany('GalleryComment');
+	public function galleryimages() {
+		return $this -> hasMany('GalleryImage');
 	}
 
 	/**

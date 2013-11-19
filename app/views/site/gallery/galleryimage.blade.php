@@ -43,26 +43,17 @@
 {{-- Content --}}
 @section('content')
 <br>
-<h2>{{{ $blog->title }}}</h2>
-         <p><i class="icon-time"></i> {{ Lang::get('site/blog.posted_on') }} {{{ $blog->date() }}} {{ Lang::get('site/blog.by') }} 
-          	<a href="#">{{{ $blog->author->username }}}</a></p>
-          <hr>
-          <img src="../blog/{{$blog->image}}" class="img-responsive">
-          <hr>
-          <p>
-			{{ $blog->content() }}
-			</p>
-   		<p>
-   			<strong>{{ Lang::get('site/blog.resource') }}:</strong>{{$blog->resource_link}}
-   		</p>          
+<h3><a href="{{{ URL::to('gallery/'.$gallery->id) }}}">{{ String::title($gallery->title) }}</a></h3>
+<div class="row"> 
+      <img src="../../gallery/{{{$gallery->folderid}}}/{{{ $gallery_image->content }}}" class="img-responsive">        
      <hr>
 
 <!-- the comment box -->
   <div class="well">            
-	<h4>{{{ $blog_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
+	<h4>{{{ $gallery_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
 
-	@if ($blog_comments->count())
-	@foreach ($blog_comments as $comment)
+	@if ($gallery_comments->count())
+	@foreach ($gallery_comments as $comment)
 
 		<h4><b>{{{ $comment->author->username }}}</b>
 				<small>	{{{ $comment->date() }}}</small>
@@ -76,13 +67,11 @@
 </div>
 
 @if ( ! Auth::check())
-{{ Lang::get('site/blog.add_comment_login') }}
+{{ Lang::get('site.add_comment_login') }}
 <br />
 <br />
-{{ Lang::get('site/blog.click') }} <a href="{{{ URL::to('user/login') }}}">{{ Lang::get('site/blog.here') }}</a> 
-{{ Lang::get('site/blog.to_login') }}
-<br><br>
-@elseif ( ! $canBlogComment )
+{{ Lang::get('site/blog.click') }} <a href="{{{ URL::to('user/login') }}}">{{ Lang::get('site/blog.here') }}</a> {{ Lang::get('site/blog.to_login') }}
+@elseif ( ! $canGalleryComment )
 {{ Lang::get('site/blog.add_comment_permission') }}
 @else
 
@@ -100,10 +89,10 @@
 
 <div class="new_comment">
 	<h4>{{ Lang::get('site/blog.add_comment') }}</h4>
-	<form method="post" action="{{{ URL::to('blog/'.$blog->slug) }}}">
+	<form method="post" action="{{{ URL::to('galleryimage/'.$gallery->id.'/'.$gallery_image->id) }}}">
 		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 			<div class="form-group">
-				<textarea class="form-control" name="blogcomment" placeholder="blogcomment" rows="7">{{{ Request::old('blogcomment') }}}</textarea>
+				<textarea class="form-control" name="gallcomment" placeholder="gallcomment" rows="7">{{{ Request::old('gallcomment') }}}</textarea>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">{{ Lang::get('site.submit') }}</button>
@@ -111,9 +100,10 @@
 	</form>
 </div>
 @endif
+</div>
 @stop
 
-	
+
 {{-- Sidebar right --}}
 @section('sidebar_right')
 <div class="col-lg-4">		
@@ -126,3 +116,4 @@
 	@endforeach 
 </div>
 @stop
+

@@ -1,23 +1,49 @@
 @extends('site.layouts.default')
 
-{{-- Web site Title --}}
-@section('title')
-{{{ Lang::get('user/user.settings') }}} ::
-@parent
+{{-- Page title --}}
+@section('page_header')
+	@if($page->showtitle==1)
+	<h1 class="page-header">
+		{{{ $page->name }}}
+	</h1>
+	@endif
 @stop
 
-{{-- New Laravel 4 Feature in use --}}
-@section('styles')
-@parent
-body {
-background: #f2f2f2;
-}
+{{-- Page title --}}
+@section('page_breadcrumb')
+	@if(isset($breadcrumb))
+	<ol class="breadcrumb">			          
+		{{ $breadcrumb }}
+	 <!--<li><a href="#">Home</a></li>
+		<li class="active">Blog Home</li>-->
+	</ol>
+	@endif
+@stop
+
+{{-- Add page scripts --}}
+@section('page_scripts')
+	<style>
+	{{{ $page->page_css }}}
+	</style>
+	<script>
+	{{ $page->page_javascript}}
+	</script>
+@stop
+
+{{-- Sidebar left --}}
+@section('sidebar_left')
+	@foreach ($sidebar_left as $item)
+	
+		  <div class="well">			
+			{{ $item['content'] }}
+		</div>
+	@endforeach 
 @stop
 
 {{-- Content --}}
 @section('content')
 <div class="page-header">
-	<h3> {{ Lang::get('site.edit_settings') }}</h3>
+	<h3> {{ Lang::get('site/user.edit_settings') }}</h3>
 </div>
 <form class="" method="post" action="{{ URL::to('user/' . $user->id . '/edit') }}"  autocomplete="off">
 	<!-- CSRF Token -->
@@ -79,4 +105,17 @@ background: #f2f2f2;
 	<!-- ./ form actions -->
 </form>
 </form>
+@stop
+
+{{-- Sidebar right --}}
+@section('sidebar_right')
+<div class="col-lg-4">		
+	 <div class="well-sm"><br/>
+	 	</div>			 
+	@foreach ($sidebar_right as $item)
+		  <div class="well">			
+			{{ $item['content'] }}
+		</div>
+	@endforeach 
+</div>
 @stop

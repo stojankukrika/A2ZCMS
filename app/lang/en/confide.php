@@ -15,8 +15,7 @@ return array(
 	'name' => 'Name',
 	'permissions' => 'Permissions',
 	'update' => 'Update',
-	'edit_settings' =>'Edit your settings',
-    'signup' => array(
+	'signup' => array(
         'title' => 'Signup',
         'desc' => 'Signup for new account',
         'confirmation_required' => 'Confirmation required',

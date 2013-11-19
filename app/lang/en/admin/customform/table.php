@@ -9,4 +9,5 @@ return array(
 	'recievers' => 'Recievers',
 	'fields' => 'Form fields',
 	'info' => '** Disassemble the different values in options ​​with a semicolon **',
+	'info_recievers' => '(Disassemble the different recievers ​​with a semicolon)',
 );

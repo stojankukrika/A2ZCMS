@@ -6,5 +6,5 @@
          <li><a href="{{ Url::to('gallery/'.$item->id) }}">{{$item->title}}</a></li>
 		@endforeach
       </ul>
-    </div>
+       </div>
   </div>

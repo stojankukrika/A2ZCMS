@@ -193,7 +193,7 @@ class AdminGalleryController extends AdminController {
 
 			$galleries = Gallery::find($id);
 
-			$path = public_path() . '\images\\/' . $galleries -> folderid;
+			$path = public_path() . '\gallery\\/' . $galleries -> folderid;
 			Fineuploader::init($path);
 
 			$name = Fineuploader::getName();
@@ -211,7 +211,7 @@ class AdminGalleryController extends AdminController {
 
 			Fineuploader::upload($name);
 
-			$path2 = public_path() . '\images\\/' . $galleries -> folderid . '\thumbs\/';
+			$path2 = public_path() . '\gallery\\/' . $galleries -> folderid . '\thumbs\/';
 			Fineuploader::init($path2);
 			$upload_success = Fineuploader::upload($name);
 

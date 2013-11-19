@@ -33,9 +33,19 @@ class UserMessagesController extends BaseController {
 		}
 		$received = $this -> messages -> where('user_id_to','=',$user->id)->orderBy('id', 'DESC')-> get();
 		$send = $this -> messages -> where('user_id_from','=',$user->id)->orderBy('id', 'DESC')-> get();
-
+		
+		$page = Page::first();
+		$pagecontent = BaseController::createSiderContent($page->id);
 		// Show the page
-		return View::make('site/messages/index', compact('user','received','send','allUsers'));
+		$data['sidebar_right'] = $pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $pagecontent['sidebar_left'];
+		$data['page'] = $page;
+		$data['user'] =$user;
+		$data['received'] = $received;
+		$data['send'] =$send;
+		$data['allUsers'] =$allUsers;
+		
+		return View::make('site/messages/index', $data);
 	}
 	
 	public function postSendmessage() {

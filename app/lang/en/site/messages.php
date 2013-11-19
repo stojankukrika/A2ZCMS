@@ -8,5 +8,6 @@ return array(
 		'subject' => 'Subject',
 		'receivers' => 'Receivers',
 		'message' => 'Message',
+		'title' => 'Messages',
 	
 	);

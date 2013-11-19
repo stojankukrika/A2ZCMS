@@ -27,9 +27,16 @@ class UserController extends BaseController {
 		if ($redirect) {
 			return $redirect;
 		}
-
+		
+		$page = Page::first();
+		$pagecontent = BaseController::createSiderContent($page->id);
 		// Show the page
-		return View::make('site/user/index', compact('user'));
+		$data['sidebar_right'] = $pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $pagecontent['sidebar_left'];
+		$data['page'] = $page;
+		$data['user'] =$user;
+		
+		return View::make('site/user/index', $data);
 	}
 
 	/**
@@ -128,7 +135,14 @@ class UserController extends BaseController {
 	 *
 	 */
 	public function getCreate() {
-		return View::make('site/user/create');
+		
+		$page = Page::first();
+		$pagecontent = BaseController::createSiderContent($page->id);
+		// Show the page
+		$data['sidebar_right'] = $pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $pagecontent['sidebar_left'];
+		$data['page'] = $page;
+		return View::make('site/user/create', $data);
 	}
 
 	/**
@@ -140,8 +154,14 @@ class UserController extends BaseController {
 		if (!empty($user -> id)) {
 			return Redirect::to('/');
 		}
-
-		return View::make('site/user/login');
+		
+		$page = Page::first();
+		$pagecontent = BaseController::createSiderContent($page->id);
+		// Show the page
+		$data['sidebar_right'] = $pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $pagecontent['sidebar_left'];
+		$data['page'] = $page;
+		return View::make('site/user/login', $data);
 	}
 
 	/**
@@ -196,7 +216,14 @@ class UserController extends BaseController {
 	 *
 	 */
 	public function getForgot() {
-		return View::make('site/user/forgot');
+		$page = Page::first();
+		$pagecontent = BaseController::createSiderContent($page->id);
+		// Show the page
+		$data['sidebar_right'] = $pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $pagecontent['sidebar_left'];
+		$data['page'] = $page;
+		
+		return View::make('site/user/forgot', $data);
 	}
 
 	/**
@@ -216,8 +243,15 @@ class UserController extends BaseController {
 	 *
 	 */
 	public function getReset($token) {
-
-		return View::make('site/user/reset') -> with('token', $token);
+		
+		$page = Page::first();
+		$pagecontent = BaseController::createSiderContent($page->id);
+		// Show the page
+		$data['sidebar_right'] = $pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $pagecontent['sidebar_left'];
+		$data['page'] = $page;
+		$data['token'] = $token;
+		return View::make('site/user/reset', $data);
 	}
 
 	/**
@@ -243,32 +277,6 @@ class UserController extends BaseController {
 		Confide::logout();
 
 		return Redirect::to('/');
-	}
-
-	/**
-	 * Get user's profile
-	 * @param $username
-	 * @return mixed
-	 */
-	public function getProfile($username) {
-		$userModel = new User;
-		$user = $userModel -> getUserByUsername($username);
-
-		// Check if the user exists
-		if (is_null($user)) {
-			return App::abort(404);
-		}
-
-		return View::make('site/user/profile', compact('user'));
-	}
-
-	public function getSettings() {
-		list($user, $redirect) = User::checkAuthAndRedirect('user/settings');
-		if ($redirect) {
-			return $redirect;
-		}
-
-		return View::make('site/user/profile', compact('user'));
 	}
 
 	/**

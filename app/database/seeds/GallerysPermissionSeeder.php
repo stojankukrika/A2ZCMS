@@ -12,7 +12,9 @@ class GallerysPermissionSeeder extends Seeder {
 					array('name' => 'manage_gallery_imagecomments', 
 							'display_name' => 'Manage gallery image comments'),
 					array('name' => 'menage_customform',
-							'display_name' => 'Menage custom forms'));
+							'display_name' => 'Menage custom forms'),
+					array ('name' => 'post_gallery_comment' ,
+							'display_name' => 'Post gallery comment'));
 
 		DB::table('permissions') -> insert($permissions);
 
@@ -20,7 +22,9 @@ class GallerysPermissionSeeder extends Seeder {
 								array('role_id' => 1, 'permission_id' => 10), 
 								array('role_id' => 1, 'permission_id' => 11), 
 								array('role_id' => 1, 'permission_id' => 12),
-								array('role_id' => 1, 'permission_id' => 13));
+								array('role_id' => 1, 'permission_id' => 13),
+								array('role_id' => 1, 'permission_id' => 14),								
+								array('role_id' => 2, 'permission_id' => 14));
 
 		DB::table('permission_role') -> insert($permissions_role);
 	}

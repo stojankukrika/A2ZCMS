@@ -66,16 +66,7 @@
 				</button>
 				<a id="main-menu-toggle" class="hidden-xs open"><i class="icon-reorder"></i></a>
 				<a class="navbar-brand col-md-2 col-sm-1 col-xs-2" href="#"><span>A2Z CMS</span></a>
-				<div id="search" class="col-sm-5 col-xs-8 col-lg-3">
-					<select>
-						<option>everything</option>
-						<option>messages</option>
-						<option>comments</option>
-						<option>users</option>
-					</select>
-					<input type="text" placeholder="search" />
-					<i class="icon-search"></i>
-				</div>
+		
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav navbar-nav pull-right">

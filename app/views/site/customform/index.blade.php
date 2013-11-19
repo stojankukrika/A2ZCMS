@@ -1,16 +1,50 @@
 @extends('site.layouts.default')
 
 {{-- Page title --}}
-@section('page_title')
-{{ $blog->title }}
+@section('page_header')
+	@if($page->showtitle==1)
+	<h1 class="page-header">
+		{{{ $page->name }}}
+	</h1>
+	@endif
 @stop
 
+{{-- Page title --}}
+@section('page_breadcrumb')
+	@if(isset($breadcrumb))
+	<ol class="breadcrumb">			          
+		{{ $breadcrumb }}
+	 <!--<li><a href="#">Home</a></li>
+		<li class="active">Blog Home</li>-->
+	</ol>
+	@endif
+@stop
+
+{{-- Add page scripts --}}
+@section('page_scripts')
+	<style>
+	{{{ $page->page_css }}}
+	</style>
+	<script>
+	{{ $page->page_javascript}}
+	</script>
+@stop
+
+{{-- Sidebar left --}}
+@section('sidebar_left')
+	@foreach ($sidebar_left as $item)
+	
+		  <div class="well">			
+			{{ $item['content'] }}
+		</div>
+	@endforeach 
+@stop
 
 {{-- Content --}}
 @section('content')
-
- <hr>
-          <p><i class="icon-time"></i> {{ Lang::get('site/blog.posted_on') }} {{{ $blog->date() }}} {{ Lang::get('site/blog.by') }} 
+<br>
+<h2>{{{ $blog->title }}}</h2>
+         <p><i class="icon-time"></i> {{ Lang::get('site/blog.posted_on') }} {{{ $blog->date() }}} {{ Lang::get('site/blog.by') }} 
           	<a href="#">{{{ $blog->author->username }}}</a></p>
           <hr>
           <img src="http://placehold.it/900x300" class="img-responsive">
@@ -75,4 +109,18 @@
 	</form>
 </div>
 @endif
+@stop
+
+	
+{{-- Sidebar right --}}
+@section('sidebar_right')
+<div class="col-lg-4">		
+	 <div class="well-sm"><br/>
+	 	</div>			 
+	@foreach ($sidebar_right as $item)
+		  <div class="well">			
+			{{ $item['content'] }}
+		</div>
+	@endforeach 
+</div>
 @stop

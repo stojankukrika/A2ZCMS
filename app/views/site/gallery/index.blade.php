@@ -40,14 +40,24 @@
 	@endforeach 
 @stop
 
-
 {{-- Content --}}
 @section('content')
-<div class="page-header">
-	<h1>{{ Lang::get('confide.forgot.title') }}</h1>
+
+<h3><a href="{{{ URL::to('gallery/'.$gallery->id) }}}">{{ String::title($gallery->title) }}</a></h3>
+<div class="row">  
+@foreach ($gallery_images as $item)
+	<div class="col-md-3 portfolio-item">
+      	<a href="{{{ URL::to('galleryimage/'.$gallery->id.'/'.$item->id) }}}">
+      		<img src="../gallery/{{{$gallery->folderid}}}/thumbs/{{{ $item->content }}}" height="85px" width="150px" class="img-responsive">
+      	</a>
+      </div>
+     @endforeach
 </div>
-{{ Confide::makeResetPasswordForm($token)->render() }}
+<ul class="pager">
+	{{ $gallery_images->links() }}
+</ul>
 @stop
+
 
 {{-- Sidebar right --}}
 @section('sidebar_right')

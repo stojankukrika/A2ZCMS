@@ -67,17 +67,30 @@
 	</fieldset>
 </form>
 <div class="form-group">&nbsp;</div>
-<div class="container col-md-6">
+<div class="form-group">
 	<div class="jumbotron">
-		<h2>Need an Account?</h2>
+		<h2>{{{ Lang::get('site/partial_views/sidebar/login.need_an_account') }}}</h2>
 		<p>
-			Create an account here
+			{{{ Lang::get('site/partial_views/sidebar/login.create_an_account_here') }}}
 		</p>
 		<p>
-			<a href="{{ Url::to('user/create') }}" class="btn btn-info"> Create Account </a>
+			<a href="{{ Url::to('user/create') }}" class="btn btn-info">{{{ Lang::get('site/partial_views/sidebar/login.create_account') }}}</a>
 		</p>
 	</div>
 
 </div>
 
+@stop
+
+{{-- Sidebar right --}}
+@section('sidebar_right')
+<div class="col-lg-4">		
+	 <div class="well-sm"><br/>
+	 	</div>			 
+	@foreach ($sidebar_right as $item)
+		  <div class="well">			
+			{{ $item['content'] }}
+		</div>
+	@endforeach 
+</div>
 @stop

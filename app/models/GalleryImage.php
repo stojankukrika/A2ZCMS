@@ -61,6 +61,11 @@ class GalleryImage extends Eloquent implements PresentableInterface {
 
 		return String::date($date);
 	}
+	
+	public function imagecomments() {
+		return $this -> hasMany('GalleryImageComment');
+	}
+	
 
 	/**
 	 * Returns the date of the blog post creation,

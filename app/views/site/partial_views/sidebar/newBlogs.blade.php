@@ -3,8 +3,8 @@
     <div class="col-lg-12">
       <ul class="list-unstyled">
       	@foreach($newBlogs as $item)
-         <li><a href="{{ Url::to('gallery/'.$item->id) }}">{{$item->title}}</a></li>
+         <li><a href="{{{ URL::to('blog/'.$item->slug) }}}">{{$item->title}}</a></li>
 		@endforeach
       </ul>
-    </div>
+     </div>
   </div>

@@ -32,26 +32,6 @@ class BlogController extends BaseController {
 		$this -> settings = $settings;
 
 	}
-
-	/**
-	 * Returns all the blog posts.
-	 *
-	 * @return View
-	 */
-	public function getIndex() {
-		$pageitem = 2;
-		foreach ($this->settings as $v) {
-			if ($v -> varname == 'pageitem') {
-				$pageitem = $v -> value;
-			}
-		}
-		// Get all the blog posts
-		$blogs = $this -> blog -> orderBy('created_at', 'DESC') -> paginate($pageitem);
-		
-		// Show the page
-		return View::make('site/blog/index', compact('blogs'));
-	}
-
 	/**
 	 * View a blog blog.
 	 *
@@ -60,7 +40,13 @@ class BlogController extends BaseController {
 	 * @throws NotFoundHttpException
 	 */
 	public function getView($slug) {
-		// Get this blog blog data
+		$pageitem = 2;
+        foreach ($this->settings as $v) {
+                if ($v -> varname == 'pageitem') {
+                        $pageitem = $v -> value;
+                }
+        }
+        // Get this blog blog data
 		$blog = $this -> blog -> where('slug', '=', $slug) -> first();
 
 		// Check if the blog blog exists
@@ -73,7 +59,7 @@ class BlogController extends BaseController {
 		}
 
 		// Get this blog comments
-		$blog_comments = $blog -> blogcomments() -> orderBy('created_at', 'ASC') -> get();
+		$blog_comments = $blog -> blogcomments() -> orderBy('created_at', 'ASC') -> paginate($pageitem);
 
 		// Get current user and check permission
 		$user = $this -> user -> currentUser();
@@ -81,8 +67,16 @@ class BlogController extends BaseController {
 		if (!empty($user)) {
 			$canBlogComment = $user -> can('post_blog_comment');
 		}
+		$page = Page::first();
+		$pagecontent = BaseController::createSiderContent($page->id);
 		// Show the page
-		return View::make('site/blog/view_post', compact('blog', 'blog_comments', 'canBlogComment'));
+		$data['sidebar_right'] = $pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $pagecontent['sidebar_left'];
+		$data['page'] = $page;
+		$data['canBlogComment'] = $canBlogComment;
+		$data['blog_comments'] = $blog_comments;
+		$data['blog'] = $blog;
+		return View::make('site/blog/index', $data);
 	}
 
 	/**
@@ -96,14 +90,14 @@ class BlogController extends BaseController {
 		$user = $this -> user -> currentUser();
 		$canBlogComment = $user -> can('post_blog_comment');
 		if (!$canBlogComment) {
-			return Redirect::to($slug . '#blogcomments') -> with('error', 'You need to be logged in to blog comments!');
+			return Redirect::to('blog/'.$slug . '#new_comment') -> with(Lang::get('site/blog.error'), Lang::get('site/blog.need_to_login'));
 		}
 
 		// Get this blog blog data
 		$blog = $this -> blog -> where('slug', '=', $slug) -> first();
 
 		// Declare the rules for the form validation
-		$rules = array('comment' => 'required|min:3');
+		$rules = array('blogcomment' => 'required|min:3');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -113,20 +107,20 @@ class BlogController extends BaseController {
 			// Save the comment
 			$blog_comment = new BlogComment;
 			$blog_comment -> user_id = Auth::user() -> id;
-			$blog_comment -> content = Input::get('comment');
+			$blog_comment -> content = Input::get('blogcomment');
 
 			// Was the comment saved with success?
 			if ($blog -> blogcomments() -> save($blog_comment)) {
 				// Redirect to this blog blog page
-				return Redirect::to($slug . '#blogcomments') -> with('success', 'Your comment was added with success.');
+				return Redirect::to('blog/'.$slug . '#new_comment') -> with(Lang::get('site/blog.success'), Lang::get('site/blog.comment_added'));
 			}
 
 			// Redirect to this blog blog page
-			return Redirect::to($slug . '#blogcomments') -> with('error', 'There was a problem adding your comment, please try again.');
+			return Redirect::to('blog/'.$slug . '#new_comment') -> with(Lang::get('site/blog.error'), Lang::get('site/blog.add_comment_error'));
 		}
 
 		// Redirect to this blog blog page
-		return Redirect::to($slug) -> withInput() -> withErrors($validator);
+		return Redirect::to('blog/'.$slug) -> withInput() -> withErrors($validator);
 	}
 
 }
