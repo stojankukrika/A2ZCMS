@@ -11,15 +11,7 @@
 
 {{-- Content --}}
 @section('content')
-
-<li>
-	<a href="#">Home</a>
-</li>
-<li class="active" >
-	Dashboard
-</li>
-</ol>
-<div class="row">
+<div class="page-header">
 
 	{{ Form::open() }}
 	<div class="col-md-12">

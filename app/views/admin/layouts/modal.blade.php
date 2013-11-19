@@ -116,7 +116,7 @@
 						type : form.attr('method'),
 						url : form.attr('action'),
 						data : form.serialize()
-					}).done(function() {
+					}).complete(function() {
 						// Optionally alert the user of success here...
 						parent.$.colorbox.close();
 						window.parent.location.reload();

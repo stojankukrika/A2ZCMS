@@ -1,14 +1,7 @@
 @extends('admin.layouts.default')
 
-{{-- Web site Title --}}
-@section('title')
-{{{ $title }}} :: @parent
-@stop
-
 @section('content')
-
-
-<div class="row">
+<div class="page-header">
 <form class="form-horizontal" method="post" action="{{ URL::to('admin/users/profile') }}" autocomplete="off">
 
 <!-- CSRF Token -->
