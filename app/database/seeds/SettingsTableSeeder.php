@@ -75,6 +75,10 @@ class SettingsTableSeeder extends Seeder {
 												'groupname' => 'setting', 
 												'value' => '15', 
 												'defaultvalue' => '15', ), 
+											array('varname' => 'searchcode', 
+												'groupname' => 'setting', 
+												'value' => '', 
+												'defaultvalue' => '', ), 
 										)
 									);
 
