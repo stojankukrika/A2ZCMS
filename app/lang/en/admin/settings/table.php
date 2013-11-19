@@ -19,5 +19,5 @@ return array(
 	'useravatheight' => 'Avatar height',
 	'yes' => 'Yes',
 	'no' => 'No',
-	
+	'searchcode' => 'Search code'
 );

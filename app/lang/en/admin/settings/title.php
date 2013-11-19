@@ -6,5 +6,6 @@ return array(
 	'analytics_code' => 'Analytics Code',
 	'meta_data' => 'Meta data',
 	'general_settings' => 'General Settings',	
-	'offline_settings' => 'Offline Settings'
+	'offline_settings' => 'Offline Settings',
+	'searchcode' => 'Google search code'
 );

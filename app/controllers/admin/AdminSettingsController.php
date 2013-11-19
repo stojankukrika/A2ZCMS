@@ -38,7 +38,7 @@ class AdminSettingsController extends AdminController {
 	 */
 	public function postIndex() {
 		// Declare the rules for the form validation
-		$rules = array('email' => 'required|email', 'title' => 'required|min:3', 'copyright' => 'required|min:3', 'dateformat' => 'required', 'timeformat' => 'required', 'useravatwidth' => 'required|integer', 'useravatheight' => 'required|integer', 'shortmsg' => 'required|integer', 'pageitem' => 'required|integer');
+		$rules = array('email' => 'required|email', 'searchcode' => 'required', 'title' => 'required|min:3', 'copyright' => 'required|min:3', 'dateformat' => 'required', 'timeformat' => 'required', 'useravatwidth' => 'required|integer', 'useravatheight' => 'required|integer', 'shortmsg' => 'required|integer', 'pageitem' => 'required|integer');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -61,6 +61,7 @@ class AdminSettingsController extends AdminController {
 			$metaauthor = Input::get('metaauthor');
 			$offline = Input::get('offline');
 			$offlinemessage = Input::get('offlinemessage');
+			$searchcode = Input::get('searchcode');
 
 			//Save settings to database
 			$settings = Settings::all();
@@ -112,6 +113,8 @@ class AdminSettingsController extends AdminController {
 					case 'offlinemessage' :
 						$v -> value = $offlinemessage;
 						break;
+					case 'searchcode':
+						$v -> value = $searchcode;
 				}
 				Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
 			}

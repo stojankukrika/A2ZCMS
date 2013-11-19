@@ -197,7 +197,6 @@
 					</div><!--/col-->
 				</div><!--/row-->
 
-			</div>
 			<!-- end: Content -->
 
 		</div><!--/row-->

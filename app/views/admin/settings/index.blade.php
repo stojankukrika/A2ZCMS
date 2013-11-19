@@ -29,8 +29,12 @@
 						<a href="#meta_data">{{ Lang::get('admin/settings/title.meta_data') }}</a>
 					</li>
 					<li>
+						<a href="#searchcode">{{ Lang::get('admin/settings/title.searchcode') }}</a>
+					</li>
+					<li>
 						<a href="#offline_settings">{{ Lang::get('admin/settings/title.offline_settings') }}</a>
 					</li>
+					
 				</ul>
 			</div>
 			<div class="box-content">
@@ -230,8 +234,25 @@
 						</div>
 						<!-- ./ metaauthor -->
 					</div>
-					<!-- ./ meta tab -->
-
+					<!-- ./ meta tab -->					
+					<!-- searchcode-->
+					<div class="tab-pane active" id="searchcode">
+						<!-- analytics -->
+						<div class="form-group {{{ $errors->has('searchcode') ? 'error' : '' }}}">
+							<div class="col-md-12">
+								<?php $searchcode = '';
+								foreach ($settings as $v) {
+									if ($v -> varname == 'searchcode') { $searchcode = $v -> value;
+									}
+								} ?>
+								{{Form::label('searchcode', Lang::get('admin/settings/table.searchcode'), array('class' => 'control-label'))}}
+								{{Form::textarea('searchcode', Input::old('searchcode', $searchcode) , array('class' => 'form-control'))}}
+								{{ $errors->first('searchcode', '<span class="help-inline">:message</span>') }}
+							</div>
+						</div>
+						<!-- ./ analytics -->
+					</div>
+					<!-- /searchcode-->
 					<!-- offline tab -->
 					<div class="tab-pane active" id="offline_settings">
 						<!-- Offline -->

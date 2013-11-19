@@ -191,3 +191,21 @@ label {
 
 ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
 .nav .dropdown-toggle .caret { display:none; }
+
+.cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2 {
+    width: 13px!important;
+    height: 13px!important;
+    padding: 6px 9px!important;
+    min-width: 13px!important;
+    margin-top: 2px!important;
+
+}
+.gsc-input-box {
+    border:none!important;
+    border-color:transparent!important;
+}
+
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+    border-color: transparent!important;
+    background-color: #fff!important;
+}

@@ -15,8 +15,8 @@ class CreateSettingsTable extends Migration {
 			$table -> increments('id');
 			$table -> string('varname');
 			$table -> string('groupname');
-			$table -> string('value');
-			$table -> string('defaultvalue');
+			$table -> text('value')->nullable();
+			$table -> text('defaultvalue')->nullable();
 		});
 	}
 

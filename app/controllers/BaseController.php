@@ -55,6 +55,9 @@ class BaseController extends Controller {
 			}
 			if ($v -> varname == 'timeformat') {
 				View::share('timeformat',  $v -> value);
+			}	
+			if ($v -> varname == 'searchcode') {
+				View::share('searchcode',  $v -> value);
 			}					
 			
 		}
