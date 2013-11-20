@@ -3,7 +3,7 @@
 namespace A2ZCMS\Helpers;
 
 class Thumbnail {
-	public static function generate_image_thumbnail($source_image_path, $thumbnail_image_path) {
+	public static function generate_image_thumbnail($source_image_path, $thumbnail_image_path,$thumbnail_with=150,$thumbnail_height=150) {
 		list($source_image_width, $source_image_height, $source_image_type) = getimagesize($source_image_path);
 		switch ($source_image_type) {
 			case IMAGETYPE_GIF :
@@ -20,16 +20,16 @@ class Thumbnail {
 			return false;
 		}
 		$source_aspect_ratio = $source_image_width / $source_image_height;
-		$thumbnail_aspect_ratio = 150 / 150;
-		if ($source_image_width <= 150 && $source_image_height <= 150) {
+		$thumbnail_aspect_ratio = $thumbnail_with / $thumbnail_height;
+		if ($source_image_width <= $thumbnail_with && $source_image_height <= $thumbnail_height) {
 			$thumbnail_image_width = $source_image_width;
 			$thumbnail_image_height = $source_image_height;
 		} elseif ($thumbnail_aspect_ratio > $source_aspect_ratio) {
-			$thumbnail_image_width = (int)(150 * $source_aspect_ratio);
-			$thumbnail_image_height = 150;
+			$thumbnail_image_width = (int)($thumbnail_with * $source_aspect_ratio);
+			$thumbnail_image_height = $thumbnail_height;
 		} else {
-			$thumbnail_image_width = 150;
-			$thumbnail_image_height = (int)(150 / $source_aspect_ratio);
+			$thumbnail_image_width = $thumbnail_with;
+			$thumbnail_image_height = (int)($thumbnail_height / $source_aspect_ratio);
 		}
 		$thumbnail_gd_image = imagecreatetruecolor($thumbnail_image_width, $thumbnail_image_height);
 		imagecopyresampled($thumbnail_gd_image, $source_gd_image, 0, 0, 0, 0, $thumbnail_image_width, $thumbnail_image_height, $source_image_width, $source_image_height);

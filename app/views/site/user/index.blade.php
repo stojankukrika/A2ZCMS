@@ -45,7 +45,8 @@
 <div class="page-header">
 	<h3> {{ Lang::get('site/user.edit_settings') }}</h3>
 </div>
-<form class="" method="post" action="{{ URL::to('user/' . $user->id . '/edit') }}"  autocomplete="off">
+<form class="" method="post" action="{{ URL::to('user/' . $user->id . '/edit') }}"  
+	enctype="multipart/form-data" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
@@ -61,7 +62,7 @@
 			</div>
 		</div>
 		<!-- ./ name -->
-
+		<br><br>
 		<!-- Surname -->
 		<div class="form-group {{{ $errors->has('surname') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="surname">{{ Lang::get('confide.surname') }}</label>
@@ -71,7 +72,16 @@
 			</div>
 		</div>
 		<!-- ./ surname -->
-
+		<br><br>
+		<!-- Avatar -->
+		<div class="form-group">
+			<label class="col-md-2 control-label" for="avatar">{{{ Lang::get('confide.avatar') }}}</label>
+			<div class="col-md-10">
+				<input name="avatar" type="file" class="uploader" id="avatar" value="Upload" />
+			</div> 
+		</div>
+		<!-- ./ avatar -->
+		<br><br>
 		<!-- Password -->
 		<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="password">{{ Lang::get('confide.password') }}</label>
@@ -81,7 +91,7 @@
 			</div>
 		</div>
 		<!-- ./ password -->
-
+		<br><br>
 		<!-- Password Confirm -->
 		<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="password_confirmation">{{ Lang::get('confide.password_confirmation') }}</label>

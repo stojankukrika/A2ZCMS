@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="page-header">
-<form class="form-horizontal" method="post" action="{{ URL::to('admin/users/profile') }}" autocomplete="off">
+<form class="form-horizontal" method="post" action="{{ URL::to('admin/users/profile') }}" 
+		enctype="multipart/form-data" autocomplete="off">
 
 <!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -23,6 +24,14 @@
 				</div>
 			</div>
 			<!-- surname -->
+			<!-- Avatar -->
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="image">{{{ Lang::get('confide.avatar') }}}</label>
+				<div class="col-md-10">
+					<input name="avatar" type="file" class="uploader" id="avatar" value="Upload" />
+				</div> 
+			</div>
+			<!-- ./ avatar -->
 			<!-- Password -->
 			<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
 				<label class="col-md-2 control-label" for="password">{{ Lang::get('confide.password') }}</label>

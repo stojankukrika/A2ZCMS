@@ -22,36 +22,33 @@
 		<meta name="google-site-verification" content="">
 
 		<!-- Dublin Core Metadata : http://dublincore.org/ -->
-		<meta name="DC.title" content="Project Name">
+		<meta name="DC.title" content="A2ZCMS">
 		<meta name="DC.subject" content="@yield('description')">
 		<meta name="DC.creator" content="@yield('author')">
 
 		<!--  Mobile Viewport Fix -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-		<?php
-			$asset = Config::get('app.url');
-		?>
 		<!-- start: CSS -->
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/print.css" rel="stylesheet"media="print"/>
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/jquery.dataTables.css">
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/colorbox.css">
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/style.min.css">
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/jquery-ui-1.10.3.custom.css">		
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/admin/css/bootstrap-dataTables.css">
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/print.css')}}" rel="stylesheet"media="print"/>
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/jquery.dataTables.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/colorbox.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/style.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/jquery-ui-1.10.3.custom.css')}}">		
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/bootstrap-dataTables.css')}}">
 		<!-- end: CSS -->
 
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 
-		<script src="{{$asset}}assets/admin/js/html5.js"></script>
-		<script src="{{$asset}}assets/admin/js/respond.min.js"></script>
+		<script src="{{asset('assets/admin/js/html5.js')}}"></script>
+		<script src="{{asset('assets/admin/js/respond.min.js')}}"></script>
 
 		<![endif]-->
 
 		<!-- start: Favicon and Touch Icons -->
-		<link rel="shortcut icon" href="{{$asset}}assets/admin/ico/favicon.ico">
+		<link rel="shortcut icon" href="{{asset('assets/admin/ico/favicon.ico')}}">
 		<!-- end: Favicon and Touch Icons -->
 	</head>
 
@@ -74,7 +71,12 @@
 						<!-- start: User Dropdown -->
 						<li class="dropdown">
 							<a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
-							<div class="avatar"><img src="{{$asset}}avatar/avatar.png" alt="Avatar">
+							<div class="avatar">
+								@if(Auth::user()->avatar)
+									<img alt="Avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}">
+								@else
+									<img alt="Avatar" src="{{asset('/avatar/avatar.png')}}">
+								@endif
 							</div>
 							<div class="user">
 								<span class="hello">{{ Lang::get('admin/general.welcome') }}!</span>
@@ -211,33 +213,32 @@
 			</p>
 
 		</footer>
-
 		<!-- start: JavaScript-->
 		<!--[if !IE]>-->
-		<script src="{{$asset}}assets/admin/js/jquery-2.0.3.min.js"></script>
+		<script src="{{asset('assets/admin/js/jquery-2.0.3.min.js')}}"></script>
 		<!--<![endif]-->
 		<!--[if IE]>
-		<script src="{{$asset}}assets/admin/js/jquery-1.10.2.min.js"></script>
+		<script src="{{asset('assets/admin/js/jquery-1.10.2.min.js')}}"></script>
 		<![endif]-->
 
-		<script src="{{$asset}}assets/admin/js/jquery-migrate-1.2.1.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/bootstrap.min.js"></script>
+		<script src="{{asset('assets/admin/js/jquery-migrate-1.2.1.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/bootstrap.min.js')}}"></script>
 
 		<!-- page scripts -->
-		<script src="{{$asset}}assets/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="{{asset('assets/admin/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/jquery.ui.touch-punch.min.js')}}"></script>
 				<!--[if lte IE 8]>
-			<script language="javascript" type="text/javascript" src="{{$asset}}assets/admin/js/excanvas.min.js"></script>
+			<script language="javascript" type="text/javascript" src="{{asset('assets/admin/js/excanvas.min.js')}}"></script>
 		<![endif]-->		
-		<script src="{{$asset}}assets/admin/js/jquery.dataTables.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/dataTables.bootstrap.min.js"></script>
+		<script src="{{asset('assets/admin/js/jquery.dataTables.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/dataTables.bootstrap.min.js')}}"></script>
 		<!-- theme scripts -->
-		<script src="{{$asset}}assets/admin/js/custom.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/core.min.js"></script>
-		<script src="{{$asset}}assets/admin/js/jquery.colorbox.js"></script>
-		<script src="{{$asset}}assets/admin/js/bootstrap-dataTables-paging.js"></script>
-		<script src="{{$asset}}assets/admin/js/select2.js"></script>		
-		<script src="{{$asset}}assets/admin/js/jquery.multiselect.js"></script>
+		<script src="{{asset('assets/admin/js/custom.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/core.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/jquery.colorbox.js')}}"></script>
+		<script src="{{asset('assets/admin/js/bootstrap-dataTables-paging.js')}}"></script>
+		<script src="{{asset('assets/admin/js/select2.js')}}"></script>		
+		<script src="{{asset('assets/admin/js/jquery.multiselect.js')}}"></script>
 
 		<!-- end: JavaScript-->
 		@yield('scripts')

@@ -51,7 +51,6 @@ class UserController extends BaseController {
 
 		$password = Input::get('password');
 		$passwordConfirmation = Input::get('password_confirmation');
-
 		if (!empty($password)) {
 			if ($password === $passwordConfirmation) {
 				$this -> user -> password = $password;
@@ -97,7 +96,19 @@ class UserController extends BaseController {
 
 			$password = Input::get('password');
 			$passwordConfirmation = Input::get('password_confirmation');
-
+		if(Input::hasFile('avatar'))
+			{
+				$file = Input::file('avatar');
+				$destinationPath = public_path() . '\avatar\\/';
+				$filename = $file->getClientOriginalName();				
+				$extension = $file -> getClientOriginalExtension();
+				$name = sha1($filename . time()) . '.' . $extension;		
+			
+				Input::file('avatar')->move($destinationPath, $name);
+				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .$name,80,80);
+				
+				$user -> avatar = $name;
+			}
 			if (!empty($password)) {
 				if ($password === $passwordConfirmation) {
 					$user -> password = $password;

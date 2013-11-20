@@ -15,6 +15,7 @@ return array(
 	'name' => 'Name',
 	'permissions' => 'Permissions',
 	'update' => 'Update',
+	'avatar' => 'Avatar',
 	'signup' => array(
         'title' => 'Signup',
         'desc' => 'Signup for new account',
