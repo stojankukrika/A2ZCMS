@@ -115,22 +115,22 @@
 								<a href="{{{ URL::to('admin') }}}"><i class="icon-dashboard"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.dashboard') }}}</span></a>
 							</li>
 							<li>
-								<a href="{{{ URL::to('admin/todolists') }}}"><i class="icon-lightbulb"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.to_do_list') }}}</span></a>
+								<a href="{{{ URL::to('admin/todolists') }}}"><i class="icon-bell"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.to_do_list') }}}</span></a>
 							</li>
 							<li>
-								<a href="{{{ URL::to('admin/customform') }}}"><i class="icon-globe"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.custom_form') }}} </span></a>
+								<a href="{{{ URL::to('admin/customform') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text">{{{ Lang::get('admin/general.custom_form') }}} </span></a>
 							</li>
 							<li>
-								<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-list-alt"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.pages') }}}</span><span class="chevron closed"></span></a>
+								<a class="dropmenu" href="{{{ URL::to('admin/pages') }}}"><i class="icon-globe"></i><span class="hidden-sm text"> {{{ Lang::get('admin/general.pages') }}}</span><span class="chevron closed"></span></a>
 								<ul>
 									<li>
 										<a href="{{{ URL::to('admin/navigationgroups') }}}"><i class="icon-th-list"></i> {{{ Lang::get('admin/general.navigation_group') }}}</a>
 									</li>
 									<li>
-										<a href="{{{ URL::to('admin/pages') }}}"><i class="icon-envelope"></i> {{{ Lang::get('admin/general.pages') }}}</a>
+										<a href="{{{ URL::to('admin/pages') }}}"><i class="icon-th-large"></i> {{{ Lang::get('admin/general.pages') }}}</a>
 									</li>
 									<li>
-										<a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-file"></i> {{{ Lang::get('admin/general.navigation') }}}</a>
+										<a href="{{{ URL::to('admin/navigation') }}}"><i class="icon-th"></i> {{{ Lang::get('admin/general.navigation') }}}</a>
 									</li>
 								</ul>
 							</li>

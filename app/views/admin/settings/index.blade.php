@@ -5,10 +5,6 @@
 {{{ $title }}} :: @parent
 @stop
 
-@section('keywords')Settings @stop
-@section('author')A2Z CMS @stop
-@section('description')Settings @stop
-
 {{-- Content --}}
 @section('content')
 <div class="page-header">

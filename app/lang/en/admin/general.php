@@ -33,4 +33,5 @@ return array(
 	'welcome' => 'Welcome',
 	'custom_form' => 'Custom forms',
 	'new_contact_form' => 'New contact form',
+	'view_more' => 'View More',
 );

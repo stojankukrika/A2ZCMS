@@ -12,6 +12,7 @@ class AdminController extends Controller {
 		$this -> beforeFilter('admin-auth');
 		$this -> beforeFilter('csrf', array('on' => 'post'));
 		$this -> beforeFilter('detectLang');
+		
 	}
 
 }
