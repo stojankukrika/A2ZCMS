@@ -109,31 +109,7 @@ If you install A2ZCMS on your localhost in folder a2zcms, you can type on web br
 And than finish the installation. Instalation would populate a database with tables and start-up data(you can delete that data later).
 
 
-### Step 6: Set NEW Encryption Key(optional)
-***In app/config/app.php***
-
-```
-/*
-|--------------------------------------------------------------------------
-| Encryption Key
-|--------------------------------------------------------------------------
-|
-| This key is used by the Illuminate encrypter service and should be set
-| to a random, long string, otherwise these encrypted values will not
-| be safe. Make sure to change it before deploying any application!
-|
-*/
-```
-
-	'key' => 'YourSecretKey!!!',
-
-You can use artisan to do this
-
-    php artisan key:generate
-
-Once you have generated your key, you might want to copy it over to your ***app/config/local/app.php*** local configuration file to have a different encryption key for each environment. A little tip, revert the key back to ***'YourSecretKey!!!'*** in ***app/config/app.php*** once you are done copying it. Now it can be generated again when you move the project to another environment.
-
-### Step 8: Make sure app/storage is writable by your web server.
+### Step 6: Make sure app/storage is writable by your web server.
 
 If permissions are set correctly:
 
@@ -143,19 +119,7 @@ Should work, if not try
 
     chmod -R 777 app/storage
 
-### Step 9: Build Assets
-
-You will need to make the folder where the assets are built writable:
-
-If permissions are set correctly:
-
-    chmod -R 775 public/assets
-
-Should work, if not try
-
-    chmod -R 777 public/assets
-
-### Step 10: Start Page
+### Step 7: Start Page
 
 ####Admin login
 You can login to admin part of A2ZCMS:
@@ -164,11 +128,27 @@ You can login to admin part of A2ZCMS:
     password: password_from_install_proces
 
 -----
+## A2Z CMS features
+* To-do list
+* Custom forms
+* Blog
+* Gallery
+* Pages
+* Website settings
+* Messages
+
+
 ## Application Structure
 
 The structure of this starter site is the same as default Laravel 4 with one exception.
 This starter site adds a `library` folder. Which, houses application specific library files.
 The files within library could also be handled within a composer package, but is included here as an example.
+
+Controllers for Admin part located in admin folder in Controller folder in app folder. 
+CMS have a custom make a page using custom function for main content and sidebar.
+Implementation custom function for pages is located in BaseController and shows in all pages. 
+When user go to some noncustom page(edit profile, messages,...) user get sidebar from first page.
+
 
 ### Production Launch
 
