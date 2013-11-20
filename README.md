@@ -129,6 +129,7 @@ You can login to admin part of A2ZCMS:
 
 -----
 ## A2Z CMS features
+* Register and validate users
 * To-do list
 * Custom forms
 * Blog
@@ -136,6 +137,8 @@ You can login to admin part of A2ZCMS:
 * Pages
 * Website settings
 * Messages
+* Add avatar to users
+* ....
 
 
 ## Application Structure
