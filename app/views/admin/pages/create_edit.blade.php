@@ -22,7 +22,8 @@
 
 {{-- Edit Page Form --}}
 <!-- <form class="form-horizontal" method="page" action="{{ URL::to('admin/pages/create') }}" > -->
-<form class="form-horizontal" method="post" action="@if (isset($page)){{ URL::to('admin/pages/' . $page->id . '/edit') }}@endif" >
+<form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8"
+		action="@if (isset($page)){{ URL::to('admin/pages/' . $page->id . '/edit') }}@endif" >
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
@@ -44,7 +45,7 @@
 			<div class="form-group {{{ $errors->has('image') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label" for="image">{{{ Lang::get('admin/pages/table.image') }}}</label>
-					<input type="file" name="image" id="image" value="{{{ Input::old('image')}}}" />
+					<input name="image" type="file" class="uploader" id="image" value="Upload" /> 
 				</div>
 			</div>
 			<!-- ./ show image -->
@@ -303,10 +304,6 @@
 				</div>
 			</div>
 		</div>
-			<!-- ./ content -->
-		</div>
-		<!-- ./ Grid tab -->
-		
 	</div>
 	<!-- ./ tabs content -->
 

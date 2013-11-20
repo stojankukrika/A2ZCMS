@@ -14,7 +14,8 @@
 <!-- ./ tabs -->
 
 {{-- Edit Blog Form --}}
-<form class="form-horizontal" enctype="multipart/form-data"  method="post" action="@if (isset($blog)){{ URL::to('admin/blogs/' . $blog->id . '/edit') }}@endif" autocomplete="off">
+<form class="form-horizontal" enctype="multipart/form-data" method="post" 
+	action="@if (isset($blog)){{ URL::to('admin/blogs/' . $blog->id . '/edit') }}@endif" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
@@ -47,7 +48,7 @@
 			<div class="form-group {{{ $errors->has('image') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label" for="image">{{{ Lang::get('admin/blogs/table.image') }}}</label>
-					<input type="file" name="image" id="image" value="{{{ Input::old('image') }}}" />
+					<input name="image" type="file" class="uploader" id="image" value="Upload" /> 
 				</div>
 			</div>
 			<!-- ./ show image -->

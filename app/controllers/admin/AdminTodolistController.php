@@ -67,8 +67,6 @@ class AdminTodolistController extends AdminController {
 			
 			if (!$this -> todolist -> save()) {
 				$error = $this -> todolist -> errors() -> all();
-
-				return Redirect::to('admin/todolists/create') -> with('error', $error);
 			}
 		}
 

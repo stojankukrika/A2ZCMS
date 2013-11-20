@@ -47,8 +47,10 @@
          <p><i class="icon-time"></i> {{ Lang::get('site/blog.posted_on') }} {{{ $blog->date() }}} {{ Lang::get('site/blog.by') }} 
           	<a href="#">{{{ $blog->author->username }}}</a></p>
           <hr>
+          @if($blog->image)
           <img src="../blog/{{$blog->image}}" class="img-responsive">
           <hr>
+          @endif
           <p>
 			{{ $blog->content() }}
 			</p>

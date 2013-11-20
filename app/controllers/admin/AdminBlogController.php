@@ -108,14 +108,7 @@ class AdminBlogController extends AdminController {
 				
 				$this -> blog -> image = $name;
 			}
-			// Was the blog post created?
-			if ($this -> blog -> save()) {
-				// Redirect to the new blog post page
-				return Redirect::to('admin/blogs/' . $this -> blog -> id . '/edit') -> with('success', Lang::get('admin/blogs/messages.create.success'));
-			}
-
-			// Redirect to the blog post create page
-			return Redirect::to('admin/blogs/create') -> with('error', Lang::get('admin/blogs/messages.create.error'));
+			$this -> blog -> save();
 		}
 
 		// Form validation failed

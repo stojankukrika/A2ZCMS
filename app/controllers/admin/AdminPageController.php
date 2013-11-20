@@ -25,7 +25,7 @@ class AdminPageController extends AdminController {
 
 		$title = Lang::get('admin/pages/title.page_management');
 
-		$pages = Page::all();
+		$pages = Page::orderBy('id','ASC')->get();
 
 		return View::make('admin/pages/index', compact('title', 'pages'));
 	}
@@ -53,8 +53,7 @@ class AdminPageController extends AdminController {
 			if($function_grid!=NULL){
 				$value['function_grid'] = $this->$function_grid();
 			}
-		}
-		
+		}		
 		// Show the page
 		return View::make('admin/pages/create_edit', compact('title','pluginfunction_content','pluginfunction_slider'));
 	}
@@ -227,14 +226,8 @@ class AdminPageController extends AdminController {
 				$pagecontentorder = Input::get('pagecontentorder');
 				$pagecontent = Input::get('pagecontent');
 				$this->saveData($pagesidebar,$pagecontentorder, $pagecontent,$page -> id);
-				// Redirect to the page page
-				return Redirect::to('admin/pages/' . $page -> id . '/edit') -> with('success', Lang::get('admin/pages/messages.update.success'));
-			} else {
-				// Redirect to the page page
-				return Redirect::to('admin/pages/' . $page -> id . '/edit') -> with('error', Lang::get('admin/pages/messages.update.error'));
 			}
 		}
-
 		// Form validation failed
 		return Redirect::to('admin/pages/' . $page -> id . '/edit') -> withInput() -> withErrors($validator);
 	}

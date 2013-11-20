@@ -49,9 +49,9 @@ Route::pattern('user', '[0-9]+');
 Route::pattern('todo', '[0-9]+');
 Route::pattern('cform', '[0-9]+');
 Route::pattern('messageid', '[0-9]+');
-Route::pattern('token', '[0-9a-z]+');
+Route::pattern('token', '[0-9a-z-]+');
 
-Route::pattern('postSlug', '[0-9a-z]+');
+Route::pattern('postSlug', '[0-9a-z-]+');
 Route::pattern('postSlug1', '[0-9]+');
 Route::pattern('postSlug2', '[0-9]+');
 
