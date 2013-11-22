@@ -16,8 +16,7 @@ class CreateBlogsTable extends Migration {
 			$table -> increments('id') -> unsigned();
 			$table -> integer('user_id') -> unsigned();
 			$table -> foreign('user_id') -> references('id') -> on('users');
-			$table -> integer('blogcategory_id') -> unsigned() -> index();
-			$table -> foreign('blogcategory_id') -> references('id') -> on('blog_categorys');
+			$table -> string('blogcategory_id');
 			$table -> string('title');
 			$table -> string('slug');
 			$table -> text('content');

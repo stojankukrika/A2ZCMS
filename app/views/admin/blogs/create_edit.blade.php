@@ -57,8 +57,11 @@
 			<div class="form-group {{{ $errors->has('blog_categorys') ? 'error' : '' }}}">
 				<div class="col-md-12">
 					<label class="control-label" for="title">{{{ Lang::get('admin/blogs/table.category') }}}</label>
-					{{Form::select('blogcategory_id', $options,$blog_category ,array('class'=>'form-control','data-style'=>'btn-primary') );}}
-					{{{ $errors->first('blog_categorys', '<span class="help-inline">:message</span>') }}}
+					<select style="width: 100%"name="blogcategory_id" id="blogcategory_id" multiple>
+						@foreach($blog_category as $item)
+							<option value="{{$item->id}}">{{$item->title}}</option>
+						@endforeach
+						</select>
 				</div>
 			</div>
 			<!-- ./ blog categorys title -->
@@ -119,4 +122,13 @@
 	</div>
 	<!-- ./ form actions -->
 </form>
+@stop
+
+{{-- Scripts --}}
+@section('scripts')
+<script type="text/javascript">
+ $(document).ready(function() {
+	$("#blogcategory_id").select2();  
+	});
+</script>
 @stop

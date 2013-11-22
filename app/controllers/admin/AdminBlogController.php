@@ -56,17 +56,10 @@ class AdminBlogController extends AdminController {
 		$title = Lang::get('admin/blogs/title.create_a_new_blog');
 
 		// Blog category
-		$blog_categorys = BlogCategory::all();
+		$blog_category = BlogCategory::all();
 
-		$options = array();
-
-		foreach ($blog_categorys as $blog_category) {
-			$options[$blog_category -> id] = $blog_category -> title;
-		}
-
-		$blog_category = '';
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('title', 'options', 'blog_category'));
+		return View::make('admin/blogs/create_edit', compact('title', 'blog_category'));
 	}
 
 	/**
@@ -126,18 +119,10 @@ class AdminBlogController extends AdminController {
 		$title = Lang::get('admin/blogs/title.blog_update');
 
 		$blog = Blog::find($id->id);
-		// Blog category
-		$blog_categorys = BlogCategory::all();
-
-		$options = array();
-
-		foreach ($blog_categorys as $blog_category) {
-			$options[$blog_category -> id] = $blog_category -> title;
-		}
-
-		$blog_category = $blog['blogcategory_id'];
+		
+		$blog_category = BlogCategory::all();
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('blog', 'title', 'options', 'blog_category'));
+		return View::make('admin/blogs/create_edit', compact('blog', 'title', 'blog_category'));
 	}
 
 	/**

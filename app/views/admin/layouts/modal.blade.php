@@ -48,6 +48,7 @@
 		<link href="{{{ asset('assets/admin/css/jquery.multiselect.css') }}}" rel="stylesheet" type="text/css" >		
 		<link href="{{{ asset('assets/admin/css/style_modal.min.css') }}}" rel="stylesheet" type="text/css" >
 		<link href="{{{ asset('assets/admin/css/jquery.tagit.css') }}}"  rel="stylesheet" type="text/css" >
+		<link href="{{{ asset('assets/admin/css/select2.css') }}}"  rel="stylesheet" type="text/css" >
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 
@@ -107,6 +108,7 @@
 		<script src="{{{ asset('assets/admin/js/jquery.colorbox.js') }}}"></script>
 		<script src="{{{ asset('assets/admin/js/jquery.multiselect.js') }}}"></script>
 		<script src="{{{ asset('assets/admin/js/tag-it.js') }}}"></script>
+		<script src="{{{ asset('assets/admin/js/select2.js') }}}"></script>
 		<script type="text/javascript">
 			$(function() {
 				$('form').submit(function(event) {
