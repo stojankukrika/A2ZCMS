@@ -326,14 +326,14 @@
 @stop
 {{-- Scripts --}}
 @section('scripts')
-<script>
-$(function() {
+<script type="text/javascript">
+	$(function() {
 		$( "#sortable1, #sortable2" ).sortable({
 			items: "li:not(.ui-state-disabled)",
 		});
 		$('#tags').tagit();        
 	});
-	 $("input[id^='limit']").spinner();
+	 $("input[id^='limit']").spinner(5);
 	 $('.btn-success').click(function(){
 	 	 var neworder = new Array();
         $('#sortable1 li').each(function() { 

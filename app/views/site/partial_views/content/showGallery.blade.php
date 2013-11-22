@@ -1,6 +1,6 @@
-<hr>
+ @if(empty($showImages))
+ <hr>
  <div class="row">
-  @if(empty($showImages))
 	@if(!empty($showGallery))
 	@foreach($showGallery as $item)
 		<div class="col-lg-4 col-md-4">
@@ -20,6 +20,6 @@
 		            </p>
 		     	 </div>
 			@endforeach
-	@endif
-	@endif
-	</div> 
+	@endif	
+	</div>
+@endif	

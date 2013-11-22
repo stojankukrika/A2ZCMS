@@ -29,8 +29,7 @@ class PermissionsTableSeeder extends Seeder {
 								array('role_id' => 1, 'permission_id' => 3), 
 								array('role_id' => 1, 'permission_id' => 4), 
 								array('role_id' => 1, 'permission_id' => 5), 
-								array('role_id' => 1, 'permission_id' => 6), 
-								array('role_id' => 2, 'permission_id' => 6), );
+								array('role_id' => 1, 'permission_id' => 6), );
 
 		DB::table('permission_role') -> insert($permissions);
 	}

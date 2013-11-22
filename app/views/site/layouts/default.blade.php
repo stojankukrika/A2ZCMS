@@ -30,7 +30,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-	      	<a class="navbar-brand" href="{{{ URL::to('') }}}"> A2Z CMS </a>
+	      	<a class="navbar-brand" href="{{{ URL::to('') }}}"> {{$title}} </a>
            </div>
 		 <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -44,6 +44,7 @@
 	      	@yield('sidebar_left')
 	        <div class="col-lg-8">
 				@yield('content')
+				</div>
 			 </div>
 			 	@yield('sidebar_right')
 	    </div>

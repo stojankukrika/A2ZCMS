@@ -34,10 +34,10 @@
 				</select>
 			</div>
 		</div>
-		<div class="control-group">
+	<div class="control-group">
 			<label class="control-label" for="per_page">{{ Lang::get('install/installer.posts_per_page') }}</label>
 			<div class="controls">
-				<input type="number" name="per_page" value="5">
+				<input type="number" name="per_page" id="per_page" value="5" type="number" min="3" max="20" step="1">
 			</div>
 		</div>
 		<button style="text-align: center;" type="submit" class="btn save">
@@ -46,3 +46,14 @@
 	</form>
 </div>
 @stop
+{{-- Scripts --}}
+@section('scripts')
+<script type="text/javascript">
+	$(function() {
+ 		$("#per_page").keyup(function () { 
+		    this.value = this.value.replace(/[^0-9\.]/g,'');
+		});
+
+ 	})
+</script>
+ @stop

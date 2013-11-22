@@ -18,7 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/install/css/font-awesome-ie7.css')}}">
 		<!-- Bootbusiness theme -->
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/install/css/a2zcms.css')}}">
-
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/install/css/jquery-ui-1.10.3.custom.css')}}">
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="{{asset('assets/site/js/html5.js')}}"></script>
@@ -106,6 +106,8 @@
 		<![endif]-->
 		<script src="{{asset('assets/install/js/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/install/js/bootstrap.min.js')}}" type="text/javascript"></script>
-		<script src="{{asset('assets/install/js/boot-business.js')}}" type="text/javascript"></script>
+		<script src="{{asset('assets/install/js/bootstrap.min.js')}}" type="text/javascript"></script>
+		<script src="{{asset('assets/install/js/jquery-ui-1.10.3.custom.min.js')}}" type="text/javascript"></script>
+		@yield('scripts')
 	</body>
 </html>

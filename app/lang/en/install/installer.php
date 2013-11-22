@@ -17,7 +17,7 @@ return array(
 	'posts_per_page' => 'Posts per page',
 	'site_theme' =>'Site Theme',
 	'site_title' => 'Site Title',
-	'config_info' => "Don't worry you can always change these later inside app/config/",
+	'config_info' => "Don't worry you can always change these later inside Admin panel -> Settings",
 	'first_name' => 'First Name',
 	'last_name' => 'Last Name',
 	'password' => 'Password',
