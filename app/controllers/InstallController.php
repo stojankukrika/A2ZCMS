@@ -154,7 +154,7 @@ class InstallController extends BaseController {
 	 * @return
 	 */
 	protected function setA2ZConfig($title, $theme, $per_page) {
-		$content = str_replace(array('##title##', '##theme##', "'##per_page##'", "'##installed##'"), array(addslashes($title), $theme, (int)$per_page, 'true'), File::get(__DIR__ . '\..\config\a2zcms_temp.php'));
+		$content = str_replace(array('##theme##', "'##installed##'"), array($theme, 'true'), File::get(__DIR__ . '\..\config\a2zcms_temp.php'));
 		
 		$settings = Settings::all();
 			foreach ($settings as $v) {
