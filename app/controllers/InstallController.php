@@ -75,8 +75,6 @@ class InstallController extends BaseController {
 
 			Artisan::call('migrate', array('--env' => App::environment()));
 
-			Artisan::call('db:seed');
-
 			return Redirect::to('install/step3');
 		} else {
 			return Redirect::to('install/step2') -> withErrors($form);
@@ -108,12 +106,17 @@ class InstallController extends BaseController {
 			returnRedirect::back() -> withInput() -> withErrors($validator);
 		}
 
-		$user_id = DB::table('users') -> insertGetId(array('name' => Input::get('first_name'), 'surname' => Input::get('last_name'), 'username' => Input::get('username'), 'email' => Input::get('email'), 'password' => Hash::make(Input::get('password')), 'confirmation_code' => md5(microtime() . Config::get('app.key')), 'created_at' => new DateTime, 'updated_at' => new DateTime, 'confirmed' => '0', 'active' => '1'));
+		$user_id = DB::table('users') -> insertGetId(array('name' => Input::get('first_name'), 'surname' => Input::get('last_name'), 'username' => Input::get('username'), 'email' => Input::get('email'), 'password' => Hash::make(Input::get('password')), 'confirmation_code' => md5(microtime() . Config::get('app.key')), 'created_at' => new DateTime, 'updated_at' => new DateTime, 'confirmed' => '1', 'active' => '1'));
 
+		Artisan::call('db:seed');
+		
 		$adminRole = Role::where('name', '=', 'admin') -> first();
 
 		DB::table('assigned_roles') -> insert(array('user_id' => $user_id, 'role_id' => $adminRole -> id));
-
+		
+		
+			
+			
 		return Redirect::to('install/step4');
 	}
 
