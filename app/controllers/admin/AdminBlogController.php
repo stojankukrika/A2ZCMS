@@ -57,9 +57,10 @@ class AdminBlogController extends AdminController {
 
 		// Blog category
 		$blog_category = BlogCategory::all();
-
+		
+		$catselect = '';
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('title', 'blog_category'));
+		return View::make('admin/blogs/create_edit', compact('title', 'blog_category','catselect'));
 	}
 
 	/**
@@ -81,7 +82,6 @@ class AdminBlogController extends AdminController {
 
 			// Update the blog post data
 			$this -> blog -> title = Input::get('title');
-			$this -> blog -> blogcategory_id = Input::get('blogcategory_id');
 			$this -> blog -> slug = Str::slug(Input::get('title'));
 			$this -> blog -> content = Input::get('content');
 			$this -> blog -> start_publish = (Input::get('start_publish') == '') ? date('Y-m-d') : Input::get('start_publish');
@@ -102,6 +102,13 @@ class AdminBlogController extends AdminController {
 				$this -> blog -> image = $name;
 			}
 			$this -> blog -> save();
+			foreach (Input::get('blogcategory_id') as $item)
+			{
+				$blog_cat = new BlogBlogCategory;
+				$blog_cat -> blog_id = $this -> blog->id;
+				$blog_cat -> blog_category_id = $item;
+				$blog_cat -> save();
+			}
 		}
 
 		// Form validation failed
@@ -118,11 +125,13 @@ class AdminBlogController extends AdminController {
 		// Title
 		$title = Lang::get('admin/blogs/title.blog_update');
 
-		$blog = Blog::find($id->id);
-		
+		$blog = Blog::find($id->id);		
 		$blog_category = BlogCategory::all();
+		
+		$catselect = BlogBlogCategory::where('blog_id','=',$id->id)->select(array('blog_category_id'))->get();
+
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('blog', 'title', 'blog_category'));
+		return View::make('admin/blogs/create_edit', compact('blog', 'title', 'blog_category','catselect'));
 	}
 
 	/**
@@ -134,7 +143,7 @@ class AdminBlogController extends AdminController {
 	public function postEdit($id) {
 
 		// Declare the rules for the form validation
-		$rules = array('title' => 'required|min:3', 'content' => 'required|min:3', 'blogcategory_id' => 'required');
+		$rules = array('title' => 'required|min:3', 'content' => 'required|min:3');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -146,7 +155,6 @@ class AdminBlogController extends AdminController {
 			$user = Auth::user();
 			
 			$blog -> title = Input::get('title');
-			$blog -> blogcategory_id = Input::get('blogcategory_id');
 			$blog -> slug = Str::slug(Input::get('title'));
 			$blog -> content = Input::get('content');
 			$blog -> start_publish = (Input::get('start_publish') == '') ? date('Y-m-d') : Input::get('start_publish');
@@ -166,8 +174,14 @@ class AdminBlogController extends AdminController {
 				
 				$blog -> image = $name;
 			}
-			if ($blog -> save()) {
-				return Redirect::to('admin/blogs/' . $blog -> id . '/edit') -> with('success', Lang::get('admin/blogs/messages.update.success'));
+			$blog -> save();
+			BlogBlogCategory::where('blog_id', $blog->id)->delete();
+			foreach (Input::get('blogcategory_id') as $item)
+			{
+				$blog_cat = new BlogBlogCategory;
+				$blog_cat -> blog_id = $blog ->id;
+				$blog_cat -> blog_category_id = $item;
+				$blog_cat -> save();
 			}
 		}
 
@@ -201,7 +215,7 @@ class AdminBlogController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$blogs = Blog::join('blog_categorys', 'blogs.blogcategory_id', '=', 'blog_categorys.id') -> select(array('blogs.id', 'blogs.title', 'blog_categorys.title as blog_category', 'blogs.id as blog_comments', 'blogs.created_at'));
+		$blogs = Blog::select(array('blogs.id', 'blogs.title', 'blogs.id as blog_comments', 'blogs.created_at'));
 
 		return Datatables::of($blogs) 
 			-> edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link  btn-sm" >{{ BlogComment::where(\'blog_id\', \'=\', $id)->count() }}</a>') 
@@ -209,20 +223,6 @@ class AdminBlogController extends AdminController {
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
             ') 
             -> remove_column('id') -> make();
-	}
-
-	/**
-	 * Show a list of all the blog posts for selected category formatted for Datatables.
-	 *
-	 * @return Datatables JSON
-	 */
-	public function getDataforcategory($blogcategory_id) {
-		$blogs = Blog::where('blogs.blogcategory_id', '=', $blogcategory_id) -> select(array('blogs.id', 'blogs.title', 'blogs.id as blog_comments', 'blogs.created_at'));
-
-		return Datatables::of($blogs) -> edit_column('blog_comments', '<a href="{{{ URL::to(\'admin/blogcomments/\' . $id . \'/commentsforblog\' ) }}}" class="btn btn-link btn-sm" >{{ BlogComment::where(\'blog_id\', \'=\', $id)->count() }}</a>') 
-			-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>
-                <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
-            ') -> remove_column('id') -> make();
 	}
 
 }

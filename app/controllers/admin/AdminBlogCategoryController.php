@@ -150,7 +150,7 @@ class AdminBlogCategoryController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$blogcategorys = BlogCategory::select(array('blog_categorys.id', 'blog_categorys.title', 'blog_categorys.id as blog_count', 'blog_categorys.created_at'));
+		$blogcategorys = BlogCategory::select(array('blog_categories.id', 'blog_categories.title', 'blog_categories.id as blog_count', 'blog_categories.created_at'));
 
 		return Datatables::of($blogcategorys) -> edit_column('blog_count', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/blogsforcategory\' ) }}}" class="btn btn-link btn-sm" >{{ Blog::where(\'blogcategory_id\', \'=\', $id)->count() }}</a>') 
 				-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogcategorys/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-sm iframe" ><i class="icon-edit "></i></a>

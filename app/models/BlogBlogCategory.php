@@ -3,21 +3,10 @@
 use Illuminate\Support\Facades\URL;
 use Robbo\Presenter\PresentableInterface;
 
-class BlogCategory extends Eloquent implements PresentableInterface {
+class BlogBlogCategory extends Eloquent implements PresentableInterface {
 
-	protected $table = "blog_categories";
+	protected $table = "blog_blog_categorys";
 	protected $softDelete = true;
-
-	/**
-	 * Returns a formatted post content entry,
-	 * this ensures that line breaks are returned.
-	 *
-	 * @return string
-	 */
-	public function title() {
-		return nl2br($this -> title);
-	}
-
 	/**
 	 * Get the date the post was created.
 	 *

@@ -40,7 +40,7 @@ class Blog extends Eloquent implements PresentableInterface {
 	 * @return array
 	 */
 	public function category() {
-		return $this -> belongsTo('BlogCategory');
+		return $this -> hasMany('BlogBlogCategory');
 	}
 
 	/**

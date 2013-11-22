@@ -78,7 +78,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::controller('blogcategorys', 'AdminBlogCategoryController');
 
     # Blog Management
-    Route::get('blogs/{blogcategory}/blogsforcategory', 'AdminBlogController@getBlogsForCategory');
     Route::get('blogs/{blog}/edit', 'AdminBlogController@getEdit');
     Route::post('blogs/{blog}/edit', 'AdminBlogController@postEdit');
     Route::get('blogs/{blog}/delete', 'AdminBlogController@getDelete');

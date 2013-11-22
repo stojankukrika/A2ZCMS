@@ -10,13 +10,11 @@ class CreateBlogsTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		// Create the `Blogs` table
 		Schema::create('blogs', function($table) {
 			$table -> engine = 'InnoDB';
 			$table -> increments('id') -> unsigned();
 			$table -> integer('user_id') -> unsigned();
 			$table -> foreign('user_id') -> references('id') -> on('users');
-			$table -> string('blogcategory_id');
 			$table -> string('title');
 			$table -> string('slug');
 			$table -> text('content');
@@ -35,7 +33,6 @@ class CreateBlogsTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		// Delete the `Blogs` table
 		Schema::drop('blogs');
 	}
 

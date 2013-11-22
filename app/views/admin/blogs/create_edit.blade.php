@@ -57,9 +57,17 @@
 			<div class="form-group {{{ $errors->has('blog_categorys') ? 'error' : '' }}}">
 				<div class="col-md-12">
 					<label class="control-label" for="title">{{{ Lang::get('admin/blogs/table.category') }}}</label>
-					<select style="width: 100%"name="blogcategory_id" id="blogcategory_id" multiple>
+					<select style="width: 100%"name="blogcategory_id[]" id="blogcategory_id" multiple>
 						@foreach($blog_category as $item)
-							<option value="{{$item->id}}">{{$item->title}}</option>
+							<option value="{{$item->id}}"
+								@if(!empty($catselect))
+									@foreach($catselect as $cat)
+										@if($item->id==$cat->blog_category_id)
+											selected="selected"
+										@endif
+									@endforeach
+								@endif
+								>{{$item->title}}</option>
 						@endforeach
 						</select>
 				</div>
