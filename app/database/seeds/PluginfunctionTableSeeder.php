@@ -68,6 +68,13 @@ class PluginfunctionTableSeeder extends Seeder {
 						'type' => 'content',
 						'created_at' => new DateTime, 
 						'updated_at' => new DateTime,),	
+					array('title' => 'Side menu', 
+						'plugin_id' => 0,
+						'function'=>'sideMenu',
+						'params'=>'',
+						'type' => 'sidebar',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 	
 						);
 						
 

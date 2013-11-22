@@ -133,30 +133,28 @@ class BaseController extends Controller {
 	}
 
 	public function main_menu($type) {
-		
+		$navigation ="";
 		switch ($type) {
 			case 'top':
 				$navigation = NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
-										->where('navigation_groups.showmenu','=',1) 
+										->where('navigation_groups.showmenu','=','1') 
 										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
 										-> get();
 				break;
 			case 'footer':
 				$navigation =NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
-										->where('navigation_groups.showfooter','=',1) 
+										->where('navigation_groups.showfooter','=','1') 
 										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
 										-> get();
 				break;
 			case 'side':
 				$navigation = NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
-										->where('navigation_groups.showsidebar','=',1) 
+										->where('navigation_groups.showsidebar','=','1') 
 										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
 										-> get();
 				break;
 		}		
-		$navigation = Navigation::select('id', 'title', 'parent', 'link_type', 'target', 'position','class') 
-								-> get();
-
+		
 		$menu = array('items' => array(), 'parents' => array());
 		// Builds the array lists with data from the menu table
 		foreach ($navigation as $key => $items) {
@@ -272,6 +270,10 @@ class BaseController extends Controller {
 	public function login($params)
 	{
 		return View::make('site.partial_views.sidebar.login');
+	}
+	public function sideMenu($params)
+	{
+		return View::make('site.partial_views.sidebar.sideMenu');
 	}
 	public function search($params)
 	{
