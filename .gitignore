@@ -10,3 +10,7 @@ app/config/production/app.php
 app/config/production/database.php
 app/config/production--/database.php
 app/config/production--/app.php
+app/config/local/app.php
+app/config/local/database.php
+app/config/local--/database.php
+app/config/local--/app.php
