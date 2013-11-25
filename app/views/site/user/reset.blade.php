@@ -44,8 +44,9 @@
 {{-- Content --}}
 @section('content')
 <div class="page-header">
-	<h1>{{ Lang::get('confide.forgot.title') }}</h1>
+	<h3>{{ Lang::get('confide.forgot.title') }}</h3>
 </div>
+<div class="row">
 {{ Confide::makeResetPasswordForm($token)->render() }}
 @stop
 
@@ -60,4 +61,13 @@
 		</div>
 	@endforeach 
 </div>
+@stop
+
+{{-- Scripts --}}
+@section('scripts')
+<script>
+	$( document ).ready(function() {
+		$('.form-group').after('<div class="form-group">&nbsp;</div>');
+	});
+</script>
 @stop

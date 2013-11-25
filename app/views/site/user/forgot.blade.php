@@ -44,8 +44,9 @@
 {{-- Content --}}
 @section('content')
 <div class="page-header">
-	<h1>{{{ Lang::get('site/user.forgot_password') }}}</h1>
+	<h3>{{{ Lang::get('site/user.forgot_password') }}}</h3>
 </div>
+<div class="row">
 {{ Confide::makeForgotPasswordForm() }}
 @stop
 
@@ -60,4 +61,15 @@
 		</div>
 	@endforeach 
 </div>
+@stop
+{{-- Scripts --}}
+@section('scripts')
+<script>
+	$( document ).ready(function() {
+		
+		$("#email").addClass('form-control');
+		$('#email').after('<div class="form-group">&nbsp;</div>');
+		$('.input-append > .btn').addClass('btn-primary');
+	});
+</script>
 @stop

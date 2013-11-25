@@ -45,6 +45,7 @@
 <div class="page-header">
 	<h3> {{ Lang::get('site/user.edit_settings') }}</h3>
 </div>
+<div class="row">
 <form class="" method="post" action="{{ URL::to('user/' . $user->id . '/edit') }}"  
 	enctype="multipart/form-data" autocomplete="off">
 	<!-- CSRF Token -->

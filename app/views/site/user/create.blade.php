@@ -43,8 +43,9 @@
 {{-- Content --}}
 @section('content')
 <div class="page-header">
-	<h1>{{ Lang::get('confide.signup.desc')}}</h1>
+	<h3>{{ Lang::get('confide.signup.desc')}}</h3>
 </div>
+<div class="row">
 <form method="POST" action="{{ URL::to('user/') }}" accept-charset="UTF-8">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<fieldset>

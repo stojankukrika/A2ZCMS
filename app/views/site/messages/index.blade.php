@@ -42,7 +42,10 @@
 
 {{-- Content --}}
 @section('content')
-		<h1>{{ Lang::get('site/messages.title') }}</h1>
+<div class="page-header">
+		<h3>{{ Lang::get('site/messages.title') }}</h3>
+	</div>
+	<div class="row">
 		<ul id="myTab" class="nav nav-tabs">
             <li class="active"><a href="#service-one" data-toggle="tab">{{ Lang::get('site/messages.inbox') }}</a></li>
             <li><a href="#service-two" data-toggle="tab">{{ Lang::get('site/messages.send') }}</a></li>
@@ -119,6 +122,7 @@
 
           </div>
        </div>
+    
 	@stop
 	
 	
@@ -135,25 +139,25 @@
 </div>
 @stop
 
-	{{-- Scripts --}}
-	@section('scripts')
-	<script>
-		$( document ).ready(function() {
-			
-			/*set a multiselect users for sending a message*/
-			$("#recipients").multiselect();
+{{-- Scripts --}}
+@section('scripts')
+<script>
+	$( document ).ready(function() {
 		
-			/*mark message as read*/
-			$("[id^='msg-']").click(function() {
+		/*set a multiselect users for sending a message*/
+		$("#recipients").multiselect();
+	
+		/*mark message as read*/
+		$("[id^='msg-']").click(function() {
 
-				var values = $(this).attr("id");
-				var value = values.split('-')[1];
-					$.ajax({
-						url: 'messages/'+value+'/read',
-						type: "GET",							
-					})
-			})
-		
-		});
-	</script>
-	@stop
+			var values = $(this).attr("id");
+			var value = values.split('-')[1];
+				$.ajax({
+					url: 'messages/'+value+'/read',
+					type: "GET",							
+				})
+		})
+	
+	});
+</script>
+@stop
