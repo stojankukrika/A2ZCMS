@@ -2,15 +2,15 @@
 ======
 
 ## Cms based on Laravel 4
-[A2Z CMS Features](#feature1)
-[Requirements](#feature2)
-[How to install](#feature3)
-[Application Structure](#feature4)
-[Production Launch](#feature5)
-[Troubleshooting](#feature6)
-[Included Package Information](#feature7)
-[License](#feature8)
-[License](#feature9)
+* [A2Z CMS Features](#feature1)
+* [Requirements](#feature2)
+* [How to install](#feature3)
+* [Application Structure](#feature4)
+* [Production Launch](#feature5)
+* [Troubleshooting](#feature6)
+* [Included Package Information](#feature7)
+* [License](#feature8)
+* [Additional information](#feature9)
 
 <a name="feature1"></a>
 ## A2Z CMS Features:
@@ -52,14 +52,16 @@
 
 -----
 <a name="feature3"></a>
-##How to install
-[Step 1: Get the code](#step1)
-[Step 2: Use Composer to install dependencies](#step2)
-[Step 3: Configure Environments(optional)](#step3)
-[Step 4: Configure Mailer](#step4)
-[Step 5: Install CMS](#step5)
-[Step 6: Make sure app/storage is writable by your web server](#step6)
-[Step 7: Start Page](#step6)
+##How to install:
+* [Step 1: Get the code](#step1)
+* [Step 2: Use Composer to install dependencies](#step2)
+* [Step 3: Configure Environments(optional)](#step3)
+* [Step 4: Configure Mailer](#step4)
+* [Step 5: Install CMS](#step5)
+* [Step 6: Make sure app/storage is writable by your web server](#step6)
+* [Step 7: Start Page](#step6)
+
+-----
 <a name="step1"></a>
 ### Step 1: Get the code
 #### Option 1: Git Clone
@@ -70,6 +72,7 @@
 
     https://github.com/mrakodol/A2ZCMS/archive/master.zip
 
+-----
 <a name="step2"></a>
 ### Step 2: Use Composer to install dependencies
 #### Option 1: Composer is not installed globally
@@ -103,6 +106,7 @@ Now I can use composer by invoking just the composer command.
 Optional way to do it, is to set up an alias:
     alias composer='/location/of/the/composer.phar'
 
+-----
 <a name="step3"></a>
 ### Step 3: Configure Environments(optional)
 
@@ -130,12 +134,15 @@ You will now be copying the initial configuration file inside this folder before
 
         'timezone' => 'UTC',
     );
+    
+-----
 <a name="step4"></a>
 ### Step 4: Configure Mailer
 
 In the same fashion, copy the ***app/config/mail.php*** configuration file in ***app/config/local/mail.php***. Now set the `address` and `name` from the `from` array in ***config/mail.php***. Those will be used to send account confirmation and password reset emails to the users.
 If you don't set that registration will fail because it cannot send the confirmation email.
 
+-----
 <a name="step5"></a>
 ### Step 5: Install CMS
 
@@ -143,6 +150,7 @@ Now that you have the environment configured, you need to create a database conf
 If you install A2ZCMS on your localhost in folder a2zcms, you can type on web browser: http://localhost/a2zcms/
 And than finish the installation. Instalation would populate a database with tables and start-up data(you can delete that data later).
 
+-----
 <a name="step6"></a>
 ### Step 6: Make sure app/storage is writable by your web server.
 
@@ -153,6 +161,8 @@ If permissions are set correctly:
 Should work, if not try
 
     chmod -R 777 app/storage
+
+-----
 <a name="step7"></a>
 ### Step 7: Start Page
 
