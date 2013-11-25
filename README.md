@@ -147,7 +147,8 @@ If you don't set that registration will fail because it cannot send the confirma
 ### Step 5: Install CMS
 
 Now that you have the environment configured, you need to create a database configuration for it. 
-If you install A2ZCMS on your localhost in folder a2zcms, you can type on web browser: http://localhost/a2zcms/
+If you install A2ZCMS on your localhost in folder a2zcms, you can type on web browser: 
+	http://localhost/a2zcms/
 And than finish the installation. Instalation would populate a database with tables and start-up data(you can delete that data later).
 
 -----

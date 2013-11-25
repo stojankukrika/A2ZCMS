@@ -116,7 +116,6 @@ return array(
 		 /* Additional Providers */
         'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
-        'Basset\BassetServiceProvider', // Better Asset Management
         'Robbo\Presenter\PresenterServiceProvider', // Presenter
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
 
