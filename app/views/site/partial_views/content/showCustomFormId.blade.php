@@ -1,7 +1,6 @@
 @if(!empty($showCustomFormId))
 <hr>
  <div class="row">
-
   	<div class="col-lg-12 col-md-12">
 	@foreach($showCustomFormId as $item)
 		<h3>{{$item->title}}<h3>

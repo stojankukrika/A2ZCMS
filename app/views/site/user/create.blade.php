@@ -8,7 +8,6 @@
 	</h1>
 	@endif
 @stop
-
 {{-- Page title --}}
 @section('page_breadcrumb')
 	@if(isset($breadcrumb))
@@ -19,7 +18,6 @@
 	</ol>
 	@endif
 @stop
-
 {{-- Add page scripts --}}
 @section('page_scripts')
 	<style>
@@ -29,7 +27,6 @@
 	{{ $page->page_javascript}}
 	</script>
 @stop
-
 {{-- Sidebar left --}}
 @section('sidebar_left')
 	@foreach ($sidebar_left as $item)
@@ -39,7 +36,6 @@
 		</div>
 	@endforeach 
 @stop
-
 {{-- Content --}}
 @section('content')
 <div class="page-header">
@@ -90,7 +86,6 @@
 				<input class="form-control" tabindex="6" placeholder="{{ Lang::get('confide.password_confirmation') }}" type="password" name="password_confirmation" id="password_confirmation">
 			</div>
 		</div>
-
 		@if ( Session::get('error') )
 		<div class="alert alert-error alert-danger">
 			@if ( is_array(Session::get('error')) )
@@ -104,7 +99,6 @@
 			{{ Session::get('notice') }}
 		</div>
 		@endif
-
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<button tabindex="3" type="submit" class="btn btn-primary">
@@ -112,10 +106,8 @@
 				</button>
 			</div>
 		</div>
-
 	</fieldset>
 </form>
-
 {{-- Sidebar right --}}
 @section('sidebar_right')
 <div class="col-lg-4">		

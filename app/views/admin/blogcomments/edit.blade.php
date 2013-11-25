@@ -14,12 +14,10 @@
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
-
 	<!-- Tabs Content -->
 	<div class="tab-content">
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
-
 			<!-- Content -->
 			<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
 				<div class="col-md-12">
@@ -33,7 +31,6 @@
 		<!-- ./ general tab -->
 	</div>
 	<!-- ./ tabs content -->
-
 	<!-- Form Actions -->
 	<div class="form-group">
 		<div class="col-md-12">

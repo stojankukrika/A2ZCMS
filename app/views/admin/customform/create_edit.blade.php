@@ -18,12 +18,11 @@
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
-
 	<!-- Tabs Content -->
 	<div class="tab-content">
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
-			<!-- Blog Title -->
+			<!-- Title -->
 			<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
 				<div class="col-md-12">
 					<label class="control-label" for="title">{{{ Lang::get('admin/general.title') }}}</label>
@@ -31,7 +30,7 @@
 					{{{ $errors->first('title', '<span class="help-inline">:message</span>') }}}
 				</div>
 			</div>
-			<!-- ./ blog title -->
+			<!-- ./ title -->
 
 			<!-- Recievers -->
 			<div class="form-group {{{ $errors->has('recievers') ? 'error' : '' }}}">
@@ -102,9 +101,7 @@
 		<!-- ./ dates tab -->
 	</div>
 	<!-- ./ tabs content -->
-
-	<!-- Form Actions -->
-	
+	<!-- Form Actions -->	
 	<div class="form-group">
 		<div class="col-md-12">
 			<button type="reset" class="btn btn-link close_popup">
@@ -120,7 +117,6 @@
 	</div>
 	<!-- ./ form actions -->
 </form>
-
 <div class="hidden" id ="addfield">
 	<li class="ui-state-default" name="formf" value="" id="formf">
 		<label class="control-label" for="name">Fild name</label>
@@ -172,7 +168,6 @@
 		$('.btn-success').click(function(){
 		 	var neworder = new Array();
 	        $('#sortable1 li').each(function() { 
-	            //get the id
 	            var name  = $(this).children('[name^="name"]').attr("value");
 	            var mandatory  = $(this).children().children('[name^="mandatory"]').attr("value");
 	            var type  = $(this).children().children('[name^="type"]').attr("value");

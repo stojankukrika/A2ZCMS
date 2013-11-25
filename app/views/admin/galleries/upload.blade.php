@@ -24,7 +24,7 @@
 <!-- ./ csrf token -->
 
 <p>
-	Gallery: <b>{{$galleries->title}}</b>
+	{{{ Lang::get("admin/galleries/table.gallery") }}}: <b>{{$galleries->title}}</b>
 </p>
 
 <div id="jquery-wrapped-fine-uploader"></div>

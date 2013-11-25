@@ -3,7 +3,6 @@
 @section('title')
 {{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 3 {{ Lang::get('install/installer.of') }} 4
 @stop
-
 @section('content')
 <div id="install-region">
 	@if (Session::has('install_errors'))

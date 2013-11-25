@@ -4,24 +4,19 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
 		<title>{{$title}}</title>
-
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 		<!-- @todo: fill with your company info or remove -->
 		<meta name="description" content="{{$metadesc}}">
 		<meta name="keywords" content="{{$metakey}}">
 		<meta name="author" content="{{$metaauthor}}">
-
 		<link rel="stylesheet" type="text/css"  href="{{asset('assets/site/'.$sitetheme.'/css/bootstrap.min.css')}}">	
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/jquery-ui-1.10.3.custom.css')}}">		
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/jquery.multiselect.css')}}">	
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/a2zcms.css')}}">		
-		
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/html5.js')}}"></script>
 		<![endif]-->
-
 		<link rel="shortcut icon" href="{{asset('admin/ico/favicon.ico')}}">
 		{{$analytics}}
 		@yield('page_scripts')		
@@ -67,34 +62,22 @@
 			</div>
 		</div>
 	</footer>
-
 		<!-- start: JavaScript-->
 		<!--[if !IE]>-->
-
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery-2.0.3.min.js')}}"></script>
-
 		<!--<![endif]-->
-
 		<!--[if IE]>
-
 		<script src="{{asset('assets/site/js/'.$sitetheme.'/jquery-1.10.2.min.js')}}"></script>
-
 		<![endif]-->
-
 		<!--[if !IE]>-->
-
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='{{asset('assets/site/'.$sitetheme.'/js/jquery-2.0.3.min.js')}}'>" + "<" + "/script>");
 		</script>
-
 		<!--<![endif]-->
-
 		<!--[if IE]>
-
 		<script type="text/javascript">
 		window.jQuery || document.write("<script src='{{asset('assets/site/'.$sitetheme.'/js/jquery-1.10.2.min.js')}}'>"+"<"+"/script>");
 		</script>
-
 		<![endif]-->
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery-migrate-1.2.1.min.js')}}"></script>
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/bootstrap.js')}}"></script>

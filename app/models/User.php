@@ -44,8 +44,6 @@ class User extends ConfideUser implements PresentableInterface {
     );
 
 
-	
-
     public function getPresenter()
     {
         return new UserPresenter($this);

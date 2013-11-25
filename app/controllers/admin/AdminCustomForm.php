@@ -3,7 +3,7 @@
 class AdminCustomFormController extends AdminController {
 
 	/**
-	 * Page Repository
+	 * Custom form
 	 *
 	 * @var Page
 	 */
@@ -25,7 +25,7 @@ class AdminCustomFormController extends AdminController {
 
 		$title = Lang::get('admin/customform/title.contact_form_management');
 		
-		// Grab all the blog posts
+		// Grab all the custom form
 		$customform = $this -> customform;
 
 		return View::make('admin/customform/index', compact('title', 'customform'));
@@ -53,16 +53,16 @@ class AdminCustomFormController extends AdminController {
 
 		// Check if the form validates with success
 		if ($validator -> passes()) {
-			// Create a new blog post
+			// Create a new custom form
 			$user = Auth::user();
 
-			// Update the blog post data
+			// Update the custom form
 			$this -> customform -> title = Input::get('title');
 			$this -> customform -> message = Input::get('message');
 			$this -> customform -> recievers = Input::get('recievers');
 			$this -> customform -> user_id = $user -> id;
 			
-			// Was the blog post created?
+			// Was the custom form created?
 			if ($this -> customform -> save()) {
 					
 				//add fileds to form
@@ -70,11 +70,11 @@ class AdminCustomFormController extends AdminController {
 					$this->saveFilds(Input::get('pagecontentorder'),Input::get('count'),$this -> customform -> id,$user -> id);
 				}				
 				
-				// Redirect to the new blog post page
+				// Redirect to the new custom form
 				return Redirect::to('admin/customform/' . $this -> customform -> id . '/edit') -> with('success', Lang::get('admin/customform/messages.create.success'));
 			}
 
-			// Redirect to the blog post create page
+			// Redirect to the custom form
 			return Redirect::to('admin/customform') -> with('error', Lang::get('admin/customform/messages.create.error'));
 		}
 
@@ -142,16 +142,16 @@ class AdminCustomFormController extends AdminController {
 		// Was the role deleted?
 		if ($customform -> delete()) {
 
-			// Redirect to the blog posts management page
+			// Redirect to the custom form
 			return Redirect::to('admin/customform') -> with('success', Lang::get('admin/customform/messages.delete.success'));
 		}
-		// There was a problem deleting the blog post
+		// There was a problem deleting the custom form
 		return Redirect::to('admin/customform') -> with('error', Lang::get('admin/customform/messages.delete.error'));
 	}
 	
 	
 	/**
-	 * Show a list of all the blog posts formatted for Datatables.
+	 * Show a list of all the custom form formatted for Datatables.
 	 *
 	 * @return Datatables JSON
 	 */

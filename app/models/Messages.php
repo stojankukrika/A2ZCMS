@@ -32,8 +32,7 @@ class Messages extends Eloquent implements PresentableInterface {
 	 */
 	public function read() {
 		return nl2br($this -> read);
-	}
-	
+	}	
 	
 	/**
 	 * Get the pugin.

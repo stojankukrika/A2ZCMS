@@ -43,7 +43,7 @@ class CustomFormController extends BaseController {
 
 		$user = $this -> user -> currentUser();
 		
-		// Get this blog blog data
+		// Get this custom form a
 		$customform = $this -> customform -> where('id', '=', $id) -> first();
 		$customform_fields = CustomFormField::where('custom_form_id', '=', $id) -> first();
 		if (is_null($customform) || is_null($customform_fields)) {
@@ -100,7 +100,7 @@ class CustomFormController extends BaseController {
 		}
 			
 
-		// Redirect to this blog blog page
+		// Redirect to this custom form
 		return Redirect::back() -> withInput() -> withErrors($validator);
 	}
 }

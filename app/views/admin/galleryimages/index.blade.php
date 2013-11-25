@@ -7,14 +7,14 @@
 
 {{-- Content --}}
 @section('content')
-<div class="page-header">
-	<h3> {{{ $title }}} </h3>
-</div>
-<label class="control-label" for="title">Gallery</label>
-{{Form::select('galleryid', $options, $galleries ,array('class'=>'form-control','data-style'=>'btn-primary') );}}
-{{{ $errors->first('galleries', '<span class="help-inline">:message</span>') }}}
-
-<div id="pictures" name="pictures" class="row"></div>
+	<div class="page-header">
+		<h3> {{{ $title }}} </h3>
+	</div>
+	<label class="control-label" for="title">Gallery</label>
+	{{Form::select('galleryid', $options, $galleries ,array('class'=>'form-control','data-style'=>'btn-primary') );}}
+	{{{ $errors->first('galleries', '<span class="help-inline">:message</span>') }}}
+	
+	<div id="pictures" name="pictures" class="row"></div>
 @stop
 
 {{-- Scripts --}}

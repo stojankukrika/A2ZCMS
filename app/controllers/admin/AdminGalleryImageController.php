@@ -18,7 +18,7 @@ class AdminGalleryImageController extends AdminController {
 	}
 
 	/**
-	 * Show a list of all the blog posts.
+	 * Show a list of all the gallery posts.
 	 *
 	 * @return View
 	 */

@@ -20,7 +20,6 @@ class BlogBlogCategory extends Eloquent implements PresentableInterface {
 
 		return String::date($date);
 	}
-
 	/**
 	 * Returns the date of the blog post creation,
 	 * on a good and more readable format :)
@@ -30,7 +29,6 @@ class BlogBlogCategory extends Eloquent implements PresentableInterface {
 	public function created_at() {
 		return $this -> date($this -> created_at);
 	}
-
 	/**
 	 * Returns the date of the blog post last update,
 	 * on a good and more readable format :)

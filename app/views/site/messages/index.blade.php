@@ -19,7 +19,6 @@
 	</ol>
 	@endif
 @stop
-
 {{-- Add page scripts --}}
 @section('page_scripts')
 	<style>
@@ -29,7 +28,6 @@
 	{{ $page->page_javascript}}
 	</script>
 @stop
-
 {{-- Sidebar left --}}
 @section('sidebar_left')
 	@foreach ($sidebar_left as $item)
@@ -39,7 +37,6 @@
 		</div>
 	@endforeach 
 @stop
-
 {{-- Content --}}
 @section('content')
 <div class="page-header">
@@ -52,8 +49,7 @@
             <li><a href="#service-three" data-toggle="tab">{{ Lang::get('site/messages.new_message') }}</a></li>
           </ul>
             <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade in active" id="service-one">
-           
+            <div class="tab-pane fade in active" id="service-one">           
               @foreach  ($received as $item)
                 <div class="panel panel-default">
 	              <div class="panel-heading">
@@ -72,8 +68,7 @@
 	            </div>
 	         @endforeach
           </div>
-           <div class="tab-pane fade in" id="service-two">
-             
+           <div class="tab-pane fade in" id="service-two">             
           @foreach  ($send as $item)
               	 <div class="panel panel-default">
 	              <div class="panel-heading">
@@ -91,7 +86,6 @@
 	              </div>
 	            </div>
 	         @endforeach
-
           </div>
           <div class="tab-pane fade in" id="service-three">
              
@@ -119,13 +113,9 @@
 	                <button type="submit" class="btn btn-primary">{{ Lang::get('site.submit') }}</button>
 	              </div>
             </form>
-
           </div>
-       </div>
-    
-	@stop
-	
-	
+       </div>    
+	@stop	
 {{-- Sidebar right --}}
 @section('sidebar_right')
 <div class="col-lg-4">		
@@ -142,22 +132,18 @@
 {{-- Scripts --}}
 @section('scripts')
 <script>
-	$( document ).ready(function() {
-		
+	$( document ).ready(function() {		
 		/*set a multiselect users for sending a message*/
-		$("#recipients").multiselect();
-	
+		$("#recipients").multiselect();	
 		/*mark message as read*/
 		$("[id^='msg-']").click(function() {
-
 			var values = $(this).attr("id");
 			var value = values.split('-')[1];
 				$.ajax({
 					url: 'messages/'+value+'/read',
 					type: "GET",							
 				})
-		})
-	
+		})	
 	});
 </script>
 @stop

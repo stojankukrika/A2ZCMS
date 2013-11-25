@@ -23,17 +23,16 @@
 {{-- Add page scripts --}}
 @section('page_scripts')
 	<style>
-	{{{ $page->page_css }}}
+		{{{ $page->page_css }}}
 	</style>
 	<script>
-	{{ $page->page_javascript}}
+		{{ $page->page_javascript}}
 	</script>
 @stop
 
 {{-- Sidebar left --}}
 @section('sidebar_left')
-	@foreach ($sidebar_left as $item)
-	
+	@foreach ($sidebar_left as $item)	
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>

@@ -24,7 +24,6 @@
 				</div>
 			</div>
 			<!-- ./ gallery title -->
-			
 			<!-- Start publish -->
 			<div class="form-group {{{ $errors->has('start_publish') ? 'error' : '' }}}">
 				<div class="col-md-12">
@@ -33,8 +32,7 @@
 					{{{ $errors->first('start_publish', '<span class="help-inline">:message</span>') }}}
 				</div>
 			</div>
-			<!-- ./ start publish -->
-			
+			<!-- ./ start publish -->			
 			<!-- End publish -->
 			<div class="form-group {{{ $errors->has('end_publish') ? 'error' : '' }}}">
 				<div class="col-md-12 controls">
@@ -70,6 +68,6 @@
 <script type="text/javascript">
  $(document).ready(function() {
 	$("#end_publish,#start_publish").datepicker({ dateFormat: 'yy-mm-dd' });  
-	});
+});
 </script>
 @stop

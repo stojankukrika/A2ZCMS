@@ -3,7 +3,6 @@
 @section('title')
 {{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.complite') }}
 @stop
-
 @section('content')
 <div id="install-region">
 	<h1>{{ Lang::get('install/installer.success') }}</h1>

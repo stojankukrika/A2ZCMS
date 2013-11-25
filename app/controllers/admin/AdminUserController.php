@@ -70,22 +70,16 @@ class AdminUserController extends AdminController {
 	public function getCreate() {
 		// All roles
 		$roles = $this -> role -> all();
-
 		// Get all the available permissions
 		$permissions = $this -> permission -> all();
-
 		// Selected groups
 		$selectedRoles = Input::old('roles', array());
-
 		// Selected permissions
 		$selectedPermissions = Input::old('permissions', array());
-
 		// Title
 		$title = Lang::get('admin/users/title.create_a_new_user');
-
 		// Mode
 		$mode = 'create';
-
 		// Show the page
 		return View::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
 	}
@@ -101,13 +95,12 @@ class AdminUserController extends AdminController {
 		$this -> user -> username = Input::get('username');
 		$this -> user -> email = Input::get('email');
 		$this -> user -> password = Input::get('password');
-
 		// The password confirmation will be removed from model
 		// before saving. This field will be used in Ardent's
 		// auto validation.
 		$this -> user -> password_confirmation = Input::get('password_confirmation');
 		$this -> user -> confirmed = Input::get('confirm');
-
+		
 		// Permissions are currently tied to roles. Can't do this yet.
 		//$user->permissions = $user->roles()->preparePermissionsForSave(Input::get( 'permissions' ));
 
@@ -300,14 +293,13 @@ class AdminUserController extends AdminController {
 	 * @return View
 	 */
 	public function getProfileEdit() {
-			
+					
 			$user_auth = Auth::user();
 			$user = User::where('id', '=', $user_auth->id) -> first();
 			// Title
-			$title = Lang::get('admin/users/title.user_update');
+			$title = Lang::get('admin/users/title.user_update');			
 			// mode
 			$mode = 'edit';
-
 			return View::make('admin/users/profile', compact('user', 'title', 'mode'));
 	}
 	
@@ -320,13 +312,11 @@ class AdminUserController extends AdminController {
 			// Declare the rules for the form validation
 		$rules = array('surname' => 'required', 
 						'name'=>'required');
-
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 		
 		$user_auth = Auth::user();
-		$user = User::where('id', '=', $user_auth->id) -> first();
-		
+		$user = User::where('id', '=', $user_auth->id) -> first();		
 		if ($validator -> passes()) {
 		
 			$oldUser = clone $user;
@@ -340,11 +330,9 @@ class AdminUserController extends AdminController {
 				$destinationPath = public_path() . '\avatar\\/';
 				$filename = $file->getClientOriginalName();				
 				$extension = $file -> getClientOriginalExtension();
-				$name = sha1($filename . time()) . '.' . $extension;		
-			
+				$name = sha1($filename . time()) . '.' . $extension;			
 				Input::file('avatar')->move($destinationPath, $name);
 				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .$name,80,80);
-				
 				$user -> avatar = $name;
 			}
 			if (!empty($password)) {
@@ -362,10 +350,8 @@ class AdminUserController extends AdminController {
 				unset($user -> password);
 				unset($user -> password_confirmation);
 			}
-
 			$user -> amend();
 		}
-
 		// Get validation errors (see Ardent package)
 		$error = $user -> errors() -> all();
 		

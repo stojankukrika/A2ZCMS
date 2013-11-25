@@ -3,15 +3,15 @@
 class AdminGalleryController extends AdminController {
 
 	/**
-	 * Post Model
-	 * @var Post
+	 * Gallery Model
+	 * @var Gallery
 	 */
 	protected $gallery;
 	protected $gallery_image;
 
 	/**
 	 * Inject the models.
-	 * @param Post $post
+	 * @param Gallery $post
 	 */
 	public function __construct(Gallery $gallery, GalleryImage $gallery_image) {
 		parent::__construct();
@@ -20,7 +20,7 @@ class AdminGalleryController extends AdminController {
 	}
 
 	/**
-	 * Show a list of all the blog posts.
+	 * Show a list of all the gallery posts.
 	 *
 	 * @return View
 	 */
@@ -28,7 +28,7 @@ class AdminGalleryController extends AdminController {
 		// Title
 		$title = Lang::get('admin/galleries/title.gallery_management');
 
-		// Grab all the blog posts
+		// Grab all the gallery posts
 		$galleries = $this -> gallery;
 
 		// Show the page
@@ -58,7 +58,7 @@ class AdminGalleryController extends AdminController {
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 
-			// Create a new blog post
+			// Create a new gallery
 			$user = Auth::user();
 			$this -> gallery -> title = Input::get('title');
 			$this -> gallery -> start_publish = (Input::get('start_publish') == '') ? date('Y-m-d') : Input::get('start_publish');
@@ -99,7 +99,7 @@ class AdminGalleryController extends AdminController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param $blog
+	 * @param $id
 	 * @return Response
 	 */
 	public function postEdit($id) {
@@ -117,11 +117,11 @@ class AdminGalleryController extends AdminController {
 		if ($validator -> passes()) {
 			// Was the page updated?
 			if ($gallery -> update($inputs)) {
-				// Redirect to the new blog post page
+				// Redirect to the new gallery
 				return Redirect::to('admin/galleries/' . $galleries -> id . '/edit') -> with('success', Lang::get('admin/galleries/messages.update.success'));
 			}
 
-			// Redirect to the blogs post management page
+			// Redirect to the gallery
 			return Redirect::to('admin/galleries/' . $galleries -> id . '/edit') -> with('error', Lang::get('admin/galleries/messages.update.error'));
 		}
 
@@ -141,15 +141,15 @@ class AdminGalleryController extends AdminController {
 		$gallery = Gallery::find($gallerys->id);
 		// Was the role deleted?
 		if ($gallery -> delete()) {
-			// Redirect to the blog posts management page
+			// Redirect to the gallery
 			return Redirect::to('admin/galleries') -> with('success', Lang::get('admin/galleries/messages.delete.success'));
 		}
-		// There was a problem deleting the blog post
+		// There was a problem deleting the gallery
 		return Redirect::to('admin/galleries') -> with('error', Lang::get('admin/galleries/messages.delete.error'));
 	}
 
 	/**
-	 * Show a list of all the blog posts formatted for Datatables.
+	 * Show a list of all the gallery formatted for Datatables.
 	 *
 	 * @return Datatables JSON
 	 */

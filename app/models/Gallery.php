@@ -18,7 +18,7 @@ class Gallery extends Eloquent implements PresentableInterface {
 	}
 
 	/**
-	 * Get the blog's author.
+	 * Get the author.
 	 *
 	 * @return User
 	 */

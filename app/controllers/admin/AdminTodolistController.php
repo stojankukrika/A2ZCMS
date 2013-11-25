@@ -24,7 +24,6 @@ class AdminTodolistController extends AdminController {
 	public function getIndex() {
 		// Title
 		$title = Lang::get('admin/todolists/title.to_do_management');
-
 		// Show the page
 		return View::make('admin/todolists/index', compact('title'));
 	}
@@ -65,9 +64,6 @@ class AdminTodolistController extends AdminController {
 			// create todo list
 			$this -> todolist -> save();
 			
-			if (!$this -> todolist -> save()) {
-				$error = $this -> todolist -> errors() -> all();
-			}
 		}
 
 		// Form validation failed

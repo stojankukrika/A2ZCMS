@@ -6,8 +6,6 @@
 |--------------------------------------------------------------------------
 |
 | Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
 |
 */
 
@@ -84,7 +82,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::post('blogs/{blog}/delete', 'AdminBlogController@getDelete');
     Route::controller('blogs', 'AdminBlogController');
 	
-	  # Gallery Comment Management
+	 # Gallery Comment Management
     Route::get('galleryimagecomments/{gallery}/commentsforgallery', 'AdminGalleryImageCommentController@getCommentsforgallery');
     Route::get('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentController@getEdit');
     Route::post('galleryimagecomments/{galleryimagecomment}/edit', 'AdminGalleryImageCommentController@postEdit');
@@ -106,7 +104,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::post('galleries/{gallery}/upload', 'AdminGalleryController@postUpload');		
     Route::controller('galleries', 'AdminGalleryController');
 	
-		# Navigation Management
+	# Navigation Management
 	Route::get('pages/{nav}/visible', 'AdminPageController@getVisible');
     Route::get('pages/{nav}/edit', 'AdminPageController@getEdit');
     Route::post('pages/{nav}/edit', 'AdminPageController@postEdit');

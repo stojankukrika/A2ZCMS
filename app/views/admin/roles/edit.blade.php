@@ -5,10 +5,10 @@
 <!-- Tabs -->
 <ul class="nav nav-tabs">
 	<li class="active">
-		<a href="#tab-general" data-toggle="tab">General</a>
+		<a href="#tab-general" data-toggle="tab">{{{ Lang::get('admin/general.general') }}}</a>
 	</li>
 	<li>
-		<a href="#tab-permissions" data-toggle="tab">Permissions</a>
+		<a href="#tab-permissions" data-toggle="tab">{{ Lang::get('confide.permissions') }}</a>
 	</li>
 </ul>
 <!-- ./ tabs -->

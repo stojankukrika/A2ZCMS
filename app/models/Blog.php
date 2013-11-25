@@ -15,7 +15,6 @@ class Blog extends Eloquent implements PresentableInterface {
 	public function content() {
 		return nl2br($this -> content);
 	}
-
 	/**
 	 * Get the blog's author.
 	 *
@@ -24,7 +23,6 @@ class Blog extends Eloquent implements PresentableInterface {
 	public function author() {
 		return $this -> belongsTo('User', 'user_id');
 	}
-
 	/**
 	 * Get the blog's comments.
 	 *
@@ -33,7 +31,6 @@ class Blog extends Eloquent implements PresentableInterface {
 	public function blogcomments() {
 		return $this -> hasMany('BlogComment');
 	}
-
 	/**
 	 * Get the blog's category.
 	 *
@@ -42,7 +39,6 @@ class Blog extends Eloquent implements PresentableInterface {
 	public function category() {
 		return $this -> hasMany('BlogBlogCategory');
 	}
-
 	/**
 	 * Get the date the blog was created.
 	 *
@@ -56,7 +52,6 @@ class Blog extends Eloquent implements PresentableInterface {
 
 		return String::date($date);
 	}
-
 	/**
 	 * Get the URL to the blog.
 	 *
@@ -65,7 +60,6 @@ class Blog extends Eloquent implements PresentableInterface {
 	public function url() {
 		return Url::to('blog/'.$this -> slug);
 	}
-
 	/**
 	 * Returns the date of the blog post creation,
 	 * on a good and more readable format :)
@@ -75,7 +69,6 @@ class Blog extends Eloquent implements PresentableInterface {
 	public function created_at() {
 		return $this -> date($this -> created_at);
 	}
-
 	/**
 	 * Returns the date of the blog post last update,
 	 * on a good and more readable format :)

@@ -25,6 +25,7 @@ return array(
 
     'login' => array(
         'title' => 'Login',
+        'accestouser' => 'Access to your account',
         'desc' => 'Login to system',
         'forgot_password' => 'Forgot password',
         'remember' => 'Remember me',
@@ -61,6 +62,7 @@ return array(
 
         'password_reset' => array(
             'subject' => 'Password Reset',
+            'info' => 'To reset your password, complete this form:',
             'greetings' => 'Hello :name',
             'body' => 'Access the following link to change your password',
             'farewell' => 'Regards',

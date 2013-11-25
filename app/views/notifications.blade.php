@@ -15,11 +15,11 @@
 	</button>
 	<h4>Success</h4>
 	@if(is_array($message))
-	@foreach ($message as $m)
-	{{ $m }}
-	@endforeach
+		@foreach ($message as $m)
+			{{ $m }}
+		@endforeach
 	@else
-	{{ $message }}
+		{{ $message }}
 	@endif
 </div>
 @endif
@@ -31,11 +31,11 @@
 	</button>
 	<h4>Error</h4>
 	@if(is_array($message))
-	@foreach ($message as $m)
-	{{ $m }}
-	@endforeach
+		@foreach ($message as $m)
+			{{ $m }}
+		@endforeach
 	@else
-	{{ $message }}
+		{{ $message }}
 	@endif
 </div>
 @endif
@@ -47,11 +47,11 @@
 	</button>
 	<h4>Warning</h4>
 	@if(is_array($message))
-	@foreach ($message as $m)
-	{{ $m }}
-	@endforeach
+		@foreach ($message as $m)
+			{{ $m }}
+		@endforeach
 	@else
-	{{ $message }}
+		{{ $message }}
 	@endif
 </div>
 @endif
@@ -63,11 +63,11 @@
 	</button>
 	<h4>Info</h4>
 	@if(is_array($message))
-	@foreach ($message as $m)
-	{{ $m }}
-	@endforeach
+		@foreach ($message as $m)
+			{{ $m }}
+		@endforeach
 	@else
-	{{ $message }}
+		{{ $message }}
 	@endif
 </div>
 @endif

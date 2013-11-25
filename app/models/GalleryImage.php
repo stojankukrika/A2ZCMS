@@ -16,7 +16,7 @@ class GalleryImage extends Eloquent implements PresentableInterface {
 		// Delete the comments
 		$this -> galleryimages() -> delete();
 
-		// Delete the blog post
+		// Delete the post
 		return parent::delete();
 	}
 
@@ -31,7 +31,7 @@ class GalleryImage extends Eloquent implements PresentableInterface {
 	}
 
 	/**
-	 * Get the blog's author.
+	 * Get the author.
 	 *
 	 * @return User
 	 */
@@ -40,7 +40,7 @@ class GalleryImage extends Eloquent implements PresentableInterface {
 	}
 
 	/**
-	 * Get the blog's comments.
+	 * Get the comments.
 	 *
 	 * @return array
 	 */

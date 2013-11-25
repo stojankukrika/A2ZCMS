@@ -3,6 +3,7 @@
 return array(
 
 	'title'      => 'Gallery Title',
+	'gallery'      => 'Gallery',
 	'images'	 => '# of Images',
 	'comments'   => '# of Comments',
 	'created_at' => 'Created at',

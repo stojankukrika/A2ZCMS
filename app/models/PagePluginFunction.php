@@ -40,8 +40,7 @@ class PagePluginFunction extends Eloquent implements PresentableInterface {
 	
 	public function page() {
 		return $this -> belongsToMany('Page', 'page_id');
-	}
-	
+	}	
 
 	/**
 	 * Returns a formatted post content entry,

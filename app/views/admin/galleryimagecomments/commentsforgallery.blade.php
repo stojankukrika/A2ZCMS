@@ -10,7 +10,6 @@
 <div class="page-header">
 	<h3> {{{ $title }}} </h3>
 </div>
-
 <table id="comments" class="table table-striped table-hover">
 	<thead>
 		<tr>

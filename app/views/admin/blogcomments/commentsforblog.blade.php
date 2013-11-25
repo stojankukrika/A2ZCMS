@@ -10,7 +10,6 @@
 <div class="page-header">
 	<h3> {{{ $title }}} {{ $blog->title }} </h3>
 </div>
-
 <table id="comments" class="table table-striped table-hover">
 	<thead>
 		<tr>
@@ -22,7 +21,6 @@
 	</thead>
 </table>
 @stop
-
 {{-- Scripts --}}
 @section('scripts')
 <script type="text/javascript">

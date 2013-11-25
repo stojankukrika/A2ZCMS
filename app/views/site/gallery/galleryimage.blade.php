@@ -8,7 +8,6 @@
 	</h1>
 	@endif
 @stop
-
 {{-- Page title --}}
 @section('page_breadcrumb')
 	@if(isset($breadcrumb))
@@ -19,7 +18,6 @@
 	</ol>
 	@endif
 @stop
-
 {{-- Add page scripts --}}
 @section('page_scripts')
 	<style>
@@ -29,7 +27,6 @@
 	{{ $page->page_javascript}}
 	</script>
 @stop
-
 {{-- Sidebar left --}}
 @section('sidebar_left')
 	@foreach ($sidebar_left as $item)
@@ -39,7 +36,6 @@
 		</div>
 	@endforeach 
 @stop
-
 {{-- Content --}}
 @section('content')
 <br>
@@ -47,7 +43,6 @@
 <div class="row"> 
       <img src="../../gallery/{{{$gallery->folderid}}}/{{{ $gallery_image->content }}}" class="img-responsive">        
      <hr>
-
 <!-- the comment box -->
   <div class="well">            
 	<h4>{{{ $gallery_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
@@ -55,8 +50,9 @@
 	@if ($gallery_comments->count())
 	@foreach ($gallery_comments as $comment)
 
-		<h4><b>{{{ $comment->author->username }}}</b>
-				<small>	{{{ $comment->date() }}}</small>
+		<h4>
+			<b>{{{ $comment->author->username }}}</b>
+			<small>	{{{ $comment->date() }}}</small>
 		</h4>
           <p>{{{ $comment->content() }}}</p>
 
@@ -65,7 +61,6 @@
 	<hr />
 	@endif
 </div>
-
 @if ( ! Auth::check())
 {{ Lang::get('site.add_comment_login') }}
 <br />
@@ -74,7 +69,6 @@
 @elseif ( ! $canGalleryComment )
 {{ Lang::get('site/blog.add_comment_permission') }}
 @else
-
 @if($errors->has())
 <div class="alert alert-danger alert-block">
 	<ul>
@@ -86,7 +80,6 @@
 	</ul>
 </div>
 @endif
-
 <div class="new_comment">
 	<h4>{{ Lang::get('site/blog.add_comment') }}</h4>
 	<form method="post" action="{{{ URL::to('galleryimage/'.$gallery->id.'/'.$gallery_image->id) }}}">
@@ -102,8 +95,6 @@
 @endif
 </div>
 @stop
-
-
 {{-- Sidebar right --}}
 @section('sidebar_right')
 <div class="col-lg-4">		

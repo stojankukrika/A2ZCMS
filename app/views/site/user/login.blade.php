@@ -1,14 +1,14 @@
 @extends('site.layouts.default')
 
-{{-- Web site Title --}}
-@section('title')
-{{{ Lang::get('user/user.login') }}} ::
-@parent
+	{{-- Web site Title --}}
+	@section('title')
+		{{{ Lang::get('user/user.login') }}} ::
+	@parent
 @stop
 
 {{-- Page title --}}
 @section('page_title')
-<span>Login</span><small>Access to your account</small></h2>
+	<span>{{Lang::get('confide.login.title')}}</span><small>{{Lang::get('confide.login.accestouser')}}</small></h2>
 @stop
 
 {{-- Content --}}
@@ -32,8 +32,7 @@
 			<div class="col-md-10">
 				<input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide.password') }}" type="password" name="password" id="password">
 			</div>
-		</div>
-	
+		</div>	
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<div class="checkbox">
@@ -44,19 +43,16 @@
 				</div>
 			</div>
 		</div>
-
 		@if ( Session::get('error') )
 		<div class="alert alert-danger">
 			{{ Session::get('error') }}
 		</div>
 		@endif
-
 		@if ( Session::get('notice') )
 		<div class="alert">
 			{{ Session::get('notice') }}
 		</div>
-		@endif
-		
+		@endif		
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<button tabindex="3" type="submit" class="btn btn-primary">
@@ -78,9 +74,7 @@
 			<a href="{{ Url::to('user/create') }}" class="btn btn-info">{{{ Lang::get('site/partial_views/sidebar/login.create_account') }}}</a>
 		</p>
 	</div>
-
 </div>
-
 @stop
 
 {{-- Sidebar right --}}

@@ -18,7 +18,7 @@ class AdminGalleryImageCommentController extends AdminController {
 	}
 
 	/**
-	 * Show a list of all the comment blogs.
+	 * Show a list of all the comment images.
 	 *
 	 * @return View
 	 */
@@ -34,7 +34,7 @@ class AdminGalleryImageCommentController extends AdminController {
 	}
 
 	/**
-	 * Show a list of all the comment for the selected blog.
+	 * Show a list of all the comment for the selected gallery.
 	 *
 	 * @return View
 	 */

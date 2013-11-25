@@ -3,7 +3,6 @@
 @section('title')
 {{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 4 {{ Lang::get('install/installer.of') }} 4
 @stop
-
 @section('content')
 <div id="install-region">
 	@if (Session::has('install_errors'))
@@ -55,7 +54,6 @@
  		$("#per_page").keyup(function () { 
 		    this.value = this.value.replace(/[^0-9\.]/g,'');
 		});
-
  	})
 </script>
  @stop

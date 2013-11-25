@@ -12,14 +12,12 @@
 	</li>
 </ul>
 <!-- ./ tabs -->
-
 {{-- Edit Blog Form --}}
 <form class="form-horizontal" enctype="multipart/form-data" method="post" 
 	action="@if (isset($blog)){{ URL::to('admin/blogs/' . $blog->id . '/edit') }}@endif" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<!-- ./ csrf token -->
-
 	<!-- Tabs Content -->
 	<div class="tab-content">
 		<!-- General tab -->
@@ -73,7 +71,6 @@
 				</div>
 			</div>
 			<!-- ./ blog categorys title -->
-
 			<!-- Content -->
 			<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
 				<div class="col-md-12">

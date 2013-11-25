@@ -4,13 +4,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
 		<title>A2Z CMS - Install</title>
-
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 		<!-- @todo: fill with your company info or remove -->
 		<meta name="description" content="">
 		<meta name="author" content="">
-
 		<link rel="stylesheet" type="text/css"  href="{{asset('assets/install/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/install/css/bootstrap-responsive.min.css')}}">
 		<!-- Font awesome - iconic font with IE7 support -->
@@ -23,7 +20,6 @@
 		<!--[if lt IE 9]>
 		<script src="{{asset('assets/site/js/html5.js')}}"></script>
 		<![endif]-->
-
 		<link rel="shortcut icon" href="{{asset('assets/admin/ico/favicon.ico')}}">
 	</head>
 
@@ -47,7 +43,6 @@
 			<!-- End: Navigation wrapper -->
 		</header>
 		<!-- End: HEADER -->
-
 		<div id="install">
 			<div class="container">
 				<div class="row">
@@ -59,7 +54,6 @@
 						@yield('content')
 						<!-- ./ content -->
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -71,38 +65,25 @@
 							&copy; 2013 <a class="a2zcms" href="#">A2Z CMS</a></span>
 						<span style="text-align:right;float:right">
 							Powered by: <a class="a2zcms" href="http://laravel.com/" alt="Laravel 4">Laravel 4</a></span>
-
 				</div>
 			</div>
 		</footer>
-
 		<!-- start: JavaScript-->
 		<!--[if !IE]>-->
-
 		<script src="{{asset('assets/install/js/jquery-2.0.3.min.js')}}"></script>
-
 		<!--<![endif]-->
-
 		<!--[if IE]>
-
 		<script src="{{asset('assets/install/js/jquery-1.10.2.min.js')}}"></script>
-
 		<![endif]-->
-
 		<!--[if !IE]>-->
-
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='{{asset('assets/install/js/jquery-2.0.3.min.js')}}'>" + "<" + "/script>");
 		</script>
-
 		<!--<![endif]-->
-
 		<!--[if IE]>
-
 		<script type="text/javascript">
 		window.jQuery || document.write("<script src='{{asset('assets/admin/js/jquery-1.10.2.min.js')}}'>"+"<"+"/script>");
 		</script>
-
 		<![endif]-->
 		<script src="{{asset('assets/install/js/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/install/js/bootstrap.min.js')}}" type="text/javascript"></script>

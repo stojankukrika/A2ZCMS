@@ -1,5 +1,4 @@
 @extends('site.layouts.default')
-
 {{-- Page title --}}
 @section('page_header')
 	@if($page->showtitle==1)
@@ -8,7 +7,6 @@
 	</h1>
 	@endif
 @stop
-
 {{-- Page title --}}
 @section('page_breadcrumb')
 	@if(isset($breadcrumb))
@@ -19,7 +17,6 @@
 	</ol>
 	@endif
 @stop
-
 {{-- Add page scripts --}}
 @section('page_scripts')
 	<style>
@@ -29,7 +26,6 @@
 	{{ $page->page_javascript}}
 	</script>
 @stop
-
 {{-- Sidebar left --}}
 @section('sidebar_left')
 	@foreach ($sidebar_left as $item)
@@ -39,7 +35,6 @@
 		</div>
 	@endforeach 
 @stop
-
 {{-- Content --}}
 @section('content')
 <br>
@@ -56,7 +51,6 @@
    			<strong>{{ Lang::get('site/blog.resource') }}:</strong>{{$blog->resource_link}}
    		</p>          
      <hr>
-
 <!-- the comment box -->
   <div class="well">            
 	<h4>{{{ $blog_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
@@ -74,7 +68,6 @@
 	<hr />
 	@endif
 </div>
-
 @if ( ! Auth::check())
 {{ Lang::get('site.add_comment_login') }}
 <br />
@@ -83,7 +76,6 @@
 @elseif ( ! $canBlogComment )
 {{ Lang::get('site/blog.add_comment_permission') }}
 @else
-
 @if($errors->has())
 <div class="alert alert-danger alert-block">
 	<ul>
@@ -95,7 +87,6 @@
 	</ul>
 </div>
 @endif
-
 <div class="new_comment">
 	<h4>{{ Lang::get('site/blog.add_comment') }}</h4>
 	<form method="post" action="{{{ URL::to($blog->slug) }}}">
@@ -110,8 +101,6 @@
 </div>
 @endif
 @stop
-
-	
 {{-- Sidebar right --}}
 @section('sidebar_right')
 <div class="col-lg-4">		

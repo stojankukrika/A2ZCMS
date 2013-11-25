@@ -14,7 +14,6 @@
 			<span class="icon-plus-sign icon-white"></span> {{{ Lang::get('admin/general.create') }}}</a>
 	</div></h3>
 </div>
-
 <table id="comments" class="table table-striped table-hover">
 	<thead>
 		<tr>

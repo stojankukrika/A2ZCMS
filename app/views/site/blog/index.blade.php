@@ -8,7 +8,6 @@
 	</h1>
 	@endif
 @stop
-
 {{-- Page title --}}
 @section('page_breadcrumb')
 	@if(isset($breadcrumb))
@@ -19,7 +18,6 @@
 	</ol>
 	@endif
 @stop
-
 {{-- Add page scripts --}}
 @section('page_scripts')
 	<style>
@@ -29,7 +27,6 @@
 	{{ $page->page_javascript}}
 	</script>
 @stop
-
 {{-- Sidebar left --}}
 @section('sidebar_left')
 	@foreach ($sidebar_left as $item)
@@ -39,7 +36,6 @@
 		</div>
 	@endforeach 
 @stop
-
 {{-- Content --}}
 @section('content')
 <br>
@@ -58,7 +54,6 @@
    			<strong>{{ Lang::get('site/blog.resource') }}:</strong>{{$blog->resource_link}}
    		</p>          
      <hr>
-
 <!-- the comment box -->
   <div class="well">            
 	<h4>{{{ $blog_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
@@ -70,13 +65,11 @@
 				<small>	{{{ $comment->date() }}}</small>
 		</h4>
           <p>{{{ $comment->content() }}}</p>
-
 	@endforeach
 	@else
 	<hr />
 	@endif
 </div>
-
 @if ( ! Auth::check())
 {{ Lang::get('site/blog.add_comment_login') }}
 <br />
@@ -99,7 +92,6 @@
 	</ul>
 </div>
 @endif
-
 <div class="new_comment">
 	<h4>{{ Lang::get('site/blog.add_comment') }}</h4>
 	<form method="post" action="{{{ URL::to('blog/'.$blog->slug) }}}">
@@ -114,8 +106,6 @@
 </div>
 @endif
 @stop
-
-	
 {{-- Sidebar right --}}
 @section('sidebar_right')
 <div class="col-lg-4">		
