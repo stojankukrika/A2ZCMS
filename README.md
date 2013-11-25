@@ -215,6 +215,28 @@ By default debugging is enabled. Before you go to production you should disable 
 
   composer dump-autoload --optimize
 
+### Site loading very slow
+
+For some Windows people they have had to manually adjust the path in composer because composer is looking in 
+ITS root folder (C:\ProgramData\Composer\Bin....etc...) for artisan instead of the root folder you are 
+currently working from.
+In your composer.json change the lines to reflect the full path to artisan and remember to escape the slash.
+For example, assuming a Windows PC with WAMP installed :
+
+		"pre-update-cmd": [
+			"php c:\\wamp\\www\\website\\artisan clear-compiled"
+		],
+		"post-install-cmd": [
+			"php c:\\wamp\\www\\website\\artisan optimize"
+		],
+		"post-update-cmd": [
+			"php c:\\wamp\\www\\website\\artisan optimize"
+		]
+
+Note : This will change your composer.json to only work on your current PC (or any with a similar path). 
+If you use github or something to work on another system, this will need to be changed to reflect the new 
+environment.
+
 
 -----
 <a name="feature7"></a>
