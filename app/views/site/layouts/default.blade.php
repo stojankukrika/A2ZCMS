@@ -12,14 +12,14 @@
 		<meta name="keywords" content="{{$metakey}}">
 		<meta name="author" content="{{$metaauthor}}">
 
-		<link rel="stylesheet" type="text/css"  href="{{asset('assets/site/css/bootstrap.min.css')}}">	
-		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/css/jquery-ui-1.10.3.custom.css')}}">		
-		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/css/jquery.multiselect.css')}}">	
-		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/css/a2zcms.css')}}">		
+		<link rel="stylesheet" type="text/css"  href="{{asset('assets/site/'.$sitetheme.'/css/bootstrap.min.css')}}">	
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/jquery-ui-1.10.3.custom.css')}}">		
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/jquery.multiselect.css')}}">	
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/a2zcms.css')}}">		
 		
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
-		<script src="{{asset('assets/site/js/html5.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/html5.js')}}"></script>
 		<![endif]-->
 
 		<link rel="shortcut icon" href="{{asset('admin/ico/favicon.ico')}}">
@@ -71,20 +71,20 @@
 		<!-- start: JavaScript-->
 		<!--[if !IE]>-->
 
-		<script src="{{asset('assets/site/js/jquery-2.0.3.min.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery-2.0.3.min.js')}}"></script>
 
 		<!--<![endif]-->
 
 		<!--[if IE]>
 
-		<script src="{{asset('assets/site/js/jquery-1.10.2.min.js')}}"></script>
+		<script src="{{asset('assets/site/js/'.$sitetheme.'/jquery-1.10.2.min.js')}}"></script>
 
 		<![endif]-->
 
 		<!--[if !IE]>-->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{{asset('assets/site/js/jquery-2.0.3.min.js')}}'>" + "<" + "/script>");
+			window.jQuery || document.write("<script src='{{asset('assets/site/'.$sitetheme.'/js/jquery-2.0.3.min.js')}}'>" + "<" + "/script>");
 		</script>
 
 		<!--<![endif]-->
@@ -92,17 +92,17 @@
 		<!--[if IE]>
 
 		<script type="text/javascript">
-		window.jQuery || document.write("<script src='{{asset('assets/site/js/jquery-1.10.2.min.js')}}'>"+"<"+"/script>");
+		window.jQuery || document.write("<script src='{{asset('assets/site/'.$sitetheme.'/js/jquery-1.10.2.min.js')}}'>"+"<"+"/script>");
 		</script>
 
 		<![endif]-->
-		<script src="{{asset('assets/site/js/jquery-migrate-1.2.1.min.js')}}"></script>
-		<script src="{{asset('assets/site/js/bootstrap.js')}}"></script>
-		<script src="{{asset('assets/site/js/theme.js')}}"></script>
-		<script src="{{asset('assets/site/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-		<script src="{{asset('assets/site/js/jquery.validate.js')}}"></script>
-		<script src="{{asset('assets/site/js/select2.js')}}"></script>
-		<script src="{{asset('assets/site/js/jquery.multiselect.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery-migrate-1.2.1.min.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/bootstrap.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/theme.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery.validate.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/select2.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery.multiselect.js')}}"></script>
 		<!-- end: JavaScript-->
 		@yield('scripts')
 	</body>

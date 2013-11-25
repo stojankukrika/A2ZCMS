@@ -2,7 +2,17 @@
 ======
 
 ## Cms based on Laravel 4
+[A2Z CMS Features](#feature1)
+[Requirements](#feature2)
+[How to install](#feature3)
+[Application Structure](#feature4)
+[Production Launch](#feature5)
+[Troubleshooting](#feature6)
+[Included Package Information](#feature7)
+[License](#feature8)
+[License](#feature9)
 
+<a name="feature1"></a>
 ## A2Z CMS Features:
 * Laravel 4
 * Twitter Bootstrap 3.0.0
@@ -12,31 +22,45 @@
 	* 500 for internal server errors
 * [Confide](#confide) for Authentication and Authorization
 * Back-end
-	* User and Role management
-	* Manage blog posts and comments
-	* WYSIWYG editor for post creation and editing.
+	* Automatic install and settup website.
+	* User and Role management.
+	* Manage blog posts and comments.
+	* Manage gallery pictures and comments.
+	* Manage custom forms.
+	* Manage pages aranged into cateogry and possition.
+	* Manage to-do list.
     * DataTables dynamic table sorting and filtering.
     * Colorbox Lightbox jQuery modal popup.
+    * soon will be more...
 * Front-end
 	* User login, registration, forgot password
-	* User account area
-	* Simple Blog functionality
+	* Blog,Gallery,Messages and more functionality
 * Packages included:
 	* [Confide](#confide)
 	* [Entrust](#entrust)
 	* [Ardent](#ardent)
 	* [Carbon](#carbon)
-	* [Basset](#basset)
 	* [Presenter](#presenter)
 	* [JeffreyWay Laravel 4 Generators](#generators)
 
 -----
+<a name="feature2"></a>
 ##Requirements
 
 	PHP >= 5.4.0 (Entrust requires 5.4, this is an increase over Laravel's 5.3.7 requirement)
 	MCrypt PHP Extension
 
+-----
+<a name="feature3"></a>
 ##How to install
+[Step 1: Get the code](#step1)
+[Step 2: Use Composer to install dependencies](#step2)
+[Step 3: Configure Environments(optional)](#step3)
+[Step 4: Configure Mailer](#step4)
+[Step 5: Install CMS](#step5)
+[Step 6: Make sure app/storage is writable by your web server](#step6)
+[Step 7: Start Page](#step6)
+<a name="step1"></a>
 ### Step 1: Get the code
 #### Option 1: Git Clone
 
@@ -46,6 +70,7 @@
 
     https://github.com/mrakodol/A2ZCMS/archive/master.zip
 
+<a name="step2"></a>
 ### Step 2: Use Composer to install dependencies
 #### Option 1: Composer is not installed globally
 
@@ -57,7 +82,6 @@
     cd a2zcms
 	composer install --dev
 
-If you haven't already, you might want to make [composer be installed globally](http://andrewelkins.com/programming/php/setting-up-composer-globally-for-laravel-4/) for future ease of use.
 
 Please note the use of the `--dev` flag.
 
@@ -69,6 +93,17 @@ This will skip the development packages and ensure the version of the packages i
 
 NEVER RUN `php composer.phar update` ON YOUR PRODUCTION SERVER.
 
+If you haven't already, you might want to make composer be installed globally:
+
+    $ curl -s http://getcomposer.org/installer | php
+    $ sudo mv composer.phar /usr/local/bin/composer
+
+Now I can use composer by invoking just the composer command.
+
+Optional way to do it, is to set up an alias:
+    alias composer='/location/of/the/composer.phar'
+
+<a name="step3"></a>
 ### Step 3: Configure Environments(optional)
 
 Laravel 4 will load configuration files depending on your environment. Basset will also build collections depending on this environment setting.
@@ -95,20 +130,20 @@ You will now be copying the initial configuration file inside this folder before
 
         'timezone' => 'UTC',
     );
-
+<a name="step4"></a>
 ### Step 4: Configure Mailer
 
 In the same fashion, copy the ***app/config/mail.php*** configuration file in ***app/config/local/mail.php***. Now set the `address` and `name` from the `from` array in ***config/mail.php***. Those will be used to send account confirmation and password reset emails to the users.
 If you don't set that registration will fail because it cannot send the confirmation email.
 
-
+<a name="step5"></a>
 ### Step 5: Install CMS
 
 Now that you have the environment configured, you need to create a database configuration for it. 
 If you install A2ZCMS on your localhost in folder a2zcms, you can type on web browser: http://localhost/a2zcms/
 And than finish the installation. Instalation would populate a database with tables and start-up data(you can delete that data later).
 
-
+<a name="step6"></a>
 ### Step 6: Make sure app/storage is writable by your web server.
 
 If permissions are set correctly:
@@ -118,7 +153,7 @@ If permissions are set correctly:
 Should work, if not try
 
     chmod -R 777 app/storage
-
+<a name="step7"></a>
 ### Step 7: Start Page
 
 ####Admin login
@@ -127,20 +162,9 @@ You can login to admin part of A2ZCMS:
     username: username_from_install_proces
     password: password_from_install_proces
 
+
 -----
-## A2Z CMS features
-* Register and validate users
-* To-do list
-* Custom forms
-* Blog
-* Gallery
-* Pages
-* Website settings
-* Messages
-* Add avatar to users
-* ....
-
-
+<a name="feature4"></a>
 ## Application Structure
 
 The structure of this starter site is the same as default Laravel 4 with one exception.
@@ -150,9 +174,10 @@ The files within library could also be handled within a composer package, but is
 Controllers for Admin part located in admin folder in Controller folder in app folder. 
 CMS have a custom make a page using custom function for main content and sidebar.
 Implementation custom function for pages is located in BaseController and shows in all pages. 
-When user go to some noncustom page(edit profile, messages,...) user get sidebar from first page.
+When user go to some non-custom page(edit profile, messages,...) user get sidebar from first page.
 
-
+-----
+<a name="feature5"></a>
 ### Production Launch
 
 By default debugging is enabled. Before you go to production you should disable debugging in `app/config/app.php`
@@ -172,13 +197,17 @@ By default debugging is enabled. Before you go to production you should disable 
     'debug' => false,
 ```
 
+-----
+<a name="feature6"></a>
 ## Troubleshooting
 
 ### Site loading very slow
 
   composer dump-autoload --optimize
 
+
 -----
+<a name="feature7"></a>
 ## Included Package Information
 <a name="confide"></a>
 ## Confide Authentication Solution
@@ -242,30 +271,6 @@ $worldWillEnd = Carbon::createFromDate(2012, 12, 21, 'GMT');
 
 For full usage see [Carbon](https://github.com/briannesbitt/Carbon)
 
-<a name="basset"></a>
-## Basset
-
-A Better Asset Management package for Laravel.
-
-Adding assets in the configuration file `config/packages/jasonlewis/basset/config.php`
-```php
-'collections' => array(
-        'public-css' => function($collection)
-        {
-            $collection->add('assets/css/bootstrap.min.css');
-            $collection->add('assets/css/bootstrap-responsive.min.css');
-        },
-    ),
-```
-
-Compiling assets
-
-    $ php artisan basset:build
-
-I would recommend using development collections for development instead of compiling .
-
-For full usage see [Using Basset by Jason Lewis](http://jasonlewis.me/code/basset/4.0)
-
 <a name="presenter"></a>
 ## Presenter
 
@@ -298,11 +303,15 @@ Laravel 4 Generators package provides a variety of generators to speed up your d
 For full usage see [Laravel 4 Generators Readme](https://github.com/JeffreyWay/Laravel-4-Generators/blob/master/readme.md)
 
 
+
 -----
+<a name="feature8"></a>
 ## License
 
 This is free software distributed under the terms of the MIT license
 
+-----
+<a name="feature9"></a>
 ## Additional information
 
 Inspired by and based on [andrew13's Laravel-4-Bootstrap-Starter-Site](https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site)

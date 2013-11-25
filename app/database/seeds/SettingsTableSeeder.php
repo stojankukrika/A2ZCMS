@@ -79,6 +79,10 @@ class SettingsTableSeeder extends Seeder {
 												'groupname' => 'setting', 
 												'value' => '', 
 												'defaultvalue' => '', ), 
+											array('varname' => 'sitetheme', 
+												'groupname' => 'setting', 
+												'value' => '', 
+												'defaultvalue' => 'default', ),
 										)
 									);
 

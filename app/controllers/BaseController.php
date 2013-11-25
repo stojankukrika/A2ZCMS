@@ -58,7 +58,10 @@ class BaseController extends Controller {
 			}	
 			if ($v -> varname == 'searchcode') {
 				View::share('searchcode',  $v -> value);
-			}					
+			}
+			if ($v -> varname == 'sitetheme') {
+				View::share('sitetheme',  $v -> value);
+			}				
 			
 		}
 		if($offline==1)

@@ -166,6 +166,9 @@ class InstallController extends BaseController {
 					case 'pageitem' :
 						$v -> value = $per_page;
 						break;
+					case 'sitetheme':
+						$v -> value = $theme;
+					break;
 				}
 				Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
 			}

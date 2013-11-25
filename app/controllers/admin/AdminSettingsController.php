@@ -38,11 +38,19 @@ class AdminSettingsController extends AdminController {
 	 */
 	public function postIndex() {
 		// Declare the rules for the form validation
-		$rules = array('email' => 'required|email', 'searchcode' => 'required', 'title' => 'required|min:3', 'copyright' => 'required|min:3', 'dateformat' => 'required', 'timeformat' => 'required', 'useravatwidth' => 'required|integer', 'useravatheight' => 'required|integer', 'shortmsg' => 'required|integer', 'pageitem' => 'required|integer');
+		$rules = array('email' => 'required|email', 
+						'title' => 'required', 
+						'copyright' => 'required', 
+						'dateformat' => 'required', 
+						'timeformat' => 'required', 
+						'useravatwidth' => 'required|integer', 
+						'useravatheight' => 'required|integer', 
+						'shortmsg' => 'required|integer', 
+						'pageitem' => 'required|integer');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
-
+	
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Update the blog post data
@@ -62,7 +70,8 @@ class AdminSettingsController extends AdminController {
 			$offline = Input::get('offline');
 			$offlinemessage = Input::get('offlinemessage');
 			$searchcode = Input::get('searchcode');
-
+			$sitetheme = Input::get('sitetheme');
+			
 			//Save settings to database
 			$settings = Settings::all();
 			foreach ($settings as $v) {
@@ -115,6 +124,10 @@ class AdminSettingsController extends AdminController {
 						break;
 					case 'searchcode':
 						$v -> value = $searchcode;
+						break;
+					case 'sitetheme':
+						$v -> value = $sitetheme;
+						break;
 				}
 				Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
 			}

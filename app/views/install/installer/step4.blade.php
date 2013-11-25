@@ -30,7 +30,9 @@
 			<label class="control-label" for="theme">{{ Lang::get('install/installer.site_theme') }}</label>
 			<div class="controls">
 				<select name="theme">
-					<option value="default">default</option>
+					<option value="a2z-default">A2Z-default</option>
+					<option value="bootstrap">bootstrap</option>
+					<option value="cerulean">cerulean</option>
 				</select>
 			</div>
 		</div>

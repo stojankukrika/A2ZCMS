@@ -137,6 +137,7 @@
 <script type="text/javascript">
  $(document).ready(function() {
 	$("#blogcategory_id").select2();  
+	$("#end_publish,#start_publish").datepicker({ dateFormat: 'yy-mm-dd' });  
 	});
 </script>
 @stop

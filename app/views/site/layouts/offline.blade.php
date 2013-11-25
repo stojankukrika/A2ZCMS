@@ -13,9 +13,9 @@
 		<?php
 		$asset = Config::get('app.url');
 		?>
-		<link rel="stylesheet" type="text/css"  href="{{$asset}}assets/site/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css"  href="{{$asset}}assets/site/'.$sitetheme.'/css/bootstrap.min.css">
 		
-		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/css/a2zcms.css">		
+		<link rel="stylesheet" type="text/css" href="{{$asset}}assets/site/'.$sitetheme.'/css/a2zcms.css">		
 
 		<link rel="shortcut icon" href="{{$asset}}assets/admin/ico/favicon.ico">
 	</head>

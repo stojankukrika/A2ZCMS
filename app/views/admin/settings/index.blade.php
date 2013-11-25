@@ -165,6 +165,29 @@
 							</div>
 						</div>
 						<!-- ./ pageitem -->
+						
+						<!-- site theme -->
+						<div class="form-group {{{ $errors->has('sitetheme') ? 'error' : '' }}}">
+							<div class="col-md-12">
+								{{Form::label('sitetheme', Lang::get('admin/settings/table.sitetheme'), array('class' => 'control-label'))}}
+								<select name="sitetheme" id="sitetheme" class="form-control input-sm">
+								<?php
+									$sitetheme = '';
+									foreach ($settings as $v) {
+										if ($v -> varname == 'sitetheme') { $sitetheme = $v -> value;
+										}
+									}
+									foreach(glob(base_path() . '\public\assets\site\*', GLOB_ONLYDIR) as $dir) {
+									    $dir = str_replace(base_path() . '\public\assets\site\\', '', $dir);
+									   echo '<option value="'.$dir.'"';
+									   if($dir==$sitetheme) echo 'selected="selected"';
+									   echo '>'.ucfirst($dir).'</option>';
+									}
+								?>
+								</select>
+							</div>
+						</div>
+						<!-- ./ pageitem -->
 					</div>
 					<!-- Analytics tab -->
 					<div class="tab-pane active" id="analytics_code">
@@ -260,9 +283,14 @@
 									}
 								} ?>
 								{{Form::label('offline', Lang::get('admin/settings/table.offline'), array('class' => 'control-label'))}}
-								{{Form::radio('offline', '0', ($offline)?true:false);}} {{Lang::get('admin/settings/table.yes')}}
-								{{Form::radio('offline', '1', (!$offline)?true:false);}} {{Lang::get('admin/settings/table.no')}}
-								{{ $errors->first('offline', '<span class="help-inline">:message</span>') }}
+								<label class="radio">
+									{{ Form::radio('offline', 1, (Input::old('offline') == '1'  || $offline == '1') ? true : false, array('id'=>'offline', 'class'=>'radio')) }}
+									{{{ Lang::get('admin/pages/table.yes') }}}	
+								</label>
+								<label class="radio">
+									{{ Form::radio('offline', 0, (Input::old('offline') == '0' || $offline == '0') ? true : false, array('id'=>'offline', 'class'=>'radio')) }}
+									{{{ Lang::get('admin/pages/table.no') }}}	
+								</label>
 							</div>
 						</div>
 						<!-- ./ offline -->
@@ -308,6 +336,9 @@
 <script>
 	$(function() {
 		$("#tabs").tabs();
+		$('#useravatwidth,#useravatheight,#shortmsg,#pageitem').keyup(function () { 
+			    this.value = this.value.replace(/[^0-9\.]/g,'');
+			});
 	}); 
 </script>
 @stop
