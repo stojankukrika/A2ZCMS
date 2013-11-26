@@ -20,7 +20,7 @@ class AdminDashboardController extends AdminController {
 			}					
 			
 		}
-				
+		$data['title']	= Lang::get('admin/general.dashboard');
 		$data['to_do_list'] = Todolist::count();
 		$data['pages'] = Page::count();
 		$data['customform'] = CustomForm::count();

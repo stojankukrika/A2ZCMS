@@ -100,7 +100,7 @@
 			<div class="form-group {{{ $errors->has('roles') ? 'error' : '' }}}">
 				<label class="col-md-2 control-label" for="roles">{{ Lang::get('confide.roles') }}</label>
 				<div class="col-md-6">
-					<select class="form-control" name="roles[]" id="roles[]" multiple>
+					<select name="roles[]" id="roles" multiple style="width:350px;" >
 						@foreach ($roles as $role)
 						@if ($mode == 'create')
 						<option value="{{{ $role->id }}}"{{{ ( in_array($role->id, $selectedRoles) ? ' selected="selected"' : '') }}}>{{{ $role->name }}}</option>
@@ -136,4 +136,12 @@
 	</div>
 	<!-- ./ form actions -->
 </form>
+@stop
+{{-- Scripts --}}
+@section('scripts')
+<script type="text/javascript">
+	$(function() {
+		$("#roles").select2() // 0-based index;  
+	});
+</script>
 @stop

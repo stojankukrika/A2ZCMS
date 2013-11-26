@@ -7,9 +7,6 @@
 	<li class="active">
 		<a href="#tab-general" data-toggle="tab">{{{ Lang::get('admin/general.general') }}}</a>
 	</li>
-	<li>
-		<a href="#tab-permissions" data-toggle="tab">{{ Lang::get('confide.permissions') }}</a>
-	</li>
 </ul>
 <!-- ./ tabs -->
 
@@ -32,23 +29,22 @@
 				</div>
 			</div>
 			<!-- ./ name -->
+		<!-- ./ name -->
+			<!-- Permissions -->
+		<div class="form-group">
+			<label class="col-md-2 control-label" for="name">{{{ Lang::get('admin/roles/table.choose_role') }}}</label>
+				<div class="col-md-10">
+					<select tabindex="2" name="permission[]" id="permission" multiple="" style="width:350px;" data-placeholder="{{{ Lang::get('admin/roles/table.choose_role') }}}">
+		            @foreach ($permissions as $permission)
+		            	<option value="{{{ $permission['id'] }}}">{{{ $permission['display_name'] }}}</option>
+		            @endforeach
+		          </select>
+		        </div>
+		    </div>
 		</div>
-		<!-- ./ tab general -->
-
-		<!-- Permissions tab -->
-		<div class="tab-pane" id="tab-permissions">
-			<div class="form-group">
-				@foreach ($permissions as $permission)
-				<label>
-					<input class="control-label" type="hidden" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="0" />
-					<input class="form-control" type="checkbox" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="1"{{{ (isset($permission['checked']) && $permission['checked'] == true ? ' checked="checked"' : '')}}} />
-					{{{ $permission['display_name'] }}} </label>
-				@endforeach
-			</div>
-		</div>
-		<!-- ./ permissions tab -->
+	  <!-- ./ permissions -->
 	</div>
-	<!-- ./ tabs content -->
+	<!-- ./ General tab -->
 
 	<!-- Form Actions -->
 	<div class="form-group">
@@ -66,4 +62,12 @@
 	</div>
 	<!-- ./ form actions -->
 </form>
+@stop
+{{-- Scripts --}}
+@section('scripts')
+<script type="text/javascript">
+	$(function() {
+		$("#permission").select2() // 0-based index;  
+	});
+</script>
 @stop

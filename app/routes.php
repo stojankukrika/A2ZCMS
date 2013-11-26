@@ -128,7 +128,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
 
     # User Management    
     Route::get('users/{role}/usersforrole', 'AdminUserController@getUsersForRole');
-    Route::get('users/{user}/show', 'AdminUserController@getShow');
     Route::get('users/{user}/edit', 'AdminUserController@getEdit');
     Route::post('users/{user}/edit', 'AdminUserController@postEdit');
     Route::get('users/{user}/delete', 'AdminUserController@getDelete');
@@ -139,7 +138,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::controller('users', 'AdminUserController');
 
     # User Role Management
-    Route::get('roles/{role}/show', 'AdminRoleController@getShow');
     Route::get('roles/{role}/edit', 'AdminRoleController@getEdit');
     Route::post('roles/{role}/edit', 'AdminRoleController@postEdit');
     Route::get('roles/{role}/delete', 'AdminRoleController@getDelete');

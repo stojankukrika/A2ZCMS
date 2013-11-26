@@ -1,5 +1,10 @@
 @extends('admin.layouts.default') 
 
+{{-- Web site Title --}}
+@section('title')
+{{{ $title }}} ::
+@stop
+
 {{-- Content --}}
 @section('content')
 	<div class="row">				

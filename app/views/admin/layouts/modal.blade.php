@@ -9,9 +9,7 @@
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title> @section('title')
-			{{{ $title }}} :: Administration
-			@end </title>
+		<title> {{{ $title }}} :: Administration </title>
 
 		<meta name="keywords" content="@yield('keywords')" />
 		<meta name="author" content="@yield('author')" />
