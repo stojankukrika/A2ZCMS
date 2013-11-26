@@ -216,7 +216,7 @@ By default debugging is enabled. Before you go to production you should disable 
 
   composer dump-autoload --optimize
 
-### Site loading very slow
+### If A2Z CMS did not want to get dependesy
 
 For some Windows people they have had to manually adjust the path in composer because composer is looking in 
 ITS root folder (C:\ProgramData\Composer\Bin....etc...) for artisan instead of the root folder you are 
