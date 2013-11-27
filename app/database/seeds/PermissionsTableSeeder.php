@@ -7,17 +7,17 @@ class PermissionsTableSeeder extends Seeder {
 
 		$permissions = array( 
 						array('name' => 'manage_blogs', 
-						'display_name' => 'Manage blogs'), 
+						'display_name' => 'Manage blogs',1), 
 						array('name' => 'manage_blog_categris', 
-						'display_name' => 'Manage blog categris'), 
+						'display_name' => 'Manage blog categris',1), 
 						array('name' => 'manage_comments', 
-						'display_name' => 'Manage comments'), 
+						'display_name' => 'Manage comments',1), 
 						array('name' => 'manage_users', 
-						'display_name' => 'Manage users'), 
+						'display_name' => 'Manage users',1), 
 						array('name' => 'manage_roles', 
-						'display_name' => 'Manage roles'), 
+						'display_name' => 'Manage roles',1), 
 						array('name' => 'post_blog_comment', 
-						'display_name' => 'Post blog comment'), 
+						'display_name' => 'Post blog comment',0), 
 					);
 
 		DB::table('permissions') -> insert($permissions);

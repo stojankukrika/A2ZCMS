@@ -56,7 +56,8 @@ class AdminRoleController extends AdminController {
 	 */
 	public function getCreate() {
 		// Get all the available permissions
-		$permissions = $this -> permission -> all();
+		$permissionsAdmin = $this -> permission -> where('is_admin','=',1)->get();
+		$permissionsUser = $this -> permission -> where('is_admin','=',0)->get();
 
 		// Selected permissions
 		$permisionsadd =Input::old('permissions', array());
@@ -64,7 +65,7 @@ class AdminRoleController extends AdminController {
 		$title = Lang::get('admin/roles/title.create_a_new_role');
 
 		// Show the page
-		return View::make('admin/roles/create_edit', compact('permissions', 'permisionsadd', 'title'));
+		return View::make('admin/roles/create_edit', compact('permissionsAdmin', 'permissionsUser','permisionsadd', 'title'));
 	}
 
 	/**
@@ -76,13 +77,20 @@ class AdminRoleController extends AdminController {
 
 		// Declare the rules for the form validation
 		$rules = array('name' => 'required');
-
+		$is_admin = 0;
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Get the inputs, with some exceptions
-			
+			foreach (Input::get('permission') as $item) {
+				$perm = Permission::where('id','=',$item);
+				if($perm->is_admin=='1')
+				{
+					$is_admin = 1;
+				}
+			}
+			$this -> role -> is_admin = $is_admin;
 			$this -> role -> name = Input::get('name');
 			$this -> role -> save();
 			foreach (Input::get('permission') as $item) {
@@ -90,7 +98,7 @@ class AdminRoleController extends AdminController {
 				$permission->permission_id = $item;
 				$permission->role_id = $this -> role->id;
 				$permission -> save();
-			}
+			}			
 		}
 
 		// Form validation failed
@@ -105,7 +113,9 @@ class AdminRoleController extends AdminController {
 	 */
 	public function getEdit($role) {
 		if (!empty($role)) {
-			$permissions = $this -> permission -> preparePermissionsForDisplay($role -> perms() -> get());
+			$permissionsAdmin = $this -> permission -> where('is_admin','=',1)->get();
+			$permissionsUser = $this -> permission -> where('is_admin','=',0)->get();
+
 		} else {
 			// Redirect to the roles management page
 			return Redirect::to('admin/roles') -> with('error', Lang::get('admin/roles/messages.does_not_exist'));
@@ -115,7 +125,7 @@ class AdminRoleController extends AdminController {
 		$title = Lang::get('admin/roles/title.role_update');
 
 		// Show the page
-		return View::make('admin/roles/create_edit', compact('role', 'permissions', 'title','permisionsadd'));
+		return View::make('admin/roles/create_edit', compact('role', 'permissionsAdmin', 'permissionsUser','title','permisionsadd'));
 	}
 
 	/**
@@ -127,14 +137,22 @@ class AdminRoleController extends AdminController {
 	public function postEdit($role) {
 		// Declare the rules for the form validation
 		$rules = array('name' => 'required');
-
+		$is_admin = 0;
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Update the role data
-			$role -> name = Input::get('name');			
+			foreach (Input::get('permission') as $item) {
+				$perm = Permission::where('id','=',$item);
+				if($perm->is_admin=='1')
+				{
+					$is_admin = 1;
+				}
+			}
+			$role -> is_admin = $is_admin;
+			$role -> name = Input::get('name');
 			$role -> save();
 			
 			PermissionRole::where('role_id','=',$role->id) -> delete();

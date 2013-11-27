@@ -6,15 +6,15 @@ class GallerysPermissionSeeder extends Seeder {
 
 		$permissions = array( 
 					array('name' => 'manage_galleries', 
-							'display_name' => 'Manage galleries'), 
+							'display_name' => 'Manage galleries',1), 
 					array('name' => 'manage_gallery_images', 
-							'display_name' => 'Manage gallery images'), 
+							'display_name' => 'Manage gallery images',1), 
 					array('name' => 'manage_gallery_imagecomments', 
-							'display_name' => 'Manage gallery image comments'),
+							'display_name' => 'Manage gallery image comments',1),
 					array('name' => 'menage_customform',
-							'display_name' => 'Menage custom forms'),
+							'display_name' => 'Menage custom forms',1),
 					array ('name' => 'post_gallery_comment' ,
-							'display_name' => 'Post gallery comment'));
+							'display_name' => 'Post gallery comment',0));
 
 		DB::table('permissions') -> insert($permissions);
 
