@@ -10,6 +10,7 @@
 * [Included Package Information](#feature7)
 * [License](#feature8)
 * [Additional information](#feature9)
+* [How CMS is look like](#feature10)
 
 <a name="feature1"></a>
 ## A2Z CMS Features:
@@ -352,3 +353,13 @@ This is free software distributed under the terms of the MIT license
 ## Additional information
 
 Inspired by and based on [andrew13's Laravel-4-Bootstrap-Starter-Site](https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site)
+
+<a name="feature10"></a>
+##How CMS is look like
+
+![Install](http://oi41.tinypic.com/2my907n.jpg)
+![First page](http://oi39.tinypic.com/15661qw.jpg)
+![Messages](http://oi39.tinypic.com/2ajdwl2.jpg)
+![Admin dashboard](http://oi44.tinypic.com/2870ry0.jpg)
+![Admin page](http://oi44.tinypic.com/eu2ffc.jpg)
+
