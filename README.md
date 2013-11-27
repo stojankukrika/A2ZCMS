@@ -1,5 +1,6 @@
 # A2ZCMS
 ======
+ [![Build Status](https://api.travis-ci.org/Zizaco/confide.png)](https://travis-ci.org/mrakodol/A2ZCMS) A2Z CMS is a CMS development with Laravel 4.
 
 ## Cms based on Laravel 4
 * [A2Z CMS Features](#feature1)
