@@ -51,7 +51,7 @@
 		<div class="control-group">
 			<label class="control-label" for="password">{{ Lang::get('install/installer.password') }}</label>
 			<div class="controls">
-				<input id="password" type="password" name="password" value="">
+				<input id="password" type="password" placeholder="{{ Lang::get('install/installer.password') }}" name="password" value="">
 			</div>
 		</div>
 		<div class="control-group">

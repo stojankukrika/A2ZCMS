@@ -21,7 +21,8 @@ class BaseController extends Controller {
 		$this -> beforeFilter('detectLang');
 		// Redirect to /install if the db isn't setup.
 		if (Config::get("a2zcms.installed") !== true) {
-			header('Location: install');
+			$url = URL::to('install');
+			header('Location: '.$url);
 			exit ;
 		}
 		$settings = Settings::all();

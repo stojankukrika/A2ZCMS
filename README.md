@@ -120,21 +120,7 @@ Open ***bootstrap/start.php*** and edit the following lines to match your settin
         'staging' => array('your-staging-machine-name'),
         'production' => array('your-production-machine-name'),
 
-    ));
-
-Now create the folder inside ***app/config*** that corresponds to the environment the code is deployed in. This will most likely be ***local*** when you first start a project.
-
-You will now be copying the initial configuration file inside this folder before editing it. Let's start with ***app/config/app.php***. So ***app/config/local/app.php*** will probably look something like this, as the rest of the configuration can be left to their defaults from the initial config file:
-
-    <?php
-
-    return array(
-
-        'url' => 'http://myproject.local',
-
-        'timezone' => 'UTC',
-    );
-    
+    ));    
 -----
 <a name="step4"></a>
 ### Step 4: Configure Mailer
@@ -150,6 +136,25 @@ Now that you have the environment configured, you need to create a database conf
 If you install A2ZCMS on your localhost in folder a2zcms, you can type on web browser: 
 	http://localhost/a2zcms/
 And than finish the installation. Instalation would populate a database with tables and start-up data(you can delete that data later).
+
+Now inside ***app/config*** that corresponds to the environment the code is deployed in. This will most likely be ***local***  or ***production***  when you first start a project.
+
+You may setup your timezone:
+
+    <?php
+		/*
+		|--------------------------------------------------------------------------
+		| Application Timezone
+		|--------------------------------------------------------------------------
+		|
+		| Here you may specify the default timezone for your application, which
+		| will be used by the PHP date and date-time functions. We have gone
+		| ahead and set this to a sensible default for you out of the box.
+		|
+		*/
+	
+		'timezone' => 'UTC',
+    );
 
 -----
 <a name="step6"></a>
@@ -222,16 +227,16 @@ For some Windows people they have had to manually adjust the path in composer be
 ITS root folder (C:\ProgramData\Composer\Bin....etc...) for artisan instead of the root folder you are 
 currently working from.
 In your composer.json change the lines to reflect the full path to artisan and remember to escape the slash.
-For example, assuming a Windows PC with WAMP installed :
+For example, assuming a Windows PC with XAMPP installed on D disk :
 
 		"pre-update-cmd": [
-			"php c:\\wamp\\www\\website\\artisan clear-compiled"
+			"php d:\\xampp\\htdocs\\website\\artisan clear-compiled"
 		],
 		"post-install-cmd": [
-			"php c:\\wamp\\www\\website\\artisan optimize"
+			"php d:\\xampp\\htdocs\\website\\artisan optimize"
 		],
 		"post-update-cmd": [
-			"php c:\\wamp\\www\\website\\artisan optimize"
+			"php d:\\xampp\\htdocs\\website\\artisan optimize"
 		]
 
 Note : This will change your composer.json to only work on your current PC (or any with a similar path). 

@@ -29,9 +29,12 @@
 			<label class="control-label" for="theme">{{ Lang::get('install/installer.site_theme') }}</label>
 			<div class="controls">
 				<select name="theme">
-					<option value="a2z-default">A2Z-default</option>
-					<option value="bootstrap">bootstrap</option>
-					<option value="cerulean">cerulean</option>
+					<?php
+						foreach(glob(base_path() . '\public\assets\site\*', GLOB_ONLYDIR) as $dir) {
+						    $dir = str_replace(base_path() . '\public\assets\site\\', '', $dir);
+						   echo '<option value="'.$dir.'">'.ucfirst($dir).'</option>';
+						}
+					?>
 				</select>
 			</div>
 		</div>

@@ -54,6 +54,7 @@ class InstallController extends BaseController {
 		$form = Validator::make($input = Input::all(), array('hostname' => array('required'), 'username' => array('required'), 'database' => array('required'), ));
 
 		if ($form -> passes()) {
+
 			$search = array_map(function($key) {
 				return '{{' . $key . '}}';
 
@@ -70,6 +71,8 @@ class InstallController extends BaseController {
 			/*delete temp file*/
 
 			//File::delete($stub);
+			$url = URL::to('/');
+			$this -> setA2ZApp($url);
 
 			Artisan::call('key:generate', array('--env' => App::environment()));
 
@@ -79,6 +82,18 @@ class InstallController extends BaseController {
 		} else {
 			return Redirect::to('install/step2') -> withErrors($form);
 		}
+	}
+
+	/**
+	 * Update the configs based on passed data
+	 *
+	 * @param string $url
+	 *
+	 * @return
+	 */
+	protected function setA2ZApp($url) {
+		$content = str_replace('##url##', $url, File::get(__DIR__ . '\..\config\app_temp.php'));
+		return File::put(__DIR__ . '\..\config\/' . App::environment() . '\app.php', $content);
 	}
 
 	/**
@@ -106,16 +121,20 @@ class InstallController extends BaseController {
 			returnRedirect::back() -> withInput() -> withErrors($validator);
 		}
 
-		$user_id = DB::table('users') -> insertGetId(array('name' => Input::get('first_name'), 'surname' => Input::get('last_name'), 'username' => Input::get('username'), 'email' => Input::get('email'), 'password' => Hash::make(Input::get('password')), 'confirmation_code' => md5(microtime() . Config::get('app.key')), 'created_at' => new DateTime, 'updated_at' => new DateTime, 'confirmed' => '1', 'active' => '1'));
-		
-		$adminRole  = new Role;
+		$user_id = DB::table('users') -> insertGetId(array('name' => Input::get('first_name'), 
+								'surname' => Input::get('last_name'), 'username' => Input::get('username'), 
+							'email' => Input::get('email'), 'password' => Hash::make(Input::get('password')), 							'confirmation_code' => md5(microtime() . Config::get('app.key')), 
+							'created_at' => new DateTime, 'updated_at' => new DateTime, 
+							'confirmed' => '1', 'active' => '1'));
+
+		$adminRole = new Role;
 		$adminRole -> name = 'admin';
 		$adminRole -> save();
-		
+
 		DB::table('assigned_roles') -> insert(array('user_id' => $user_id, 'role_id' => $adminRole -> id));
-		
+
 		Artisan::call('db:seed');
-		
+
 		$settings = Settings::all();
 		foreach ($settings as $v) {
 			switch ($v->varname) {
@@ -125,7 +144,7 @@ class InstallController extends BaseController {
 			}
 			Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
 		}
-	
+
 		return Redirect::to('install/step4');
 	}
 
@@ -140,7 +159,8 @@ class InstallController extends BaseController {
 	 * Save the config files
 	 */
 	public function postStep4() {
-		$this -> setA2ZConfig(Input::get('title', 'Site Name'), Input::get('theme', 'Default'), Input::get('per_page', 5));	
+		$this -> setA2ZConfig(Input::get('title', 'Site Name'), Input::get('theme', 'a2z-default'),
+								Input::get('per_page', 5));
 		return View::make('install.installer.complete');
 	}
 
@@ -154,48 +174,27 @@ class InstallController extends BaseController {
 	 * @return
 	 */
 	protected function setA2ZConfig($title, $theme, $per_page) {
-		$content = str_replace(array('##theme##', "'##installed##'"), array($theme, 'true'), File::get(__DIR__ . '\..\config\a2zcms_temp.php'));
-		
-		$settings = Settings::all();
-			foreach ($settings as $v) {
+		$content = str_replace(array('##theme##', "'##installed##'"), array($theme, 'true'), 
+		File::get(__DIR__ . '\..\config\a2zcms_temp.php'));
 
-				switch ($v->varname) {
-					case 'title' :
-						$v -> value = $title;
-						break;
-					case 'pageitem' :
-						$v -> value = $per_page;
-						break;
-					case 'sitetheme':
-						$v -> value = $theme;
+		$settings = Settings::all();
+		foreach ($settings as $v) {
+
+			switch ($v->varname) {
+				case 'title' :
+					$v -> value = $title;
 					break;
-				}
-				Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
+				case 'pageitem' :
+					$v -> value = $per_page;
+					break;
+				case 'sitetheme' :
+					$v -> value = $theme;
+					break;
 			}
+			Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
+		}
 
 		return File::put(__DIR__ . '\..\config\a2zcms.php', $content);
-	}
-
-	/**
-	 * Get the config file
-	 *
-	 * Use the current environment to load the config file. With a fall back on the original.
-	 *
-	 * @param string $file
-	 * @return string
-	 */
-	protected function getConfigFile($file) {
-		if (file_exists(app_path() . '/config/' . App::environment() . '/' . $file)) {
-			return app_path() . '/config/' . App::environment() . '/' . $file;
-		}
-
-		return app_path() . '/config/' . $file;
-	}
-
-	protected function getDatabaseSeedFile($dir) {
-		if (file_exists(app_path() . '/database/' . $dir . '/*.php')) {
-			return app_path() . '/database/' . $dir . '/*.php';
-		}
 	}
 
 }
