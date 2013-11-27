@@ -72,7 +72,7 @@ class InstallController extends BaseController {
 
 			//File::delete($stub);
 			$url = URL::to('/');
-			$this -> setA2ZApp($url);
+			$this -> setA2ZApp($url.'/');
 
 			Artisan::call('key:generate', array('--env' => App::environment()));
 

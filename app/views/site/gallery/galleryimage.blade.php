@@ -85,7 +85,8 @@
 	<form method="post" action="{{{ URL::to('galleryimage/'.$gallery->id.'/'.$gallery_image->id) }}}">
 		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 			<div class="form-group">
-				<textarea class="form-control" name="gallcomment" placeholder="gallcomment" rows="7">{{{ Request::old('gallcomment') }}}</textarea>
+				<textarea class="form-control" name="gallcomment" id="gallcomment" placeholder="gallcomment" rows="7">{{{ Request::old('gallcomment') }}}</textarea>
+				<label id="characterLeft"></label>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">{{ Lang::get('site.submit') }}</button>
@@ -108,3 +109,20 @@
 </div>
 @stop
 
+{{-- Scripts --}}
+@section('scripts')
+<script>
+	$('#characterLeft').text({{$shortmsg}}+' {{ Lang::get('site/messages.characters_left') }}');
+	$('#gallcomment').keyup(function () {
+	    var max = {{$shortmsg}};
+	    var len = $(this).val().length;
+	    if (len >= max) {
+	    	$('#gallcomment').val($('#gallcomment').val().substr(0, max));
+	        $('#characterLeft').text('{{ Lang::get('site/messages.you_have_reached_the_limit') }}');
+	    } else {
+	        var ch = max - len;
+	        $('#characterLeft').text(ch + ' characters left');
+	    }
+	});
+</script>
+@stop

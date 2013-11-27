@@ -53,84 +53,14 @@ class AdminSettingsController extends AdminController {
 	
 		// Check if the form validates with success
 		if ($validator -> passes()) {
-			// Update the blog post data
-			$email = Input::get('email');
-			$title = Input::get('title');
-			$copyright = Input::get('copyright');
-			$dateformat = Input::get('dateformat');
-			$timeformat = Input::get('timeformat');
-			$useravatwidth = Input::get('useravatwidth');
-			$useravatheight = Input::get('useravatheight');
-			$shortmsg = Input::get('shortmsg');
-			$pageitem = Input::get('pageitem');
-			$analytics = Input::get('analytics');
-			$metadesc = Input::get('metadesc');
-			$metakey = Input::get('metakey');
-			$metaauthor = Input::get('metaauthor');
-			$offline = Input::get('offline');
-			$offlinemessage = Input::get('offlinemessage');
-			$searchcode = Input::get('searchcode');
-			$sitetheme = Input::get('sitetheme');
-			
-			//Save settings to database
+				
 			$settings = Settings::all();
-			foreach ($settings as $v) {
 
-				switch ($v->varname) {
-					case 'email' :
-						$v -> value = $email;
-						break;
-					case 'title' :
-						$v -> value = $title;
-						break;
-					case 'copyright' :
-						$v -> value = $copyright;
-						break;
-					case 'dateformat' :
-						$v -> value = $dateformat;
-						break;
-					case 'timeformat' :
-						$v -> value = $timeformat;
-						break;
-					case 'useravatwidth' :
-						$v -> value = $useravatwidth;
-						break;
-					case 'useravatheight' :
-						$v -> value = $useravatheight;
-						break;
-					case 'shortmsg' :
-						$v -> value = $shortmsg;
-						break;
-					case 'pageitem' :
-						$v -> value = $pageitem;
-						break;
-					case 'analytics' :
-						$v -> value = $analytics;
-						break;
-					case 'metadesc' :
-						$v -> value = $metadesc;
-						break;
-					case 'metakey' :
-						$v -> value = $metakey;
-						break;
-					case 'metaauthor' :
-						$v -> value = $metaauthor;
-						break;
-					case 'offline' :
-						$v -> value = $offline;
-						break;
-					case 'offlinemessage' :
-						$v -> value = $offlinemessage;
-						break;
-					case 'searchcode':
-						$v -> value = $searchcode;
-						break;
-					case 'sitetheme':
-						$v -> value = $sitetheme;
-						break;
-				}
-				Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
-			}
+	        foreach($settings as $setting)
+	        {
+	            $setting->value = Input::get($setting->varname);
+	            $setting->save();
+	        }
 
 			// Redirect to the settings page
 			return Redirect::to('admin/settings/') -> with('success', Lang::get('admin/settings/messages.success'));

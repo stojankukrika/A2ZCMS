@@ -26,11 +26,28 @@ class AdminUserController extends AdminController {
 	 * @param Role $role
 	 * @param Permission $permission
 	 */
+	private $useravatwidth;
+	private $useravatheight;
+	
 	public function __construct(User $user, Role $role, Permission $permission) {
 		parent::__construct();
 		$this -> user = $user;
 		$this -> role = $role;
 		$this -> permission = $permission;
+		
+		$settings = Settings::whereIn('varname',
+						array('useravatwidth', 'useravatheight'))->get();
+		
+		foreach ($settings as $v) {
+				if ($v -> varname == 'useravatwidth') {
+					$useravatwidth = $v -> value;
+				}
+				if ($v -> varname == 'useravatheight') {
+					$useravatheight = $v -> value;
+				}				
+			}
+		$this->useravatwidth = $useravatwidth;
+		$this->useravatheight = $useravatheight;
 	}
 
 	/**
@@ -119,16 +136,6 @@ class AdminUserController extends AdminController {
 
 			return Redirect::to('admin/users/create') -> withInput(Input::except('password')) -> with('error', $error);
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param $user
-	 * @return Response
-	 */
-	public function getShow($user) {
-		// redirect to the frontend
 	}
 
 	/**
@@ -332,7 +339,7 @@ class AdminUserController extends AdminController {
 				$extension = $file -> getClientOriginalExtension();
 				$name = sha1($filename . time()) . '.' . $extension;			
 				Input::file('avatar')->move($destinationPath, $name);
-				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .$name,80,80);
+				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .$name,$this->useravatwidth,$this->useravatheight);
 				$user -> avatar = $name;
 			}
 			if (!empty($password)) {

@@ -12,9 +12,25 @@ class UserController extends BaseController {
 	 * Inject the models.
 	 * @param User $user
 	 */
+	private $useravatwidth;
+	private $useravatheight;
+	
 	public function __construct(User $user) {
 		parent::__construct();
 		$this -> user = $user;
+		$settings = Settings::whereIn('varname',
+						array('useravatwidth', 'useravatheight'))->get();
+		
+		foreach ($settings as $v) {
+				if ($v -> varname == 'useravatwidth') {
+					$useravatwidth = $v -> value;
+				}
+				if ($v -> varname == 'useravatheight') {
+					$useravatheight = $v -> value;
+				}				
+			}
+		$this->useravatwidth = $useravatwidth;
+		$this->useravatheight = $useravatheight;
 	}
 
 	/**
@@ -105,7 +121,7 @@ class UserController extends BaseController {
 				$name = sha1($filename . time()) . '.' . $extension;		
 			
 				Input::file('avatar')->move($destinationPath, $name);
-				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .$name,80,80);
+				Thumbnail::generate_image_thumbnail($destinationPath. $name, $destinationPath .$name,$this->useravatwidth,$this->useravatheight);
 				
 				$user -> avatar = $name;
 			}

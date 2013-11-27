@@ -108,6 +108,7 @@
 	              <div class="form-group col-lg-12">
 	                <label for="input4">{{ Lang::get('site/messages.message') }}</label>
 	                <textarea name="content" class="form-control" rows="6" id="content"></textarea>
+	                <label id="characterLeft"></label>
 	              </div>
 	              <div class="form-group col-lg-12">
 	                <button type="submit" class="btn btn-primary">{{ Lang::get('site.submit') }}</button>
@@ -144,6 +145,18 @@
 					type: "GET",							
 				})
 		})	
+	});
+	$('#characterLeft').text({{$shortmsg}}+' {{ Lang::get('site/messages.characters_left') }}');
+	$('#content').keyup(function () {
+	    var max = {{$shortmsg}};
+	    var len = $(this).val().length;
+	    if (len >= max) {
+	    	$('#content').val($('#content').val().substr(0, max));
+	        $('#characterLeft').text('{{ Lang::get('site/messages.you_have_reached_the_limit') }}');
+	    } else {
+	        var ch = max - len;
+	        $('#characterLeft').text(ch + ' characters left');
+	    }
 	});
 </script>
 @stop

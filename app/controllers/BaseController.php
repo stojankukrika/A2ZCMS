@@ -25,49 +25,21 @@ class BaseController extends Controller {
 			header('Location: '.$url);
 			exit ;
 		}
-		$settings = Settings::all();
-		
+		$settings = Settings::whereIn('varname', 
+						array('offline', 'metadesc', 'metakey','metaauthor','title','shortmsg',
+							'copyright','analytics','dateformat','timeformat','searchcode','sitetheme'))->get();
 		$offline = 0;
+		
 		foreach ($settings as $v) {
-			if ($v -> varname == 'offline') {
-				$offline = $v -> value;
-				View::share('key', 'value');
-			}
-			if ($v -> varname == 'metadesc') {
-				View::share('metadesc',  $v -> value);
-			}
-			if ($v -> varname == 'metakey') {
-				View::share('metakey', $v -> value);
-			}
-			if ($v -> varname == 'metaauthor') {
-				View::share('metaauthor',  $v -> value);
-			}
-			if ($v -> varname == 'title') {
-				View::share('title',  $v -> value);
-			}
-			if ($v -> varname == 'copyright') {
-				View::share('copyright',  $v -> value);
-			}
-			if ($v -> varname == 'analytics') {
-				View::share('analytics',  $v -> value);
-			}	
-			if ($v -> varname == 'dateformat') {
-				View::share('dateformat',  $v -> value);
-			}
-			if ($v -> varname == 'timeformat') {
-				View::share('timeformat',  $v -> value);
-			}	
-			if ($v -> varname == 'searchcode') {
-				View::share('searchcode',  $v -> value);
-			}
-			if ($v -> varname == 'sitetheme') {
-				View::share('sitetheme',  $v -> value);
-			}				
-			
+				if ($v -> varname == 'offline') {
+					$offline = $v -> value;
+				}
+				View::share($v -> varname,  $v -> value);
 		}
+		
 		if($offline==1)
 		{
-			header('Location: '. Config::get("app.url").'offline');
+			header('Location: '. Config::get("app.url").'/offline');
 			exit ;
 		}
 		$user = Auth::user();

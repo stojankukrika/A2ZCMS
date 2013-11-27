@@ -97,7 +97,8 @@
 	<form method="post" action="{{{ URL::to('blog/'.$blog->slug) }}}">
 		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 			<div class="form-group">
-				<textarea class="form-control" name="blogcomment" placeholder="blogcomment" rows="7">{{{ Request::old('blogcomment') }}}</textarea>
+				<textarea class="form-control" name="blogcomment" id="blogcomment" placeholder="blogcomment" rows="7">{{{ Request::old('blogcomment') }}}</textarea>
+				<label id="characterLeft"></label>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">{{ Lang::get('site.submit') }}</button>
@@ -117,4 +118,21 @@
 		</div>
 	@endforeach 
 </div>
+@stop
+{{-- Scripts --}}
+@section('scripts')
+<script>
+	$('#characterLeft').text({{$shortmsg}}+' {{ Lang::get('site/messages.characters_left') }}');
+	$('#blogcomment').keyup(function () {
+	    var max = {{$shortmsg}};
+	    var len = $(this).val().length;
+	    if (len >= max) {
+	    	$('#blogcomment').val($('#blogcomment').val().substr(0, max));
+	        $('#characterLeft').text('{{ Lang::get('site/messages.you_have_reached_the_limit') }}');
+	    } else {
+	        var ch = max - len;
+	        $('#characterLeft').text(ch + ' characters left');
+	    }
+	});
+</script>
 @stop
