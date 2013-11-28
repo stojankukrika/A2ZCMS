@@ -5,7 +5,7 @@ class ToDoListPermissionsTableSeeder extends Seeder {
 	public function run() {
 			
 		$permissions = array( 
-						array('name' => 'menage_todolists', 
+						array('name' => 'manage_todolists', 
 						'display_name' => 'Manage todolists','is_admin' => 1),
 					);
 

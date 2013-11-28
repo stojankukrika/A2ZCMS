@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder {
 		$this -> call('SettingsTableSeeder');
 		$this -> call('NavPagesPermissionSeeder');
 		$this -> call('GallerysPermissionSeeder');
+		$this -> call('CustomFormPermissionsTableSeeder');
 		$this -> call('PluginsTableSeeder');
 		$this -> call('PluginfunctionTableSeeder');
 		$this -> call('CustomFormsTableSeeder');

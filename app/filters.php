@@ -94,9 +94,9 @@ Entrust::routeNeedsPermission( 'admin/navigationgroups*', 'manage_navigation_gro
 Entrust::routeNeedsPermission( 'admin/galleryimages*', 'manage_gallery_images', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/galleries*', 'manage_galleries', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/galleryimagecomments*', 'manage_gallery_imagecomments', Redirect::to('/admin') );
-Entrust::routeNeedsPermission( 'admin/customform*', 'menage_customform', Redirect::to('/admin') );
-Entrust::routeNeedsPermission( 'admin/todolists*', 'menage_todolists', Redirect::to('/admin') );
-Entrust::routeNeedsPermission( 'admin/settings*', 'menage_settings', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/customform*', 'manage_customform', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/todolists*', 'manage_todolists', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/settings*', 'manage_settings', Redirect::to('/admin') );
 
 /*
 |--------------------------------------------------------------------------
