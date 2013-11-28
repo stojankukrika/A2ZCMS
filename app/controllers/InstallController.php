@@ -129,6 +129,7 @@ class InstallController extends BaseController {
 
 		$adminRole = new Role;
 		$adminRole -> name = 'admin';
+		$adminRole -> is_admin = 1;
 		$adminRole -> save();
 
 		DB::table('assigned_roles') -> insert(array('user_id' => $user_id, 'role_id' => $adminRole -> id));

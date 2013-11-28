@@ -70,13 +70,22 @@ Route::filter('guest', function()
 | Access filters based on roles.
 |
 */
+Route::filter('check_admin', function()
+{
+	//if the user who do not have admin role has access to the admin page returned to home page
+	$user = Auth::user()->currentRoleIds();
+	if($user['allow_admin']!='1'){
+		return Redirect::to('/');
+	}
 
+});
 // Check for role on all admin routes
-Entrust::routeNeedsRole( 'admin*', array('admin'), Redirect::to('/') );
+Route::filter('pattern: admin/*', 'check_admin');
 
 // Check for permissions on admin actions
 Entrust::routeNeedsPermission( 'admin/blogs*', 'manage_blogs', Redirect::to('/admin') );
-Entrust::routeNeedsPermission( 'admin/comments*', 'manage_comments', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/blogcategorys*', 'manage_blog_categris', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/blogcomments*', 'manage_comments', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/users*', 'manage_users', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/roles*', 'manage_roles', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/pages*', 'manage_pages', Redirect::to('/admin') );
@@ -86,6 +95,8 @@ Entrust::routeNeedsPermission( 'admin/galleryimages*', 'manage_gallery_images', 
 Entrust::routeNeedsPermission( 'admin/galleries*', 'manage_galleries', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/galleryimagecomments*', 'manage_gallery_imagecomments', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/customform*', 'menage_customform', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/todolists*', 'menage_todolists', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/settings*', 'menage_settings', Redirect::to('/admin') );
 
 /*
 |--------------------------------------------------------------------------

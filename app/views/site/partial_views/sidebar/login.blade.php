@@ -6,7 +6,7 @@
 		@else
 		<img alt="Avatar" src="{{asset('avatar/avatar.png')}}">
 		@endif
-		@if (Auth::user()->hasRole('admin'))
+		@if (Auth::user()->currentRoleIds()['allow_admin']=='1')
 		<li>
 			<a href="{{{ URL::to('admin') }}}">{{{ Lang::get('site/partial_views/sidebar/login.admin_panel') }}}</a>
 		</li>

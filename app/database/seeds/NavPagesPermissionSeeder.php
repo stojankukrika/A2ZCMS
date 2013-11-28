@@ -6,11 +6,11 @@ class NavPagesPermissionSeeder extends Seeder {
 
 		$permissions = array( 
 					array('name' => 'manage_navigation', 
-							'display_name' => 'Manage navigation',1), 
+							'display_name' => 'Manage navigation','is_admin' => 1), 
 					array('name' => 'manage_pages', 
-							'display_name' => 'Manage pages',1), 
+							'display_name' => 'Manage pages','is_admin' => 1), 
 					array('name' => 'manage_navigation_groups', 
-							'display_name' => 'Manage navigation groups',1),
+							'display_name' => 'Manage navigation groups','is_admin' => 1),
 					);
 
 		DB::table('permissions') -> insert($permissions);

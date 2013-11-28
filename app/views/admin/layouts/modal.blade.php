@@ -82,6 +82,7 @@
 		<script src="{{{ asset('assets/admin/js/jquery.ui.touch-punch.min.js') }}}"></script>
 		<script src="{{{ asset('assets/admin/js/fineuploader/jquery.fineuploader-3.1.1.js') }}}"></script>
 		<script src="{{{ asset('assets/admin/js/jquery.colorbox.js') }}}"></script>
+		<script src="{{  asset('assets/admin/js/core.min.js')}}"></script>
 		<script src="{{{ asset('assets/admin/js/jquery.multiselect.js') }}}"></script>
 		<script src="{{{ asset('assets/admin/js/tag-it.js') }}}"></script>
 		<script src="{{{ asset('assets/admin/js/select2.js') }}}"></script>

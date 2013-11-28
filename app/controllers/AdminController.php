@@ -9,9 +9,11 @@ class AdminController extends Controller {
 	 */
 	public function __construct() {
 		// Apply the admin auth filter
-		$this -> beforeFilter('admin-auth');
+		$this -> beforeFilter('check_admin');
 		$this -> beforeFilter('csrf', array('on' => 'post'));
 		$this -> beforeFilter('detectLang');
+		$this -> beforeFilter('auth');
+		$this -> beforeFilter('before');
 		
 	}
 

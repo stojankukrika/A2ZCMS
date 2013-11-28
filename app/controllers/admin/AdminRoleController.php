@@ -67,7 +67,6 @@ class AdminRoleController extends AdminController {
 		// Show the page
 		return View::make('admin/roles/create_edit', compact('permissionsAdmin', 'permissionsUser','permisionsadd', 'title'));
 	}
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -82,14 +81,18 @@ class AdminRoleController extends AdminController {
 		$validator = Validator::make(Input::all(), $rules);
 		// Check if the form validates with success
 		if ($validator -> passes()) {
-			// Get the inputs, with some exceptions
-			foreach (Input::get('permission') as $item) {
-				$perm = Permission::where('id','=',$item);
-				if($perm->is_admin=='1')
-				{
-					$is_admin = 1;
+			
+			// Check if role is for admin user
+			$permissionsAdmin = $this -> permission -> where('is_admin','=',1)->get();
+			
+			foreach ($permissionsAdmin as $perm){
+		            foreach(Input::get('permission') as $item){
+	            		if($item==$perm['id'] && $perm['is_admin']=='1')
+						{
+							$is_admin = 1;
+						}
+		            }
 				}
-			}
 			$this -> role -> is_admin = $is_admin;
 			$this -> role -> name = Input::get('name');
 			$this -> role -> save();
@@ -144,13 +147,15 @@ class AdminRoleController extends AdminController {
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Update the role data
-			foreach (Input::get('permission') as $item) {
-				$perm = Permission::where('id','=',$item);
-				if($perm->is_admin=='1')
-				{
-					$is_admin = 1;
+			$permissionsAdmin = $this -> permission -> where('is_admin','=',1)->get();
+			foreach ($permissionsAdmin as $perm){
+		            foreach(Input::get('permission') as $item){
+	            		if($item==$perm['id'] && $perm['is_admin']=='1')
+						{
+							$is_admin = 1;
+						}
+		            }
 				}
-			}
 			$role -> is_admin = $is_admin;
 			$role -> name = Input::get('name');
 			$role -> save();

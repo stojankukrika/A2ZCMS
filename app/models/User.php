@@ -88,6 +88,7 @@ class User extends ConfideUser implements PresentableInterface {
      */
     public function currentRoleIds()
     {
+    	$allow_admin = 0;
         $roles = $this->roles;
         $roleIds = false;
         if( !empty( $roles ) ) {
@@ -95,9 +96,11 @@ class User extends ConfideUser implements PresentableInterface {
             foreach( $roles as &$role )
             {
                 $roleIds[] = $role->id;
+				if($role->is_admin=='1')
+				$allow_admin = 1;
             }
         }
-        return $roleIds;
+        return array('roleIds' => $roleIds, 'allow_admin' => $allow_admin);
     }
 
     /**
