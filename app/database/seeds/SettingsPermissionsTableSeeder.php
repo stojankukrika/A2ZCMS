@@ -3,11 +3,10 @@
 class SettingsPermissionsTableSeeder extends Seeder {
 
 	public function run() {
-		DB::table('permissions') -> delete();
-
+		
 		$permissions = array( 
 						array('name' => 'manage_settings', 
-						'display_name' => 'Manage settings',1),
+						'display_name' => 'Manage settings','is_admin' => 1),
 					);
 
 		DB::table('permissions') -> insert($permissions);

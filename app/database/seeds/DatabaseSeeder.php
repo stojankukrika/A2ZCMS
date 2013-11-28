@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder {
 		$this -> call('PagesTableSeeder');
 		$this -> call('NavigationLinksTableSeeder');
 		$this -> call('PagePluginFunctionsTableSeeder');
+		$this -> call('SettingsPermissionsTableSeeder');
+		$this -> call('ToDoListPermissionsTableSeeder');
 	}
 
 }

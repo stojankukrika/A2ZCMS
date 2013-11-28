@@ -3,8 +3,7 @@
 class PermissionsTableSeeder extends Seeder {
 
 	public function run() {
-		DB::table('permissions') -> delete();
-
+		
 		$permissions = array( 
 						array('name' => 'manage_blogs', 
 						'display_name' => 'Manage blogs','is_admin' => 1), 

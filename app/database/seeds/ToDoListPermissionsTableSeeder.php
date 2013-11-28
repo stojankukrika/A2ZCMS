@@ -1,13 +1,12 @@
 <?php
 
-class SettingsPermissionsTableSeeder extends Seeder {
+class ToDoListPermissionsTableSeeder extends Seeder {
 
 	public function run() {
-		DB::table('permissions') -> delete();
-
+			
 		$permissions = array( 
 						array('name' => 'menage_todolists', 
-						'display_name' => 'Manage todolists',1),
+						'display_name' => 'Manage todolists','is_admin' => 1),
 					);
 
 		DB::table('permissions') -> insert($permissions);
