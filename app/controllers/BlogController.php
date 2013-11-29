@@ -67,6 +67,12 @@ class BlogController extends BaseController {
 		if (!empty($user)) {
 			$canBlogComment = $user -> can('post_blog_comment');
 		}
+		
+		$canBlogVote = false;
+		if (!empty($user)) {
+			$canBlogVote = $user -> can('post_blog_vote');
+		}
+	
 		$page = Page::first();
 		$pagecontent = BaseController::createSiderContent($page->id);
 		// Show the page
@@ -74,6 +80,7 @@ class BlogController extends BaseController {
 		$data['sidebar_left'] = $pagecontent['sidebar_left'];
 		$data['page'] = $page;
 		$data['canBlogComment'] = $canBlogComment;
+		$data['canBlogVote'] = $canBlogVote;
 		$data['blog_comments'] = $blog_comments;
 		$data['blog'] = $blog;
 		return View::make('site/blog/index', $data);
@@ -95,7 +102,8 @@ class BlogController extends BaseController {
 
 		// Get this blog blog data
 		$blog = $this -> blog -> where('slug', '=', $slug) -> first();
-
+		$blog ->hits = $blog ->hits +1;
+		$blog - save();
 		// Declare the rules for the form validation
 		$rules = array('blogcomment' => 'required|min:3');
 

@@ -22,5 +22,9 @@ return array(
 	'logout' =>'Logout',
 	'messages' =>'Messages',
 	'submit' => 'Submit',
+	'num_of_votes' => 'Number of votes:',
+	'add_votes_login'=>'You need to be logged in to add vote.',
+	'add_votes_permission' => "You don't have the correct permissions to add votes.",
+	
 
 );

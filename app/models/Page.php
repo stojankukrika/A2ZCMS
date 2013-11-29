@@ -35,6 +35,16 @@ class Page extends Eloquent implements PresentableInterface {
 		return nl2br($this -> content);
 	}
 	
+	public function tags()
+	{
+		$tags = explode(',', $this -> tags);
+		$ret ="";
+		foreach ($tags as $value) {
+			$ret .='<a href="#">'.$value.'</a>, ';
+		}
+		return substr($ret,0,-1);
+	}
+	
 	/**
 	 * Returns a formatted post content css,
 	 * this ensures that line breaks are returned.

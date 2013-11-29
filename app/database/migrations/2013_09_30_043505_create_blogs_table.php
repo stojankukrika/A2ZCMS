@@ -18,6 +18,9 @@ class CreateBlogsTable extends Migration {
 			$table -> string('title');
 			$table -> string('slug');
 			$table -> text('content');
+			$table -> integer('voteup')-> unsigned() -> default(0);
+			$table -> integer('votedown')-> unsigned() -> default(0);
+			$table -> integer('hits')-> unsigned() -> default(0);
 			$table -> date('start_publish');
 			$table -> date('end_publish') -> nullable();
 			$table -> string('resource_link') -> nullable();			

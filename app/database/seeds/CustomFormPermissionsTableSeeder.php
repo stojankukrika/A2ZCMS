@@ -13,7 +13,8 @@ class CustomFormPermissionsTableSeeder extends Seeder {
 
 		//DB::table('permission_role')->delete();
 
-		$permissions = array( array('role_id' => 1, 'permission_id' => 14) );
+		$permissions = array( array('role_id' => 1, 'permission_id' => 14,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,) );
 
 		DB::table('permission_role') -> insert($permissions);
 	}

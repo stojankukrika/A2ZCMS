@@ -43,6 +43,14 @@
 <div class="row"> 
       <img src="../../gallery/{{{$gallery->folderid}}}/{{{ $gallery_image->content }}}" class="img-responsive">        
      <hr>
+     <p id="vote">{{ Lang::get("site.num_of_votes") }} <span id="countvote">{{$gallery->voteup-$gallery->votedown}}</span> 
+		@if (!$canImageVote )
+		<br><b><i>{{ Lang::get('site.add_votes_permission') }}</i></b>
+		@else				
+		<span style="display: inline-block;" onclick="contentvote('1','image',{{$gallery_image->id}})" class="up"></span>
+		<span style="display: inline-block;" onclick="contentvote('0','image',{{$gallery_image->id}})" class="down"></span>
+		@endif
+	</p>
 <!-- the comment box -->
   <div class="well">            
 	<h4>{{{ $gallery_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
@@ -67,7 +75,7 @@
 <br />
 {{ Lang::get('site/blog.click') }} <a href="{{{ URL::to('user/login') }}}">{{ Lang::get('site/blog.here') }}</a> {{ Lang::get('site/blog.to_login') }}
 @elseif ( ! $canGalleryComment )
-{{ Lang::get('site/blog.add_comment_permission') }}
+<br><b></i>{{ Lang::get('site/blog.add_comment_permission') }}</i></b>
 @else
 @if($errors->has())
 <div class="alert alert-danger alert-block">

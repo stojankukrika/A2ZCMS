@@ -226,3 +226,17 @@ input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:
     border-color: transparent!important;
     background-color: #fff!important;
 }
+
+
+.up {
+	background-image: url("../img/up.png");
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 16px;
+}
+.down {
+    background-image: url("../img/down.png");
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 16px;
+}

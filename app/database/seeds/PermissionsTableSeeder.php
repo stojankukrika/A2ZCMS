@@ -23,12 +23,18 @@ class PermissionsTableSeeder extends Seeder {
 
 		//DB::table('permission_role')->delete();
 
-		$permissions = array( array('role_id' => 1, 'permission_id' => 1), 
-								array('role_id' => 1, 'permission_id' => 2), 
-								array('role_id' => 1, 'permission_id' => 3), 
-								array('role_id' => 1, 'permission_id' => 4), 
-								array('role_id' => 1, 'permission_id' => 5), 
-								array('role_id' => 1, 'permission_id' => 6), );
+		$permissions = array( array('role_id' => 1, 'permission_id' => 1,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 2,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 3,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 4,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 5,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 6,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), );
 
 		DB::table('permission_role') -> insert($permissions);
 	}

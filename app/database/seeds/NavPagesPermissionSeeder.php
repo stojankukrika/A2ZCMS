@@ -16,9 +16,12 @@ class NavPagesPermissionSeeder extends Seeder {
 		DB::table('permissions') -> insert($permissions);
 
 		$permissions_role = array( 
-								array('role_id' => 1, 'permission_id' => 7), 
-								array('role_id' => 1, 'permission_id' => 8), 
-								array('role_id' => 1, 'permission_id' => 9));
+								array('role_id' => 1, 'permission_id' => 7,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 8,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 9,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,));
 
 		DB::table('permission_role') -> insert($permissions_role);
 	}

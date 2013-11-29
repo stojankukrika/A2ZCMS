@@ -17,10 +17,14 @@ class GallerysPermissionSeeder extends Seeder {
 		DB::table('permissions') -> insert($permissions);
 
 		$permissions_role = array( 
-								array('role_id' => 1, 'permission_id' => 10), 
-								array('role_id' => 1, 'permission_id' => 11), 
-								array('role_id' => 1, 'permission_id' => 12),
-								array('role_id' => 1, 'permission_id' => 13));
+								array('role_id' => 1, 'permission_id' => 10,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 11,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 12,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),
+								array('role_id' => 1, 'permission_id' => 13,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,));
 
 		DB::table('permission_role') -> insert($permissions_role);
 	}

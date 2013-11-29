@@ -219,6 +219,7 @@ Route::post('galleryimage/{postSlug1}/{postSlug2}', 'GalleryController@postGalle
 
 Route::get('page/{postSlug1}', 'WebsiteController@getView');
 Route::post('page/{postSlug1}', 'WebsiteController@postView');
+Route::get('contentvote', 'WebsiteController@contentvote');
 
 Route::get('customform/{postSlug1}', 'CustomFormController@postView');
 Route::post('customform/{postSlug1}', 'CustomFormController@postView');

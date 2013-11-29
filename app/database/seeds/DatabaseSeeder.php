@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder {
 		$this -> call('PagePluginFunctionsTableSeeder');
 		$this -> call('SettingsPermissionsTableSeeder');
 		$this -> call('ToDoListPermissionsTableSeeder');
+		$this -> call('PageVotePermissionsTableSeeder');
 	}
 
 }

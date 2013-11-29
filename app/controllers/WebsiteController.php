@@ -30,6 +30,8 @@ class WebsiteController extends BaseController {
 		// Get this webpage data
 		$navigation_link = Navigation::where('id', '=', $slug) -> first();
 		$page = $this -> page -> where('id', '=', $navigation_link->page_id) -> first();
+		$page -> hits = $page -> hits + 1;
+		$page -> update();
 		
 		// Check if the blog page exists
 		if (is_null($page)) {
@@ -44,6 +46,52 @@ class WebsiteController extends BaseController {
 		$data['content'] = $pagecontent['content'];
 		$data['page'] = $page;
 		return View::make('site/page/view_page', $data);
+	}
+	
+	/*method for voting content get id of content,up-down vote and type of content(page,blog,image)*/
+	public function contentvote()
+	{
+		$id = Input::get('id');
+		$updown = Input::get('updown');
+		$content = Input::get('content');
+		$user = $this -> user -> currentUser();
+		$newvalue = 0;
+		$exists = ContentVote::where('content','=',$content)->where('updown','=',$updown)->where('idcontent','=',$id)->where('user_id','=',$user->id)->get();
+		
+		switch ($content) {
+			case 'page':
+				$item = Page::where('id', '=', $id) -> first();
+				break;
+			case 'image':
+				$item = GalleryImage::where ('id', '=', $id) -> first();
+				break;
+			case 'blog':
+				$item = Blog::where ('id', '=', $id) -> first();
+				break;			
+			}
+		if(!empty($exists)){
+			$contentvote = new ContentVote;
+			$contentvote -> user_id = $user->id;
+			$contentvote -> updown = $updown;
+			$contentvote -> content = $content;
+			$contentvote -> idcontent = $id;
+			$contentvote -> created_at = new DateTime;
+			$contentvote -> created_at = new DateTime;
+			$contentvote -> save();
+			
+			if($updown=='1')
+				{
+					$item -> voteup = $item -> voteup + 1;
+				}
+				else {
+					$item -> votedown = $item -> votedown + 1;
+				}
+				
+				$item ->save();
+			}
+			$newvalue = $item->voteup - $item -> votedown;
+					
+		return $newvalue;
 	}
 	 
 	 

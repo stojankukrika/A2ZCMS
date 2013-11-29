@@ -35,6 +35,7 @@
 * Front-end
 	* User login, registration, forgot password
 	* Blog,Gallery,Messages and more functionality
+	* Voting content(Blog,Gallery,Page)
 * Packages included:
 	* [Confide](#confide)
 	* [Entrust](#entrust)
@@ -219,7 +220,7 @@ By default debugging is enabled. Before you go to production you should disable 
 
 ### Site loading very slow
 
-  composer dump-autoload --optimize
+		composer dump-autoload --optimize
 
 ### If A2Z CMS did not want to get dependesy
 

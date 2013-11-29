@@ -54,6 +54,14 @@
    			<strong>{{ Lang::get('site/blog.resource') }}:</strong>{{$blog->resource_link}}
    		</p>          
      <hr>
+     <p id="vote">{{ Lang::get("site.num_of_votes") }} <span id="countvote">{{$blog->voteup-$blog->votedown}}</span> 
+		@if (!$canBlogVote )
+		<br><b><i>{{ Lang::get('site.add_votes_permission') }}</i></b>
+		@else				
+		<span style="display: inline-block;" onclick="contentvote('1','image',{{$blog->id}})" class="up"></span>
+		<span style="display: inline-block;" onclick="contentvote('0','image',{{$blog->id}})" class="down"></span>
+		@endif
+	</p>
 <!-- the comment box -->
   <div class="well">            
 	<h4>{{{ $blog_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
@@ -76,9 +84,9 @@
 <br />
 {{ Lang::get('site/blog.click') }} <a href="{{{ URL::to('user/login') }}}">{{ Lang::get('site/blog.here') }}</a> 
 {{ Lang::get('site/blog.to_login') }}
-<br><br>
+<br>
 @elseif ( ! $canBlogComment )
-{{ Lang::get('site/blog.add_comment_permission') }}
+<br><b><i>{{ Lang::get('site/blog.add_comment_permission') }}</i></b>
 @else
 
 @if($errors->has())

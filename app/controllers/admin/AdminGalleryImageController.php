@@ -65,7 +65,7 @@ class AdminGalleryImageController extends AdminController {
 	 * @return Response
 	 */
 	public function getImageforgallery($galleryid) {
-		$images = GalleryImage::join('gallery', 'gallery.id', '=', 'gallery_images.gallery_id') -> select(array('gallery_images.id', 'gallery_images.content', 'gallery.folderid', 'gallery_images.views', 'gallery_images.likes', 'gallery_images.created_at')) -> where('gallery_id', '=', $galleryid);
+		$images = GalleryImage::join('gallery', 'gallery.id', '=', 'gallery_images.gallery_id') -> select(array('gallery_images.id', 'gallery_images.content', 'gallery.folderid', 'gallery_images.voteup', 'gallery_images.votedown', 'gallery_images.hits as hits', 'gallery_images.created_at')) -> where('gallery_id', '=', $galleryid);
 
 		return Datatables::of($images) -> make();
 	}

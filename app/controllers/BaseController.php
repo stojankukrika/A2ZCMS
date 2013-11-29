@@ -286,8 +286,14 @@ class BaseController extends Controller {
 	 
 	public function content($page_id)
 	{
+		$user = $this -> user -> currentUser();
+		$canPageVote = false;
+		if (!empty($user)) {
+			$canPageVote = $user -> can('post_page_vote');
+		}
+		
 		$page = Page::find($page_id);
-		return View::make('site.partial_views.content.content', compact('page'));
+		return View::make('site.partial_views.content.content', compact('page','canPageVote'));
 	}
 	public function showGallery($ids="",$grids="",$sorts,$limits,$orders)
 	{

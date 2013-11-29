@@ -17,7 +17,7 @@
 		<!--[if lt IE 9]>
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/html5.js')}}"></script>
 		<![endif]-->
-		<link rel="shortcut icon" href="{{asset('admin/ico/favicon.ico')}}">
+		<link rel="shortcut icon" href="{{asset('assets/admin/ico/favicon.ico')}}">
 		{{$analytics}}
 		@yield('page_scripts')		
 	</head>

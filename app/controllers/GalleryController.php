@@ -100,7 +100,7 @@ class GalleryController extends BaseController {
 			// 404 error page.
 			return App::abort(404);
 		}
-		$gallery_image -> views = $gallery_image -> views +1;
+		$gallery_image -> hits = $gallery_image -> hits +1;
 		$gallery_image -> update();
 		
 		$gallery_comments = $gallery_image -> imagecomments()-> orderBy('created_at', 'ASC') ->paginate($pageitem);
@@ -111,12 +111,18 @@ class GalleryController extends BaseController {
 		if (!empty($user)) {
 			$canGalleryComment = $user -> can('post_gallery_comment');
 		}
+		
+		$canImageVote = false;
+		if (!empty($user)) {
+			$canImageVote = $user -> can('post_image_vote');
+		}
 		$page = Page::first();
 		$pagecontent = BaseController::createSiderContent($page->id);
 		// Show the page
 		$data['sidebar_right'] = $pagecontent['sidebar_right'];
 		$data['sidebar_left'] = $pagecontent['sidebar_left'];
 		$data['page'] = $page;
+		$data['canImageVote'] = $canImageVote;
 		$data['canGalleryComment'] = $canGalleryComment;
 		$data['gallery_image'] = $gallery_image;
 		$data['gallery'] = $gallery;

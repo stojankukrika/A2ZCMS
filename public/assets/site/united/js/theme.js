@@ -43,3 +43,15 @@ $(function () {
         $("body").addClass("old-ie");
     }
 });
+
+function contentvote(updown,id)
+{
+	$.ajax({
+			 url: 'pagevote',
+			type: "GET",
+			data: { updown: updown, id: id },
+			success: function(data){
+				$( "#countvote" ).text(data);
+			}
+		});
+}
