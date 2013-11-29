@@ -58,8 +58,8 @@
 		@if (!$canBlogVote )
 		<br><b><i>{{ Lang::get('site.add_votes_permission') }}</i></b>
 		@else				
-		<span style="display: inline-block;" onclick="contentvote('1','image',{{$blog->id}})" class="up"></span>
-		<span style="display: inline-block;" onclick="contentvote('0','image',{{$blog->id}})" class="down"></span>
+		<span style="display: inline-block;" onclick="contentvote('1','blog',{{$blog->id}})" class="up"></span>
+		<span style="display: inline-block;" onclick="contentvote('0','blog',{{$blog->id}})" class="down"></span>
 		@endif
 	</p>
 <!-- the comment box -->

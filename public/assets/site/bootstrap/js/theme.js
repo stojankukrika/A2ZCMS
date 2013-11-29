@@ -44,12 +44,12 @@ $(function () {
     }
 });
 
-function contentvote(updown,content,id)
+function contentvote(updown,id)
 {
 	$.ajax({
-			 url: 'contentvote',
+			 url: 'pagevote',
 			type: "GET",
-			data: { updown: updown,content: content, id: id },
+			data: { updown: updown, id: id },
 			success: function(data){
 				$( "#countvote" ).text(data);
 			}
