@@ -14,7 +14,8 @@ class UserController extends BaseController {
 	 */
 	private $useravatwidth;
 	private $useravatheight;
-	
+	private $page;
+	private $pagecontent;
 	public function __construct(User $user) {
 		parent::__construct();
 		$this -> user = $user;
@@ -31,6 +32,8 @@ class UserController extends BaseController {
 			}
 		$this->useravatwidth = $useravatwidth;
 		$this->useravatheight = $useravatheight;
+		$this->page = Page::first();
+		$this->pagecontent = BaseController::createSiderContent($this->page->id);
 	}
 
 	/**
@@ -43,13 +46,10 @@ class UserController extends BaseController {
 		if ($redirect) {
 			return $redirect;
 		}
-		
-		$page = Page::first();
-		$pagecontent = BaseController::createSiderContent($page->id);
 		// Show the page
-		$data['sidebar_right'] = $pagecontent['sidebar_right'];
-		$data['sidebar_left'] = $pagecontent['sidebar_left'];
-		$data['page'] = $page;
+		$data['sidebar_right'] = $this->pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $this->pagecontent['sidebar_left'];
+		$data['page'] = $this->page;
 		$data['user'] =$user;
 		
 		return View::make('site/user/index', $data);
@@ -163,12 +163,9 @@ class UserController extends BaseController {
 	 */
 	public function getCreate() {
 		
-		$page = Page::first();
-		$pagecontent = BaseController::createSiderContent($page->id);
-		// Show the page
-		$data['sidebar_right'] = $pagecontent['sidebar_right'];
-		$data['sidebar_left'] = $pagecontent['sidebar_left'];
-		$data['page'] = $page;
+		$data['sidebar_right'] = $this->pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $this->pagecontent['sidebar_left'];
+		$data['page'] = $this->page;
 		return View::make('site/user/create', $data);
 	}
 
@@ -182,12 +179,9 @@ class UserController extends BaseController {
 			return Redirect::to('/');
 		}
 		
-		$page = Page::first();
-		$pagecontent = BaseController::createSiderContent($page->id);
-		// Show the page
-		$data['sidebar_right'] = $pagecontent['sidebar_right'];
-		$data['sidebar_left'] = $pagecontent['sidebar_left'];
-		$data['page'] = $page;
+		$data['sidebar_right'] = $this->pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $this->pagecontent['sidebar_left'];
+		$data['page'] = $this->page;
 		return View::make('site/user/login', $data);
 	}
 
@@ -243,12 +237,9 @@ class UserController extends BaseController {
 	 *
 	 */
 	public function getForgot() {
-		$page = Page::first();
-		$pagecontent = BaseController::createSiderContent($page->id);
-		// Show the page
-		$data['sidebar_right'] = $pagecontent['sidebar_right'];
-		$data['sidebar_left'] = $pagecontent['sidebar_left'];
-		$data['page'] = $page;
+		$data['sidebar_right'] = $this->pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $this->pagecontent['sidebar_left'];
+		$data['page'] = $this->page;
 		
 		return View::make('site/user/forgot', $data);
 	}
@@ -271,12 +262,9 @@ class UserController extends BaseController {
 	 */
 	public function getReset($token) {
 		
-		$page = Page::first();
-		$pagecontent = BaseController::createSiderContent($page->id);
-		// Show the page
-		$data['sidebar_right'] = $pagecontent['sidebar_right'];
-		$data['sidebar_left'] = $pagecontent['sidebar_left'];
-		$data['page'] = $page;
+		$data['sidebar_right'] = $this->pagecontent['sidebar_right'];
+		$data['sidebar_left'] = $this->pagecontent['sidebar_left'];
+		$data['page'] = $this->page;
 		$data['token'] = $token;
 		return View::make('site/user/reset', $data);
 	}
