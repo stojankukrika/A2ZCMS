@@ -36,14 +36,11 @@
       </div>
 	</nav>
 	<div class="container">
-       	<div class="row">
-	      	@yield('sidebar_left')
-	        <div class="col-lg-8">
-				@yield('content')
-				</div>
-			 </div>
-			 	@yield('sidebar_right')
-	    </div>
+	<div class="row">
+        @yield('sidebar_left')
+        @yield('content')
+        @yield('sidebar_right')        
+      </div>
 	</div>
 	 <footer>
 		 <div class="row">

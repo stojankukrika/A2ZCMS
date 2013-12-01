@@ -27,22 +27,26 @@
 	{{ $page->page_javascript}}
 	</script>
 @stop
+       
 {{-- Sidebar left --}}
 @section('sidebar_left')
-	@foreach ($sidebar_left as $item)
-	
+@if(!empty($sidebar_left))
+<br>
+	<div class="col-xs-6 col-lg-4">
+	@foreach ($sidebar_left as $item)	
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>
 	@endforeach 
+	</div>
+@endif
 @stop
 {{-- Content --}}
 @section('content')
-<br>
+<div class="col-xs-12 col-sm-6 col-lg-8">
 <div class="page-header">
 		<h3>{{{ $blog->title }}}</h3>
 	</div>
-<div class="row">
          <p><i class="icon-time"></i> {{ Lang::get('site/blog.posted_on') }} {{{ $blog->date() }}} {{ Lang::get('site/blog.by') }} 
           	<a href="#">{{{ $blog->author->username }}}</a></p>
           <hr>
@@ -65,7 +69,7 @@
 		<span style="display: inline-block;" onclick="contentvote('0','blog',{{$blog->id}})" class="down"></span>
 		@endif
 	</p>
-<!-- the comment box -->
+	<!-- the comment box -->
   <div class="well">            
 	<h4>{{{ $blog_comments->count() }}} {{ Lang::get('site/blog.comments') }}</h4>
 
@@ -80,55 +84,57 @@
 	@else
 	<hr />
 	@endif
-</div>
-@if ( ! Auth::check())
-{{ Lang::get('site/blog.add_comment_login') }}
-<br />
-<br />
-{{ Lang::get('site/blog.click') }} <a href="{{{ URL::to('user/login') }}}">{{ Lang::get('site/blog.here') }}</a> 
-{{ Lang::get('site/blog.to_login') }}
-<br>
-@elseif ( ! $canBlogComment )
-<br><b><i>{{ Lang::get('site/blog.add_comment_permission') }}</i></b>
-@else
-
-@if($errors->has())
-<div class="alert alert-danger alert-block">
-	<ul>
-		@foreach ($errors->all() as $error)
-		<li>
-			{{ $error }}
-		</li>
-		@endforeach
-	</ul>
-</div>
-@endif
-<div class="new_comment">
-	<h4>{{ Lang::get('site/blog.add_comment') }}</h4>
-	<form method="post" action="{{{ URL::to('blog/'.$blog->slug) }}}">
-		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
-			<div class="form-group">
-				<textarea class="form-control" name="blogcomment" id="blogcomment" placeholder="blogcomment" rows="7">{{{ Request::old('blogcomment') }}}</textarea>
-				<label id="characterLeft"></label>
+	</div>
+	@if ( ! Auth::check())
+	{{ Lang::get('site/blog.add_comment_login') }}
+	<br />
+	<br />
+	{{ Lang::get('site/blog.click') }} <a href="{{{ URL::to('user/login') }}}">{{ Lang::get('site/blog.here') }}</a> 
+	{{ Lang::get('site/blog.to_login') }}
+	<br>
+	@elseif ( ! $canBlogComment )
+	<br><b><i>{{ Lang::get('site/blog.add_comment_permission') }}</i></b>
+	@else
+	
+	@if($errors->has())
+	<div class="alert alert-danger alert-block">
+		<ul>
+			@foreach ($errors->all() as $error)
+			<li>
+				{{ $error }}
+			</li>
+			@endforeach
+		</ul>
+	</div>
+	@endif
+	<div class="new_comment">
+		<h4>{{ Lang::get('site/blog.add_comment') }}</h4>
+		<form method="post" action="{{{ URL::to('blog/'.$blog->slug) }}}">
+			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
+				<div class="form-group">
+					<textarea class="form-control" name="blogcomment" id="blogcomment" placeholder="blogcomment" rows="7">{{{ Request::old('blogcomment') }}}</textarea>
+					<label id="characterLeft"></label>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success">{{ Lang::get('site.submit') }}</button>
+				</div>
+		</form>
+	</div>
+	@endif
+	</div>
+	@stop
+	{{-- Sidebar right --}}
+	@section('sidebar_right')
+	@if(!empty($sidebar_right))
+		<br>
+		<div class="col-xs-6 col-lg-4">
+		@foreach ($sidebar_right as $item)
+			  <div class="well">			
+				{{ $item['content'] }}
 			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-success">{{ Lang::get('site.submit') }}</button>
-			</div>
-	</form>
-</div>
-@endif
-@stop
-{{-- Sidebar right --}}
-@section('sidebar_right')
-<div class="col-lg-4">		
-	 <div class="well-sm"><br/>
-	 	</div>			 
-	@foreach ($sidebar_right as $item)
-		  <div class="well">			
-			{{ $item['content'] }}
+		@endforeach 
 		</div>
-	@endforeach 
-</div>
+	@endif
 @stop
 {{-- Scripts --}}
 @section('scripts')

@@ -1,18 +1,30 @@
 @extends('site.layouts.default')
 
-	{{-- Web site Title --}}
-	@section('title')
-		{{{ Lang::get('user/user.login') }}} ::
-	@parent
+{{-- Page title --}}
+@section('page_header')
+	@if($page->showtitle==1)
+	<h1 class="page-header">
+		{{{ $page->name }}}
+	</h1>
+	@endif
 @stop
 
-{{-- Page title --}}
-@section('page_title')
-	<span>{{Lang::get('confide.login.title')}}</span><small>{{Lang::get('confide.login.accestouser')}}</small></h2>
-@stop
+{{-- Sidebar left --}}
+@section('sidebar_left')
+@if(!empty($sidebar_left))
+<br>
+	<div class="col-xs-6 col-lg-4">
+	@foreach ($sidebar_left as $item)	
+		  <div class="well">			
+			{{ $item['content'] }}
+		</div>
+	@endforeach 
+	</div>
+@endif
 
 {{-- Content --}}
 @section('content')
+<div class="col-xs-12 col-sm-6 col-lg-8">
 <div class="page-header">
 	<h3>{{Lang::get('confide.login.desc')}}</h3>
 </div>
@@ -74,18 +86,21 @@
 			<a href="{{ Url::to('user/create') }}" class="btn btn-info">{{{ Lang::get('site/partial_views/sidebar/login.create_account') }}}</a>
 		</p>
 	</div>
+	</div>
+	</div>
 </div>
 @stop
 
 {{-- Sidebar right --}}
-@section('sidebar_right')
-<div class="col-lg-4">		
-	 <div class="well-sm"><br/>
-	 	</div>			 
-	@foreach ($sidebar_right as $item)
-		  <div class="well">			
-			{{ $item['content'] }}
+	@section('sidebar_right')
+	@if(!empty($sidebar_right))
+		<br>
+		<div class="col-xs-6 col-lg-4">
+		@foreach ($sidebar_right as $item)
+			  <div class="well">			
+				{{ $item['content'] }}
+			</div>
+		@endforeach 
 		</div>
-	@endforeach 
-</div>
+	@endif
 @stop

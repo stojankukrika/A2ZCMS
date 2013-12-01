@@ -29,17 +29,24 @@
 @stop
 {{-- Sidebar left --}}
 @section('sidebar_left')
+@if(!empty($sidebar_left))
+<br>
+	<div class="col-xs-6 col-lg-4">
 	@foreach ($sidebar_left as $item)
 	
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>
 	@endforeach 
+	</div>
+@endif
 @stop
 {{-- Content --}}
 @section('content')
-<br>
-<h3><a href="{{{ URL::to('gallery/'.$gallery->id) }}}">{{ String::title($gallery->title) }}</a></h3>
+<div class="col-xs-12 col-sm-6 col-lg-8">
+<div class="page-header">
+	<h3><a href="{{{ URL::to('gallery/'.$gallery->id) }}}">{{ String::title($gallery->title) }}</a></h3>
+	</div>
 <div class="row"> 
       <img src="../../gallery/{{{$gallery->folderid}}}/{{{ $gallery_image->content }}}" class="img-responsive">        
      <hr>
@@ -103,18 +110,20 @@
 </div>
 @endif
 </div>
+</div>
 @stop
 {{-- Sidebar right --}}
 @section('sidebar_right')
-<div class="col-lg-4">		
-	 <div class="well-sm"><br/>
-	 	</div>			 
+<@if(!empty($sidebar_right))
+		<br>
+		<div class="col-xs-6 col-lg-4">	 
 	@foreach ($sidebar_right as $item)
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>
 	@endforeach 
 </div>
+	@endif
 @stop
 
 {{-- Scripts --}}

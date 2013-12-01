@@ -32,16 +32,20 @@
 
 {{-- Sidebar left --}}
 @section('sidebar_left')
-	@foreach ($sidebar_left as $item)
-	
+@if(!empty($sidebar_left))
+<br>
+	<div class="col-xs-6 col-lg-4">
+	@foreach ($sidebar_left as $item)	
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>
 	@endforeach 
-@stop
+	</div>
+@endif
 
 {{-- Content --}}
 @section('content')
+<div class="col-xs-12 col-sm-6 col-lg-8">
 <div class="page-header">
 	<h3> {{ Lang::get('site/user.edit_settings') }}</h3>
 </div>
@@ -115,18 +119,20 @@
 	</div>
 	<!-- ./ form actions -->
 </form>
-</form>
+	</div>
+</div>
 @stop
 
 {{-- Sidebar right --}}
-@section('sidebar_right')
-<div class="col-lg-4">		
-	 <div class="well-sm"><br/>
-	 	</div>			 
-	@foreach ($sidebar_right as $item)
-		  <div class="well">			
-			{{ $item['content'] }}
+	@section('sidebar_right')
+	@if(!empty($sidebar_right))
+		<br>
+		<div class="col-xs-6 col-lg-4">
+		@foreach ($sidebar_right as $item)
+			  <div class="well">			
+				{{ $item['content'] }}
+			</div>
+		@endforeach 
 		</div>
-	@endforeach 
-</div>
+	@endif
 @stop

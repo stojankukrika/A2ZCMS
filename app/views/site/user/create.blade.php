@@ -27,17 +27,22 @@
 	{{ $page->page_javascript}}
 	</script>
 @stop
+
 {{-- Sidebar left --}}
 @section('sidebar_left')
-	@foreach ($sidebar_left as $item)
-	
+@if(!empty($sidebar_left))
+<br>
+	<div class="col-xs-6 col-lg-4">
+	@foreach ($sidebar_left as $item)	
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>
 	@endforeach 
-@stop
+	</div>
+@endif
 {{-- Content --}}
 @section('content')
+<div class="col-xs-12 col-sm-6 col-lg-8">
 <div class="page-header">
 	<h3>{{ Lang::get('confide.signup.desc')}}</h3>
 </div>
@@ -108,17 +113,19 @@
 		</div>
 	</fieldset>
 </form>
-{{-- Sidebar right --}}
-@section('sidebar_right')
-<div class="col-lg-4">		
-	 <div class="well-sm"><br/>
-	 	</div>			 
-	@foreach ($sidebar_right as $item)
-		  <div class="well">			
-			{{ $item['content'] }}
-		</div>
-	@endforeach 
 </div>
-@stop
-
+</div>
+	@stop
+{{-- Sidebar right --}}
+	@section('sidebar_right')
+	@if(!empty($sidebar_right))
+		<br>
+		<div class="col-xs-6 col-lg-4">
+		@foreach ($sidebar_right as $item)
+			  <div class="well">			
+				{{ $item['content'] }}
+			</div>
+		@endforeach 
+		</div>
+	@endif
 @stop
