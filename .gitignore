@@ -12,3 +12,8 @@ app/config/production/app.php
 app/config/production/database.php
 app/config/local/app.php
 app/config/local/database.php
+**public/avatar
+**public/blog
+**public/customform
+**public/gallery
+**public/page
