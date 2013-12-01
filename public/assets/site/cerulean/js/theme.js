@@ -44,14 +44,16 @@ $(function () {
     }
 });
 
-function contentvote(updown,id)
+
+function contentvote(updown,content,id)
 {
+	var url = $('#url').val();
 	$.ajax({
-			 url: 'pagevote',
-			type: "GET",
-			data: { updown: updown, id: id },
-			success: function(data){
-				$( "#countvote" ).text(data);
-			}
-		});
+		 url: url,
+		type: "GET",
+		data: { updown: updown,content:content, id: id },
+		success: function(data){
+			$( "#countvote" ).text(data);
+		}
+	});
 }

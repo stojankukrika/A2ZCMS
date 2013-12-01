@@ -56,7 +56,7 @@ class WebsiteController extends BaseController {
 		$content = Input::get('content');
 		$user = $this -> user -> currentUser();
 		$newvalue = 0;
-		$exists = ContentVote::where('content','=',$content)->where('updown','=',$updown)->where('idcontent','=',$id)->where('user_id','=',$user->id)->get();
+		$exists = ContentVote::where('content','=',$content)->where('idcontent','=',$id)->where('user_id','=',$user->id)->select('id')->get();
 		
 		switch ($content) {
 			case 'page':
@@ -69,7 +69,7 @@ class WebsiteController extends BaseController {
 				$item = Blog::where ('id', '=', $id) -> first();
 				break;			
 			}
-		if(!empty($exists)){
+		if($exists->count() == 0 ){
 			$contentvote = new ContentVote;
 			$contentvote -> user_id = $user->id;
 			$contentvote -> updown = $updown;

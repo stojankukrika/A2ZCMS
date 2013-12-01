@@ -21,7 +21,8 @@
 		{{$analytics}}
 		@yield('page_scripts')		
 	</head>
-	<body>	
+	<body>
+	<input type="hidden" id="url" value='{{ URL::action("WebsiteController@contentvote") }}' />	
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -87,6 +88,7 @@
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/select2.js')}}"></script>
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery.multiselect.js')}}"></script>
 		<!-- end: JavaScript-->
+		
 		@yield('scripts')
 	</body>
 </html>

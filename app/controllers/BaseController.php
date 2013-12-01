@@ -114,19 +114,19 @@ class BaseController extends Controller {
 			case 'top':
 				$navigation = NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
 										->where('navigation_groups.showmenu','=','1') 
-										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
+										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.page_id', 'navigation_links.link_type', 'navigation_links.url', 'navigation_links.uri','navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
 										-> get();
 				break;
 			case 'footer':
 				$navigation =NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
 										->where('navigation_groups.showfooter','=','1') 
-										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
+										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.page_id', 'navigation_links.link_type', 'navigation_links.url', 'navigation_links.uri','navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
 										-> get();
 				break;
 			case 'side':
 				$navigation = NavigationGroup::join('navigation_links','navigation_groups.id', '=', 'navigation_links.navigation_group_id')
 										->where('navigation_groups.showsidebar','=','1') 
-										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
+										-> select('navigation_links.id', 'navigation_links.title', 'navigation_links.parent', 'navigation_links.page_id', 'navigation_links.link_type','navigation_links.url', 'navigation_links.uri','navigation_links.link_type', 'navigation_links.target', 'navigation_links.position','navigation_links.class') 
 										-> get();
 				break;
 		}		
@@ -150,10 +150,35 @@ class BaseController extends Controller {
 		if (isset($menu['parents'][$parent])) {
 			foreach ($menu['parents'][$parent] as $itemId) {
 				if (!isset($menu['parents'][$itemId])) {
-					$html .= "<li> <a class='".$menu['items'][$itemId]['class']."' href='".URL::to('page') ."/". $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a></li>";
+
+					$html .= "<li> <a target='".$menu['items'][$itemId]['target']."' class='".$menu['items'][$itemId]['class']."' href='";
+					switch ($menu['items'][$itemId]['link_type']) {
+						case 'page':
+							$html .=URL::to('page') ."/". $menu['items'][$itemId]['page_id'];
+							break;
+						case 'url':
+							$html .=URL::to($menu['items'][$itemId]['uri']);
+							break;
+						case 'uri':
+							$html .=$menu['items'][$itemId]['url'];
+							break;
+					}
+					$html .="'>" . $menu['items'][$itemId]['title'] . "</a></li>";
 				}
 				if (isset($menu['parents'][$itemId])) {
-					$html .= "<li class='dropdown'> <a class='dropdown-toggle ".$menu['items'][$itemId]['class']."' href='".URL::to('page') ."/". $menu['items'][$itemId]['id'] . "'>" . $menu['items'][$itemId]['title'] . "</a>
+					$html .= "<li class='dropdown'> <a target='".$menu['items'][$itemId]['target']."' class='dropdown-toggle ".$menu['items'][$itemId]['class']."' href='";
+					switch ($menu['items'][$itemId]['link_type']) {
+						case 'page':
+							$html .=URL::to('page') ."/". $menu['items'][$itemId]['page_id'];
+							break;
+						case 'url':
+							$html .=URL::to($menu['items'][$itemId]['uri']);
+							break;
+						case 'uri':
+							$html .=$menu['items'][$itemId]['url'];
+							break;
+					}
+					$html .="'>" . $menu['items'][$itemId]['title'] . "</a>
 						<ul class='dropdown-menu'>";
 					$html .= $this -> buildMenu($itemId, $menu);
 					$html .= " </ul></li>";

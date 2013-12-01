@@ -107,7 +107,7 @@
 			<div class="form-group {{{ $errors->has('target') ? 'error' : '' }}}">
 				<div class="col-lg-12">
 					<label class="control-label col-lg-2" for="target">{{{ Lang::get('admin/navigation/table.target') }}}</label>
-					{{ Form::select('target', array('selected'=>'Self', '_blank' => Lang::get("admin/navigation/table.blank_page")), Input::old('page_id', isset($navigation) ? $navigation->target : ''), array('class' => 'form-control input-sm')) }}
+					{{ Form::select('target', array('_self'=>'Self', '_blank' => Lang::get("admin/navigation/table.blank_page")), Input::old('page_id', isset($navigation) ? $navigation->target : ''), array('class' => 'form-control input-sm')) }}
 					<span class="help-inline">{{{ $errors->first('target', ':message') }}}</span>
 				</div>
 			</div>
