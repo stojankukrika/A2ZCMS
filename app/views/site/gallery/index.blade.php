@@ -42,9 +42,11 @@
 
 {{-- Content --}}
 @section('content')
-
-<h3><a href="{{{ URL::to('gallery/'.$gallery->id) }}}">{{ String::title($gallery->title) }}</a></h3>
-<div class="row">  
+<br>
+<div class="page-header">
+		<h3><a href="{{{ URL::to('gallery/'.$gallery->id) }}}">{{ String::title($gallery->title) }}</a></h3>
+	</div>
+<div class="row">
 @foreach ($gallery_images as $item)
 	<div class="col-md-3 portfolio-item">
       	<a href="{{{ URL::to('galleryimage/'.$gallery->id.'/'.$item->id) }}}">
@@ -52,10 +54,10 @@
       	</a>
       </div>
      @endforeach
-</div>
-<ul class="pager">
-	{{ $gallery_images->links() }}
-</ul>
+     
+	<ul class="pager">
+		{{ $gallery_images->links() }}
+	</ul>
 @stop
 
 

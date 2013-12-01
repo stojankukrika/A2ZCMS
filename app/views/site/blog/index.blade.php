@@ -39,7 +39,10 @@
 {{-- Content --}}
 @section('content')
 <br>
-<h2>{{{ $blog->title }}}</h2>
+<div class="page-header">
+		<h3>{{{ $blog->title }}}</h3>
+	</div>
+<div class="row">
          <p><i class="icon-time"></i> {{ Lang::get('site/blog.posted_on') }} {{{ $blog->date() }}} {{ Lang::get('site/blog.by') }} 
           	<a href="#">{{{ $blog->author->username }}}</a></p>
           <hr>
