@@ -214,7 +214,7 @@ class BaseController extends Controller {
 			if($page->sidebar==1){
 				$sidebar_right[] = array('content' =>$this->$function($params));
 			}
-			if($page->sidebar==2){
+			if($page->sidebar==0){
 				$sidebar_left[] = array('content' =>$this->$function($params));
 			}
 		}
