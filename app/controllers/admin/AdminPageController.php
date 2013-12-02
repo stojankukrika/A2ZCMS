@@ -389,11 +389,12 @@ class AdminPageController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$pages = Page::select(array('pages.id', 'pages.name', 'pages.status','pages.voteup','pages.votedown','hits'));
+		$pages = Page::select(array('pages.id', 'pages.name', 'pages.status','pages.voteup','pages.votedown','pages.hits','pages.sidebar'));
 
 		return Datatables::of($pages) 
 			-> edit_column('voteup', '{{ $voteup-$votedown }}') 
 			-> edit_column('status', '{{($status)? "<i class=\"icon-eye-open\"></i>":"<i class=\"icon-eye-close\"></i>";}}') 
+			-> edit_column('sidebar', '{{($sidebar=="0")? "'.Lang::get('admin/pages/table.left').'":"'.Lang::get('admin/pages/table.right').'";}}') 
 			-> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/visible\' ) }}}" class="btn btn-link btn-sm"><i class="icon-exchange "></i></a>
 							<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
                             <a href="{{{ URL::to(\'admin/pages/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>') 

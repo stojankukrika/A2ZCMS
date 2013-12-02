@@ -116,6 +116,7 @@
 	</fieldset>
 </form>
 </div>
+<br>
 </div>
 	@stop
 {{-- Sidebar right --}}

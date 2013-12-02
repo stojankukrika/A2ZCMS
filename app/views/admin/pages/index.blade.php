@@ -21,7 +21,8 @@
 			<th class="span6">{{{ Lang::get('admin/pages/table.name') }}}</th>
 			<th class="span2">{{{ Lang::get('admin/pages/table.status') }}}</th>
 			<th class="span2">{{{ Lang::get('admin/pages/table.votes') }}}</th>
-			<th class="span2">{{{ Lang::get('admin/pages/table.hits') }}}</th>
+			<th class="span2">{{{ Lang::get('admin/pages/table.hits') }}}</th>			
+			<th class="span3">{{{ Lang::get('admin/pages/table.sidebar') }}}</th>
 			<th class="span2">{{{ Lang::get('table.actions') }}}</th>
 		</tr>
 	</thead>

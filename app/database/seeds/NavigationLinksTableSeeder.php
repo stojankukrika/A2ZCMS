@@ -12,7 +12,7 @@ class NavigationLinksTableSeeder extends Seeder {
 		$navigation_links = array( 
 					array('title' => 'Home', 
 						'parent' => NULL,
-						'link_type' => 'url',
+						'link_type' => 'page',
 						'page_id' => $page_id,
 						'url' => '',
 						'uri' => '',

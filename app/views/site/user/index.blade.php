@@ -119,6 +119,7 @@
 	<!-- ./ form actions -->
 </form>
 	</div>
+	<br>
 </div>
 @stop
 

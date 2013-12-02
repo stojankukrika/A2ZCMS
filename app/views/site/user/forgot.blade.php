@@ -45,11 +45,13 @@
 {{-- Content --}}
 @section('content')
 <div class="col-xs-12 col-sm-6 col-lg-8">
-<div class="page-header">
-	<h3>{{{ Lang::get('site/user.forgot_password') }}}</h3>
+	<div class="page-header">
+		<h3>{{{ Lang::get('site/user.forgot_password') }}}</h3>
+	</div>
+	<div class="row">
+		{{ Confide::makeForgotPasswordForm() }}
+	</div>
 </div>
-<div class="row">
-{{ Confide::makeForgotPasswordForm() }}
 @stop
 
 {{-- Sidebar right --}}

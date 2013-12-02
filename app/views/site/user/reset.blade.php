@@ -45,11 +45,11 @@
 {{-- Content --}}
 @section('content')
 <div class="col-xs-12 col-sm-6 col-lg-8">
-<div class="page-header">
-	<h3>{{ Lang::get('confide.forgot.title') }}</h3>
-</div>
-<div class="row">
-{{ Confide::makeResetPasswordForm($token)->render() }}
+	<div class="page-header">
+		<h3>{{ Lang::get('confide.forgot.title') }}</h3>
+	</div>
+	<div class="row">
+		{{ Confide::makeResetPasswordForm($token)->render() }}
 	</div>
 </div>
 @stop

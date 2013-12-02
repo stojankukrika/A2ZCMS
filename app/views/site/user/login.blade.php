@@ -33,8 +33,7 @@
 @if(!empty($sidebar_left))
 <br>
 	<div class="col-xs-6 col-lg-4">
-	@foreach ($sidebar_left as $item)
-	
+	@foreach ($sidebar_left as $item)	
 		  <div class="well">			
 			{{ $item['content'] }}
 		</div>
@@ -108,6 +107,7 @@
 	</div>
 	</div>
 	</div>
+	<br>
 </div>
 @stop
 
