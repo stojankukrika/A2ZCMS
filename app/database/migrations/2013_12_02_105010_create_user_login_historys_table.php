@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCustomFormFieldsTable extends Migration {
+class CreateUserLoginHistorysTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,17 +12,10 @@ class CreateCustomFormFieldsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('custom_form_fields', function(Blueprint $table) {
+		Schema::create('user_login_historys', function(Blueprint $table) {
 			$table->increments('id');
-			$table -> integer('custom_form_id')->unsigned()->index();
-			$table -> foreign('custom_form_id')->references('id')->on('custom_forms')->onDelete('cascade');
 			$table -> integer('user_id')->unsigned()->index();
 			$table -> foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table -> string('name');
-			$table -> string('options');	
-			$table -> integer('type');	
-			$table -> integer('order');	
-			$table -> boolean('mandatory');				
 			$table -> timestamps();
 			$table -> softDeletes();
 		});
@@ -35,7 +28,7 @@ class CreateCustomFormFieldsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('custom_form_fields');
+		Schema::drop('user_login_historys');
 	}
 
 }

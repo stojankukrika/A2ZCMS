@@ -77,6 +77,13 @@ class BaseController extends Controller {
 		// logAttempt will check if the 'email' perhaps is the username.
 		// Check that the user is confirmed.
 		if (Confide::logAttempt($input, true)) {
+				
+			$login_user = Auth::user();
+			
+			$userloginlog = new UserLoginHistory;
+			$userloginlog -> user_id = $login_user->id;
+			$userloginlog -> save();
+				
 			$r = Session::get('loginRedirect');
 			if (!empty($r)) {
 				Session::forget('loginRedirect');

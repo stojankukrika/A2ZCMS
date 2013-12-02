@@ -24,6 +24,7 @@
 * Back-end
 	* Automatic install and settup website.
 	* User and Role management.
+	* View user login history.
 	* Manage blog posts and comments.
 	* Manage gallery pictures and comments.
 	* Manage custom forms.
@@ -36,6 +37,7 @@
 	* User login, registration, forgot password
 	* Blog,Gallery,Messages and more functionality
 	* Voting content(Blog,Gallery,Page)
+	* Custom themes
 * Packages included:
 	* [Confide](#confide)
 	* [Entrust](#entrust)
@@ -50,6 +52,7 @@
 
 	PHP >= 5.4.0 (Entrust requires 5.4, this is an increase over Laravel's 5.3.7 requirement)
 	MCrypt PHP Extension
+	Enable creating triger in database
 
 -----
 <a name="feature3"></a>

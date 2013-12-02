@@ -128,6 +128,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
 
     # User Management    
     Route::get('users/{role}/usersforrole', 'AdminUserController@getUsersForRole');
+	Route::get('users/{user}/usershistory', 'AdminUserController@getHistory');
     Route::get('users/{user}/edit', 'AdminUserController@getEdit');
     Route::post('users/{user}/edit', 'AdminUserController@postEdit');
     Route::get('users/{user}/delete', 'AdminUserController@getDelete');

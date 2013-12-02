@@ -77,7 +77,18 @@ class InstallController extends BaseController {
 			Artisan::call('key:generate', array('--env' => App::environment()));
 
 			Artisan::call('migrate', array('--env' => App::environment()));
-
+			
+			//triger for update user last_login affter user is login to system
+			DB::unprepared("CREATE TRIGGER `user_login_historys` AFTER INSERT ON `user_login_historys`
+							 FOR EACH ROW UPDATE users set users.last_login = 
+							(select user_login_historys.created_at 
+							 from user_login_historys
+							 where user_login_historys.id = NEW.id) 
+							WHERE id = (select user_login_historys.user_id 
+							 from user_login_historys
+							 where user_login_historys.id = NEW.id)");
+			
+			
 			return Redirect::to('install/step3');
 		} else {
 			return Redirect::to('install/step2') -> withErrors($form);

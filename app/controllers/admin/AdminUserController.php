@@ -255,19 +255,17 @@ class AdminUserController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$users = User::select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'users.confirmed', 'users.created_at'));
+		$users = User::select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'users.confirmed','users.last_login','users.created_at'));
 
 		return Datatables::of($users)
-			-> edit_column('confirmed', '@if($confirmed)
-                            Yes
-                        @else
-                            No
-                        @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
-                                @if($username == \'admin\')
+						-> edit_column('confirmed', '@if($confirmed) Yes @else No @endif') 
+						 -> add_column('actions', '
+                                <a href="{{{ URL::to(\'admin/users/\' . $id . \'/usershistory\' ) }}}" class="btn btn-sm btn-link"><i class="icon-signal "></i></a>                               
+						 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
+                                @if($id == \'1\')
                                 @else
                                     <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>
-                                @endif
-            ') -> remove_column('id') -> make();
+                                @endif             ') -> remove_column('id') -> make();
 	}
 
 	/**
@@ -279,14 +277,12 @@ class AdminUserController extends AdminController {
 		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id') 
 					-> leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id') 
 					-> where('assigned_roles.role_id', '=', $role_id) 
-					-> select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'roles.name as rolename', 'users.confirmed', 'users.created_at'));
+					-> select(array('users.id', 'users.name', 'users.surname', 'users.username', 'users.email', 'roles.name as rolename', 'users.confirmed','users.last_login','users.created_at'));
 
-		return Datatables::of($users) -> edit_column('confirmed', '@if($confirmed)
-                            Yes
-                        @else
-                            No
-                        @endif') -> add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
-                                @if($username == \'admin\')
+		return Datatables::of($users) -> edit_column('confirmed', '@if($confirmed) Yes @else No @endif') 
+						 -> add_column('actions', ' <a href="{{{ URL::to(\'admin/users/\' . $id . \'/usershistory\' ) }}}" class="btn btn-sm btn-link"><i class="icon-signal "></i></a>                               
+						 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-sm btn-default"><i class="icon-edit "></i></a>
+                                @if($id == \'1\')
                                 @else
                                     <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-sm btn-danger"><i class="icon-trash "></i></a>
                                 @endif
@@ -367,6 +363,29 @@ class AdminUserController extends AdminController {
 		} else {
 			return Redirect::to('admin/users/profile') -> withInput(Input::except('password', 'password_confirmation')) -> with('error', $error);
 		}
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function getHistory($user) {
+		
+		$pageitem = 2;
+		$settings = Settings::all();
+        foreach ($settings as $v) {
+                if ($v -> varname == 'pageitem') {
+                        $pageitem = $v -> value;
+                }
+        }
+
+		$title = Lang::get('admin/users/title.history_login');
+
+		$historylogin = UserLoginHistory::where('user_id','=',$user->id)-> paginate($pageitem);
+		
+		// Show the page
+		return View::make('admin/users/history_login', compact('title', 'user','historylogin'));
 	}
 	
 
