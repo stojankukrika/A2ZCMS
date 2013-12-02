@@ -13,7 +13,7 @@ class AddLastLoginIntoUsers extends Migration {
 	public function up()
 	{
 		Schema::table('users', function(Blueprint $table) {
-			$table -> timestamp('last_login')->after('active')->nullable()-> default(0);
+			$table -> timestamp('last_login')->after('active')->nullable();
 		});
 				
 	}
