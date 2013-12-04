@@ -19,7 +19,7 @@
 	<thead>
 		<tr>
 			<th class="span2">{{{ Lang::get('admin/navigation/table.title') }}}</th>
-			<th class="span3">{{{ Lang::get('admin/navigation/table.parent') }}}</th>
+			<th class="span3">{{{ Lang::get('admin/navigation/table.page') }}}</th>
 			<th class="span3">{{{ Lang::get('admin/navigation/table.link_type') }}}</th>
 			<th class="span3">{{{ Lang::get('admin/navigation/title.navigation_group') }}}</th>
 			<th class="span1">{{{ Lang::get('table.actions') }}}</th>

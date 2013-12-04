@@ -48,6 +48,12 @@
 				<input id="password" type="text" name="password" placeholder="password" value="{{ (isset($old) ? $old->password : '') }}">
 			</div>
 		</div>
+			<div class="control-group">
+			<label class="control-label" for="prefix">{{ Lang::get('install/installer.database_prefix') }}</label>
+			<div class="controls">
+				<input id="prefix" type="text" name="prefix" placeholder="prefix" value="{{ (isset($old) ? $old->prefix : 'a2z_') }}">
+			</div>
+		</div>
 		<div class="control-group">
 			<div class="controls">
 				<button type="submit" class="btn save">

@@ -27,4 +27,5 @@ return array(
 	'database' => 'Database',
 	'database_username' => 'Database username',
 	'database_password' => 'Database password',
+	'database_prefix' => 'Database prefix',
 );

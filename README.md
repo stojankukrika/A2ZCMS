@@ -38,6 +38,8 @@
 	* Blog,Gallery,Messages and more functionality
 	* Voting content(Blog,Gallery,Page)
 	* Custom themes
+	* User can use avatar
+	* soon will be more...
 * Packages included:
 	* [Confide](#confide)
 	* [Entrust](#entrust)
@@ -53,6 +55,7 @@
 	PHP >= 5.4.0 (Entrust requires 5.4, this is an increase over Laravel's 5.3.7 requirement)
 	MCrypt PHP Extension
 	Enable creating triger in database
+	SQL server(for example MySQL)
 
 -----
 <a name="feature3"></a>
@@ -61,9 +64,10 @@
 * [Step 2: Use Composer to install dependencies](#step2)
 * [Step 3: Configure Environments(optional)](#step3)
 * [Step 4: Configure Mailer](#step4)
-* [Step 5: Install CMS](#step5)
-* [Step 6: Make sure app/storage is writable by your web server](#step6)
-* [Step 7: Start Page](#step6)
+* [Step 5: Create database](#step5)
+* [Step 6: Install CMS](#step6)
+* [Step 7: Make sure app/storage is writable by your web server](#step7)
+* [Step 8: Start Page](#step8)
 
 -----
 <a name="step1"></a>
@@ -134,7 +138,15 @@ If you don't set that registration will fail because it cannot send the confirma
 
 -----
 <a name="step5"></a>
-### Step 5: Install CMS
+### Step 5: Create database
+
+If you finished first four steps, now you can create database on your database server(MySQL). You must create database
+with utf-8 collation(uft8_general_ci), to install and application work perfectly.
+
+
+-----
+<a name="step6"></a>
+### Step 6: Install CMS
 
 Now that you have the environment configured, you need to create a database configuration for it. 
 If you install A2ZCMS on your localhost in folder a2zcms, you can type on web browser: 
@@ -161,8 +173,8 @@ You may setup your timezone:
     );
 
 -----
-<a name="step6"></a>
-### Step 6: Make sure app/storage is writable by your web server.
+<a name="step7"></a>
+### Step 7: Make sure app/storage is writable by your web server.
 
 If permissions are set correctly:
 
@@ -173,8 +185,8 @@ Should work, if not try
     chmod -R 777 app/storage
 
 -----
-<a name="step7"></a>
-### Step 7: Start Page
+<a name="step8"></a>
+### Step 8: Start Page
 
 ####Admin login
 You can login to admin part of A2ZCMS:

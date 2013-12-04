@@ -129,22 +129,23 @@ class AdminPageController extends AdminController {
 				
 			$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
 									->leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
-									->whereRaw("(page_plugin_functions.page_id  = '".$page->id."' OR page_plugin_functions.page_id IS NULL)")
+									->whereRaw("(page_id  = '".$page->id."' OR page_id IS NULL)")
 									->where('plugin_functions.type','=','content')
-									->whereRaw('page_plugin_functions.deleted_at IS NULL')
 									->orderBy('page_plugin_functions.order','ASC')
 									->groupBy('plugin_functions.id')
-									->get(array('plugin_functions.id',
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="id" limit 1) AS ids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="grid" limit 1) AS grids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="sort" limit 1) AS sorts')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="limit" limit 1) AS limits')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page->id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="order" limit 1) AS orders')),
+									->get(array('plugin_functions.id','page_plugin_functions.plugin_function_id',
 									'plugin_functions.title','page_plugin_functions.order','plugins.function_id','plugin_functions.function','plugin_functions.params','plugins.function_grid'));
 
 			foreach ($pluginfunction_content as $key => $value) {
 				$function_id = $value['function_id'];
 				$function_grid = $value['function_grid'];
+				if($value['plugin_function_id']!=""){
+					$value['ids'] = PagePluginFunction::where('param','=','id')->where('page_id','=',$page->id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['grids'] = PagePluginFunction::where('param','=','grid')->where('page_id','=',$page->id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['sorts'] = PagePluginFunction::where('param','=','sort')->where('page_id','=',$page->id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['limits'] = PagePluginFunction::where('param','=','limit')->where('page_id','=',$page->id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['orders'] = PagePluginFunction::where('param','=','order')->where('page_id','=',$page->id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					}
 				if($function_id!=NULL){
 					$value['function_id'] = $this->$function_id();
 				}
@@ -152,15 +153,22 @@ class AdminPageController extends AdminController {
 					$value['function_grid'] = $this->$function_grid();
 				}
 			}
-
-			$pluginfunction_slider = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
-								->whereRaw("(page_plugin_functions.page_id  = '".$page->id."' OR page_plugin_functions.page_id IS NULL)")
+		$pluginfunction_slider = PluginFunction::where('type','=','sidebar')->get();
+		
+		$pluginfunction_slider_page = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+								->where('page_id','=',$page->id)
 								->where('plugin_functions.type','=','sidebar')
-								->whereRaw('page_plugin_functions.deleted_at IS NULL')
-								->orderBy('page_plugin_functions.order','ASC')
-								->groupBy('plugin_functions.id')
-								->get(array('plugin_functions.id','plugin_functions.title','page_plugin_functions.order'));
-
+								->groupBy('plugin_function_id')
+								->get(array('page_plugin_functions.plugin_function_id','page_plugin_functions.order'));
+		
+		if(!empty($pluginfunction_slider_page[0])){
+			foreach ($pluginfunction_slider_page as $item2){
+				foreach ($pluginfunction_slider as $item) {
+					if($item2['plugin_function_id']==$item->id)
+					$item->order = $item2['order'];
+				}
+			}
+		}
 			return View::make('admin/pages/create_edit', compact('page', 'title', 'pluginfunction_content','pluginfunction_slider'));
 		} else {
 			return Redirect::to('admin/pages') -> with('error', Lang::get('admin/users/messages.does_not_exist'));

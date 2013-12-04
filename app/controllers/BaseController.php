@@ -161,7 +161,7 @@ class BaseController extends Controller {
 					$html .= "<li> <a target='".$menu['items'][$itemId]['target']."' class='".$menu['items'][$itemId]['class']."' href='";
 					switch ($menu['items'][$itemId]['link_type']) {
 						case 'page':
-							$html .=URL::to('page') ."/". $menu['items'][$itemId]['page_id'];
+							$html .=URL::to('page') ."/". $menu['items'][$itemId]['id'];
 							break;
 						case 'url':
 							$html .=URL::to($menu['items'][$itemId]['uri']);
@@ -176,7 +176,7 @@ class BaseController extends Controller {
 					$html .= "<li class='dropdown'> <a target='".$menu['items'][$itemId]['target']."' class='dropdown-toggle ".$menu['items'][$itemId]['class']."' href='";
 					switch ($menu['items'][$itemId]['link_type']) {
 						case 'page':
-							$html .=URL::to('page') ."/". $menu['items'][$itemId]['page_id'];
+							$html .=URL::to('page') ."/". $menu['items'][$itemId]['id'];
 							break;
 						case 'url':
 							$html .=URL::to($menu['items'][$itemId]['uri']);
@@ -249,27 +249,31 @@ class BaseController extends Controller {
 	{
 		$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
 									->leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
-									->whereRaw("(page_plugin_functions.page_id  = '".$page_id."' OR page_plugin_functions.page_id IS NULL)")
+									->where('page_plugin_functions.page_id', '=' ,$page_id)
 									->where('plugin_functions.type','=','content')
-									->whereRaw('page_plugin_functions.deleted_at IS NULL')
 									->orderBy('page_plugin_functions.order','ASC')
 									->groupBy('plugin_functions.id')
-									->get(array(
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="id" limit 1) AS ids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="grid" limit 1) AS grids')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="sort" limit 1) AS sorts')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="limit" limit 1) AS limits')),
-									(DB::raw('(SELECT value AS value FROM page_plugin_functions WHERE (page_plugin_functions.page_id  = '.$page_id.' OR page_plugin_functions.page_id IS NULL) and page_plugin_functions.deleted_at IS NULL and plugin_functions.id=page_plugin_functions.plugin_function_id AND param="order" limit 1) AS orders')),
+									->get(array('plugin_functions.id','page_plugin_functions.plugin_function_id',
 									'plugin_functions.title','page_plugin_functions.order','plugins.function_id','plugin_functions.function','plugin_functions.params','plugins.function_grid'));
 
+			foreach ($pluginfunction_content as $key => $value) {
+				if($value['plugin_function_id']!=""){
+					
+					$value['ids'] = PagePluginFunction::where('param','=','id')->where('page_id','=',$page_id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['grids'] = PagePluginFunction::where('param','=','grid')->where('page_id','=',$page_id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['sorts'] = PagePluginFunction::where('param','=','sort')->where('page_id','=',$page_id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['limits'] = PagePluginFunction::where('param','=','limit')->where('page_id','=',$page_id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+					$value['orders'] = PagePluginFunction::where('param','=','order')->where('page_id','=',$page_id)->where('plugin_function_id','=',$value['plugin_function_id'])->pluck('value');
+				}
+			}
+				
 			$pluginfunction_slider = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
-								->whereRaw("page_plugin_functions.page_id  = '".$page_id."'")
+								->where('page_plugin_functions.page_id', '=' ,$page_id)
 								->where('plugin_functions.type','=','sidebar')
-								->whereRaw('page_plugin_functions.deleted_at IS NULL')
 								->orderBy('page_plugin_functions.order','ASC')
 								->groupBy('plugin_functions.id')
 								->get(array('plugin_functions.id','plugin_functions.title','plugin_functions.params','plugin_functions.function','page_plugin_functions.order'));
-		
+	
 		return $arrayName = array('pluginfunction_content' => $pluginfunction_content, 'pluginfunction_slider' => $pluginfunction_slider);
 	}
 	/*
