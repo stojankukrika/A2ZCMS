@@ -212,7 +212,7 @@ class BaseController extends Controller {
 		$sidebar_right = array(); 
 		$sidebar_left = array(); 
 		$content = array();		
-		
+
 		foreach ($function_slider as $item)
 		{
 			$function = $item->function;

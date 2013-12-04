@@ -174,6 +174,10 @@ class AdminPageController extends AdminController {
 			return Redirect::to('admin/pages') -> with('error', Lang::get('admin/users/messages.does_not_exist'));
 		}
 	}
+	function sort_objects_by_total($a, $b) {
+		if($a->total_posts == $b->total_posts){ return 0 ; }
+		return ($a->total_posts < $b->total_posts) ? -1 : 1;
+	}
 
 	/**
 	 * Update the specified resource in storage.
