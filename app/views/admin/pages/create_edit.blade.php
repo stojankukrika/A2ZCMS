@@ -121,11 +121,11 @@
 				<div class="col-lg-12">
 					<label class="control-label" for="sidebar">{{{ Lang::get('admin/pages/table.sidebar') }}}</label>
 					<label class="radio">
-						{{ Form::radio('sidebar', 1, (Input::old('sidebar') == '1' || (isset($page) && $page->sidebar == '1')) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
+						{{ Form::radio('sidebar', 0, (Input::old('sidebar') == '0' || (isset($page) && $page->sidebar == '0')) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.left') }}}	
 					</label>
 					<label class="radio">
-						{{ Form::radio('sidebar', 0, (Input::old('sidebar') == '0' || (isset($page) && $page->sidebar == '0') || !isset($page)) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
+						{{ Form::radio('sidebar', 1, (Input::old('sidebar') == '1' || (isset($page) && $page->sidebar == '1') || !isset($page)) ? true : false, array('id'=>'sidebar', 'class'=>'radio')) }}
 						{{{ Lang::get('admin/pages/table.right') }}}	
 					</label>
 	

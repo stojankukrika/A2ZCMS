@@ -88,6 +88,7 @@ class CustomFormController extends BaseController {
 			
 			$emailadmin = explode(';', $emailadmin);
 			foreach ($emailadmin as $email) {
+				if($email!=""){
 					if(Mail::send('emails.customform', $data, function($message)
 					{
 					    $message->to($email)
@@ -104,4 +105,5 @@ class CustomFormController extends BaseController {
 		// Redirect to this custom form
 		return Redirect::back() -> withInput() -> withErrors($validator);
 	}
+}
 }

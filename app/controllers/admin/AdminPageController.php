@@ -126,7 +126,7 @@ class AdminPageController extends AdminController {
 			$title = Lang::get('admin/pages/title.page_update');
 			
 			$page = Page::find($id);
-				
+				/*select content plugins that added to page*/
 			$pluginfunction_content = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
 									->leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id')
 									->whereRaw("(page_id  = '".$page->id."' OR page_id IS NULL)")
@@ -135,7 +135,20 @@ class AdminPageController extends AdminController {
 									->groupBy('plugin_functions.id')
 									->get(array('plugin_functions.id','page_plugin_functions.plugin_function_id',
 									'plugin_functions.title','page_plugin_functions.order','plugins.function_id','plugin_functions.function','plugin_functions.params','plugins.function_grid'));
-
+		
+			$pluginfunction_content_all = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id')
+									->where('type','=','content')->get(array('plugin_functions.title','plugins.function_id','plugin_functions.id as id','plugin_functions.function','plugin_functions.params','plugins.function_grid'));
+			
+			 /*add to view other content plugins that not in page*/
+			$tem = array();
+			foreach ($pluginfunction_content as $item) {
+				$temp[]=$item->function_id;
+			}
+			foreach ($pluginfunction_content_all as $item) {
+				if(!in_array($item->function_id,$temp))
+				$pluginfunction_content[]=$item;
+			}		
+		/*get other values for selected plugins*/
 			foreach ($pluginfunction_content as $key => $value) {
 				$function_id = $value['function_id'];
 				$function_grid = $value['function_grid'];
@@ -153,7 +166,7 @@ class AdminPageController extends AdminController {
 					$value['function_grid'] = $this->$function_grid();
 				}
 			}
-		
+		/*select sidebar plugins*/
 		$pluginfunction_slider = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
 								->where('page_id','=',$page->id)
 								->where('plugin_functions.type','=','sidebar')
@@ -163,6 +176,7 @@ class AdminPageController extends AdminController {
 			
 		$pluginfunction_slider_all = PluginFunction::where('type','=','sidebar')->get();
 		
+		 /*add not added sidebar plugins*/
 		$tem = array();
 		foreach ($pluginfunction_slider as $item) {
 			$temp[]=$item->id;
@@ -170,31 +184,12 @@ class AdminPageController extends AdminController {
 		foreach ($pluginfunction_slider_all as $item) {
 			if(!in_array($item->id,$temp))
 			$pluginfunction_slider[]=$item;
-		}				
-		/*$pluginfunction_slider = PluginFunction::where('type','=','sidebar')->get();
+		}		
 		
-		$pluginfunction_slider_page = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
-								->where('page_id','=',$page->id)
-								->where('plugin_functions.type','=','sidebar')
-								->groupBy('plugin_function_id')
-								->get(array('page_plugin_functions.plugin_function_id','page_plugin_functions.order'));
-		
-		if(!empty($pluginfunction_slider_page[0])){
-			foreach ($pluginfunction_slider_page as $item2){
-				foreach ($pluginfunction_slider as $item) {
-					if($item2['plugin_function_id']==$item->id)
-					$item->order = $item2['order'];
-				}
-			}
-		}*/
 			return View::make('admin/pages/create_edit', compact('page', 'title', 'pluginfunction_content','pluginfunction_slider'));
 		} else {
 			return Redirect::to('admin/pages') -> with('error', Lang::get('admin/users/messages.does_not_exist'));
 		}
-	}
-	function sort_objects_by_total($a, $b) {
-		if($a->total_posts == $b->total_posts){ return 0 ; }
-		return ($a->total_posts < $b->total_posts) ? -1 : 1;
 	}
 
 	/**
@@ -425,7 +420,7 @@ class AdminPageController extends AdminController {
 		return Datatables::of($pages) 
 			-> edit_column('voteup', '{{ $voteup-$votedown }}') 
 			-> edit_column('status', '{{($status)? "<i class=\"icon-eye-open\"></i>":"<i class=\"icon-eye-close\"></i>";}}') 
-			-> edit_column('sidebar', '{{($sidebar=="0")? "'.Lang::get('admin/pages/table.left').'":"'.Lang::get('admin/pages/table.right').'";}}') 
+			-> edit_column('sidebar', '{{($sidebar==0)? "'.Lang::get('admin/pages/table.left').'":"'.Lang::get('admin/pages/table.right').'";}}') 
 			-> add_column('actions', '<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/visible\' ) }}}" class="btn btn-link btn-sm"><i class="icon-exchange "></i></a>
 							<a href="{{{ URL::to(\'admin/pages/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
                             <a href="{{{ URL::to(\'admin/pages/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>') 

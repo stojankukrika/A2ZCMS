@@ -18,7 +18,10 @@
 			<a href="{{{ URL::to('user') }}}">{{{ Lang::get('site/partial_views/sidebar/login.edit_profile') }}}</a>
 		</li>
 		<li>
-			<a href="{{{ URL::to('user/logout') }}}">{{{ Lang::get('site/partial_views/sidebar/login.logout') }}}</a>
+			<a href="{{{ URL::to('user/logout') }}}">
+				<button tabindex="3" type="submit" class="btn btn-primary">
+						{{{ Lang::get('site/partial_views/sidebar/login.logout') }}}
+					</button></a>
 		</li>
 		@else
 		<h4>{{{ Lang::get('site/partial_views/sidebar/login.desc') }}}</h4>
