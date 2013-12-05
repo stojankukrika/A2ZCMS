@@ -153,9 +153,26 @@ class AdminPageController extends AdminController {
 					$value['function_grid'] = $this->$function_grid();
 				}
 			}
-		$pluginfunction_slider = PluginFunction::where('type','=','sidebar')->get();
 		
-		$pluginfunction_slider_page = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+		$pluginfunction_slider = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+								->where('page_id','=',$page->id)
+								->where('plugin_functions.type','=','sidebar')
+								->groupBy('plugin_function_id')
+								->get(array('page_plugin_functions.plugin_function_id','page_plugin_functions.order','plugin_functions.title'));
+			
+		$pluginfunction_slider_all = PluginFunction::where('type','=','sidebar')->get();
+		
+		$tem = array();
+		foreach ($pluginfunction_slider as $item) {
+			$temp[]=$item->plugin_function_id;
+		}
+		foreach ($pluginfunction_slider_all as $item) {
+			if(!in_array($item->id,$temp))
+			$pluginfunction_slider[]=$item;
+		}				
+		/*$pluginfunction_slider = PluginFunction::where('type','=','sidebar')->get();
+		
+		$pluginfunction_slider_page = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
 								->where('page_id','=',$page->id)
 								->where('plugin_functions.type','=','sidebar')
 								->groupBy('plugin_function_id')
@@ -168,7 +185,7 @@ class AdminPageController extends AdminController {
 					$item->order = $item2['order'];
 				}
 			}
-		}
+		}*/
 			return View::make('admin/pages/create_edit', compact('page', 'title', 'pluginfunction_content','pluginfunction_slider'));
 		} else {
 			return Redirect::to('admin/pages') -> with('error', Lang::get('admin/users/messages.does_not_exist'));
@@ -237,6 +254,7 @@ class AdminPageController extends AdminController {
 				$pagesidebar = (Input::has('pagesidebar'))?Input::get('pagesidebar'):"";
 				$pagecontentorder = Input::get('pagecontentorder');
 				$pagecontent = Input::get('pagecontent');
+			
 				$this->saveData($pagesidebar,$pagecontentorder, $pagecontent,$page -> id);
 			}
 		}

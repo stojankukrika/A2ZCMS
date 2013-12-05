@@ -267,7 +267,7 @@ class BaseController extends Controller {
 				}
 			}
 				
-			$pluginfunction_slider = PluginFunction::leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+			$pluginfunction_slider = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
 								->where('page_plugin_functions.page_id', '=' ,$page_id)
 								->where('plugin_functions.type','=','sidebar')
 								->orderBy('page_plugin_functions.order','ASC')
