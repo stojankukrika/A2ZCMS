@@ -127,8 +127,8 @@ class AdminPageController extends AdminController {
 			
 			$page = Page::find($id);
 				
-			$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
-									->leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+			$pluginfunction_content = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+									->leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id')
 									->whereRaw("(page_id  = '".$page->id."' OR page_id IS NULL)")
 									->where('plugin_functions.type','=','content')
 									->orderBy('page_plugin_functions.order','ASC')
@@ -158,13 +158,14 @@ class AdminPageController extends AdminController {
 								->where('page_id','=',$page->id)
 								->where('plugin_functions.type','=','sidebar')
 								->groupBy('plugin_function_id')
-								->get(array('page_plugin_functions.plugin_function_id','page_plugin_functions.order','plugin_functions.title'));
+								->orderBy('page_plugin_functions.order','ASC')
+								->get(array('page_plugin_functions.plugin_function_id as id','page_plugin_functions.order','plugin_functions.title'));
 			
 		$pluginfunction_slider_all = PluginFunction::where('type','=','sidebar')->get();
 		
 		$tem = array();
 		foreach ($pluginfunction_slider as $item) {
-			$temp[]=$item->plugin_function_id;
+			$temp[]=$item->id;
 		}
 		foreach ($pluginfunction_slider_all as $item) {
 			if(!in_array($item->id,$temp))

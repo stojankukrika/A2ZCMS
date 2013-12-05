@@ -247,8 +247,8 @@ class BaseController extends Controller {
 	}
 	public function readModulsForPage($page_id)
 	{
-		$pluginfunction_content = PluginFunction::leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id') 
-									->leftJoin('page_plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+		$pluginfunction_content = PagePluginFunction::leftJoin('plugin_functions','plugin_functions.id','=','page_plugin_functions.plugin_function_id')
+									->leftJoin('plugins', 'plugins.id', '=', 'plugin_functions.plugin_id')
 									->where('page_plugin_functions.page_id', '=' ,$page_id)
 									->where('plugin_functions.type','=','content')
 									->orderBy('page_plugin_functions.order','ASC')

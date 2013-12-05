@@ -3,7 +3,7 @@
  <div class="row">
   	<div class="col-lg-12 col-md-12">
 	@foreach($showCustomFormId as $item)
-		<h3>{{$item->title}}<h3>
+		<h3>{{$item->title}}</h3>
 			@if(!empty($showCustomFormId))
 				<form action="{{{ URL::to('customform/'.$item->id) }}}" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
