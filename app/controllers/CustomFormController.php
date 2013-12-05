@@ -92,8 +92,9 @@ class CustomFormController extends BaseController {
 					{
 					    $message->to($email)
 					    		->subject(Lang::get('site/customform.contact_custom_message'));
-					})){
-					return Redirect::back() -> with(Lang::get('site/customform.success'), Lang::get('site/customform.comment_added'));
+					}))
+					{
+						return Redirect::back() -> with(Lang::get('site/customform.success'), Lang::get('site/customform.comment_added'));
 					}
 				}
 			}
