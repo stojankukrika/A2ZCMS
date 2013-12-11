@@ -19,7 +19,7 @@
 		</li>
 		<li>
 			<a href="{{{ URL::to('user/logout') }}}">
-				<button tabindex="3" type="submit" class="btn btn-primary">
+				<button tabindex="3" type="submit" class="btn btn-danger">
 						{{{ Lang::get('site/partial_views/sidebar/login.logout') }}}
 					</button></a>
 		</li>
@@ -65,7 +65,7 @@
 					<button tabindex="3" type="submit" class="btn btn-primary">
 						{{{ Lang::get('site/partial_views/sidebar/login.submit') }}}
 					</button>
-					<a class="btn btn-default" href="{{ Url::to('user/forgot') }}">{{{ Lang::get('site/partial_views/sidebar/login.forgot_password') }}}</a>
+					<a class="btn btn-success" href="{{ Url::to('user/forgot') }}">{{{ Lang::get('site/partial_views/sidebar/login.forgot_password') }}}</a>
 				</p>
 			</fieldset>
 		</form>	

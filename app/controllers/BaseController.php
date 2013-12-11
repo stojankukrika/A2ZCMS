@@ -26,7 +26,7 @@ class BaseController extends Controller {
 			exit ;
 		}
 		$settings = Settings::whereIn('varname', 
-						array('offline', 'metadesc', 'metakey','metaauthor','title','shortmsg',
+						array('offline', 'metadesc', 'metakey','metaauthor','title',
 							'copyright','analytics','dateformat','timeformat','searchcode','sitetheme'))->get();
 		$offline = 0;
 		

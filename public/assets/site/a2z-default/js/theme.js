@@ -1,4 +1,18 @@
 $(function () {
+	$('textarea').summernote({
+		  height: 100,
+		  toolbar: [
+		    //['style', ['style']], // no style button
+		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		    ['fontsize', ['fontsize']],
+		    ['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']],
+		    //['insert', ['picture', 'link']], // no insert buttons
+		    //['table', ['table']], // no table button
+		    //['help', ['help']] //no help button
+		  ]
+		});
     $(window).scroll(function(){
         // add navbar opacity on scroll
         if ($(this).scrollTop() > 100) {

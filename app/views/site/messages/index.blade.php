@@ -154,17 +154,6 @@
 				})
 		})	
 	});
-	$('#characterLeft').text({{$shortmsg}}+' {{ Lang::get('site/messages.characters_left') }}');
-	$('#content').keyup(function () {
-	    var max = {{$shortmsg}};
-	    var len = $(this).val().length;
-	    if (len >= max) {
-	    	$('#content').val($('#content').val().substr(0, max));
-	        $('#characterLeft').text('{{ Lang::get('site/messages.you_have_reached_the_limit') }}');
-	    } else {
-	        var ch = max - len;
-	        $('#characterLeft').text(ch + ' characters left');
-	    }
-	});
+	
 </script>
 @stop

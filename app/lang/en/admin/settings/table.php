@@ -6,7 +6,6 @@ return array(
 	'dateformat'   => 'Format for Date (PHP DATE)',
 	'timeformat' => 'Format for Time (PHP DATE)',
 	'pageitem' => 'Choose how many item per page',
-	'shortmsg' => 'Short Message Length',
 	'analytics' => 'Analytics Code',
 	'offline' => 'Offline',
 	'offlinemessage' => 'Offline message',

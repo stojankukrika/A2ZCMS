@@ -32,6 +32,7 @@
 	* Manage to-do list.
     * DataTables dynamic table sorting and filtering.
     * Colorbox Lightbox jQuery modal popup.
+    * Add Summernote WYSIWYG in textareas.
     * soon will be more...
 * Front-end
 	* User login, registration, forgot password
@@ -39,6 +40,7 @@
 	* Voting content(Blog,Gallery,Page)
 	* Custom themes
 	* User can use avatar
+	* Add Summernote WYSIWYG in textareas
 	* soon will be more...
 * Packages included:
 	* [Confide](#confide)
@@ -47,6 +49,7 @@
 	* [Carbon](#carbon)
 	* [Presenter](#presenter)
 	* [JeffreyWay Laravel 4 Generators](#generators)
+	* [Summernote](#summernote)
 
 -----
 <a name="feature2"></a>
@@ -353,8 +356,16 @@ Laravel 4 Generators package provides a variety of generators to speed up your d
 - `generate:test`
 - `generate:pivot <-- NEW!!`
 
-
 For full usage see [Laravel 4 Generators Readme](https://github.com/JeffreyWay/Laravel-4-Generators/blob/master/readme.md)
+
+<a name"summernote"></a>
+## Summernote
+
+Summernote is a javascript program that helps you to create WYSIWYG Editor on web. Super Simple WYSIWYG Editor on Bootstrap(3.0 and 2.x).
+
+[Demo Page](http://hackerwins.github.io/summernote/)
+
+For full usage see [Summernote Readme](https://github.com/hackerwins/summernote)
 
 
 

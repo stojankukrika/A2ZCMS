@@ -54,7 +54,6 @@
 		 {{ $item['content'] }}
 	@endforeach 
 </div>
-</div>
 <br>
 @stop
 

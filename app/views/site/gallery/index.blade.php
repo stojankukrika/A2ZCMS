@@ -58,12 +58,11 @@
       		<img src="../gallery/{{{$gallery->folderid}}}/thumbs/{{{ $item->content }}}" height="85px" width="150px" class="img-responsive">
       	</a>
       </div>
-     @endforeach
-     
+     @endforeach	
+	</div>
 	<ul class="pager">
 		{{ $gallery_images->links() }}
 	</ul>
-	</div>
 	</div>
 @stop
 

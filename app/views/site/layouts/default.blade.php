@@ -9,10 +9,14 @@
 		<meta name="description" content="{{$metadesc}}">
 		<meta name="keywords" content="{{$metakey}}">
 		<meta name="author" content="{{$metaauthor}}">
-		<link rel="stylesheet" type="text/css"  href="{{asset('assets/site/'.$sitetheme.'/css/bootstrap.min.css')}}">	
+		<link rel="stylesheet" type="text/css"  href="{{asset('assets/site/'.$sitetheme.'/css/bootstrap.css')}}">	
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/jquery-ui-1.10.3.custom.css')}}">		
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/jquery.multiselect.css')}}">	
-		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/a2zcms.css')}}">		
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/a2zcms.css')}}">				
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/summernote.css')}}">	
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/summernote-bs3.css')}}">				
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/font-awesome.min.css')}}">	
+		<link rel="stylesheet" type="text/css" href="{{asset('assets/site/'.$sitetheme.'/css/prettify.css')}}">			
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/html5.js')}}"></script>
@@ -84,6 +88,8 @@
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery.validate.js')}}"></script>
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/select2.js')}}"></script>
 		<script src="{{asset('assets/site/'.$sitetheme.'/js/jquery.multiselect.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/prettify.js')}}"></script>
+		<script src="{{asset('assets/site/'.$sitetheme.'/js/summernote.js')}}"></script>
 		<!-- end: JavaScript-->
 		
 		@yield('scripts')

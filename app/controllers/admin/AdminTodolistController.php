@@ -57,6 +57,7 @@ class AdminTodolistController extends AdminController {
 		if ($validator -> passes()) {
 			$user = Auth::user();
 			
+			$this -> todolist -> title = Input::get('title');
 			$this -> todolist -> content = Input::get('content');
 			$this -> todolist -> finished = Input::get('finished');
 			$this -> todolist -> work_done = (Input::get('finished')==100.00)?'1':'0';
@@ -105,6 +106,7 @@ class AdminTodolistController extends AdminController {
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 				$user = Auth::user();
+				$todolist -> title = Input::get('title');
 				$todolist -> content = Input::get('content');
 				$todolist -> finished = Input::get('finished');
 				$todolist -> user_id = $user -> id;
@@ -159,7 +161,7 @@ class AdminTodolistController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done','todolist.finished', 'todolist.created_at'));
+		$todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done','todolist.finished', 'todolist.created_at'))->where('user_id','=',Auth::user()->id);
 
 		return Datatables::of($todolists) -> edit_column('work_done', '@if ($work_done==0){{ "Work" }} @else {{ "Done" }} @endif') 
 		-> add_column('actions', '<a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/change\' ) }}}" class="btn btn-link btn-sm" ><i class="icon-retweet "></i></a>

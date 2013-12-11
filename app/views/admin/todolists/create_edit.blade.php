@@ -20,21 +20,32 @@
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
 
+			<!-- Title -->
+			<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
+				<div class="col-md-12">
+					<label class="control-label" for="title">{{{ Lang::get('admin/general.title') }}}</label>
+					<input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', isset($todolist) ? $todolist->title : null) }}" />
+					<span class="help-inline">{{{ $errors->first('title', ':message') }}}</span>
+				</div>
+			</div>
+			<!-- ./ title -->
 			<!-- Content -->
 			<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
 				<div class="col-md-12">
-					<label class="control-label" for="content">{{{ Lang::get('admin/general.title') }}}</label>
-					<input class="form-control" type="text" name="content" id="text" value="{{ Input::old('title', isset($todolist) ? $todolist->content : null) }}" />
+					<label class="control-label" for="content">{{{ Lang::get('admin/pages/table.content') }}}</label>
+					<textarea class="full-width col-md-12 wysihtml5" name="content" id="content" >{{ Input::old('title', isset($todolist) ? $todolist->content : null) }}</textarea>
 					<span class="help-inline">{{{ $errors->first('content', ':message') }}}</span>
 				</div>
 			</div>
+			<!-- ./ content -->
+			<!-- FInished-->
 			<div class="form-group">
 				<div class="col-md-12">
 					 <label class="control-label"  for="finished">{{{ Lang::get('admin/todolists/table.finished') }}}</label></br>
 					 <input id="finished" class="form-control"  name="finished" value="{{{ Input::old('finished', isset($todolist) ? $todolist->finished : '0.00') }}}" />
 				</div>				
 			</div>
-			<!-- ./ content -->
+			<!-- ./ finished -->
 		</div>
 		<!-- ./ general tab -->
 	</div>

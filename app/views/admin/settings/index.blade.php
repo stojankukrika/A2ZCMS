@@ -137,20 +137,6 @@
 							</div>
 						</div>
 						<!-- ./ timeformat -->
-						<!-- Shortmsg -->
-						<div class="form-group {{{ $errors->has('shortmsg') ? 'error' : '' }}}">
-							<div class="col-md-12">
-								<?php $shortmsg = '';
-								foreach ($settings as $v) {
-									if ($v -> varname == 'shortmsg') { $shortmsg = $v -> value;
-									}
-								} ?>
-								{{Form::label('shortmsg', Lang::get('admin/settings/table.shortmsg'), array('class' => 'control-label'))}}
-								{{Form::text('shortmsg', Input::old('shortmsg', $shortmsg) , array('class' => 'form-control'))}}
-								{{ $errors->first('shortmsg', '<span class="help-inline">:message</span>') }}
-							</div>
-						</div>
-						<!-- ./ shortmsg -->
 						<!-- Pageitem -->
 						<div class="form-group {{{ $errors->has('pageitem') ? 'error' : '' }}}">
 							<div class="col-md-12">

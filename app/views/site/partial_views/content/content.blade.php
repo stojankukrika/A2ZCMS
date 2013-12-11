@@ -1,4 +1,5 @@
-@if($page->showtitle=='1') 
+ <div class="row">
+ 	@if($page->showtitle=='1') 
 	<h1>{{$page->name}}</h1>
 @endif
 @if($page->showdate=='1') 
@@ -33,3 +34,4 @@
 	</p>
 	@endif
  <hr>
+ </div> 

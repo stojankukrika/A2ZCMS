@@ -39,7 +39,11 @@
 		<link href="{{{ asset('assets/admin/css/jquery.multiselect.css') }}}" rel="stylesheet" type="text/css" >		
 		<link href="{{{ asset('assets/admin/css/style_modal.min.css') }}}" rel="stylesheet" type="text/css" >
 		<link href="{{{ asset('assets/admin/css/jquery.tagit.css') }}}"  rel="stylesheet" type="text/css" >
-		<link href="{{{ asset('assets/admin/css/select2.css') }}}"  rel="stylesheet" type="text/css" >
+		<link href="{{{ asset('assets/admin/css/select2.css') }}}"  rel="stylesheet" type="text/css" >		
+		<link href="{{ asset('assets/admin/css/summernote.css')}}"  rel="stylesheet" type="text/css" >	
+		<link href="{{ asset('assets/admin/css/summernote-bs3.css')}}"  rel="stylesheet" type="text/css" >				
+		<link href="{{ asset('assets/admin/css/font-awesome.min.css')}}"  rel="stylesheet" type="text/css" >	
+		<link href="{{ asset('assets/admin/css/prettify.css')}}"  rel="stylesheet" type="text/css" >	
 		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="{{{ asset('assets/admin/js/html5.js') }}}"></script>
@@ -85,9 +89,12 @@
 		<script src="{{  asset('assets/admin/js/core.min.js')}}"></script>
 		<script src="{{{ asset('assets/admin/js/jquery.multiselect.js') }}}"></script>
 		<script src="{{{ asset('assets/admin/js/tag-it.js') }}}"></script>
-		<script src="{{{ asset('assets/admin/js/select2.js') }}}"></script>
+		<script src="{{  asset('assets/admin/js/prettify.js')}}"></script>
+		<script src="{{  asset('assets/admin/js/summernote.js')}}"></script>
+		<script src="{{  asset('assets/admin/js/select2.js') }}"></script>
 		<script type="text/javascript">
 			$(function() {
+				$('textarea').summernote({height: 250});
 				$('form').submit(function(event) {
 					var form = $(this);
 					$.ajax({
