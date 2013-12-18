@@ -1124,7 +1124,7 @@
 .btn-warning
 {
 	color:#fff;
-	background:#fabb3d
+	background:#fabb3d!important;
 }
 .btn-warning:hover,.btn-warning.disabled,.btn-warning[disabled]
 {

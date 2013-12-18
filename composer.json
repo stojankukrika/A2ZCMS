@@ -11,7 +11,6 @@
 	"require": {
 		"php": ">=5.3.0",
 		"laravel/framework": "4.0.*",
-		"twbs/bootstrap": "dev-master",
 		"zizaco/confide": "1.0.x",
 		"zizaco/entrust": "dev-master",
 		"robclancy/presenter": "1.0.*",
@@ -22,7 +21,6 @@
 	"require-dev": {
 		"php": ">=5.3.0",
         "laravel/framework": "4.0.*",
-		"twbs/bootstrap": "dev-master",
 		"zizaco/confide": "1.0.x",
 		"zizaco/entrust": "dev-master",
 		"robclancy/presenter": "1.0.*",
@@ -33,7 +31,6 @@
         "summerstreet/woodling": "0.1.*",
         "barryvdh/laravel-ide-helper": "dev-master",
         "leafo/lessphp": "v0.4.0",
-        "natxet/CssMin": "dev-master",
         "lmammino/jsmin4assetic": "1.0.*"
 	},
 	"autoload": {
