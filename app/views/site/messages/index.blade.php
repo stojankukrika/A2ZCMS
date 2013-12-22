@@ -64,7 +64,7 @@
 	                   <b>{{{ $item->subject }}}</b>
 	                  </a>
 	                </h4><span>{{{ $item->sender->surname }}} {{{ $item->sender->name }}}</span> 
-	                ({{{ date($dateformat.$timeformat, strtotime($item->sender->created_at)) }}})
+	                ({{{ date($dateformat.$timeformat, strtotime($item->created_at)) }}})
 	              </div>
 	              <div id="{{{$item->id}}}" class="panel-collapse collapse">
 	                <div class="panel-body">
@@ -83,7 +83,7 @@
 	                    <b>{{{ $item->subject }}}</b>
 	                  </a>
 	                </h4><span>{{{ $item->receiver->surname }}} {{{ $item->receiver->name }}}</span> 
- 					({{{ date($dateformat.$timeformat, strtotime($item->sender->created_at)) }}})
+ 					({{{ date($dateformat.$timeformat, strtotime($item->created_at)) }}})
 	              </div>
 	              <div id="{{{$item->id}}}" class="panel-collapse collapse">
 	                <div class="panel-body">
