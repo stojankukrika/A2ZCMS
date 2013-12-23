@@ -101,12 +101,17 @@ class UserController extends BaseController {
 	 * Edits a user
 	 *
 	 */
-	public function postEdit($user) {
+	public function postEdit($user_id) {
 		// Validate the inputs
-		$validator = Validator::make(Input::all(), $user -> getUpdateRules());
-
+		
+		$validator = Validator::make(Input::all(), array(
+    			'name' => 'required|min:3',
+   			 'surname' => 'required|min:3',
+			));
+		
 		if ($validator -> passes()) {
-			$oldUser = clone $user;
+			$user = User::find($user_id);
+			
 			$user -> name = Input::get('name');
 			$user -> surname = Input::get('surname');
 
@@ -125,7 +130,7 @@ class UserController extends BaseController {
 				
 				$user -> avatar = $name;
 			}
-			if (!empty($password)) {
+			if (!empty($password) && !empty($passwordConfirmation)) {
 				if ($password === $passwordConfirmation) {
 					$user -> password = $password;
 					// The password confirmation will be removed from model
@@ -134,15 +139,12 @@ class UserController extends BaseController {
 					$user -> password_confirmation = $passwordConfirmation;
 				} else {
 					// Redirect to the new user page
-					return Redirect::to('users') -> with('error', Lang::get('admin/users/messages.password_does_not_match'));
+					return Redirect::to('user') -> with('error', Lang::get('admin/users/messages.password_does_not_match'));
 				}
 			} else {
 				unset($user -> password);
 				unset($user -> password_confirmation);
 			}
-
-			$user -> prepareRules($oldUser, $user);
-
 			// Save if valid. Password field will be hashed before save
 			$user -> amend();
 		}
