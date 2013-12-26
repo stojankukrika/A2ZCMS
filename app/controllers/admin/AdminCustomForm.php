@@ -184,4 +184,18 @@ class AdminCustomFormController extends AdminController {
 			$order++;
 		}
 	}
+	
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function postDeleteItem($formId) {
+		
+		$customformfield = CustomFormField::find(Input::get('id'));
+		if ($customformfield -> delete()) {
+			return 0;
+		}
+		return 1;		
+	}	
 }

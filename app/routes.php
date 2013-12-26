@@ -145,6 +145,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|detectLang'), function
     Route::post('customform/{id}/edit', 'AdminCustomFormController@postEdit');
     Route::get('customform/{id}/delete', 'AdminCustomFormController@getDelete');
     Route::post('customform/{id}/delete', 'AdminCustomFormController@getDelete');
+	Route::get('customform/{id}/deleteitem', 'AdminCustomFormController@postDeleteItem');
+    Route::post('customform/{id}/deleteitem', 'AdminCustomFormController@postDeleteItem');
     Route::controller('customform', 'AdminCustomFormController');
 
 	# Settings

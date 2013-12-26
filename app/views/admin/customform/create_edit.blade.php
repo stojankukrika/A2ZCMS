@@ -55,7 +55,7 @@
 		
 		<!-- Dates tab -->
 		<div class="tab-pane" id="tab-dates">
-			<input class="btn btn-link" id="add" type="button" value="Add field">
+			<a class="btn btn-link" id="add" href="#"><i class="icon-plus-sign"></i> {{Lang::get('admin/customform/table.add_filed')}}</a>
 			<div id="fields">
 				<div class="row responsive-utilities-test">
 					<div class="col-md-10 col-xs-10" id="form_fields">
@@ -67,28 +67,30 @@
 							@if(!empty($customformfields))
 								@foreach($customformfields as $item)								
 									<li class="ui-state-default" name="formf" value="{{$id}}" id="formf{{$id}}">
-										<label class="control-label" for="name">Fild name</label>
+										<label class="control-label" for="name">{{Lang::get('admin/customform/table.fildname')}}</label>
 										<input type="text" id="name{{$item->id}}" value="{{$item->name}}" name="name{{$id}}">
 										<div>
-											<label class="control-label" for="mandatory">Mandatory </label>
+											<label class="control-label" for="mandatory">{{Lang::get('admin/customform/table.mandatory')}} </label>
 											<select name="mandatory{{$id}}" id="mandatory{{$id}}"> 
-												<option value="1" {{($item->mandatory=='1')?"selected":""}}>No</option>
-										  		<option value="2" {{($item->mandatory=='2')?"selected":""}}>Yes</option>
-										  		<option value="3" {{($item->mandatory=='3')?"selected":""}}>Only numbers</option>
-										  		<option value="4" {{($item->mandatory=='4')?"selected":""}}>Valid email adress</option>
+												<option value="1" {{($item->mandatory=='1')?"selected":""}}>{{Lang::get('admin/customform/table.no')}}</option>
+										  		<option value="2" {{($item->mandatory=='2')?"selected":""}}>{{Lang::get('admin/customform/table.yes')}}</option>
+										  		<option value="3" {{($item->mandatory=='3')?"selected":""}}>{{Lang::get('admin/customform/table.onlynumbers')}}</option>
+										  		<option value="4" {{($item->mandatory=='4')?"selected":""}}>{{Lang::get('admin/customform/table.validemail')}}</option>
 											</select>
-											<label class="control-label" for="type">Type </label>
+											<label class="control-label" for="type">{{Lang::get('admin/customform/table.type')}} </label>
 											<select name="type{{$id}}" id="type{{$id}}"> 
-												<option value="1" {{($item->type=='1')?"selected":""}}>Input field</option>
-												<option value="2" {{($item->type=='2')?"selected":""}}>Text area</option>
-												<option value="3" {{($item->type=='3')?"selected":""}}>Select</option>
-												<option value="4" {{($item->type=='4')?"selected":""}}>Radio</option>
-												<option value="5" {{($item->type=='5')?"selected":""}}>Upload</option>
-												<option value="6" {{($item->type=='6')?"selected":""}}>Checkbox</option>
+												<option value="1" {{($item->type=='1')?"selected":""}}>{{Lang::get('admin/customform/table.input_field')}}</option>
+												<option value="2" {{($item->type=='2')?"selected":""}}>{{Lang::get('admin/customform/table.text_area')}}</option>
+												<option value="3" {{($item->type=='3')?"selected":""}}>{{Lang::get('admin/customform/table.select')}}</option>
+												<option value="4" {{($item->type=='4')?"selected":""}}>{{Lang::get('admin/customform/table.radio')}}</option>
+												<option value="5" {{($item->type=='5')?"selected":""}}>{{Lang::get('admin/customform/table.upload')}}</option>
+												<option value="6" {{($item->type=='6')?"selected":""}}>{{Lang::get('admin/customform/table.checkbox')}}</option>
 											</select>
-											<label class="control-label" for="options"> Options</label>
+											<label class="control-label" for="options"> {{Lang::get('admin/customform/table.options')}}</label>
 											<input type="text" name="options{{$id}}" value="{{$item->options}}" id="options{{$item->id}}">
 										</div>
+										<a class="btn btn-default btn-sm btn-small remove"><span class="icon-trash"><input type="hidden" value="{{$item->id}}" class="remove" name="remove"></span></a>
+										
 									</li>
 									<?php $id++;?>
 								@endforeach
@@ -119,34 +121,51 @@
 </form>
 <div class="hidden" id ="addfield">
 	<li class="ui-state-default" name="formf" value="" id="formf">
-		<label class="control-label" for="name">Fild name</label>
+		<label class="control-label" for="name">{{Lang::get('admin/customform/table.fildname')}}</label>
 		<input type="text" id="name" value="" name="name">
 		<div>
-			<label class="control-label" for="mandatory">Mandatory </label>
+			<label class="control-label" for="mandatory">{{Lang::get('admin/customform/table.mandatory')}} </label>
 			<select name="mandatory" id="mandatory"> 
-				<option value="1">No</option>
-		  		<option value="2">Yes</option>
-		  		<option value="3">Only numbers</option>
-		  		<option value="4">Valid email adress</option>
+				<option value="1">{{Lang::get('admin/customform/table.no')}}</option>
+		  		<option value="2">{{Lang::get('admin/customform/table.yes')}}</option>
+		  		<option value="3">{{Lang::get('admin/customform/table.onlynumbers')}}</option>
+		  		<option value="4">{{Lang::get('admin/customform/table.validemail')}}</option>
 			</select>
-			<label class="control-label" for="type">Type </label>
+			<label class="control-label" for="type">{{Lang::get('admin/customform/table.type')}} </label>
 			<select name="type" id="type"> 
-				<option value="1">Input field</option>
-				<option value="2">Text area</option>
-				<option value="3">Select</option>
-				<option value="4">Radio</option>
-				<option value="5">Upload</option>
-				<option value="6">Checkbox</option>
+				<option value="1">{{Lang::get('admin/customform/table.input_field')}}</option>
+				<option value="2">{{Lang::get('admin/customform/table.text_area')}}</option>
+				<option value="3">{{Lang::get('admin/customform/table.select')}}</option>
+				<option value="4">{{Lang::get('admin/customform/table.radio')}}</option>
+				<option value="5">{{Lang::get('admin/customform/table.upload')}}</option>
+				<option value="6">{{Lang::get('admin/customform/table.checkbox')}}</option>
 			</select>
-			<label class="control-label" for="options"> Options</label>
+			<label class="control-label" for="options"> {{Lang::get('admin/customform/table.options')}} </label>
 			<input type="text" name="options" value="" id="options">
 		</div>
+		<a class="btn btn-default btn-sm btn-small remove"><span class="icon-trash"><input type="hidden" value="" class="remove" name="remove"></span></a>									
 	</li>
 </div>
 	
 @stop
 @section('scripts')
 <script type="text/javascript">
+var clicked = 0;
+$('.remove').click(function(){
+	clicked = $(this).children().children().val();
+	$.ajax({
+            url : "{{ URL::to('admin/customform/' . $customform->id . '/deleteitem') }}"
+            , type : "post"
+            , data : { id : clicked, _token: "{{{ csrf_token() }}}" }
+            , success : function(resp){
+            	 if( resp == 0){
+            	 	$("#formf"+clicked).remove();
+            	 	//window.location.replace("");
+                }
+            }
+        	});
+});
+ 	 
 	$(function() {
 		var count = {{isset($customform)?$customform->customformfields->count():'0'}};
 		var formfild =$('#addfield').html();
@@ -158,7 +177,8 @@
 			formfild = formfild.replace('<select name="mandatory" id="mandatory">', '<select name="mandatory'+count+'" id="mandatory'+count+'">');
 			formfild = formfild.replace('<select name="type" id="type">', '<select name="type'+count+'" id="type'+count+'">');
 			formfild = formfild.replace('<input name="options" value="" id="options" type="text">', '<input name="options'+count+'" value="" id="options'+count+'" type="text">');
-
+			formfild = formfild.replace('<input type="hidden" value="" class="remove" name="remove">', '<input type="hidden" value="' + count + '" class="remove" name="remove">');
+	
 			$("#sortable1").append(formfild);
 			$('#count').val(count);
 			
