@@ -38,7 +38,8 @@ class AdminBlogController extends AdminController {
 	 *
 	 * @return View
 	 */
-	public function getBlogsForCategory($blog_category) {
+	public function getBlogsForCategory($id) {
+		$blog_category = BlogCategory::find($id);
 		// Title
 		$title = Lang::get('admin/blogs/title.blog_management_for_category');
 
@@ -125,10 +126,10 @@ class AdminBlogController extends AdminController {
 		// Title
 		$title = Lang::get('admin/blogs/title.blog_update');
 
-		$blog = Blog::find($id->id);		
+		$blog = Blog::find($id);		
 		$blog_category = BlogCategory::all();
 		
-		$catselect = BlogBlogCategory::where('blog_id','=',$id->id)->select(array('blog_category_id'))->get();
+		$catselect = BlogBlogCategory::where('blog_id','=',$id)->select(array('blog_category_id'))->get();
 
 		// Show the page
 		return View::make('admin/blogs/create_edit', compact('blog', 'title', 'blog_category','catselect'));
@@ -151,7 +152,7 @@ class AdminBlogController extends AdminController {
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 		
-			$blog = Blog::find($id->id);
+			$blog = Blog::find($id);
 			$user = Auth::user();
 			
 			$blog -> title = Input::get('title');
@@ -195,9 +196,8 @@ class AdminBlogController extends AdminController {
 	 * @param $blog
 	 * @return Response
 	 */
-	public function getDelete($blog) {
+	public function getDelete($id) {
 			
-		$id= $blog->id;
 		$blog = Blog::find($id);
 		// Was the role deleted?
 		if ($blog -> delete()) {

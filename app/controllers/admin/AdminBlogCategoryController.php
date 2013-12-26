@@ -83,12 +83,13 @@ class AdminBlogCategoryController extends AdminController {
 	 * @param $blog_category
 	 * @return Response
 	 */
-	public function getEdit($blog_category) {
+	public function getEdit($id) {
+		$blogcategory = BlogCatgory::find($id);
 		// Title
 		$title = Lang::get('admin/blogcategorys/title.category_update');
 
 		// Show the page
-		return View::make('admin/blogcategorys/edit', compact('blog_category', 'title'));
+		return View::make('admin/blogcategorys/edit', compact('blogcategory', 'title'));
 	}
 
 	/**
@@ -130,9 +131,8 @@ class AdminBlogCategoryController extends AdminController {
 	 * @param $comment
 	 * @return Response
 	 */
-	public function getDelete($blog_category) {
+	public function getDelete($id) {
 		
-		$id = $blog_category->id;
 		$blogcategory = BlogCategory::find($id);
 		// Was the role deleted?
 		if ($blogcategory -> delete()) {

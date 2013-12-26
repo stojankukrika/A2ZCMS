@@ -52,7 +52,9 @@ class AdminGalleryImageCommentController extends AdminController {
 	 * @param $comment
 	 * @return Response
 	 */
-	public function getEdit($gallery_comment) {
+	public function getEdit($id) {
+		
+		$gallery_comment = GalleryImageComment::find($id);
 		// Title
 		$title = Lang::get('admin/galleryimagecomments/title.comment_update');
 

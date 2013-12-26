@@ -38,7 +38,8 @@ class AdminBlogCommentController extends AdminController {
 	 *
 	 * @return View
 	 */
-	public function getCommentsForBlog($blog) {
+	public function getCommentsForBlog($id) {
+		$blog = Blog::find($id);
 		// Title
 		$title = Lang::get('admin/blogcomments/title.comment_management_for_blog');
 
@@ -52,7 +53,8 @@ class AdminBlogCommentController extends AdminController {
 	 * @param $comment
 	 * @return Response
 	 */
-	public function getEdit($blog_comment) {
+	public function getEdit($id) {
+		$blog_comment = BlogComment::find($id);
 		// Title
 		$title = Lang::get('admin/blogcomments/title.comment_update');
 
@@ -98,9 +100,8 @@ class AdminBlogCommentController extends AdminController {
 	 * @param $comment
 	 * @return Response
 	 */
-	public function getDelete($blog_comment) {
+	public function getDelete($id) {
 		
-		$id = $blog_comment->id;
 		$blogcomment = BlogComment::find($id);
 		// Was the role deleted?
 		if ($blogcomment -> delete()) {

@@ -88,7 +88,9 @@ class AdminGalleryController extends AdminController {
 	 * @param $blog
 	 * @return Response
 	 */
-	public function getEdit($galleries) {
+	public function getEdit($id) {
+		
+		$galleries = Gallery::find($id);
 		// Title
 		$title = Lang::get('admin/galleries/title.gallery_update');
 
@@ -135,10 +137,9 @@ class AdminGalleryController extends AdminController {
 	 * @param $blog
 	 * @return Response
 	 */
-	public function getDelete($gallerys) {
+	public function getDelete($id) {
 		
-		$id = $gallerys->id;
-		$gallery = Gallery::find($gallerys->id);
+		$gallery = Gallery::find($id);
 		// Was the role deleted?
 		if ($gallery -> delete()) {
 			// Redirect to the gallery
@@ -167,13 +168,11 @@ class AdminGalleryController extends AdminController {
 	/*
 	 * Get upload pictures for gallery
 	 * */
-	public function getUpload($galleries) {
+	public function getUpload($id) {
+		
+		$galleries = Gallery::find($id);
 		// Title
 		$title = Lang::get('admin/galleries/title.gallery_add_picture');
-
-		$id = $galleries -> id;
-		$galleries = Gallery::find($id);
-
 		// Show the page
 		return View::make('admin/galleries/upload', compact('galleries', 'title'));
 	}
@@ -223,10 +222,10 @@ class AdminGalleryController extends AdminController {
 		}
 	}
 
-	public function getImagesForGallery($gallery_id) {
+	public function getImagesForGallery($id) {
 		// Title
 		$title = Lang::get('admin/galleries/title.gallery_management_for_category');
-		$galleries = Gallery::find($gallery_id);
+		$galleries = Gallery::find($id);
 		// Show the page
 		return View::make('admin/galleries/imagesforgallery', compact('galleries', 'title'));
 	}
