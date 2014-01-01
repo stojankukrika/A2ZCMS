@@ -8736,8 +8736,8 @@ namespace  {
 	 * @return \Illuminate\Routing\Route
 	 * @static 
 	 */
-	 public static function getCurrentRoute(){
-		return \Illuminate\Routing\Router::getCurrentRoute();
+	 public static function current(){
+		return \Illuminate\Routing\Router::current();
 	 }
 
 	/**
@@ -8774,7 +8774,7 @@ namespace  {
 	/**
 	 * Get the controller inspector instance.
 	 *
-	 * @return \Illuminate\Routing\Controllers\Inspector
+	 * @return \Illuminate\Routing\Controllers\Controllers\Inspector
 	 * @static 
 	 */
 	 public static function getInspector(){
@@ -8784,7 +8784,7 @@ namespace  {
 	/**
 	 * Set the controller inspector instance.
 	 *
-	 * @param \Illuminate\Routing\Controllers\Inspector  $inspector
+	 * @param \Illuminate\Routing\Controllers\Controllers\Inspector  $inspector
 	 * @return void
 	 * @static 
 	 */

@@ -74,7 +74,7 @@ class InstallController extends BaseController {
 			$url = URL::to('/');
 			$this -> setA2ZApp($url.'/');
 
-			Artisan::call('key:generate', array('--env' => App::environment()));
+			//Artisan::call('key:generate', array('--env' => App::environment()));
 
 			Artisan::call('migrate', array('--env' => App::environment()));
 			
