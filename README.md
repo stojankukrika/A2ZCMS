@@ -1,6 +1,6 @@
 # A2ZCMS
 ======
-## A2Z CMS based on Laravel 4
+## A2Z CMS based on Laravel 4.1
 * [A2Z CMS Features](#feature1)
 * [Requirements](#feature2)
 * [How to install](#feature3)
@@ -14,7 +14,7 @@
 
 <a name="feature1"></a>
 ## A2Z CMS Features:
-* Laravel 4
+* Laravel 4.1
 * Twitter Bootstrap 3.0.0
 * Custom Error Pages
 	* 403 for forbidden page accesses
@@ -67,7 +67,7 @@
 * [Step 2: Use Composer to install dependencies](#step2)
 * [Step 3: Configure Environments(optional)](#step3)
 * [Step 4: Configure Mailer](#step4)
-* [Step 5: Create database](#step5)
+* [Step 5: Create database and create Encryption Key](#step5)
 * [Step 6: Install CMS](#step6)
 * [Step 7: Make sure app/storage is writable by your web server](#step7)
 * [Step 8: Start Page](#step8)
@@ -86,6 +86,11 @@
 -----
 <a name="step2"></a>
 ### Step 2: Use Composer to install dependencies
+
+Laravel utilizes [Composer](http://getcomposer.org/) to manage its dependencies. First, download a copy of the composer.phar. 
+Once you have the PHAR archive, you can either keep it in your local project directory or move to 
+usr/local/bin to use it globally on your system. On Windows, you can use the Composer [Windows installer](https://getcomposer.org/Composer-Setup.exe).
+
 #### Option 1: Composer is not installed globally
 
     cd a2zcms
@@ -95,7 +100,6 @@
 
     cd a2zcms
 	composer install --dev
-
 
 Please note the use of the `--dev` flag.
 
@@ -141,11 +145,15 @@ If you don't set that registration will fail because it cannot send the confirma
 
 -----
 <a name="step5"></a>
-### Step 5: Create database
+### Step 5: Create database and create Encryption Key
 
 If you finished first four steps, now you can create database on your database server(MySQL). You must create database
 with utf-8 collation(uft8_general_ci), to install and application work perfectly.
 
+The configuration option that we need is create the encryption key that is used within the framework. 
+To do this, all we need to do is to run:
+
+    php artisan key:generate
 
 -----
 <a name="step6"></a>
