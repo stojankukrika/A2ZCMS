@@ -1,4 +1,5 @@
 # A2ZCMS
+![logo](http://i44.tinypic.com/jgm6ht.jpg)
 ======
 ## A2Z CMS based on Laravel 4.1
 * [A2Z CMS Features](#feature1)
