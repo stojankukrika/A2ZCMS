@@ -21,7 +21,7 @@ class AdminDashboardController extends AdminController {
 			
 		}
 		$data['title']	= Lang::get('admin/general.dashboard');
-		$data['to_do_list'] = Todolist::count();
+		$data['to_do_list_not_finish'] = Todolist::where('work_done','=',0)->count();
 		$data['pages'] = Page::count();
 		$data['customform'] = CustomForm::count();
 		$data['gallery'] = Gallery::count();

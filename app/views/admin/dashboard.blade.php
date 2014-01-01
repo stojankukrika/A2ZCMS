@@ -12,7 +12,7 @@
 			<div class="smallstat box">
 				<i class="icon-bell blue"></i>
 				<span class="title">{{{ Lang::get('admin/general.to_do_list') }}}</span>
-				<span class="value">{{$to_do_list}}</span>
+				<span class="value">{{$to_do_list_not_finish}}</span>
 				<a class="more" href="{{{ URL::to('admin/todolists') }}}">
 					<span>{{Lang::get('admin/general.view_more')}}</span>
 					<i class="icon-chevron-right"></i>
