@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost/',
+	'url' => 'http://localhost',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'Europe/Paris',
+	'timezone' => 'UTC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -60,12 +60,12 @@ return array(
 	|--------------------------------------------------------------------------
 	|
 	| This key is used by the Illuminate encrypter service and should be set
-	| to a random, long string, otherwise these encrypted values will not
-	| be safe. Make sure to change it before deploying any application!
+	| to a random, 32 character string, otherwise these encrypted strings
+	| will not be safe. Please do this before deploying an application!
 	|
 	*/
 
-	'key' => 'MaMH2AxxkSeCVcHk65K7ZxYmTxhVCqMw',
+	'key' => '95Tp73fwrklQQ2JdFla1y4awUUDU5iim',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,14 +78,13 @@ return array(
 	|
 	*/
 
-    'providers' => array(
-        /* Laravel Base Providers */
+	'providers' => array(
+
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
-		'Illuminate\Foundation\Providers\CommandCreatorServiceProvider',
 		'Illuminate\Session\CommandsServiceProvider',
-		'Illuminate\Foundation\Providers\ComposerServiceProvider',
+		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
 		'Illuminate\Routing\ControllerServiceProvider',
 		'Illuminate\Cookie\CookieServiceProvider',
 		'Illuminate\Database\DatabaseServiceProvider',
@@ -93,65 +92,56 @@ return array(
 		'Illuminate\Filesystem\FilesystemServiceProvider',
 		'Illuminate\Hashing\HashServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
-		'Illuminate\Foundation\Providers\KeyGeneratorServiceProvider',
 		'Illuminate\Log\LogServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
-		'Illuminate\Foundation\Providers\MaintenanceServiceProvider',
 		'Illuminate\Database\MigrationServiceProvider',
-		'Illuminate\Foundation\Providers\OptimizeServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
-		'Illuminate\Foundation\Providers\PublisherServiceProvider',
 		'Illuminate\Queue\QueueServiceProvider',
 		'Illuminate\Redis\RedisServiceProvider',
+		'Illuminate\Remote\RemoteServiceProvider',
 		'Illuminate\Auth\Reminders\ReminderServiceProvider',
-		'Illuminate\Foundation\Providers\RouteListServiceProvider',
 		'Illuminate\Database\SeedServiceProvider',
-		'Illuminate\Foundation\Providers\ServerServiceProvider',
 		'Illuminate\Session\SessionServiceProvider',
-		'Illuminate\Foundation\Providers\TinkerServiceProvider',
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		 /* Additional Providers */
+	        'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
+	        'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
+	        'Robbo\Presenter\PresenterServiceProvider', // Presenter
+	        'Bllim\Datatables\DatatablesServiceProvider', // Datatables
+	
+	        /* Uncomment for use in development */
+	        'Way\Generators\GeneratorsServiceProvider', // Generators
+	),
 
-		/* Additional Providers */
-		'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
-		'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
-		'Robbo\Presenter\PresenterServiceProvider', // Presenter
-		'Bllim\Datatables\DatatablesServiceProvider', // Datatables
-		
-		/* Uncomment for use in development */
-		'Way\Generators\GeneratorsServiceProvider', // Generators
-		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
+	/*
+	|--------------------------------------------------------------------------
+	| Service Provider Manifest
+	|--------------------------------------------------------------------------
+	|
+	| The service provider manifest is used by Laravel to lazy load service
+	| providers which are not needed for each request, as well to keep a
+	| list of all of the services. Here, you may set its storage spot.
+	|
+	*/
 
-    ),
+	'manifest' => storage_path().'/meta',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Service Provider Manifest
-    |--------------------------------------------------------------------------
-    |
-    | The service provider manifest is used by Laravel to lazy load service
-    | providers which are not needed for each request, as well to keep a
-    | list of all of the services. Here, you may set its storage spot.
-    |
-    */
+	/*
+	|--------------------------------------------------------------------------
+	| Class Aliases
+	|--------------------------------------------------------------------------
+	|
+	| This array of class aliases will be registered when this application
+	| is started. However, feel free to register as many as you wish as
+	| the aliases are "lazy" loaded so they don't hinder performance.
+	|
+	*/
 
-    'manifest' => storage_path() . '/meta',
+	'aliases' => array(
 
-    /*
-    |--------------------------------------------------------------------------
-    | Class Aliases
-    |--------------------------------------------------------------------------
-    |
-    | This array of class aliases will be registered when this application
-    | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
-    |
-    */
-
-    'aliases' => array(
-        /* Laravel Base Aliases */
 		'App'             => 'Illuminate\Support\Facades\App',
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',
 		'Auth'            => 'Illuminate\Support\Facades\Auth',
@@ -159,7 +149,7 @@ return array(
 		'Cache'           => 'Illuminate\Support\Facades\Cache',
 		'ClassLoader'     => 'Illuminate\Support\ClassLoader',
 		'Config'          => 'Illuminate\Support\Facades\Config',
-		'Controller'      => 'Illuminate\Routing\Controllers\Controller',
+		'Controller'      => 'Illuminate\Routing\Controller',
 		'Cookie'          => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'           => 'Illuminate\Support\Facades\Crypt',
 		'DB'              => 'Illuminate\Support\Facades\DB',
@@ -168,7 +158,7 @@ return array(
 		'File'            => 'Illuminate\Support\Facades\File',
 		'Form'            => 'Illuminate\Support\Facades\Form',
 		'Hash'            => 'Illuminate\Support\Facades\Hash',
-		'Html'            => 'Illuminate\Support\Facades\HTML',
+		'HTML'            => 'Illuminate\Support\Facades\HTML',
 		'Input'           => 'Illuminate\Support\Facades\Input',
 		'Lang'            => 'Illuminate\Support\Facades\Lang',
 		'Log'             => 'Illuminate\Support\Facades\Log',
@@ -184,25 +174,23 @@ return array(
 		'Schema'          => 'Illuminate\Support\Facades\Schema',
 		'Seeder'          => 'Illuminate\Database\Seeder',
 		'Session'         => 'Illuminate\Support\Facades\Session',
+		'SSH'             => 'Illuminate\Support\Facades\SSH',
 		'Str'             => 'Illuminate\Support\Str',
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
 		/* Additional Aliases */
-		'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
-		'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
-		'Presenter'       => 'Robbo\Presenter\Presenter', // Presenter
-		'Presentable'     => 'Robbo\Presenter\PresentableInterface', // Presenter
-		'Basset'          => 'Basset\Facade', // Better Asset Management
-		'String'          => 'A2ZCMS\Helpers\String', // String
-		'Fineuploader'    => 'A2ZCMS\Helpers\Fineuploader', // Fineuploader
-		'Thumbnail'		  => 'A2ZCMS\Helpers\Thumbnail', // Fineuploader
-		'Carbon'          => 'Carbon\Carbon', // Carbon
-		'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
-
-    ),
-
-    'available_language' => array('en'),
-
+	        'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
+	        'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
+	        'Presenter'       => 'Robbo\Presenter\Presenter', // Presenter
+	        'Presentable'     => 'Robbo\Presenter\PresentableInterface', // Presenter
+	        'Basset'          => 'Basset\Facade', // Better Asset Management
+	        'String'          => 'A2ZCMS\Helpers\String', // String
+	        'Fineuploader'    => 'A2ZCMS\Helpers\Fineuploader', // Fineuploader
+	        'Thumbnail'		  => 'A2ZCMS\Helpers\Thumbnail', // Fineuploader
+	        'UUID'		  	  => 'A2ZCMS\Helpers\UUID', // UUID
+	        'Carbon'          => 'Carbon\Carbon', // Carbon
+	        'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
+	),
+	'available_language' => array('en'),
 );
