@@ -1,5 +1,12 @@
 # A2ZCMS
 ![logo](http://i44.tinypic.com/jgm6ht.jpg)
+
+======
+<!-- DONATE/ -->
+[![Gittip donate button](http://img.shields.io/gittip/mrakodol.png)](https://www.gittip.com/mrakodol/ "Donate weekly to this project using Gittip")
+[![Flattr donate button](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mrakodol)
+[![BitCoin donate button](http://img.shields.io/bitcoin/donate.png?color=yellow)](https://coinbase.com/checkouts/4d0769619eaebde35c378920a895596e "Donate once-off to this project using BitCoin")
+<!-- /DONATE -->
 ======
 ## A2Z CMS based on Laravel 4.1
 * [A2Z CMS Features](#feature1)
@@ -12,7 +19,6 @@
 * [License](#feature8)
 * [Additional information](#feature9)
 * [How CMS is look like](#feature10)
-
 
 <a name="feature1"></a>
 ## A2Z CMS Features:
