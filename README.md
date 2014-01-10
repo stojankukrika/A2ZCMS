@@ -13,6 +13,29 @@
 * [Additional information](#feature9)
 * [How CMS is look like](#feature10)
 
+<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
+<input type="hidden" name="cmd" value="_s-xclick">
+<table>
+<tr><td>##Help A2Z CMS To Run This CMS Free. 
+Please enter the amount below that you wish to donate.
+Thank you for your kind support to A2Z CMS</td></tr>
+<tr><td><input type="hidden" name="on0" value="Select of Amount to donate">Select of Amount to donate</td></tr><tr><td><select name="os0">
+	<option value="1 EUR">1 EUR - €1.00</option>
+	<option value="2 EUR">2 EUR - €2.00</option>
+	<option value="5 EUR">5 EUR - €5.00</option>
+	<option value="10 EUR">10 EUR - €10.00</option>
+	<option value="20 EUR">20 EUR - €20.00</option>
+	<option value="50 EUR">50 EUR - €50.00</option>
+	<option value="100 EUR">100 EUR - €100.00</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="EUR">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
 <a name="feature1"></a>
 ## A2Z CMS Features:
 * Laravel 4.1
