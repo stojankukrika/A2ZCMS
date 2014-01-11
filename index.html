@@ -1,43 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <title>A2Z CMS by mrakodol</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>A2Z CMS by mrakodol</title>
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
-
-        <header>
-          <h1>A2Z CMS</h1>
-          <h2>A2ZCMS</h2>
-        </header>
-
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/mrakodol/A2ZCMS/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/mrakodol/A2ZCMS/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/mrakodol/A2ZCMS" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>
+    <div class="wrapper">
+      <header>
+        <h1>A2Z CMS</h1>
+        <p>A2ZCMS</p>
+        <p class="view"><a href="https://github.com/mrakodol/A2ZCMS">View the Project on GitHub <small>mrakodol/A2ZCMS</small></a></p>
+        <ul>
+          <li><a href="https://github.com/mrakodol/A2ZCMS/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/mrakodol/A2ZCMS/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/mrakodol/A2ZCMS">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
 <a name="a2zcms" class="anchor" href="#a2zcms"><span class="octicon octicon-link"></span></a>A2ZCMS</h1>
+
+<p><img src="http://i44.tinypic.com/jgm6ht.jpg" alt="logo"></p>
+
+<h1></h1>
+
+
+
+<p><a href="https://www.gittip.com/mrakodol/" title="Donate weekly to this project using Gittip"><img src="http://img.shields.io/gittip/mrakodol.png" alt="Gittip donate button"></a>
+<a href="https://flattr.com/submit/auto?user_id=mrakodol&amp;url=https%3A%2F%2Fgithub.com%2Fmrakodol%2FA2ZCMS"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr donate button"></a>
+<a href="https://coinbase.com/checkouts/4d0769619eaebde35c378920a895596e" title="Donate once-off to this project using BitCoin"><img src="http://img.shields.io/bitcoin/donate.png?color=yellow" alt="BitCoin donate button"></a></p>
+
+
 
 <h1></h1>
 
 <h2>
-<a name="a2z-cms-based-on-laravel-4" class="anchor" href="#a2z-cms-based-on-laravel-4"><span class="octicon octicon-link"></span></a>A2Z CMS based on Laravel 4</h2>
+<a name="a2z-cms-based-on-laravel-41" class="anchor" href="#a2z-cms-based-on-laravel-41"><span class="octicon octicon-link"></span></a>A2Z CMS based on Laravel 4.1</h2>
 
 <ul>
 <li><a href="#feature1">A2Z CMS Features</a></li>
@@ -56,7 +64,7 @@
 <a name="a2z-cms-features" class="anchor" href="#a2z-cms-features"><span class="octicon octicon-link"></span></a>A2Z CMS Features:</h2>
 
 <ul>
-<li>Laravel 4</li>
+<li>Laravel 4.1</li>
 <li>Twitter Bootstrap 3.0.0</li>
 <li>Custom Error Pages
 
@@ -81,6 +89,7 @@
 <li>Manage to-do list.</li>
 <li>DataTables dynamic table sorting and filtering.</li>
 <li>Colorbox Lightbox jQuery modal popup.</li>
+<li>Add Summernote WYSIWYG in textareas.</li>
 <li>soon will be more...</li>
 </ul>
 </li>
@@ -92,6 +101,7 @@
 <li>Voting content(Blog,Gallery,Page)</li>
 <li>Custom themes</li>
 <li>User can use avatar</li>
+<li>Add Summernote WYSIWYG in textareas</li>
 <li>soon will be more...</li>
 </ul>
 </li>
@@ -104,6 +114,7 @@
 <li><a href="#carbon">Carbon</a></li>
 <li><a href="#presenter">Presenter</a></li>
 <li><a href="#generators">JeffreyWay Laravel 4 Generators</a></li>
+<li><a href="#summernote">Summernote</a></li>
 </ul>
 </li>
 </ul><hr><p><a name="feature2"></a></p>
@@ -127,7 +138,7 @@ SQL server(for example MySQL)
 <li><a href="#step2">Step 2: Use Composer to install dependencies</a></li>
 <li><a href="#step3">Step 3: Configure Environments(optional)</a></li>
 <li><a href="#step4">Step 4: Configure Mailer</a></li>
-<li><a href="#step5">Step 5: Create database</a></li>
+<li><a href="#step5">Step 5: Create database and create Encryption Key</a></li>
 <li><a href="#step6">Step 6: Install CMS</a></li>
 <li><a href="#step7">Step 7: Make sure app/storage is writable by your web server</a></li>
 <li><a href="#step8">Step 8: Start Page</a></li>
@@ -152,6 +163,10 @@ SQL server(for example MySQL)
 
 <h3>
 <a name="step-2-use-composer-to-install-dependencies" class="anchor" href="#step-2-use-composer-to-install-dependencies"><span class="octicon octicon-link"></span></a>Step 2: Use Composer to install dependencies</h3>
+
+<p>Laravel utilizes <a href="http://getcomposer.org/">Composer</a> to manage its dependencies. First, download a copy of the composer.phar. 
+Once you have the PHAR archive, you can either keep it in your local project directory or move to 
+usr/local/bin to use it globally on your system. On Windows, you can use the Composer <a href="https://getcomposer.org/Composer-Setup.exe">Windows installer</a>.</p>
 
 <h4>
 <a name="option-1-composer-is-not-installed-globally" class="anchor" href="#option-1-composer-is-not-installed-globally"><span class="octicon octicon-link"></span></a>Option 1: Composer is not installed globally</h4>
@@ -218,10 +233,16 @@ If you don't set that registration will fail because it cannot send the confirma
 <hr><p><a name="step5"></a></p>
 
 <h3>
-<a name="step-5-create-database" class="anchor" href="#step-5-create-database"><span class="octicon octicon-link"></span></a>Step 5: Create database</h3>
+<a name="step-5-create-database-and-create-encryption-key" class="anchor" href="#step-5-create-database-and-create-encryption-key"><span class="octicon octicon-link"></span></a>Step 5: Create database and create Encryption Key</h3>
 
 <p>If you finished first four steps, now you can create database on your database server(MySQL). You must create database
 with utf-8 collation(uft8_general_ci), to install and application work perfectly.</p>
+
+<p>The configuration option that we need is create the encryption key that is used within the framework. 
+To do this, all we need to do is to run:</p>
+
+<pre><code>php artisan key:generate
+</code></pre>
 
 <hr><p><a name="step6"></a></p>
 
@@ -462,6 +483,17 @@ The <code>$userObject</code> will function the same unless a method is called th
 <li><code>generate:pivot &lt;-- NEW!!</code></li>
 </ul><p>For full usage see <a href="https://github.com/JeffreyWay/Laravel-4-Generators/blob/master/readme.md">Laravel 4 Generators Readme</a></p>
 
+<p><a name></a></p>
+
+<h2>
+<a name="summernote" class="anchor" href="#summernote"><span class="octicon octicon-link"></span></a>Summernote</h2>
+
+<p>Summernote is a javascript program that helps you to create WYSIWYG Editor on web. Super Simple WYSIWYG Editor on Bootstrap(3.0 and 2.x).</p>
+
+<p><a href="http://hackerwins.github.io/summernote/">Demo Page</a></p>
+
+<p>For full usage see <a href="https://github.com/hackerwins/summernote">Summernote Readme</a></p>
+
 <hr><p><a name="feature8"></a></p>
 
 <h2>
@@ -482,15 +514,13 @@ The <code>$userObject</code> will function the same unless a method is called th
 <a name="how-cms-is-look-like" class="anchor" href="#how-cms-is-look-like"><span class="octicon octicon-link"></span></a>How CMS is look like</h2>
 
 <p><img src="http://oi41.tinypic.com/2my907n.jpg" alt="Install"><img src="http://oi39.tinypic.com/15661qw.jpg" alt="First page"><img src="http://oi39.tinypic.com/2ajdwl2.jpg" alt="Messages"><img src="http://oi44.tinypic.com/2870ry0.jpg" alt="Admin dashboard"><img src="http://oi44.tinypic.com/eu2ffc.jpg" alt="Admin page"></p>
-        </section>
-
-        <footer>
-          A2Z CMS is maintained by <a href="https://github.com/mrakodol">mrakodol</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
+      </section>
     </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/mrakodol">mrakodol</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
