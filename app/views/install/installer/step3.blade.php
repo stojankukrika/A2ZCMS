@@ -1,7 +1,7 @@
 @extends('install.layouts.default')
 
 @section('title')
-{{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 3 {{ Lang::get('install/installer.of') }} 4
+{{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 3 {{ Lang::get('install/installer.of') }} 5
 @stop
 @section('content')
 <div id="install-region">
@@ -25,33 +25,33 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="first_name">{{ Lang::get('install/installer.first_name') }}</label>
+			<label class="control-label" for="hostname">{{ Lang::get('install/installer.host_name') }}</label>
 			<div class="controls">
-				<input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{ (isset($old) ? $old->first_name : '') }}">
+				<input type="text" id="hostname" name="hostname" placeholder="localhost" value="{{ (isset($old) ? $old->hostname : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="last_name">{{ Lang::get('install/installer.last_name') }}</label>
+			<label class="control-label" for="database">{{ Lang::get('install/installer.database') }}</label>
 			<div class="controls">
-				<input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{ (isset($old) ? $old->last_name : '') }}">
+				<input type="text" id="database" name="database" placeholder="database" value="{{ (isset($old) ? $old->database : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="username">{{ Lang::get('install/installer.username') }}</label>
+			<label class="control-label" for="username">{{ Lang::get('install/installer.database_username') }}</label>
 			<div class="controls">
-				<input type="text" id="username" name="username" placeholder="Username" value="{{ (isset($old) ? $old->username : '') }}">
+				<input type="text" id="username" name="username" placeholder="username" value="{{ (isset($old) ? $old->username : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="email">{{ Lang::get('install/installer.email') }}</label>
+			<label class="control-label" for="password">{{ Lang::get('install/installer.database_password') }}</label>
 			<div class="controls">
-				<input type="text" id="email" name="email" placeholder="Email" value="{{ (isset($old) ? $old->email : '') }}">
+				<input id="password" type="text" name="password" placeholder="password" value="{{ (isset($old) ? $old->password : '') }}">
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label" for="password">{{ Lang::get('install/installer.password') }}</label>
+			<div class="control-group">
+			<label class="control-label" for="prefix">{{ Lang::get('install/installer.database_prefix') }}</label>
 			<div class="controls">
-				<input id="password" type="password" placeholder="{{ Lang::get('install/installer.password') }}" name="password" value="">
+				<input id="prefix" type="text" name="prefix" placeholder="prefix" value="{{ (isset($old) ? $old->prefix : 'a2z_') }}">
 			</div>
 		</div>
 		<div class="control-group">

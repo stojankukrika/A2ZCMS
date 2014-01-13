@@ -16,6 +16,17 @@ class InstallController extends BaseController {
 			return App::abort(404, 'Page not found');
 		}
 	}
+	 public $writable_dirs = array(
+        'avatar' => FALSE,
+        'blog' => FALSE,
+        'customform' => FALSE,
+        'gallery' => FALSE,
+        'page' => FALSE,
+    );
+    public $writable_subdirs = array(
+        'blog/thumbs' => FALSE,
+        'page/thumbs' => FALSE,
+    );
 
 	/**
 	 * Get the install index.
@@ -49,13 +60,36 @@ class InstallController extends BaseController {
 	public function getStep2() {
 		return View::make('install.installer.step2');
 	}
+	/**
+	 * Run the migrations
+	 *
+	 * @return Response
+	 */
+	public function postStep2() {
+			$form = Validator::make($input = Input::all(), array('accept' => array('required')));
+
+		if ($form -> passes()) {
+			return Redirect::to('install/step3');
+		} else {
+			return Redirect::to('install/step2') -> withErrors($form);
+		}
+	}
+
+	/**
+	 * Get the user form.
+	 *
+	 * @return Response
+	 */
+	public function getStep3() {
+		return View::make('install.installer.step3');
+	}
 
 	/**
 	 * Add the user and show success!
 	 *
 	 * @return Response
 	 */
-	public function postStep2() {
+	public function postStep3() {
 
 		$form = Validator::make($input = Input::all(), array('hostname' => array('required'), 'username' => array('required'), 'database' => array('required'), ));
 
@@ -96,9 +130,9 @@ class InstallController extends BaseController {
 							 where ".Input::get('prefix')."user_login_historys.id = NEW.id)");
 			
 			
-			return Redirect::to('install/step3');
+			return Redirect::to('install/step4');
 		} else {
-			return Redirect::to('install/step2') -> withErrors($form);
+			return Redirect::to('install/step3') -> withErrors($form);
 		}
 	}
 
@@ -119,8 +153,8 @@ class InstallController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getStep3() {
-		return View::make('install.installer.step3');
+	public function getStep4() {
+		return View::make('install.installer.step4');
 	}
 
 	/**
@@ -128,7 +162,7 @@ class InstallController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function postStep3() {
+	public function postStep4() {
 
 		$rules = array('first_name' => 'required', 'last_name' => 'required', 'username' => 'required', 'email' => 'required', 'password' => 'required', );
 
@@ -164,20 +198,20 @@ class InstallController extends BaseController {
 			Settings::where('varname', '=', $v -> varname) -> update(array('value' => $v -> value));
 		}
 
-		return Redirect::to('install/step4');
+		return Redirect::to('install/step5');
 	}
 
 	/**
 	 * Get the config form.
 	 */
-	public function getStep4() {
-		return View::make('install.installer.step4');
+	public function getStep5() {
+		return View::make('install.installer.step5');
 	}
 
 	/**
 	 * Save the config files
 	 */
-	public function postStep4() {
+	public function postStep5() {
 		$this -> setA2ZConfig(Input::get('title', 'Site Name'), Input::get('theme', 'a2z-default'),
 								Input::get('per_page', 5));
 		return View::make('install.installer.complete');

@@ -1,7 +1,7 @@
 @extends('install.layouts.default')
 
 @section('title')
-{{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 1 {{ Lang::get('install/installer.of') }} 4
+{{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 1 {{ Lang::get('install/installer.of') }} 5
 @stop
 @section('content')
 <div id="install-region">
@@ -15,7 +15,7 @@
 		@endforeach
 	</div>
 	@endif
-	<form method="post" action="{{ url('install') }}" class="form-horizontal">
+	<form method="post" action="{{ url('install/step1') }}" class="form-horizontal">
 		<div id="js-errors" class="hide">
 			<div class="alert alert-error">
 				<button type="button" class="close" data-dismiss="alert">

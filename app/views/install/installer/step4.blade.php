@@ -1,7 +1,7 @@
 @extends('install.layouts.default')
 
 @section('title')
-{{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 4 {{ Lang::get('install/installer.of') }} 4
+{{ Lang::get('install/installer.installer') }} | {{ Lang::get('install/installer.step') }} 4 {{ Lang::get('install/installer.of') }} 5
 @stop
 @section('content')
 <div id="install-region">
@@ -15,48 +15,52 @@
 		@endforeach
 	</div>
 	@endif
-	<form method="post" style="text-align: center;" action="{{ url('install/step4') }}" class="form-horizontal">
-		<p>
-			{{ Lang::get('install/installer.config_info') }}
-		</p>
-		<div class="control-group">
-			<label class="control-label" for="title">{{ Lang::get('install/installer.site_title') }}</label>
-			<div class="controls">
-				<input type="text" id="title" name="title" placeholder="Site Title" value="{{ (isset($old) ? $old->title : '') }}">
+	<form method="post" action="{{ url('install/step4') }}" class="form-horizontal">
+		<div id="js-errors" class="hide">
+			<div class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">
+					×
+				</button>
+				<span></span>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="theme">{{ Lang::get('install/installer.site_theme') }}</label>
+			<label class="control-label" for="first_name">{{ Lang::get('install/installer.first_name') }}</label>
 			<div class="controls">
-				<select name="theme">
-					<?php
-						foreach(glob(base_path() . '\public\assets\site\*', GLOB_ONLYDIR) as $dir) {
-						    $dir = str_replace(base_path() . '\public\assets\site\\', '', $dir);
-						   echo '<option value="'.$dir.'">'.ucfirst($dir).'</option>';
-						}
-					?>
-				</select>
+				<input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{ (isset($old) ? $old->first_name : '') }}">
 			</div>
 		</div>
-	<div class="control-group">
-			<label class="control-label" for="per_page">{{ Lang::get('install/installer.posts_per_page') }}</label>
+		<div class="control-group">
+			<label class="control-label" for="last_name">{{ Lang::get('install/installer.last_name') }}</label>
 			<div class="controls">
-				<input type="number" name="per_page" id="per_page" value="8" type="number" min="3" max="20" step="1">
+				<input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{ (isset($old) ? $old->last_name : '') }}">
 			</div>
 		</div>
-		<button style="text-align: center;" type="submit" class="btn save">
-			{{ Lang::get('install/installer.finish') }}
-		</button>
+		<div class="control-group">
+			<label class="control-label" for="username">{{ Lang::get('install/installer.username') }}</label>
+			<div class="controls">
+				<input type="text" id="username" name="username" placeholder="Username" value="{{ (isset($old) ? $old->username : '') }}">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="email">{{ Lang::get('install/installer.email') }}</label>
+			<div class="controls">
+				<input type="text" id="email" name="email" placeholder="Email" value="{{ (isset($old) ? $old->email : '') }}">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password">{{ Lang::get('install/installer.password') }}</label>
+			<div class="controls">
+				<input id="password" type="password" placeholder="{{ Lang::get('install/installer.password') }}" name="password" value="">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn save">
+					{{ Lang::get('install/installer.next_step') }}
+				</button>
+			</div>
+		</div>
 	</form>
 </div>
 @stop
-{{-- Scripts --}}
-@section('scripts')
-<script type="text/javascript">
-	$(function() {
- 		$("#per_page").keyup(function () { 
-		    this.value = this.value.replace(/[^0-9\.]/g,'');
-		});
- 	})
-</script>
- @stop
