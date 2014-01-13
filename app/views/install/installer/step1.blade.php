@@ -39,7 +39,7 @@
 	            <label>I agree to the license {{Form::checkbox('accept', '1') }}</label>
 	        </div>
 		<button style="text-align: center;" type="submit" class="btn save">
-			{{ Lang::get('install/installer.install_database_continue') }}
+			{{ Lang::get('install/installer.continue') }}
 		</button>
 	</form>
 </div>
