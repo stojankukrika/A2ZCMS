@@ -32,7 +32,13 @@ class InstallController extends BaseController {
 	 * @return Response
 	 */
 	public function postIndex() {
-		return Redirect::to('install/step2');
+			$form = Validator::make($input = Input::all(), array('accept' => array('required')));
+
+		if ($form -> passes()) {
+			return Redirect::to('install/step2');
+		} else {
+			return Redirect::to('install/index') -> withErrors($form);
+		}
 	}
 
 	/**
