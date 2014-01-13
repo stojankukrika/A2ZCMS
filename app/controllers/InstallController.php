@@ -3,7 +3,7 @@
 class InstallController extends BaseController {
 
 	/**
-	 * Create a new API User controller.
+	 * Create a new Install controller.
 	 *
 	 * @param UserRepositoryInterface $users
 	 *
