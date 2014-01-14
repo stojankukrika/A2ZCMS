@@ -16,6 +16,7 @@ class InstallController extends BaseController {
 			return Redirect::to('');
 		}
 	}
+	 public $errors = array();
 	 public $writable_dirs = array(
         'avatar' => FALSE,
         'blog' => FALSE,
