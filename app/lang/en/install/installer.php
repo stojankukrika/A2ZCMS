@@ -7,7 +7,7 @@ return array(
     'of' => 'of',
     'complite' => 'Complite',
 	'success' => 'Success',
-	'install_complete' => 'Install complete.',
+	'install_complete' => 'Congratulations! You have successfully installed A2Z CMS.',
 	'you_can_now' => 'You can now',
 	'go_to_heome_page' =>'go to home page.',
 	'error' =>'Error!',
