@@ -13,7 +13,7 @@ class InstallController extends BaseController {
 	public function __construct() {
 		// If the config is marked as installed then bail with a 404.
 		if (Config::get("a2zcms.installed") === true) {
-			return App::abort(404, 'Page not found');
+			return Redirect::to('');
 		}
 	}
 	 public $writable_dirs = array(
@@ -51,14 +51,82 @@ class InstallController extends BaseController {
 			return Redirect::to('install/index') -> withErrors($form);
 		}
 	}
+	private function validate()
+    {
+    	$cms_root = getcwd().'/';		
+		
+        if ( ! is_writable($cms_root . '../app/config/app.php'))
+        {
+            $this->errors[] =  $cms_root . '../app/config/app.php is not writable.';
+        }
 
+        if ( ! is_writable($cms_root . '../app/config/database.php'))
+        {
+            $this->errors[] =  $cms_root . '../app/config/database.php is not writable.';
+        }
+		if ( ! is_writable($cms_root . '../app/config/a2zcms.php'))
+        {
+            $this->errors[] =  $cms_root . '../app/config/a2zcms.php is not writable.';
+        }
+		$writable_dirs = array_merge($this->writable_dirs, $this->writable_subdirs);
+        foreach ($writable_dirs as $path => $is_writable)
+        {
+            if(!is_writable($cms_root . $path))
+            {
+            	$this->errors[] = $cms_root . $path . ' is not writable.';
+            }
+        }
+
+        if (phpversion() < '5.1.6')
+        {
+            $this->errors[] = 'You need to use PHP 5.1.6 or greater.';
+        }
+
+        if ( ! ini_get('file_uploads'))
+        {
+            $this->errors[] = 'File uploads need to be enabled in your PHP configuration.';
+        }
+
+        if ( ! extension_loaded('mysql'))
+        {
+            $this->errors[] = 'The PHP MySQL extension is required.';
+        }
+
+        if ( ! extension_loaded('gd'))
+        {
+            $this->errors[] = 'The PHP GD extension is required.';
+        }
+
+        if ( ! extension_loaded('curl'))
+        {
+            $this->errors[] = 'The PHP cURL extension is required.';
+        }
+        if (empty($this->errors))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 	/**
 	 * Get the user form.
 	 *
 	 * @return Response
 	 */
 	public function getStep2() {
-		return View::make('install.installer.step2');
+		clearstatcache();
+		$cms_root = getcwd().'/';
+		$writable_dirs = array_merge($this->writable_dirs, $this->writable_subdirs);
+        foreach ($writable_dirs as $path => $is_writable)
+        {
+            $this->writable_dirs[$path] = is_writable($cms_root . $path);
+        }
+		
+		$data['writable_dirs'] = $this->writable_dirs;
+        $data['cms_root'] = $cms_root;
+		return View::make('install.installer.step2',$data);
 	}
 	/**
 	 * Run the migrations
@@ -66,13 +134,12 @@ class InstallController extends BaseController {
 	 * @return Response
 	 */
 	public function postStep2() {
-			$form = Validator::make($input = Input::all(), array('accept' => array('required')));
-
-		if ($form -> passes()) {
+		if ($this->validate()) {
 			return Redirect::to('install/step3');
 		} else {
-			return Redirect::to('install/step2') -> withErrors($form);
+			return Redirect::to('install/step2') -> withErrors($this->errors);
 		}
+		
 	}
 
 	/**

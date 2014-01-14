@@ -15,7 +15,7 @@
 		@endforeach
 	</div>
 	@endif
-	<form method="post" action="{{ url('install/step1') }}" class="form-horizontal">
+	<form method="post" action="" class="form-horizontal">
 		<div id="js-errors" class="hide">
 			<div class="alert alert-error">
 				<button type="button" class="close" data-dismiss="alert">
