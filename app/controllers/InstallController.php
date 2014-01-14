@@ -5,11 +5,7 @@ class InstallController extends BaseController {
 	/**
 	 * Create a new Install controller.
 	 *
-	 * @param UserRepositoryInterface $users
-	 *
-	 * @internal param UserRepositoryInterface $user
-	 * @return InstallController
-	 */
+	*/
 	public function __construct() {
 		// If the config is marked as installed then bail with a 404.
 		if (Config::get("a2zcms.installed") === true) {
@@ -17,6 +13,8 @@ class InstallController extends BaseController {
 		}
 	}
 	 public $errors = array();
+	 
+	 /*folder that need to be a writable*/
 	 public $writable_dirs = array(
         'avatar' => FALSE,
         'blog' => FALSE,
@@ -39,7 +37,7 @@ class InstallController extends BaseController {
 	}
 
 	/**
-	 * Run the migrations
+	 * Run the chenck if user accept the licence
 	 *
 	 * @return Response
 	 */
@@ -52,6 +50,11 @@ class InstallController extends BaseController {
 			return Redirect::to('install/index') -> withErrors($form);
 		}
 	}
+	
+	/*
+	 * Run validate if files and folders are on server and writable 
+	 * */
+	 
 	private function validate()
     {
     	$cms_root = getcwd().'/';		
@@ -112,7 +115,7 @@ class InstallController extends BaseController {
         }
     }
 	/**
-	 * Get the user form.
+	 * Get the user form to show info of files and folders
 	 *
 	 * @return Response
 	 */
@@ -130,7 +133,7 @@ class InstallController extends BaseController {
 		return View::make('install.installer.step2',$data);
 	}
 	/**
-	 * Run the migrations
+	 * Run the validation of writable files and folders
 	 *
 	 * @return Response
 	 */
@@ -144,7 +147,7 @@ class InstallController extends BaseController {
 	}
 
 	/**
-	 * Get the user form.
+	 * Get the user form to enter database params.
 	 *
 	 * @return Response
 	 */
@@ -153,7 +156,7 @@ class InstallController extends BaseController {
 	}
 
 	/**
-	 * Add the user and show success!
+	 * Add database settings and migrate database
 	 *
 	 * @return Response
 	 */
@@ -181,8 +184,6 @@ class InstallController extends BaseController {
 			//File::delete($stub);
 			$url = URL::to('/');
 			$this -> setA2ZApp($url.'/');
-
-			//Artisan::call('key:generate', array('--env' => App::environment()));
 
 			Artisan::call('migrate', array('--env' => App::environment()));
 			
@@ -217,7 +218,7 @@ class InstallController extends BaseController {
 	}
 
 	/**
-	 * Get the user form.
+	 * Get the user form for creating admin user.
 	 *
 	 * @return Response
 	 */
@@ -226,7 +227,7 @@ class InstallController extends BaseController {
 	}
 
 	/**
-	 * Add the user and show success!
+	 * Add the user as admin
 	 *
 	 * @return Response
 	 */
@@ -242,7 +243,7 @@ class InstallController extends BaseController {
 		}
 
 		$user_id = DB::table('users') -> insertGetId(array('name' => Input::get('first_name'), 
-								'surname' => Input::get('last_name'), 'username' => Input::get('username'), 
+							'surname' => Input::get('last_name'), 'username' => Input::get('username'), 
 							'email' => Input::get('email'), 'password' => Hash::make(Input::get('password')), 							'confirmation_code' => md5(microtime() . Config::get('app.key')), 
 							'created_at' => new DateTime, 'updated_at' => new DateTime, 
 							'confirmed' => '1', 'active' => '1'));
@@ -277,7 +278,7 @@ class InstallController extends BaseController {
 	}
 
 	/**
-	 * Save the config files
+	 * Save the config files and FINISH install
 	 */
 	public function postStep5() {
 		$this -> setA2ZConfig(Input::get('title', 'Site Name'), Input::get('theme', 'a2z-default'),
