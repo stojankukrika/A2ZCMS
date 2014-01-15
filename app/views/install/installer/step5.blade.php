@@ -20,13 +20,13 @@
 			{{ Lang::get('install/installer.config_info') }}
 		</p>
 		<div class="control-group">
-			<label class="control-label" for="title">{{ Lang::get('install/installer.site_title') }}</label>
+			<label class="control-label" for="title">{{ Lang::get('install/installer.site_title') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="title" name="title" placeholder="Site Title" value="{{ (isset($old) ? $old->title : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="theme">{{ Lang::get('install/installer.site_theme') }}</label>
+			<label class="control-label" for="theme">{{ Lang::get('install/installer.site_theme') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<select name="theme">
 					<?php

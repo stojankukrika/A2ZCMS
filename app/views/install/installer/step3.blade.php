@@ -15,6 +15,7 @@
 		@endforeach
 	</div>
 	@endif
+	<p>{{ Lang::get('install/installer.enter_database_connection') }}</p>
 	<form method="post" action="{{ url('install/step3') }}" class="form-horizontal">
 		<div id="js-errors" class="hide">
 			<div class="alert alert-error">
@@ -25,31 +26,31 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="hostname">{{ Lang::get('install/installer.host_name') }}</label>
+			<label class="control-label" for="hostname">{{ Lang::get('install/installer.host_name') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="hostname" name="hostname" placeholder="localhost" value="{{ (isset($old) ? $old->hostname : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="database">{{ Lang::get('install/installer.database') }}</label>
+			<label class="control-label" for="database">{{ Lang::get('install/installer.database') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="database" name="database" placeholder="database" value="{{ (isset($old) ? $old->database : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="username">{{ Lang::get('install/installer.database_username') }}</label>
+			<label class="control-label" for="username">{{ Lang::get('install/installer.database_username') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="username" name="username" placeholder="username" value="{{ (isset($old) ? $old->username : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="password">{{ Lang::get('install/installer.database_password') }}</label>
+			<label class="control-label" for="password">{{ Lang::get('install/installer.database_password') }}:</label>
 			<div class="controls">
 				<input id="password" type="text" name="password" placeholder="password" value="{{ (isset($old) ? $old->password : '') }}">
 			</div>
 		</div>
 			<div class="control-group">
-			<label class="control-label" for="prefix">{{ Lang::get('install/installer.database_prefix') }}</label>
+			<label class="control-label" for="prefix">{{ Lang::get('install/installer.database_prefix') }}:</label>
 			<div class="controls">
 				<input id="prefix" type="text" name="prefix" placeholder="prefix" value="{{ (isset($old) ? $old->prefix : 'a2z_') }}">
 			</div>

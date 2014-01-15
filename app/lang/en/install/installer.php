@@ -21,6 +21,7 @@ return array(
 	'first_name' => 'First Name',
 	'last_name' => 'Last Name',
 	'password' => 'Password',
+	'passwordconfirm' => 'Confirm Password',
 	'email' => 'Email',
 	'username' => 'Username',
 	'host_name' => 'Host name',
@@ -28,4 +29,5 @@ return array(
 	'database_username' => 'Database username',
 	'database_password' => 'Database password',
 	'database_prefix' => 'Database prefix',
+	'enter_database_connection' => 'Please enter your database connection details.',
 );

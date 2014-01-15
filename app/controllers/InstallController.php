@@ -188,7 +188,7 @@ class InstallController extends BaseController {
 			Artisan::call('migrate', array('--env' => App::environment()));
 			
 			//triger for update user last_login affter user is login to system
-			DB::unprepared("CREATE TRIGGER ".Input::get('prefix')."user_login_historys 
+			DB::unprepared("CREATE TRIGGER ".Input::get('prefix')."user_login_historys_after_inserts 
 							AFTER INSERT ON ".Input::get('prefix')."user_login_historys
 							 FOR EACH ROW UPDATE ".Input::get('prefix')."users set ".Input::get('prefix')."users.last_login = 
 							(select ".Input::get('prefix')."user_login_historys.created_at 
@@ -238,13 +238,14 @@ class InstallController extends BaseController {
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 
-		if (!$validator -> passes()) {
+		if (!$validator -> passes() || Input::get('password')!=Input::get('passwordconfirm')) {
 			returnRedirect::back() -> withInput() -> withErrors($validator);
 		}
 
 		$user_id = DB::table('users') -> insertGetId(array('name' => Input::get('first_name'), 
 							'surname' => Input::get('last_name'), 'username' => Input::get('username'), 
-							'email' => Input::get('email'), 'password' => Hash::make(Input::get('password')), 							'confirmation_code' => md5(microtime() . Config::get('app.key')), 
+							'email' => Input::get('email'), 'password' => Hash::make(Input::get('password')),
+							'confirmation_code' => md5(microtime() . Config::get('app.key')), 
 							'created_at' => new DateTime, 'updated_at' => new DateTime, 
 							'confirmed' => '1', 'active' => '1'));
 

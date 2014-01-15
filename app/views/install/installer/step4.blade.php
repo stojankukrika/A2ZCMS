@@ -25,33 +25,39 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="first_name">{{ Lang::get('install/installer.first_name') }}</label>
+			<label class="control-label" for="first_name">{{ Lang::get('install/installer.first_name') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{ (isset($old) ? $old->first_name : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="last_name">{{ Lang::get('install/installer.last_name') }}</label>
+			<label class="control-label" for="last_name">{{ Lang::get('install/installer.last_name') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{ (isset($old) ? $old->last_name : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="username">{{ Lang::get('install/installer.username') }}</label>
+			<label class="control-label" for="username">{{ Lang::get('install/installer.username') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="username" name="username" placeholder="Username" value="{{ (isset($old) ? $old->username : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="email">{{ Lang::get('install/installer.email') }}</label>
+			<label class="control-label" for="email">{{ Lang::get('install/installer.email') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input type="text" id="email" name="email" placeholder="Email" value="{{ (isset($old) ? $old->email : '') }}">
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="password">{{ Lang::get('install/installer.password') }}</label>
+			<label class="control-label" for="password">{{ Lang::get('install/installer.password') }}:<span class="required">*</span></label>
 			<div class="controls">
 				<input id="password" type="password" placeholder="{{ Lang::get('install/installer.password') }}" name="password" value="">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="passwordconfirm">{{ Lang::get('install/installer.passwordconfirm') }}:<span class="required">*</span></label>
+			<div class="controls">
+				<input id="passwordconfirm" type="password" placeholder="{{ Lang::get('install/installer.passwordconfirm') }}" name="passwordconfirm" value="">
 			</div>
 		</div>
 		<div class="control-group">
