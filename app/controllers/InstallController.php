@@ -213,7 +213,7 @@ class InstallController extends BaseController {
 	 * @return
 	 */
 	protected function setA2ZApp($url) {
-		$content = str_replace('##url##', $url, File::get(__DIR__ . '\..\config\app_temp.php'));
+		$content = str_replace('##url##', $url, File::get(__DIR__ . '\..\config\app.php'));
 		return File::put(__DIR__ . '\..\config\/' . App::environment() . '\app.php', $content);
 	}
 
