@@ -1,5 +1,5 @@
 # A2ZCMS
-![logo](http://i44.tinypic.com/jgm6ht.jpg)
+![logo](http://i44.tinypic.com/igi5uq.jpg)
 
 ======
 <!-- DONATE/ -->
