@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder {
 		$this -> call('SettingsPermissionsTableSeeder');
 		$this -> call('ToDoListPermissionsTableSeeder');
 		$this -> call('PageVotePermissionsTableSeeder');
+		$this -> call('AdminNavigationsTableSeeder');		
+		$this -> call('AdminSubNavigationsTableSeeder');
 	}
 
 }

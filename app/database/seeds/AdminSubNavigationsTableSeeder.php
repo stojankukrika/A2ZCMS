@@ -1,0 +1,81 @@
+<?php
+
+class AdminSubNavigationsTableSeeder extends Seeder {
+
+	public function run() {
+		// Uncomment the below to wipe the table clean before populating
+		// DB::table('settings')->truncate();
+
+		DB::table('admin_subnavigations') -> insert(array( 
+											array('admin_navigation_id' => 3, 
+												'title' => 'Navigation group', 
+												'navigation' => 'navigationgroups', 
+												'order' => 1,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 3, 
+												'title' => 'Pages', 
+												'navigation' => 'pages', 
+												'order' => 2,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 3, 
+												'title' => 'Navigation', 
+												'navigation' => 'navigation', 
+												'order' => 3,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 4, 
+												'title' => 'Blog categorys', 
+												'navigation' => 'blogcategorys', 
+												'order' => 1,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 4, 
+												'title' => 'Blog', 
+												'navigation' => 'blogs', 
+												'order' => 2,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 4, 
+												'title' => 'Blog comments', 
+												'navigation' => 'blogcomments', 
+												'order' => 3,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 4, 
+												'title' => 'Gallery images', 
+												'navigation' => 'galleryimages', 
+												'order' => 1,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 4, 
+												'title' => 'Galleries', 
+												'navigation' => 'galleries', 
+												'order' => 2,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 4, 
+												'title' => 'Gallery comments', 
+												'navigation' => 'galleryimagecomments', 
+												'order' => 3,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 											
+											array('admin_navigation_id'=> 6, 
+												'title' => 'Users', 
+												'navigation' => 'users', 
+												'order' => 1,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,), 
+											array('admin_navigation_id' => 6, 
+												'title' => 'Roles', 
+												'navigation' => 'roles', 
+												'order' => 2,
+												'created_at' => new DateTime, 
+												'updated_at' => new DateTime,),
+										)
+									);
+
+	}
+
+}
