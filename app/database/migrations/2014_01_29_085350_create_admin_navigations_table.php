@@ -17,7 +17,7 @@ class CreateAdminNavigationsTable extends Migration {
 			$table -> integer('plugin_id')->unsigned()->index();
 			$table -> foreign('plugin_id')->references('id')->on('plugins')->onDelete('cascade');
 			$table -> string('title');
-			$table -> string('navigation');			
+			$table -> string('url');			
 			$table -> integer('order');		
 			$table -> timestamps();
 			$table -> softDeletes();

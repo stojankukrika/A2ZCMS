@@ -17,7 +17,7 @@ class CreateAdminSubNavigationsTable extends Migration {
 			$table -> integer('admin_navigation_id')->unsigned()->index();
 			$table -> foreign('admin_navigation_id')->references('id')->on('admin_navigations')->onDelete('cascade');
 			$table -> string('title');
-			$table -> string('navigation');			
+			$table -> string('url');			
 			$table -> integer('order');		
 			$table -> timestamps();
 			$table -> softDeletes();
