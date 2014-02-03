@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration {
 			$table -> string('groupname');
 			$table -> text('value')->nullable();
 			$table -> text('defaultvalue')->nullable();
+			$table -> string('type',50)->nullable();
 		});
 	}
 
