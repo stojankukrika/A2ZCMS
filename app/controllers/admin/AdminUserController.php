@@ -370,8 +370,8 @@ class AdminUserController extends AdminController {
 	 *
 	 * @return Response
 	 */
-	public function getHistory($user) {
-		
+	public function getHistory($user_id) {
+
 		$pageitem = 2;
 		$settings = Settings::all();
         foreach ($settings as $v) {
@@ -382,7 +382,8 @@ class AdminUserController extends AdminController {
 
 		$title = Lang::get('admin/users/title.history_login');
 
-		$historylogin = UserLoginHistory::where('user_id','=',$user->id)-> paginate($pageitem);
+		$user = User::find($user_id);
+		$historylogin = UserLoginHistory::where('user_id','=',$user_id)-> paginate($pageitem);
 		
 		// Show the page
 		return View::make('admin/users/history_login', compact('title', 'user','historylogin'));
