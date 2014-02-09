@@ -18,6 +18,7 @@ class CreateSettingsTable extends Migration {
 			$table -> text('value')->nullable();
 			$table -> text('defaultvalue')->nullable();
 			$table -> string('type',50)->nullable();
+			$table -> string('rule',50)->nullable();
 		});
 	}
 
