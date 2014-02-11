@@ -5,7 +5,7 @@ use Robbo\Presenter\PresentableInterface;
 class Gallery extends Eloquent implements PresentableInterface {
 
 	protected $softDelete = true;
-	protected $table = "gallery";
+	protected $table = "gallerys";
 
 	/**
 	 * Returns a formatted post content entry,

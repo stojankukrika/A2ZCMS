@@ -11,7 +11,7 @@ class CreateTodolistTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('todolist', function(Blueprint $table) {
+		Schema::create('todolists', function(Blueprint $table) {
 			$table -> increments('id');
 			$table -> integer('user_id') -> unsigned();
 			$table -> foreign('user_id') -> references('id') -> on('users');
@@ -28,7 +28,7 @@ class CreateTodolistTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('todolist');
+		Schema::drop('todolists');
 	}
 
 }

@@ -4,7 +4,7 @@ use Robbo\Presenter\PresentableInterface;
 
 class Todolist extends Eloquent implements PresentableInterface {
 
-	protected $table = "todolist";
+	protected $table = "todolists";
 	protected $softDelete = true;
 
 	/**
