@@ -102,7 +102,7 @@ class AdminNavigationController extends AdminController {
 	public function getEdit($id) {
 
 		$navigations = Navigation::all();
-		$pageList = Page::lists('name', 'id');
+		$pageList = Page::lists('title', 'id');
 		$navigationGroupList = NavigationGroup::lists('title', 'id');
 
 		if ($id) {
