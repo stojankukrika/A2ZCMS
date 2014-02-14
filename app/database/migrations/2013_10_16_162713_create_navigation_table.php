@@ -15,7 +15,7 @@ class CreateNavigationTable extends Migration {
 		Schema::create('navigation_groups', function(Blueprint $table) {
 			$table -> increments('id');
 			$table -> string('title') -> unique();
-			$table -> string('abbrev') -> unique();
+			$table -> string('slug') -> unique();
 			$table -> timestamps();
 		});
 

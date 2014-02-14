@@ -3,8 +3,7 @@
 return array(
 
 	'title' => 'Title',
-	'abbreviation'  => 'Abbreviation',
-
+	'slug'  => 'Slug',
 	'link_type'  => 'Link Type',
 	'parent' => 'Parent',
 	'page' => 'Page',

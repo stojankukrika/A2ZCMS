@@ -19,7 +19,7 @@
 	<thead>
 		<tr>
 			<th class="span2">{{{ Lang::get('admin/navigation/table.title') }}}</th>
-			<th class="span3">{{{ Lang::get('admin/navigation/table.abbreviation') }}}</th>
+			<th class="span3">{{{ Lang::get('admin/navigation/table.slug') }}}</th>
 			<th class="span2">{{{ Lang::get('table.actions') }}}</th>
 		</tr>
 	</thead>

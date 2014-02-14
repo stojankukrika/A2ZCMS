@@ -54,7 +54,7 @@ class AdminNavigationGroupController extends AdminController {
 		if ($validator -> passes()) {
 			// Create a new blog post
 			$this -> navigationGroup -> title = Input::get('title');
-			$this -> navigationGroup -> abbrev = Str::slug(Input::get('title'));
+			$this -> navigationGroup -> slug = Str::slug(Input::get('title'));
 			$this -> navigationGroup -> showmenu = Input::get('showmenu');
 			$this -> navigationGroup -> showfooter = Input::get('showfooter');
 			$this -> navigationGroup -> showsidebar = Input::get('showsidebar');
@@ -155,7 +155,7 @@ class AdminNavigationGroupController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$navs = NavigationGroup::select(array('navigation_groups.id', 'navigation_groups.title', 'navigation_groups.abbrev'));
+		$navs = NavigationGroup::select(array('navigation_groups.id', 'navigation_groups.title', 'navigation_groups.slug'));
 
 		return Datatables::of($navs) -> add_column('actions', '<a href="{{{ URL::to(\'admin/navigationgroups/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
                                <a href="{{{ URL::to(\'admin/navigationgroups/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>

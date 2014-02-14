@@ -155,7 +155,7 @@ class AdminGalleryController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$galleries = Gallery::select(array('gallery.id', 'gallery.title', 'gallery.id as images_count', 'gallery.id as comments_count', 'gallery.created_at'));
+		$galleries = Gallery::select(array('gallerys.id', 'gallerys.title', 'gallerys.id as images_count', 'gallerys.id as comments_count', 'gallerys.created_at'));
 
 		return Datatables::of($galleries) -> edit_column('images_count', '<a href="{{{ URL::to(\'admin/galleries/\' . $id . \'/imagesforgallery\' ) }}}" class="btn btn-link btn-sm" >{{ DB::table(\'gallery_images\')->where(\'gallery_id\', \'=\', $id)->where(\'deleted_at\', \'=\', NULL)->count() }}</a>') 
 			-> edit_column('comments_count', '<a href="{{{ URL::to(\'admin/galleryimagecomments/\' . $id . \'/commentsforgallery\' ) }}}" class="btn btn-link btn-sm" >{{ GalleryImageComment::where(\'gallery_id\', \'=\', $id)->where(\'deleted_at\', \'=\', NULL)->count() }}</a>') 

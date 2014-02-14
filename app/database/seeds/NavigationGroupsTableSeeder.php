@@ -9,7 +9,7 @@ class NavigationGroupsTableSeeder extends Seeder {
 
 		$navigation_groups = array( 
 					array('title' => 'Main menu', 
-						'abbrev' => 'main-menu',
+						'slug' => 'main-menu',
 						'showmenu' => '1',
 						'showfooter' => '0',
 						'showsidebar' => '0',
