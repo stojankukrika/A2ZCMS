@@ -73,7 +73,7 @@ class AdminPageController extends AdminController {
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Create a new blog post
-			$this -> page -> name = Input::get('name');
+			$this -> page -> title = Input::get('title');
 			$this -> page -> slug = Str::slug(Input::get('name'));
 			$this -> page -> content = Input::get('content');
 			$this -> page -> status = Input::get('status');
@@ -213,7 +213,7 @@ class AdminPageController extends AdminController {
 		if ($validator -> passes()) {
 			// Was the page updated?
 			
-			$page -> name = Input::get('name');
+			$page -> title = Input::get('title');
 			$page -> slug = Str::slug(Input::get('name'));
 			$page -> content = Input::get('content');
 			$page -> status = Input::get('status');
@@ -415,7 +415,7 @@ class AdminPageController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$pages = Page::select(array('pages.id', 'pages.name', 'pages.status','pages.voteup','pages.votedown','pages.hits','pages.sidebar'));
+		$pages = Page::select(array('pages.id', 'pages.title', 'pages.status','pages.voteup','pages.votedown','pages.hits','pages.sidebar'));
 
 		return Datatables::of($pages) 
 			-> edit_column('voteup', '{{ $voteup-$votedown }}') 
