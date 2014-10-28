@@ -15,7 +15,7 @@
 		"zizaco/entrust": "dev-master",
 		"robclancy/presenter": "1.1.*",
         "bllim/datatables": "*",
-		"way/generators": "dev-master"
+		"way/generators": "~2.0"
 	},
 	"autoload": {
 		"classmap": [
