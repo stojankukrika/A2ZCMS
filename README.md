@@ -8,7 +8,7 @@
 [![BitCoin donate button](http://img.shields.io/bitcoin/donate.png?color=yellow)](https://coinbase.com/checkouts/4d0769619eaebde35c378920a895596e "Donate once-off to this project using BitCoin")
 <!-- /DONATE -->
 ======
-## A2Z CMS based on Laravel 4.1
+## A2Z CMS based on Laravel 4.2
 * [A2Z CMS Features](#feature1)
 * [Requirements](#feature2)
 * [How to install](#feature3)
@@ -22,7 +22,7 @@
 
 <a name="feature1"></a>
 ## A2Z CMS Features:
-* Laravel 4.1
+* Laravel 4.2
 * Twitter Bootstrap 3.0.0
 * Custom Error Pages
 	* 403 for forbidden page accesses
