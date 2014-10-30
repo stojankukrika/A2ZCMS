@@ -161,7 +161,7 @@ class AdminTodolistController extends AdminController {
 	 * @return Datatables JSON
 	 */
 	public function getData() {
-		$todolists = Todolist::select(array('todolist.id', 'todolist.content', 'todolist.work_done','todolist.finished', 'todolist.created_at'))->where('user_id','=',Auth::user()->id);
+		$todolists = Todolist::select(array('id', 'content', 'work_done','finished', 'created_at'))->where('user_id','=',Auth::user()->id);
 
 		return Datatables::of($todolists) -> edit_column('work_done', '@if ($work_done==0){{ "Work" }} @else {{ "Done" }} @endif') 
 		-> add_column('actions', '<a href="{{{ URL::to(\'admin/todolists/\' . $id . \'/change\' ) }}}" class="btn btn-link btn-sm" ><i class="icon-retweet "></i></a>

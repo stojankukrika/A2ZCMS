@@ -189,7 +189,7 @@ class AdminNavigationController extends AdminController {
 		$navs = Navigation::leftjoin('navigation_groups', 'navigation_groups.id', '=', 'navigation_links.navigation_group_id') 
 						-> leftjoin('pages', 'navigation_links.page_id', '=', 'pages.id') 
 						-> orderBy('navigation_links.position') 
-						-> select(array('navigation_links.id', 'navigation_links.title', 'pages.name as page', 'navigation_links.link_type', 'navigation_groups.title as navigtion_group'));
+						-> select(array('navigation_links.id', 'navigation_links.title', 'pages.title as page', 'navigation_links.link_type', 'navigation_groups.title as navigtion_group'));
 
 		return Datatables::of($navs) -> add_column('actions', '<a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-sm"><i class="icon-edit "></i></a>
                                <a href="{{{ URL::to(\'admin/navigation/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger"><i class="icon-trash "></i></a>

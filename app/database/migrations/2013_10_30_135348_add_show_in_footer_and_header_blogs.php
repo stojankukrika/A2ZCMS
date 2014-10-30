@@ -13,7 +13,7 @@ class AddShowInFooterAndHeaderBlogs extends Migration {
 	public function up()
 	{
 		Schema::table('navigation_groups', function(Blueprint $table) {
-			$table -> boolean('showmenu')->after('abbrev');
+			$table -> boolean('showmenu')->after('slug');
 			$table -> boolean('showfooter')->after('showmenu');
 			$table -> boolean('showsidebar')->after('showfooter');
 		});

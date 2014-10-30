@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="a2zcms">
+    <serverData>
+      <paths name="a2zcms">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="a2zcms" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
+

@@ -56,6 +56,19 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
+	| Application Fallback Locale
+	|--------------------------------------------------------------------------
+	|
+	| The fallback locale determines the locale to use when the current one
+	| is not available. You may change the value to correspond to any of
+	| the language folders that are provided through your application.
+	|
+	*/
+
+	'fallback_locale' => 'en',
+
+	/*
+	|--------------------------------------------------------------------------
 	| Encryption Key
 	|--------------------------------------------------------------------------
 	|
@@ -65,7 +78,9 @@ return array(
 	|
 	*/
 
-	'key' => '95Tp73fwrklQQ2JdFla1y4awUUDU5iim',
+	'key' => 'Us1TWHSFz74nUdhDCu9QwemD7Bd0TR1j',
+
+	'cipher' => MCRYPT_RIJNDAEL_128,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -107,13 +122,14 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		 /* Additional Providers */
-	        'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
-	        'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
-	        'Robbo\Presenter\PresenterServiceProvider', // Presenter
-	        'Bllim\Datatables\DatatablesServiceProvider', // Datatables
-	
-	        /* Uncomment for use in development */
-	        'Way\Generators\GeneratorsServiceProvider', // Generators
+		'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
+		'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
+		'Robbo\Presenter\PresenterServiceProvider', // Presenter
+		'Bllim\Datatables\DatatablesServiceProvider', // Datatables
+
+		/* Uncomment for use in development */
+		'Way\Generators\GeneratorsServiceProvider', // Generators
+
 	),
 
 	/*
@@ -174,23 +190,25 @@ return array(
 		'Schema'          => 'Illuminate\Support\Facades\Schema',
 		'Seeder'          => 'Illuminate\Database\Seeder',
 		'Session'         => 'Illuminate\Support\Facades\Session',
+		'SoftDeletingTrait' => 'Illuminate\Database\Eloquent\SoftDeletingTrait',
 		'SSH'             => 'Illuminate\Support\Facades\SSH',
 		'Str'             => 'Illuminate\Support\Str',
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		/* Additional Aliases */
-	        'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
-	        'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
-	        'Presenter'       => 'Robbo\Presenter\Presenter', // Presenter
-	        'Presentable'     => 'Robbo\Presenter\PresentableInterface', // Presenter
-	        'Basset'          => 'Basset\Facade', // Better Asset Management
-	        'String'          => 'A2ZCMS\Helpers\String', // String
-	        'Fineuploader'    => 'A2ZCMS\Helpers\Fineuploader', // Fineuploader
-	        'Thumbnail'		  => 'A2ZCMS\Helpers\Thumbnail', // Fineuploader
-	        'UUID'		  	  => 'A2ZCMS\Helpers\UUID', // UUID
-	        'Carbon'          => 'Carbon\Carbon', // Carbon
-	        'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
+		'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
+		'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
+		'Presenter'       => 'Robbo\Presenter\Presenter', // Presenter
+		'Presentable'     => 'Robbo\Presenter\PresentableInterface', // Presenter
+		'Basset'          => 'Basset\Facade', // Better Asset Management
+		'String'          => 'A2ZCMS\Helpers\String', // String
+		'Fineuploader'    => 'A2ZCMS\Helpers\Fineuploader', // Fineuploader
+		'Thumbnail'		  => 'A2ZCMS\Helpers\Thumbnail', // Fineuploader
+		'UUID'		  	  => 'A2ZCMS\Helpers\UUID', // UUID
+		'Carbon'          => 'Carbon\Carbon', // Carbon
+		'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
 	),
 	'available_language' => array('en'),
+
 );

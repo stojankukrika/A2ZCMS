@@ -19,8 +19,9 @@ class ConfideSetupUsersTable extends Migration {
 			$table -> string('username') -> unique();
 			$table -> string('password');
 			$table -> string('confirmation_code');
-			$table -> boolean('confirmed') -> default(false);
-			$table -> boolean('active') -> default(false);
+            $table -> string('remember_token')-> nullable();
+			$table -> boolean('confirmed')->default(false);
+			$table -> boolean('active')->default(false);
 			$table -> timestamps();
 			$table -> softDeletes();
 		});
@@ -30,7 +31,7 @@ class ConfideSetupUsersTable extends Migration {
 			$table -> engine = 'InnoDB';
 			$table -> string('email');
 			$table -> string('token');
-			$table -> boolean('used') -> default(false);
+			$table -> boolean('used')->default(false);
 			$table -> timestamp('created_at');
 			$table -> softDeletes();
 		});
