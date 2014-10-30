@@ -12,7 +12,7 @@ class AddFinishedToTodolistTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('todolist', function(Blueprint $table) {
+		Schema::table('todolists', function(Blueprint $table) {
 			$table -> decimal('finished', 5, 2)->after('content');
 			$table -> string('title')->after('user_id');
 		});
@@ -25,7 +25,7 @@ class AddFinishedToTodolistTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('todolist', function(Blueprint $table) {
+		Schema::table('todolists', function(Blueprint $table) {
 			$table -> dropColumn('finished');
 			$table -> dropColumn('title');
 			

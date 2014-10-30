@@ -186,7 +186,7 @@
 		<div class="clearfix"></div>
 		<footer>
 			<p>
-				<span style="text-align:left;float:left">&copy; 2013 <a href="#">A2Z CMS</a></span>
+				<span style="text-align:left;float:left">&copy; 2013-<?=date("Y")?> <a href="#">A2Z CMS</a></span>
 				<span class="hidden-phone" style="text-align:right;float:right">Powered by: <a href="http://laravel.com/" alt="Laravel 4">Laravel 4</a></span>
 			</p>
 

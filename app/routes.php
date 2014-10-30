@@ -183,6 +183,7 @@ Route::post('user/reset/{token}', 'UserController@postReset');
 
 //:: User Account Routes ::
 Route::post('user/login', 'UserController@postLogin');
+Route::get('user/logout', 'UserController@getLogout');
 
 //:: User Account Routes ::
 Route::post('login', 'BaseController@postLogin');

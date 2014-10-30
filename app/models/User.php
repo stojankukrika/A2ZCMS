@@ -4,27 +4,27 @@ use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\Confide;
 use Zizaco\Confide\ConfideEloquentRepository;
 use Zizaco\Entrust\HasRole;
-use Robbo\Presenter\PresentableInterface;
 use Carbon\Carbon;
+use Illuminate\Auth\UserInterface;
+use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends ConfideUser implements PresentableInterface {
+class User extends ConfideUser implements UserInterface, RemindableInterface{
     use HasRole;
-	
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
-	
-	/**
-	* Ardent validation rules
-	*
-	* @var array
-	*/
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
+     * Ardent validation rules
+     *
+     * @var array
+     */
     public static $rules = array(
-		'name' => 'required|min:4',
-		'surname' => 'required|min:4',
+        'name' => 'required|min:4',
+        'surname' => 'required|min:4',
         'username' => 'required|alpha_dash|unique:users',
         'email' => 'required|email|unique:users',
         'password' => 'required|between:4,11|confirmed',
@@ -32,22 +32,16 @@ class User extends ConfideUser implements PresentableInterface {
     );
 
     /**
-	* Rules for when updating a user.
-	*
-	* @var array
-	*/
+     * Rules for when updating a user.
+     *
+     * @var array
+     */
     protected $updateRules = array(
-		'name' => 'required|min:4',
-		'surname' => 'required|min:4',
+        'name' => 'required|min:4',
+        'surname' => 'required|min:4',
         'password' => 'between:4,11|confirmed',
         'password_confirmation' => 'between:4,11',
     );
-
-
-    public function getPresenter()
-    {
-        return new UserPresenter($this);
-    }
 
     /**
      * Get user by username
@@ -102,8 +96,8 @@ class User extends ConfideUser implements PresentableInterface {
         }
         return array('roleIds' => $roleIds, 'allow_admin' => $allow_admin);
     }
-
-    /**
+	 
+	/**
      * Redirect after auth.
      * If ifValid is set to true it will redirect a logged in user.
      * @param $redirect
@@ -132,9 +126,17 @@ class User extends ConfideUser implements PresentableInterface {
 
     public function currentUser()
     {
-        return (new Confide(new ConfideEloquentRepository()))->user();
+        return Auth::user();//(new Confide(new EloquentRepository()))->user();
     }
 
-
+    /**
+     * Get the e-mail address where password reminders are sent.
+     *
+     * @return string
+     */
+    public function getReminderEmail()
+    {
+        return $this->email;
+    }
 
 }

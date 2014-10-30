@@ -1,5 +1,4 @@
 <?php
-
 class InstallController extends BaseController {
 
 	/**
@@ -11,6 +10,7 @@ class InstallController extends BaseController {
 		if (Config::get("a2zcms.installed") === true) {
 			return Redirect::to('');
 		}
+        define('STDIN',fopen("php://stdin","r"));
 	}
 	 public $errors = array();
 	 
@@ -184,8 +184,7 @@ class InstallController extends BaseController {
 			//File::delete($stub);
 			$url = URL::to('/');
 			$this -> setA2ZApp($url.'/');
-
-			Artisan::call('migrate', array('--env' => App::environment()));
+			Artisan::call('migrate',  array('--force' => true));
 			
 			//triger for update user last_login affter user is login to system
 			DB::unprepared("CREATE TRIGGER ".Input::get('prefix')."user_login_historys_after_inserts 
@@ -201,7 +200,7 @@ class InstallController extends BaseController {
 			
 			return Redirect::to('install/step4');
 		} else {
-			return Redirect::to('install/step3') -> withErrors($form);
+			return Redirect::to('install/step4') -> withErrors($form);
 		}
 	}
 
@@ -254,10 +253,11 @@ class InstallController extends BaseController {
 		$adminRole -> is_admin = 1;
 		$adminRole -> save();
 
-		DB::table('assigned_roles') -> insert(array('user_id' => $user_id, 'role_id' => $adminRole -> id));
+		DB::table('assigned_roles') -> insert(array('user_id' => $user_id, 'role_id' => $adminRole -> id,
+											'created_at' => new DateTime, 'updated_at' => new DateTime));
 
-		Artisan::call('db:seed');
-
+		$this->seed();
+		
 		$settings = Settings::all();
 		foreach ($settings as $v) {
 			switch ($v->varname) {
@@ -270,7 +270,7 @@ class InstallController extends BaseController {
 
 		return Redirect::to('install/step5');
 	}
-
+	
 	/**
 	 * Get the config form.
 	 */
@@ -319,5 +319,661 @@ class InstallController extends BaseController {
 
 		return File::put(__DIR__ . '\..\config\a2zcms.php', $content);
 	}
+	
+	private function seed()
+	{
+		//PermissionsTableSeeder
+		
+		$permissions = array( 
+						array('name' => 'manage_blogs', 
+						'display_name' => 'Manage blogs','is_admin' => 1), 
+						array('name' => 'manage_blog_categris', 
+						'display_name' => 'Manage blog categris','is_admin' => 1), 
+						array('name' => 'manage_comments', 
+						'display_name' => 'Manage comments','is_admin' => 1), 
+						array('name' => 'manage_users', 
+						'display_name' => 'Manage users','is_admin' => 1), 
+						array('name' => 'manage_roles', 
+						'display_name' => 'Manage roles','is_admin' => 1), 
+						array('name' => 'post_blog_comment', 
+						'display_name' => 'Post blog comment','is_admin' => 0), 
+					);
 
+		DB::table('permissions') -> insert($permissions);
+
+		$permissions = array( array('role_id' => 1, 'permission_id' => 1,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 2,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 3,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 4,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 5,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+								array('role_id' => 1, 'permission_id' => 6,'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), );
+
+		DB::table('permission_role') -> insert($permissions);
+		
+		//SettingsTableSeeder
+		DB::table('settings') -> insert(array( 
+											array('varname' => 'updatetime', 
+												'groupname' => 'version', 
+												'value' => time(), 
+												'defaultvalue' => time(),
+												'type' =>'text',
+												'rule' => ''),
+											array('varname' => 'offline', 
+												'groupname' => 'offline', 
+												'value' => '0', 
+												'type' =>'radio',
+												'defaultvalue' => '0',
+												'rule' => ''),
+											array('varname' => 'version', 
+												'groupname' => 'version', 
+												'value' => '1.0', 
+												'defaultvalue' => '1.0',
+												'type' =>'text',
+												'rule' => ''),
+											array('varname' => 'offlinemessage', 
+												'groupname' => 'offline', 
+												'value' => '<p>Sorry, the site is unavailable at the moment while we are testing some functionality.</p>',
+												'defaultvalue' => 'Sorry, the site is unavailable at the moment while we are testing some functionality.',
+												'type' =>'textarea',
+												'rule' => ''),
+											array('varname' => 'title', 
+												'groupname' => 'general', 
+												'value' => 'A2Z CMS',
+												'defaultvalue' => 'A2Z CMS',
+												'type' =>'text',
+												'rule' => ''),
+											array('varname' => 'copyright', 
+												'groupname' => 'general', 
+												'value' => 'yoursite.com &copy; '.date("Y"),
+												'defaultvalue' => 'A2Z CMS 2013-2014',
+												'type' =>'text',
+												'rule' => ''),
+											array('varname' => 'metadesc', 
+												'groupname' => 'metadata', 
+												'value' => '',
+												'defaultvalue' => '',
+												'type' =>'textarea',
+												'rule' => ''),
+											array('varname' => 'metakey', 
+												'groupname' => 'metadata', 
+												'value' => '',
+												'defaultvalue' => '',
+												'type' =>'textarea',
+												'rule' => '""'), 
+											array('varname' => 'metaauthor', 
+												'groupname' => 'metadata', 
+												'value' => 'http://www.yoursite.com',
+												'defaultvalue' => 'http://www.a2zcms.com',
+												'type' =>'text',
+												'rule' => ''),
+											array('varname' => 'analytics', 
+												'groupname' => 'analitic', 
+												'value' => '',
+												'defaultvalue' => '',
+												'type' =>'textarea',
+												'rule' => ''),
+											array('varname' => 'email', 
+												'groupname' => 'setting', 
+												'value' => 'admin@example.com',
+												'defaultvalue' => '',
+												'type' =>'text',
+												'rule' => 'required|email'), 
+											array('varname' => 'dateformat', 
+												'groupname' => 'setting', 
+												'value' => 'd.m.Y', 
+												'defaultvalue' => 'd.m.Y',
+												'type' =>'text',
+												'rule' => 'required'), 
+											array('varname' => 'timeformat', 
+												'groupname' => 'setting', 
+												'value' => ' - H:i',
+												'defaultvalue' => 'h:i A',
+												'type' =>'text',
+												'rule' => 'required'), 
+											array('varname' => 'useravatwidth', 
+												'groupname' => 'setting', 
+												'value' => '150', 
+												'defaultvalue' => '150',
+												'type' =>'text',
+												'rule' => 'required|integer'), 
+											array('varname' => 'useravatheight', 
+												'groupname' => 'setting', 
+												'value' => '113', 
+												'defaultvalue' => '113',
+												'type' =>'text',
+												'rule' => 'required|integer'), 
+											array('varname' => 'pageitem', 
+												'groupname' => 'setting', 
+												'value' => '15', 
+												'defaultvalue' => '15',
+												'type' =>'text',
+												'rule' => 'required|integer'), 
+											array('varname' => 'searchcode', 
+												'groupname' => 'googlesearch', 
+												'value' => '',
+												'defaultvalue' => '',
+												'type' =>'textarea',
+												'rule' => ''),
+											array('varname' => 'sitetheme', 
+												'groupname' => 'setting', 
+												'value' => '',
+												'defaultvalue' => 'default',
+												'type' =>'select',
+												'rule' => 'required'),
+											array('varname' => 'pageitemadmin', 
+												'groupname' => 'setting', 
+												'value' => '10', 
+												'defaultvalue' => '10',
+												'type' =>'text',
+												'rule' => 'required|integer'),
+												
+										)
+									);
+			
+			//NavPagesPermissionSeeder			
+			$permissions = array( 
+					array('name' => 'manage_navigation', 
+							'display_name' => 'Manage navigation','is_admin' => 1), 
+					array('name' => 'manage_pages', 
+							'display_name' => 'Manage pages','is_admin' => 1), 
+					array('name' => 'manage_navigation_groups', 
+							'display_name' => 'Manage navigation groups','is_admin' => 1),
+					);
+
+			DB::table('permissions') -> insert($permissions);
+	
+			$permissions_role = array( 
+									array('role_id' => 1, 'permission_id' => 7,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,), 
+									array('role_id' => 1, 'permission_id' => 8,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,), 
+									array('role_id' => 1, 'permission_id' => 9,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,));
+	
+			DB::table('permission_role') -> insert($permissions_role);
+				
+			//GallerysPermissionSeeder
+			$permissions = array( 
+					array('name' => 'manage_galleries', 
+							'display_name' => 'Manage galleries','is_admin' => 1), 
+					array('name' => 'manage_gallery_images', 
+							'display_name' => 'Manage gallery images','is_admin' => 1), 
+					array('name' => 'manage_gallery_imagecomments', 
+							'display_name' => 'Manage gallery image comments','is_admin' => 1),
+					array ('name' => 'post_gallery_comment' ,
+							'display_name' => 'Post gallery comment','is_admin' => 0));
+
+			DB::table('permissions') -> insert($permissions);
+	
+			$permissions_role = array( 
+									array('role_id' => 1, 'permission_id' => 10,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,), 
+									array('role_id' => 1, 'permission_id' => 11,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,), 
+									array('role_id' => 1, 'permission_id' => 12,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,),
+									array('role_id' => 1, 'permission_id' => 13,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,));
+	
+			DB::table('permission_role') -> insert($permissions_role);
+			
+			//CustomFormPermissionsTableSeeder
+			$permissions = array( 
+						array('name' => 'manage_customform',
+							'display_name' => 'Manage custom forms','is_admin' => 1),
+					);
+
+			DB::table('permissions') -> insert($permissions);
+	
+			$permissions = array( array('role_id' => 1, 'permission_id' => 14,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,) );
+	
+			DB::table('permission_role') -> insert($permissions);
+			
+			//PluginsTableSeeder
+			$plugins = array( 
+					array('content' => 'Blog', 
+						'function_id' => 'getBlogId',
+						'function_grid' => 'getBlogGroupId',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 		
+					array('content' => 'Gallery', 
+						'function_id' => 'getGalleryId',
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 
+					array('content' => 'Custom form', 
+						'function_id' => 'getCustomFormId',
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 
+					array('content' => 'To-do list', 
+						'function_id' => NULL,
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 
+					array('content' => 'Pages', 
+						'function_id' => NULL,
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 
+					array('content' => 'Blog', 
+						'function_id' => NULL,
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 
+					array('content' => 'Settings', 
+						'function_id' => NULL,
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 
+					array('content' => 'Users', 
+						'function_id' => NULL,
+						'function_grid' => NULL,
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 
+						
+				);
+			 DB::table('plugins')->insert($plugins);
+			 
+			 //PluginfunctionTableSeeder
+			 $plugin_blog = Plugin::find(1) -> id;
+		$plugin_gallery = Plugin::find(2) -> id;
+		$plugin_contact = Plugin::find(3) -> id;
+		
+		$pluginfunctions = array( 
+					array('title' => 'Login form', 
+						'plugin_id' => 0,
+						'function'=>'login',
+						'params'=>'',
+						'type' => 'sidebar',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 		
+					array('title' => 'Search Form', 
+						'plugin_id' => 0,
+						'function'=>'search',
+						'params'=>'',
+						'type' => 'sidebar',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,), 
+					array('title' => 'New gallerys', 
+						'plugin_id' => $plugin_gallery,
+						'function'=>'newGallerys',
+						'params'=>'sort:asc;order:id;limit:5;',
+						'type' => 'sidebar',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),
+					array('title' => 'New blogs', 
+						'plugin_id' => $plugin_blog,
+						'function'=>'newBlogs',
+						'params'=>'sort:asc;order:id;limit:5;',
+						'type' => 'sidebar',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),
+					array('title' => 'Content', 
+						'plugin_id' => 0,
+						'function'=>'content',
+						'params'=>'',
+						'type' => 'content',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),					
+					array('title' => 'Display gallery', 
+						'plugin_id' => $plugin_gallery,
+						'function'=>'showGallery',
+						'params'=>'id;sort;order;limit;',
+						'type' => 'content',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),
+					array('title' => 'Display blogs', 
+						'plugin_id' => $plugin_blog,
+						'function'=>'showBlogs',
+						'params'=>'id;sort;order;limit;',
+						'type' => 'content',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),
+					array('title' => 'Display custom form', 
+						'plugin_id' => $plugin_contact,
+						'function'=>'showCustomFormId',
+						'params'=>'id;',
+						'type' => 'content',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime,),	
+					array('title' => 'Side menu', 
+						'plugin_id' => 0,
+						'function'=>'sideMenu',
+						'params'=>'',
+						'type' => 'sidebar',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ), 	
+						);
+						
+				DB::table('plugin_functions')->insert($pluginfunctions);
+				
+				//CustomFormsTableSeeder
+				$user_id = User::first();
+		
+				$custom_forms = array( 
+							array('title' => 'Standard contact form', 
+								'user_id' => $user_id -> id,
+								'recievers' => $user_id -> email,
+								'message' => '<p>Thank you for contact us, we will get back to you as soon as we can.</p>',
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime, ));
+		
+				DB::table('custom_forms')->insert($custom_forms);
+				
+				//CustomFormFieldsTableSeeder
+				$custom_forms = CustomForm::find(1) -> id;
+                $user_id = User::first() -> id;
+
+                $custom_form_fields = array(
+                            array(
+							'custom_form_id'=>$custom_forms,
+							'user_id' => $user_id,
+							'name' => 'Name', 
+							'options' => '',
+							'type' => '1',
+							'order' => '1',
+							'mandatory' => '1',
+							'created_at' => new DateTime, 
+							'updated_at' => new DateTime, ),
+						array(
+							'custom_form_id'=>$custom_forms,
+							'user_id' => $user_id,
+							'name' => 'Email', 
+							'options' => '',
+							'type' => '1',
+							'order' => '2',
+							'mandatory' => '4',
+							'created_at' => new DateTime, 
+							'updated_at' => new DateTime, )	,
+						array(
+							'custom_form_id'=>$custom_forms,
+							'user_id' => $user_id,
+							'name' => 'Phone', 
+							'options' => '',
+							'type' => '1',
+							'order' => '3',
+							'mandatory' => '2',
+							'created_at' => new DateTime, 
+							'updated_at' => new DateTime, )	,
+						array(
+							'custom_form_id'=>$custom_forms,
+							'user_id' => $user_id,
+							'name' => 'Message', 
+							'options' => '',
+							'type' => '2',
+							'order' => '4',
+							'mandatory' => '1',
+							'created_at' => new DateTime, 
+							'updated_at' => new DateTime, )							
+				);
+				DB::table('custom_form_fields')->insert($custom_form_fields);
+				
+				//NavigationGroupsTableSeeder
+				$navigation_groups = array( 
+					array('title' => 'Main menu', 
+						'slug' => 'main-menu',
+						'showmenu' => '1',
+						'showfooter' => '0',
+						'showsidebar' => '0',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, )	
+						
+				);
+				 DB::table('navigation_groups')->insert($navigation_groups);
+				 
+				 //PagesTableSeeder
+				 $ontent = '<div><h1>A2Z CMS 1.0</h1><p>Welcome to your very own A2Z CMS 1.1 installation.</p></div><div><p>Login into your profile and change this page and enjoy in A2ZCMS.</p><p>If you have any questions feel free to check the <a href="https://github.com/mrakodol/A2ZCMS/issues">Issues</a> at any time or create a new issue.</p><p>Enjoy A2Z CMS and welcome a board.</p><p>Kind Regards</p><p>Stojan Kukrika - A2Z CMS</p></div>';
+				$pages = array( 
+					array('title' => 'Home', 
+						'slug' => 'home',
+						'sidebar' => '1',
+						'showtags' => '1',
+						'showtitle' => '1',
+						'showvote' => '1',
+						'showdate' => '1',
+						'voteup' => '0',
+						'votedown' => '0',
+						'password' => '',
+						'tags' => 'tag1',
+						'hits' => '0',
+						'content' => $ontent,
+						'status' => '1',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, )	
+						
+				);
+		 	DB::table('pages')->insert($pages);
+			
+			//NavigationLinksTableSeeder
+			$page_id = Page::first()->id;
+			$navigation_group_id = NavigationGroup::first()->id;
+			
+			$navigation_links = array( 
+						array('title' => 'Home', 
+						'parent' => NULL,
+						'link_type' => 'page',
+						'page_id' => $page_id,
+						'url' => '',
+						'uri' => '',
+						'navigation_group_id' => $navigation_group_id,
+						'position' => '1',
+						'target' => '',
+						'restricted_to' => '',
+						'class' => '',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, )							
+				);
+			DB::table('navigation_links')->insert($navigation_links);
+			
+			//PagePluginFunctionsTableSeeder
+			$page_id = Page::first()->id;
+
+			$page_plugin_functions = array( 
+					array('page_id' => $page_id, 
+						'plugin_function_id' => PluginFunction::find(1)->id,
+						'order' => '1',
+						'param' => '',
+						'type' => '',
+						'value' => '',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, ),
+					array('page_id' => $page_id, 
+						'plugin_function_id' => PluginFunction::find(5)->id,
+						'order' => '1',
+						'param' => '',
+						'type' => '',
+						'value' => '',
+						'created_at' => new DateTime, 
+						'updated_at' => new DateTime, )	
+						
+				);
+			DB::table('page_plugin_functions')->insert($page_plugin_functions);
+			
+			//SettingsPermissionsTableSeeder
+			$permissions = array( 
+						array('name' => 'manage_settings', 
+						'display_name' => 'Manage settings','is_admin' => 1),
+					);
+
+			DB::table('permissions') -> insert($permissions);
+			$permissions = array( array('role_id' => 1, 'permission_id' => 15,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,), );
+			DB::table('permission_role') -> insert($permissions);
+				
+			//ToDoListPermissionsTableSeeder
+			$permissions = array( 
+						array('name' => 'manage_todolists', 
+						'display_name' => 'Manage todolists','is_admin' => 1),
+					);
+
+			DB::table('permissions') -> insert($permissions);
+			$permissions = array( array('role_id' => 1, 'permission_id' => 16,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,), );
+			DB::table('permission_role') -> insert($permissions);
+			
+			//PageVotePermissionsTableSeeder
+			$permissions = array( 
+						array('name' => 'post_page_vote', 
+						'display_name' => 'Post page vote','is_admin' => 0),
+						array('name' => 'post_blog_vote', 
+						'display_name' => 'Post blog vote','is_admin' => 0),
+						array('name' => 'post_image_vote', 
+						'display_name' => 'Post image vote','is_admin' => 0),
+					);
+	
+			DB::table('permissions') -> insert($permissions);
+	
+			$permissions = array( array('role_id' => 1, 'permission_id' => 17,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,), 
+							array('role_id' => 1, 'permission_id' => 18,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,),
+							array('role_id' => 1, 'permission_id' => 19,'created_at' => new DateTime, 
+							'updated_at' => new DateTime,),);
+	
+			DB::table('permission_role') -> insert($permissions);
+			
+			//AdminNavigationsTableSeeder
+			DB::table('admin_navigations') -> insert(array( 
+							array('plugin_id' => 4, 
+								'title' => 'To-do list',
+								'icon' =>'icon-bell', 
+								'url' => 'todolists', 
+								'order' => 1,
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime,), 
+							array('plugin_id' => 3, 
+								'title' => 'Custom forms', 
+								'icon' =>'icon-list-alt',
+								'url' => 'customform', 
+								'order' => 2,
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime,), 
+							array('plugin_id' => 5, 
+								'title' => 'Pages',
+								'icon' =>'icon-globe', 
+								'url' => 'pages', 
+								'order' => 3,
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime,), 
+							array('plugin_id' => 1, 
+								'title' => 'Blog', 
+								'icon' =>'icon-external-link',
+								'url' => 'blogcategorys', 
+								'order' => 4,
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime,), 
+							array('plugin_id' =>2, 
+								'title' => 'Gallery',
+								'icon' =>'icon-camera', 
+								'url' => 'gallery', 
+								'order' => 5,
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime,), 
+							array('plugin_id' => 7, 
+								'title' => 'Users', 
+								'icon' =>'icon-group',
+								'url' => 'users', 
+								'order' => 6,
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime,), 
+							array('plugin_id' => 6, 
+								'title' => 'Settings', 
+								'icon' =>'icon-cogs',
+								'url' => 'settings', 
+								'order' => 7,
+								'created_at' => new DateTime, 
+								'updated_at' => new DateTime,), 
+						)
+					);
+					
+			//AdminSubNavigationsTableSeeder
+			DB::table('admin_subnavigations') -> insert(array( 
+                                array('admin_navigation_id' => 3,
+                                    'title' => 'Navigation group',
+                                    'icon' =>'icon-th-list',
+                                    'url' => 'navigationgroups',
+                                    'order' => 1,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 3,
+                                    'title' => 'Pages',
+                                    'icon' =>'icon-th-large',
+                                    'url' => 'pages',
+                                    'order' => 2,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 3,
+                                    'title' => 'Navigation',
+                                    'icon' =>'icon-th',
+                                    'url' => 'navigation',
+                                    'order' => 3,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 4,
+                                    'title' => 'Blog categorys',
+                                    'icon' =>'icon-rss',
+                                    'url' => 'blogcategorys',
+                                    'order' => 1,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 4,
+                                    'title' => 'Blog',
+                                    'icon' =>'icon-book',
+                                    'url' => 'blogs',
+                                    'order' => 2,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 4,
+                                    'title' => 'Blog comments',
+                                    'icon' =>'icon-comment-alt',
+                                    'url' => 'blogcomments',
+                                    'order' => 3,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 5,
+                                    'title' => 'Gallery images',
+                                    'icon' =>'icon-rss',
+                                    'url' => 'galleryimages',
+                                    'order' => 1,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 5,
+                                    'title' => 'Galleries',
+                                    'icon' =>'icon-camera-retro',
+                                    'url' => 'galleries',
+                                    'order' => 2,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 5,
+                                    'title' => 'Gallery comments',
+                                    'icon' =>'icon-comments-alt',
+                                    'url' => 'galleryimagecomments',
+                                    'order' => 3,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id'=> 6,
+                                    'title' => 'Users',
+                                    'icon' =>'icon-user',
+                                    'url' => 'users',
+                                    'order' => 1,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                                array('admin_navigation_id' => 6,
+                                    'title' => 'Roles',
+                                    'icon' =>'icon-user-md',
+                                    'url' => 'roles',
+                                    'order' => 2,
+                                    'created_at' => new DateTime,
+                                    'updated_at' => new DateTime,),
+                            )
+                        );
+		}
 }

@@ -15,9 +15,8 @@ class BaseController extends Controller {
 	 */
 
 	public function __construct() {
-		$user = new User;
-		$this -> user = $user;
-		$this -> beforeFilter('csrf', array('on' => 'post'));
+
+        $this -> beforeFilter('csrf', array('on' => 'post'));
 		$this -> beforeFilter('detectLang');
 		// Redirect to /install if the db isn't setup.
 		if (Config::get("a2zcms.installed") !== true) {
@@ -44,6 +43,7 @@ class BaseController extends Controller {
 		}
 		$user = Auth::user();
 		if(!empty($user)){
+            $this->user = $user;
 			$unreadmessages = Messages::where('user_id_to','=',$user->id)->where('read','=','0')->count();
 			View::share('unreadmessages',  $unreadmessages);
 		}
@@ -68,42 +68,37 @@ class BaseController extends Controller {
 	 *
 	 */
 	public function postLogin() {
-		$input = array('email' => Input::get('email'), // May be the username too
-		'username' => Input::get('email'), // May be the username too
-		'password' => Input::get('password'), 'remember' => Input::get('remember'), );
+        $input = array(
+            'email'    => Input::get( 'email' ), // May be the username too
+            'username' => Input::get( 'email' ), // May be the username too
+            'password' => Input::get( 'password' ),
+            'remember' => Input::get( 'remember' ),
+        );
 
-		// If you wish to only allow login from confirmed users, call logAttempt
-		// with the second parameter as true.
-		// logAttempt will check if the 'email' perhaps is the username.
-		// Check that the user is confirmed.
-		if (Confide::logAttempt($input, true)) {
-				
-			$login_user = Auth::user();
-			
-			$userloginlog = new UserLoginHistory;
-			$userloginlog -> user_id = $login_user->id;
-			$userloginlog -> save();
-				
-			$r = Session::get('loginRedirect');
-			if (!empty($r)) {
-				Session::forget('loginRedirect');
-				return Redirect::to($r);
-			}
-			return Redirect::back();
-		} else {
-			// Check if there was too many login attempts
-			if (Confide::isThrottled($input)) {
-				$err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
-			} elseif ($this -> user -> checkUserExists($input) && !$this -> user -> isConfirmed($input)) {
-				$err_msg = Lang::get('confide::confide.alerts.not_confirmed');
-			} else {
-				$err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
-			}
+        // If you wish to only allow login from confirmed users, call logAttempt
+        // with the second parameter as true.
+        // logAttempt will check if the 'email' perhaps is the username.
+        // Check that the user is confirmed.
+        if ( Confide::logAttempt( $input, true ) )
+        {
+            return Redirect::intended('/');
+        }
+        else
+        {
+            // Check if there was too many login attempts
+            if ( Confide::isThrottled( $input ) ) {
+                $err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
+            } elseif ( $this->user->checkUserExists( $input ) && ! $this->user->isConfirmed( $input ) ) {
+                $err_msg = Lang::get('confide::confide.alerts.not_confirmed');
+            } else {
+                $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
+            }
 
-			return Redirect::back() -> withInput(Input::except('password')) -> with('error', $err_msg);
-		}
-	}
-
+            return Redirect::to('user/login')
+                ->withInput(Input::except('password'))
+                ->with( 'error', $err_msg );
+        }
+    }
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -322,7 +317,7 @@ class BaseController extends Controller {
 	 
 	public function content($page_id)
 	{
-		$user = $this -> user -> currentUser();
+		$user = $this -> user;
 		$canPageVote = false;
 		if (!empty($user)) {
 			$canPageVote = $user -> can('post_page_vote');
